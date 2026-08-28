@@ -1,0 +1,985 @@
+{{
+  "introduction to physics": {
+    "definition": "Physics is the branch of science that studies matter, energy and the interaction between them.",
+
+    "objectives": [
+      "Study matter and energy.",
+      "Explain natural phenomena.",
+      "Develop scientific skills.",
+      "Solve everyday problems."
+    ],
+
+    "importance": [
+      "Medicine",
+      "Engineering",
+      "Transport",
+      "Communication",
+      "Agriculture",
+      "Construction",
+      "Electricity generation",
+      "Weather forecasting"
+    ],
+
+    "branches": [
+      "Mechanics",
+      "Thermodynamics",
+      "Optics",
+      "Electricity",
+      "Magnetism",
+      "Atomic Physics",
+      "Nuclear Physics",
+      "Electronics"
+    ],
+
+    "si_units": {
+      "Length": "metre (m)",
+      "Mass": "kilogram (kg)",
+      "Time": "second (s)",
+      "Temperature": "kelvin (K)",
+      "Electric Current": "ampere (A)",
+      "Amount of Substance": "mole (mol)",
+      "Luminous Intensity": "candela (cd)"
+    },
+
+    "formulae": [],
+
+    "key_points": [
+      "Physics is an experimental science.",
+      "Measurements use SI units.",
+      "Observations lead to scientific laws.",
+      "Physics explains natural events."
+    ],
+
+    "worked_examples": [
+ ,
+"measurement ii": {
+  "definition": "Measurement II deals with accurate measurements using precision instruments such as the Vernier calipers and the micrometer screw gauge.",
+
+  "vernier_calipers": {
+    "purpose": "Measures internal diameter, external diameter, thickness and depth.",
+    "least_count": "0.01 cm (0.1 mm)",
+    "parts": [
+      "Main scale",
+      "Vernier scale",
+      "Outside jaws",
+      "Inside jaws",
+      "Depth gauge",
+      "Lock screw"
+    ]
+  },
+
+  "micrometer_screw_gauge": {
+    "purpose": "Measures very small diameters and thicknesses.",
+    "least_count": "0.01 mm",
+    "parts": [
+      "Frame",
+      "Anvil",
+      "Spindle",
+      "Sleeve",
+      "Thimble",
+      "Ratchet"
+    ]
+  },
+
+  "zero_error": {
+    "definition": "A reading shown by an instrument when the correct reading should be zero.",
+    "types": [
+      "Positive zero error",
+      "Negative zero error"
+    ]
+  },
+
+  "formulae": [
+    "Actual Reading = Main Scale Reading + Vernier Reading",
+    "Correct Reading = Observed Reading − Positive Zero Error",
+    "Correct Reading = Observed Reading + Negative Zero Error"
+  ],
+
+  "key_points": [
+    "Always check for zero error before taking measurements.",
+    "Read the scale at eye level to avoid parallax error.",
+    "Use the ratchet on the micrometer to avoid over-tightening."
+  ],
+
+  "worked_examples": [
+    {
+      "question": "Main scale = 2.30 cm, Vernier reading = 0.06 cm. Find the reading.",
+      "solution": "Reading = 2.30 + 0.06 = 2.36 cm."
+    },
+    {
+      "question": "Observed reading = 5.62 mm, Positive zero error = 0.02 mm.",
+      "solution": "Correct reading = 5.62 − 0.02 = 5.60 mm."
+    }
+  ],
+
+  "practice_questions": [
+    "State the least count of a Vernier calipers.",
+    "State the least count of a micrometer screw gauge.",
+    "What is zero error?",
+    "How do you avoid parallax error?"
+  ],
+
+  "answers": [
+    "0.01 cm.",
+    "0.01 mm.",
+    "A reading shown when the instrument should read zero.",
+    "Read the scale directly at eye level."
+  ]
+},
+"force": {
+  "definition": "A force is a push or pull acting on an object that can change its state of rest or motion.",
+
+  "types_of_force": {
+    "contact_forces": [
+      "Friction",
+      "Tension",
+      "Normal reaction",
+      "Upthrust"
+    ],
+    "non_contact_forces": [
+      "Gravitational force",
+      "Magnetic force",
+      "Electrostatic force"
+    ]
+  },
+
+  "effects_of_force": [
+    "Starts motion.",
+    "Stops motion.",
+    "Changes speed.",
+    "Changes direction.",
+    "Changes shape."
+  ],
+
+  "formulae": [
+    "F = ma",
+    "Weight = mg"
+  ],
+
+  "si_unit": "Newton (N)",
+
+  "key_points": [
+    "Force is a vector quantity.",
+    "A force has magnitude and direction.",
+    "Mass is measured in kilograms.",
+    "Weight is measured in Newtons."
+  ],
+
+  "worked_examples": [
+    {
+      "question": "A body of mass 5 kg accelerates at 4 m/s². Find the force.",
+      "solution": "F = ma = 5 × 4 = 20 N."
+    },
+    {
+      "question": "Find the weight of a 12 kg object if g = 10 m/s².",
+      "solution": "W = mg = 12 × 10 = 120 N."
+    }
+  ],
+
+  "practice_questions": [
+    "Define force.",
+    "State four effects of force.",
+    "Differentiate between mass and weight.",
+    "Calculate the force acting on a 6 kg object accelerating at 2 m/s²."
+  ],
+
+  "answers": [
+    "A force is a push or pull acting on a body.",
+    "Starts motion, stops motion, changes speed and changes direction.",
+    "Mass is the amount of matter in a body while weight is the gravitational force acting on the body.",
+    "F = ma = 6 × 2 = 12 N."
+  ]
+}      {
+        "question": "Name four applications of Physics.",
+        "answer": "Medicine, Engineering, Communication and Transport."
+      },
+      {
+        "question": "State three branches of Physics.",
+        "answer": "Mechanics, Optics and Thermodynamics."
+      }
+    ],
+
+    "practice_questions": [
+      "Define Physics.",
+      "State four branches of Physics.",
+      "State five applications of Physics.",
+      "List the seven SI base units."
+    ],
+
+    "answers": [
+      "Physics is the study of matter and energy.",
+      "Mechanics, Optics, Thermodynamics and Electricity.",
+      "Medicine, Engineering, Agriculture, Communication and Transport.",
+      "metre, kilogram, second, ampere, kelvin, mole and candela."
+    ]
+  }
+}
+,
+"measurement i": {
+  "definition": "Measurement is the process of comparing a physical quantity with an accepted standard unit.",
+
+  "physical_quantities": {
+    "Length": "metre (m)",
+    "Mass": "kilogram (kg)",
+    "Time": "second (s)",
+    "Temperature": "kelvin (K)"
+  },
+
+  "measuring_instruments": {
+    "Length": [
+      "Metre rule",
+      "Tape measure",
+      "Vernier calipers",
+      "Micrometer screw gauge"
+    ],
+    "Mass": [
+      "Beam balance",
+      "Electronic balance"
+    ],
+    "Time": [
+      "Stopwatch",
+      "Clock"
+    ],
+    "Temperature": [
+      "Thermometer"
+    ]
+  },
+
+  "key_points": [
+    "Measurements should be accurate.",
+    "Measurements should be precise.",
+    "Always avoid parallax error.",
+    "Use the correct instrument for the quantity being measured."
+  ],
+
+  "formulae": [],
+
+  "worked_examples": [
+    {
+      "question": "Convert 5 km to metres.",
+      "solution": "5 × 1000 = 5000 m."
+    },
+    {
+      "question": "Convert 300 cm to metres.",
+      "solution": "300 ÷ 100 = 3 m."
+    }
+  ],
+
+  "practice_questions": [
+    "Define measurement.",
+    "State four SI base units.",
+    "Name four measuring instruments.",
+    "What causes parallax error?"
+  ],
+
+  "answers": [
+    "Measurement is comparing a quantity with a standard unit.",
+    "Metre, kilogram, second and kelvin.",
+    "Metre rule, tape measure, vernier calipers and micrometer screw gauge.",
+    "Looking at the scale from the wrong angle."
+  ]
+}
+,
+"pressure": {
+  "definition": "Pressure is the force acting normally per unit area.",
+
+  "formulae": [
+    "P = F / A",
+    "F = PA",
+    "A = F / P"
+  ],
+
+  "si_unit": "Pascal (Pa)",
+
+  "key_points": [
+    "Pressure increases when force increases.",
+    "Pressure decreases when area increases.",
+    "Pressure acts at right angles to a surface.",
+    "Pressure is a scalar quantity."
+  ],
+
+  "applications": [
+    "Sharp knives have small surface areas.",
+    "Needles are pointed.",
+    "Tractors have wide tyres.",
+    "Camels have broad feet.",
+    "High heels exert high pressure."
+  ],
+
+  "pressure_in_liquids": {
+    "definition": "Liquid pressure increases with depth.",
+    "facts": [
+      "Pressure acts in all directions.",
+      "Pressure depends on depth.",
+      "Pressure depends on the density of the liquid."
+    ]
+  },
+
+  "atmospheric_pressure": {
+    "definition": "Atmospheric pressure is the pressure exerted by the weight of air.",
+    "instrument": "Barometer",
+    "standard_value": "101325 Pa"
+  },
+
+  "hydraulic_machines": {
+    "principle": "Pressure applied to a confined liquid is transmitted equally in all directions (Pascal's Principle).",
+    "examples": [
+      "Hydraulic jack",
+      "Hydraulic brakes",
+      "Hydraulic lift",
+      "Hydraulic press"
+    ]
+  },
+
+  "worked_examples": [
+    {
+      "question": "A force of 120 N acts on an area of 4 m². Calculate the pressure.",
+      "solution": "P = F/A = 120 ÷ 4 = 30 Pa."
+    },
+    {
+      "question": "Pressure is 200 Pa over an area of 5 m². Find the force.",
+      "solution": "F = PA = 200 × 5 = 1000 N."
+    }
+  ],
+
+  "practice_questions": [
+    "Define pressure.",
+    "State the SI unit of pressure.",
+    "Why do tractors have wide tyres?",
+    "State Pascal's Principle.",
+    "Name two hydraulic machines."
+  ],
+
+  "answers": [
+    "Pressure is force acting normally per unit area.",
+    "Pascal (Pa).",
+    "To reduce pressure on the ground.",
+    "Pressure applied to a confined liquid is transmitted equally in all directions.",
+    "Hydraulic jack and hydraulic brakes."
+  ]
+},
+"particulate nature of matter": {
+  "definition": "Matter is anything that has mass and occupies space. Matter is made up of tiny particles called molecules or atoms.",
+
+  "states_of_matter": {
+    "solid": {
+      "properties": [
+        "Fixed shape",
+        "Fixed volume",
+        "Particles are closely packed",
+        "Particles vibrate about fixed positions"
+      ]
+    },
+    "liquid": {
+      "properties": [
+        "No fixed shape",
+        "Fixed volume",
+        "Particles move freely",
+        "Can flow"
+      ]
+    },
+    "gas": {
+      "properties": [
+        "No fixed shape",
+        "No fixed volume",
+        "Particles move randomly",
+        "Highly compressible"
+      ]
+    }
+  },
+
+  "kinetic_theory": [
+    "Matter is made of tiny particles.",
+    "Particles are always moving.",
+    "Particles have spaces between them.",
+    "Heating increases particle movement."
+  ],
+
+  "diffusion": {
+    "definition": "Diffusion is the movement of particles from a region of high concentration to a region of low concentration.",
+    "examples": [
+      "Perfume smell spreading in a room.",
+      "Ink spreading in water."
+    ]
+  },
+
+  "brownian_motion": {
+    "definition": "Brownian motion is the random movement of tiny particles suspended in a fluid.",
+    "cause": "Collision with fast-moving molecules."
+  },
+
+  "formulae": [],
+
+  "worked_examples": [
+    {
+      "question": "Why does the smell of perfume spread across a room?",
+      "solution": "Because perfume particles diffuse through the air from a region of high concentration to a region of low concentration."
+    },
+    {
+      "question": "Why do gases fill the whole container?",
+      "solution": "Gas particles move freely in all directions and occupy all available space."
+    }
+  ],
+
+  "practice_questions": [
+    "Define matter.",
+    "State the three states of matter.",
+    "Define diffusion.",
+    "Define Brownian motion.",
+    "State four assumptions of the kinetic theory of matter."
+  ],
+
+  "answers": [
+    "Matter is anything that has mass and occupies space.",
+    "Solid, liquid and gas.",
+    "Diffusion is the movement of particles from a region of high concentration to a region of low concentration.",
+    "Brownian motion is the random movement of tiny particles suspended in a fluid.",
+    "Matter is made of particles; particles are always moving; particles have spaces between them; heating increases particle movement."
+  ]
+},
+"thermal expansion": {
+  "definition": "Thermal expansion is the increase in the size of a substance when heated and the decrease in size when cooled.",
+
+  "types": {
+    "linear expansion": "Increase in length.",
+    "area expansion": "Increase in surface area.",
+    "volume expansion": "Increase in volume."
+  },
+
+  "key_points": [
+    "Particles move faster when heated.",
+    "The spaces between particles increase.",
+    "Solids expand least.",
+    "Liquids expand more than solids.",
+    "Gases expand the most."
+  ],
+
+  "applications": [
+    "Expansion joints on railway lines.",
+    "Expansion gaps on bridges.",
+    "Overhead electric cables are left slack.",
+    "Bimetallic strips in thermostats."
+  ],
+
+  "advantages": [
+    "Used in thermometers.",
+    "Used in thermostats.",
+    "Helps fit metal rims on wooden wheels."
+  ],
+
+  "disadvantages": [
+    "Railway lines may buckle.",
+    "Bridges may crack.",
+    "Power lines may sag."
+  ],
+
+  "formulae": [
+    "Expansion depends on temperature change."
+  ],
+
+  "worked_examples": [
+    {
+      "question": "Why are gaps left between railway tracks?",
+      "solution": "To allow the rails to expand when heated and prevent buckling."
+    },
+    {
+      "question": "Why are electric wires installed loosely?",
+      "solution": "They contract in cold weather and expand in hot weather."
+    }
+  ],
+
+  "practice_questions": [
+    "Define thermal expansion.",
+    "State the three types of expansion.",
+    "Give four applications of thermal expansion.",
+    "State two disadvantages of thermal expansion."
+  ],
+
+  "answers": [
+    "Thermal expansion is the increase in size of a substance when heated.",
+    "Linear, area and volume expansion.",
+    "Railway lines, bridges, thermometers and thermostats.",
+    "Buckling of railway lines and cracking of bridges."
+  ]
+},
+"heat transfer": {
+  "definition": "Heat transfer is the movement of heat energy from a hotter body to a colder body.",
+
+  "methods": {
+    "conduction": {
+      "definition": "Transfer of heat through a substance without movement of the substance.",
+      "examples": [
+        "Heating one end of a metal rod.",
+        "Cooking using a metal saucepan."
+      ]
+    },
+
+    "convection": {
+      "definition": "Transfer of heat by movement of liquids or gases.",
+      "examples": [
+        "Boiling water.",
+        "Sea breeze.",
+        "Land breeze."
+      ]
+    },
+
+    "radiation": {
+      "definition": "Transfer of heat by electromagnetic waves without the need for a material medium.",
+      "examples": [
+        "Heat from the Sun.",
+        "Heat from a fire."
+      ]
+    }
+  },
+
+  "good_conductors": [
+    "Copper",
+    "Aluminium",
+    "Iron",
+    "Silver"
+  ],
+
+  "poor_conductors": [
+    "Wood",
+    "Plastic",
+    "Rubber",
+    "Glass",
+    "Air"
+  ],
+
+  "applications": [
+    "Cooking utensils are made of metals.",
+    "Saucepan handles are made of wood or plastic.",
+    "Vacuum flasks reduce heat loss.",
+    "Houses are ventilated using convection."
+  ],
+
+  "formulae": [],
+
+  "worked_examples": [
+    {
+      "question": "Why are cooking pots made of aluminium?",
+      "solution": "Because aluminium is a good conductor of heat."
+    },
+    {
+      "question": "Why are saucepan handles made of plastic?",
+      "solution": "Because plastic is a poor conductor of heat."
+    }
+  ],
+
+  "practice_questions": [
+    "Define heat transfer.",
+    "State the three methods of heat transfer.",
+    "Give two examples of conduction.",
+    "Explain how sea breeze occurs.",
+    "Why does a vacuum flask reduce heat loss?"
+  ],
+
+  "answers": [
+    "Heat transfer is the movement of heat from a hotter body to a colder body.",
+    "Conduction, convection and radiation.",
+    "Heating a metal rod and cooking with a metal saucepan.",
+    "Cool air from the sea moves to replace warm rising air over land.",
+    "It reduces heat transfer by conduction, convection and radiation."
+  ]
+},
+"temperature and thermometers": {
+  "definition": "Temperature is the degree of hotness or coldness of a body.",
+
+  "difference_between_heat_and_temperature": {
+    "heat": "Heat is a form of energy transferred from a hotter body to a colder body.",
+    "temperature": "Temperature is the measure of the hotness or coldness of a body."
+  },
+
+  "temperature_scales": {
+    "celsius": "°C",
+    "kelvin": "K"
+  },
+
+  "formulae": [
+    "K = °C + 273",
+    "°C = K - 273"
+  ],
+
+  "thermometers": {
+    "clinical": "Measures human body temperature.",
+    "laboratory": "Measures temperatures in experiments.",
+    "maximum_minimum": "Measures the highest and lowest temperatures."
+  },
+
+  "properties_of_thermometric_liquids": [
+    "Expand uniformly.",
+    "Easy to see.",
+    "Do not stick to glass.",
+    "Respond quickly to temperature changes."
+  ],
+
+  "advantages_of_mercury": [
+    "Visible.",
+    "Expands uniformly.",
+    "Does not wet glass.",
+    "High boiling point."
+  ],
+
+  "advantages_of_alcohol": [
+    "Low freezing point.",
+    "Can measure very low temperatures.",
+    "Expands more than mercury."
+  ],
+
+  "worked_examples": [
+    {
+      "question": "Convert 27°C to Kelvin.",
+      "solution": "K = 27 + 273 = 300 K."
+    },
+    {
+      "question": "Convert 310 K to Celsius.",
+      "solution": "°C = 310 - 273 = 37°C."
+    }
+  ],
+
+  "practice_questions": [
+    "Define temperature.",
+    "Differentiate between heat and temperature.",
+    "Convert 35°C to Kelvin.",
+    "Convert 298 K to Celsius.",
+    "State four properties of a good thermometric liquid."
+  ],
+
+  "answers": [
+    "Temperature is the degree of hotness or coldness of a body.",
+    "Heat is energy while temperature measures hotness.",
+    "308 K.",
+    "25°C.",
+    "Uniform expansion, visible, does not wet glass and responds quickly."
+  ]
+},
+"linear motion": {
+  "definition": "Linear motion is motion along a straight line.",
+
+  "distance": {
+    "definition": "Distance is the total length of the path travelled.",
+    "unit": "metre (m)",
+    "type": "Scalar"
+  },
+
+  "displacement": {
+    "definition": "Displacement is the shortest distance from the starting point to the ending point in a specified direction.",
+    "unit": "metre (m)",
+    "type": "Vector"
+  },
+
+  "speed": {
+    "definition": "Speed is the distance travelled per unit time.",
+    "formula": "Speed = Distance / Time",
+    "unit": "m/s"
+  },
+
+  "velocity": {
+    "definition": "Velocity is displacement per unit time in a given direction.",
+    "formula": "Velocity = Displacement / Time",
+    "unit": "m/s"
+  },
+
+  "acceleration": {
+    "definition": "Acceleration is the rate of change of velocity.",
+    "formula": "Acceleration = (Final Velocity - Initial Velocity) / Time",
+    "unit": "m/s²"
+  },
+
+  "equations_of_motion": [
+    "v = u + at",
+    "s = ut + 1/2 at²",
+    "v² = u² + 2as"
+  ],
+
+  "graphs": [
+    "Distance-Time Graph",
+    "Speed-Time Graph",
+    "Velocity-Time Graph"
+  ],
+
+  "key_points": [
+    "Distance is a scalar quantity.",
+    "Displacement is a vector quantity.",
+    "Speed has magnitude only.",
+    "Velocity has magnitude and direction.",
+    "Acceleration may be positive or negative."
+  ],
+
+  "worked_examples": [
+    {
+      "question": "A car travels 240 m in 20 s. Calculate its speed.",
+      "solution": "Speed = 240 ÷ 20 = 12 m/s."
+    },
+    {
+      "question": "A body changes velocity from 10 m/s to 30 m/s in 5 s. Find its acceleration.",
+      "solution": "Acceleration = (30 - 10) ÷ 5 = 4 m/s²."
+    }
+  ],
+
+  "practice_questions": [
+    "Define distance.",
+    "Differentiate between speed and velocity.",
+    "State the SI unit of acceleration.",
+    "Calculate the speed of a cyclist travelling 150 m in 30 s.",
+    "Calculate the acceleration of a body whose velocity changes from 8 m/s to 20 m/s in 4 s."
+  ],
+
+  "answers": [
+    "Distance is the total length of the path travelled.",
+    "Speed is scalar while velocity has direction.",
+    "m/s².",
+    "5 m/s.",
+    "3 m/s²."
+  ]
+},
+"reflection of light": {
+  "definition": "Reflection is the bouncing back of light when it strikes a surface.",
+
+  "laws_of_reflection": [
+    "The angle of incidence equals the angle of reflection.",
+    "The incident ray, reflected ray and normal lie in the same plane."
+  ],
+
+  "terms": {
+    "incident_ray": "The ray that strikes the surface.",
+    "reflected_ray": "The ray that leaves the surface after reflection.",
+    "normal": "A line drawn at 90° to the reflecting surface.",
+    "angle_of_incidence": "The angle between the incident ray and the normal.",
+    "angle_of_reflection": "The angle between the reflected ray and the normal."
+  },
+
+  "types_of_reflection": {
+    "regular": "Occurs on smooth polished surfaces producing clear images.",
+    "diffuse": "Occurs on rough surfaces producing unclear images."
+  },
+
+  "plane_mirror": {
+    "properties": [
+      "Image is upright.",
+      "Image is virtual.",
+      "Image is laterally inverted.",
+      "Image is the same size as the object.",
+      "Image distance equals object distance."
+    ]
+  },
+
+  "applications": [
+    "Periscopes",
+    "Rear-view mirrors",
+    "Dressing mirrors",
+    "Kaleidoscopes"
+  ],
+
+  "formulae": [
+    "Angle of Incidence = Angle of Reflection"
+  ],
+
+  "worked_examples": [
+    {
+      "question": "If the angle of incidence is 35°, find the angle of reflection.",
+      "solution": "Angle of reflection = 35°."
+    },
+    {
+      "question": "An object is placed 50 cm in front of a plane mirror. Find the image distance.",
+      "solution": "Image distance = 50 cm."
+    }
+  ],
+
+  "practice_questions": [
+    "State the two laws of reflection.",
+    "Define reflection.",
+    "Differentiate between regular and diffuse reflection.",
+    "State five characteristics of images formed by a plane mirror.",
+    "An incident ray strikes a mirror at 60°. Find the angle of reflection."
+  ],
+
+  "answers": [
+    "Angle of incidence equals angle of reflection; incident ray, reflected ray and normal lie in the same plane.",
+    "Reflection is the bouncing back of light from a surface.",
+    "Regular reflection occurs on smooth surfaces while diffuse reflection occurs on rough surfaces.",
+    "Virtual, upright, same size, laterally inverted and equal image distance.",
+    "60°."
+  ]
+},
+"electrostatics": {
+  "definition": "Electrostatics is the study of electric charges at rest.",
+
+  "charges": {
+    "positive": "Produced when an object loses electrons.",
+    "negative": "Produced when an object gains electrons."
+  },
+
+  "laws_of_charge": [
+    "Like charges repel.",
+    "Unlike charges attract."
+  ],
+
+  "methods_of_charging": [
+    "Charging by friction.",
+    "Charging by contact (conduction).",
+    "Charging by induction."
+  ],
+
+  "conductors": [
+    "Copper",
+    "Aluminium",
+    "Silver",
+    "Iron"
+  ],
+
+  "insulators": [
+    "Plastic",
+    "Rubber",
+    "Glass",
+    "Wood",
+    "Dry air"
+  ],
+
+  "electroscope": {
+    "definition": "An electroscope is an instrument used to detect the presence and type of electric charge.",
+    "parts": [
+      "Metal cap",
+      "Metal rod",
+      "Gold leaves",
+      "Glass case"
+    ]
+  },
+
+  "applications": [
+    "Photocopiers",
+    "Electrostatic spray painting",
+    "Smoke precipitators",
+    "Lightning conductors"
+  ],
+
+  "dangers": [
+    "Lightning strikes",
+    "Electric sparks near fuel",
+    "Damage to electronic equipment"
+  ],
+
+  "formulae": [],
+
+  "worked_examples": [
+    {
+      "question": "What happens when a positively charged rod is brought near a negatively charged object?",
+      "solution": "They attract each other because unlike charges attract."
+    },
+    {
+      "question": "State one method of charging a body.",
+      "solution": "Charging by friction."
+    }
+  ],
+
+  "practice_questions": [
+    "Define electrostatics.",
+    "State the law of electric charges.",
+    "Name three methods of charging.",
+    "What is the function of an electroscope?",
+    "State two applications of electrostatics."
+  ],
+
+  "answers": [
+    "Electrostatics is the study of electric charges at rest.",
+    "Like charges repel while unlike charges attract.",
+    "Friction, contact and induction.",
+    "To detect electric charge.",
+    "Photocopiers and electrostatic spray painting."
+  ]
+},
+"cells and simple circuits": {
+  "definition": "An electric cell is a source of electrical energy that converts chemical energy into electrical energy.",
+
+  "types_of_cells": {
+    "primary_cells": [
+      "Dry cell",
+      "Alkaline cell"
+    ],
+    "secondary_cells": [
+      "Lead-acid accumulator",
+      "Rechargeable lithium-ion battery"
+    ]
+  },
+
+  "parts_of_a_simple_circuit": [
+    "Cell",
+    "Switch",
+    "Connecting wires",
+    "Bulb",
+    "Resistor"
+  ],
+
+  "circuit_types": {
+    "series": {
+      "description": "Components are connected in one path.",
+      "advantages": [
+        "Easy to construct."
+      ],
+      "disadvantages": [
+        "If one component fails, the whole circuit stops working."
+      ]
+    },
+    "parallel": {
+      "description": "Components are connected on separate branches.",
+      "advantages": [
+        "Each component works independently."
+      ],
+      "disadvantages": [
+        "Requires more connecting wires."
+      ]
+    }
+  },
+
+  "conductors": [
+    "Copper",
+    "Aluminium",
+    "Silver"
+  ],
+
+  "insulators": [
+    "Plastic",
+    "Rubber",
+    "Glass",
+    "Wood"
+  ],
+
+  "key_points": [
+    "Current flows only in a closed circuit.",
+    "A switch opens or closes a circuit.",
+    "Electric current is measured in amperes (A).",
+    "Voltage is measured in volts (V)."
+  ],
+
+  "formulae": [
+    "I = V / R"
+  ],
+
+  "worked_examples": [
+    {
+      "question": "A circuit has a voltage of 12 V and a resistance of 4 Ω. Calculate the current.",
+      "solution": "I = V/R = 12 ÷ 4 = 3 A."
+    },
+    {
+      "question": "Why does a bulb go off when the switch is opened?",
+      "solution": "Because opening the switch breaks the circuit and stops current flow."
+    }
+  ],
+
+  "practice_questions": [
+    "Define an electric cell.",
+    "Differentiate between primary and secondary cells.",
+    "State three components of a simple circuit.",
+    "Differentiate between series and parallel circuits.",
+    "Calculate the current if V = 9 V and R = 3 Ω."
+  ],
+
+  "answers": [
+    "An electric cell converts chemical energy into electrical energy.",
+    "Primary cells cannot be recharged while secondary cells can.",
+    "Cell, switch and bulb.",
+    "Series has one path while parallel has several branches.",
+    "3 A."
+  ]
+}

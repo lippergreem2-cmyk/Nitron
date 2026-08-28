@@ -1,0 +1,26 @@
+{
+  "1": {
+    "title": "Introduction to React",
+    "explanation": "React is a JavaScript library for building fast, interactive user interfaces using reusable components.",
+    "code": "function App() {\n  return <h1>Hello React!</h1>;\n}\n\nexport default App;",
+    "output": "A webpage displaying 'Hello React!'.",
+    "practice": "Create a React component that displays your name in an <h1> tag.",
+    "quiz": "What is a React component?"
+  },
+  "2": {
+    "title": "JSX",
+    "explanation": "JSX is a syntax extension for JavaScript that lets you write HTML-like code inside React components.",
+    "code": "const element = <h2>Welcome to Nitron</h2>;",
+    "output": "A heading saying 'Welcome to Nitron'.",
+    "practice": "Create a JSX paragraph introducing yourself.",
+    "quiz": "What does JSX allow you to write inside JavaScript?"
+  },
+  "3": {
+    "title": "Props",
+    "explanation": "Props are inputs passed to React components, allowing components to be reused with different data.",
+    "code": "function Welcome(props) {\n  return <h1>Hello, {props.name}!</h1>;\n}\n\n<Welcome name=\"Nitron\" />",
+    "output": "Hello, Nitron!",
+    "practice": "Create a component that receives a city name as a prop and displays it.",
+    "quiz": "What are props used for in React?"
+  }
+}

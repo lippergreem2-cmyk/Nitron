@@ -1,0 +1,46 @@
+{
+  "domain": "Geography",
+  "description": "Knowledge about Earth, locations, environments, populations, and physical features.",
+  "topics": [
+    {
+      "name": "Earth Fundamentals",
+      "knowledge": [
+        "Geography studies Earth’s places, environments, and relationships between humans and the planet.",
+        "Earth contains continents, oceans, mountains, rivers, and different climates.",
+        "Maps and geographic data help understand locations and environments."
+      ]
+    },
+    {
+      "name": "Physical Geography",
+      "knowledge": [
+        "Physical geography studies natural features of Earth.",
+        "Mountains, deserts, forests, rivers, and oceans shape the planet.",
+        "Climate and weather influence ecosystems and human activities."
+      ]
+    },
+    {
+      "name": "Human Geography",
+      "knowledge": [
+        "Human geography studies populations, cultures, cities, and societies.",
+        "Cities develop based on resources, transportation, and human needs.",
+        "Population patterns change through migration and development."
+      ]
+    },
+    {
+      "name": "Countries and Regions",
+      "knowledge": [
+        "Countries are organized territories with governments and populations.",
+        "Regions can be studied by geography, culture, economy, and history.",
+        "International connections influence trade, technology, and cooperation."
+      ]
+    },
+    {
+      "name": "Environmental Knowledge",
+      "knowledge": [
+        "The environment includes living organisms and the physical world around them.",
+        "Environmental science studies ecosystems and human impact on Earth.",
+        "Sustainable practices help protect natural resources."
+      ]
+    }
+  ]
+}

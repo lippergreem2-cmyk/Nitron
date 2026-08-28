@@ -1,0 +1,14 @@
+.gradle/
+local.properties
+.idea/
+build/
+app/build/
+*.iml
+signing.properties
+nitron-release.jks
+
+signing.properties
+nitron-release.jks
+__pycache__/
+*.pyc
+.env

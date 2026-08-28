@@ -1,0 +1,81 @@
+"""
+Nitron Knowledge Processor
+"""
+
+import re
+
+
+class KnowledgeProcessor:
+
+    def __init__(self):
+        self.name = "Nitron Knowledge Processor"
+
+    def clean(self, text):
+        """
+        Clean webpage text.
+        """
+
+        text = re.sub(r"\s+", " ", text)
+        return text.strip()
+
+    def keywords(self, text, limit=30):
+        """
+        Extract simple keywords.
+        """
+
+        words = self.clean(text).lower().split()
+
+        ignore = {
+            "the", "a", "an", "and", "or",
+            "to", "of", "in", "on", "for",
+            "is", "are", "was", "were",
+            "this", "that", "with", "as",
+            "by", "be", "it", "from"
+        }
+
+        keywords = []
+
+        for word in words:
+
+            word = word.strip(".,:;!?()[]{}<>\"'")
+
+            if len(word) < 3:
+                continue
+
+            if word in ignore:
+                continue
+
+            if word not in keywords:
+                keywords.append(word)
+
+            if len(keywords) >= limit:
+                break
+
+        return keywords
+
+    def summarize(self, text, max_length=2000):
+        """
+        Create a simple summary.
+        """
+
+        text = self.clean(text)
+
+        if len(text) <= max_length:
+            return text
+
+        return text[:max_length] + "..."
+
+    def process(self, title, content):
+        """
+        Process knowledge.
+        """
+
+        return {
+            "title": title,
+            "summary": self.summarize(content),
+            "keywords": self.keywords(content),
+            "length": len(content)
+        }
+
+
+processor = KnowledgeProcessor()

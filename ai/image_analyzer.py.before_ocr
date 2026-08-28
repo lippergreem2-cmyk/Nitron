@@ -1,0 +1,174 @@
+"""
+Nitron Image Analyzer
+
+Provides:
+- image file information
+- dimensions
+- format
+- color mode
+- OCR text extraction using Termux Tesseract
+
+The analyzer does not claim to identify people or objects.
+"""
+
+import os
+import subprocess
+from datetime import datetime
+
+try:
+    from PIL import Image
+except ImportError:
+    Image = None
+
+
+TESSERACT = "tesseract"
+
+
+def extract_text(image_path):
+    """
+    Extract visible text from an image using Tesseract.
+    """
+
+    try:
+        process = subprocess.run(
+            [
+                TESSERACT,
+                image_path,
+                "stdout",
+                "--psm",
+                "6",
+                "-l",
+                "eng",
+            ],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+
+        if process.returncode != 0:
+            error = process.stderr.strip()
+
+            return {
+                "success": False,
+                "text": "",
+                "error": error or "Tesseract OCR failed."
+            }
+
+        text = process.stdout.strip()
+
+        return {
+            "success": True,
+            "text": text,
+            "error": ""
+        }
+
+    except FileNotFoundError:
+        return {
+            "success": False,
+            "text": "",
+            "error": "Tesseract is not installed or not in PATH."
+        }
+
+    except subprocess.TimeoutExpired:
+        return {
+            "success": False,
+            "text": "",
+            "error": "OCR timed out."
+        }
+
+    except Exception as e:
+        return {
+            "success": False,
+            "text": "",
+            "error": str(e)
+        }
+
+
+def analyze_image(image_path, note=""):
+    """
+    Analyze an image locally and extract visible text.
+    """
+
+    if not image_path:
+        raise ValueError("No image path supplied.")
+
+    if not os.path.exists(image_path):
+        raise FileNotFoundError(
+            f"Image not found: {image_path}"
+        )
+
+    result = {
+        "type": "image",
+        "path": image_path,
+        "filename": os.path.basename(image_path),
+        "size_bytes": os.path.getsize(image_path),
+        "analyzed_at": datetime.now().isoformat(),
+    }
+
+    if note:
+        result["user_note"] = note
+
+    # Image metadata
+    if Image is None:
+
+        result["analysis"] = (
+            "Image received successfully, "
+            "but Pillow is not installed."
+        )
+
+    else:
+
+        try:
+            with Image.open(image_path) as image:
+
+                result["format"] = image.format
+                result["width"] = image.width
+                result["height"] = image.height
+                result["mode"] = image.mode
+
+                result["analysis"] = (
+                    f"Image received successfully. "
+                    f"Format: {image.format}. "
+                    f"Dimensions: {image.width}x{image.height}. "
+                    f"Color mode: {image.mode}."
+                )
+
+        except Exception as e:
+
+            result["analysis"] = (
+                f"The image file was received, "
+                f"but metadata analysis failed: {e}"
+            )
+
+    # OCR
+    ocr = extract_text(image_path)
+
+    result["ocr"] = ocr
+
+    if ocr["success"]:
+
+        text = ocr["text"]
+
+        if text:
+            result["text"] = text
+
+            result["analysis"] += (
+                f" OCR extracted {len(text)} characters of text."
+            )
+
+        else:
+            result["text"] = ""
+
+            result["analysis"] += (
+                " OCR completed, but no readable text was found."
+            )
+
+    else:
+
+        result["text"] = ""
+
+        result["analysis"] += (
+            f" OCR unavailable: {ocr['error']}"
+        )
+
+    return result

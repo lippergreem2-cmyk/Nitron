@@ -1,0 +1,18 @@
+{
+  "1": {
+    "title": "Introduction to CSS",
+    "explanation": "CSS (Cascading Style Sheets) is used to style HTML pages. It controls colors, fonts, spacing, layouts, and animations.",
+    "code": "body {\n  background: #f5f5f5;\n  color: #222;\n  font-family: Arial, sans-serif;\n}\n\nh1 {\n  color: blue;\n}",
+    "output": "The webpage has a light gray background, dark text, and a blue heading.",
+    "practice": "Change the background color and make all headings green.",
+    "quiz": "What does CSS stand for?"
+  },
+  "2": {
+    "title": "Selectors",
+    "explanation": "Selectors tell CSS which HTML elements to style.",
+    "code": "h1 {\n  color: red;\n}\n\np {\n  font-size: 18px;\n}\n\n.button {\n  background: blue;\n  color: white;\n}",
+    "output": "Headings become red, paragraphs are larger, and elements with class 'button' have a blue background.",
+    "practice": "Style a heading, a paragraph, and create a button class.",
+    "quiz": "Which selector targets all paragraph elements?"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Cloud Security",
+    "explanation": "Cloud security is the practice of protecting cloud-based applications, data, and infrastructure. It combines technology, policies, and procedures to help keep cloud resources secure.",
+    "code": "# Cloud security protects cloud resources.",
+    "output": "Understanding the purpose of cloud security.",
+    "practice": "List three advantages of using cloud security.",
+    "quiz": "What is cloud security?"
+  },
+  "2": {
+    "title": "Cloud Service Models",
+    "explanation": "The three main cloud service models are Infrastructure as a Service (IaaS), Platform as a Service (PaaS), and Software as a Service (SaaS). Each provides a different level of management and responsibility.",
+    "code": "IaaS\nPaaS\nSaaS",
+    "output": "The cloud service models are listed.",
+    "practice": "Research one example of each cloud service model.",
+    "quiz": "What does SaaS stand for?"
+  },
+  "3": {
+    "title": "Identity and Access Management",
+    "explanation": "Identity and Access Management (IAM) controls who can access cloud resources and what actions they are allowed to perform. Applying the principle of least privilege helps reduce risk.",
+    "code": "user -> role -> permissions",
+    "output": "Access is managed according to assigned permissions.",
+    "practice": "Explain why least privilege is important.",
+    "quiz": "What is the purpose of IAM?"
+  },
+  "4": {
+    "title": "Data Protection",
+    "explanation": "Protect cloud data by using encryption, regular backups, secure storage, and appropriate access controls. Sensitive information should be handled according to organizational policies.",
+    "code": "encrypt(data)\nbackup(data)",
+    "output": "Data is stored more securely.",
+    "practice": "List four ways to protect data in the cloud.",
+    "quiz": "Why are backups important?"
+  },
+  "5": {
+    "title": "Cloud Security Best Practices",
+    "explanation": "Enable multi-factor authentication, keep software updated, monitor logs, review permissions regularly, and follow security policies to improve the security of cloud environments.",
+    "code": "# Enable MFA\n# Review permissions\n# Monitor logs",
+    "output": "Cloud resources follow recommended security practices.",
+    "practice": "Write five cloud security best practices.",
+    "quiz": "Name three best practices for cloud security."
+  }
+}

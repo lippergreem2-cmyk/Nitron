@@ -1,0 +1,510 @@
+# ==========================================================
+# NITRON REAL CODE GENERATOR v1.0
+# ==========================================================
+
+import os
+import json
+
+
+class CodeGenerator:
+
+    def __init__(self, workspace=None):
+        if workspace is None:
+            workspace = os.path.expanduser(
+                "~/Nitron/GeneratedProjects"
+            )
+
+        self.workspace = os.path.abspath(workspace)
+
+        os.makedirs(
+            self.workspace,
+            exist_ok=True
+        )
+
+    # ======================================================
+    # PROJECT NAME
+    # ======================================================
+
+    def _safe_name(self, name):
+        name = str(name).strip()
+
+        if not name:
+            return "NewProject"
+
+        allowed = (
+            "abcdefghijklmnopqrstuvwxyz"
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            "0123456789"
+            "_- "
+        )
+
+        cleaned = ""
+
+        for char in name:
+            if char in allowed:
+                cleaned += char
+            else:
+                cleaned += "_"
+
+        cleaned = cleaned.strip()
+
+        return cleaned or "NewProject"
+
+    # ======================================================
+    # CREATE PROJECT
+    # ======================================================
+
+    def create_project(self, project_name):
+        project_name = self._safe_name(project_name)
+
+        project_path = os.path.join(
+            self.workspace,
+            project_name
+        )
+
+        os.makedirs(
+            project_path,
+            exist_ok=True
+        )
+
+        return project_path
+
+    # ======================================================
+    # WRITE ONE FILE
+    # ======================================================
+
+    def write_file(
+        self,
+        project_path,
+        relative_path,
+        content
+    ):
+
+        if not relative_path:
+            raise ValueError(
+                "File path cannot be empty."
+            )
+
+        relative_path = relative_path.replace(
+            "\\",
+            "/"
+        )
+
+        relative_path = os.path.normpath(
+            relative_path
+        )
+
+        # Prevent escaping the project directory
+        if (
+            relative_path == ".."
+            or relative_path.startswith(
+                ".." + os.sep
+            )
+        ):
+            raise ValueError(
+                "Invalid file path."
+            )
+
+        file_path = os.path.abspath(
+            os.path.join(
+                project_path,
+                relative_path
+            )
+        )
+
+        project_path = os.path.abspath(
+            project_path
+        )
+
+        if not (
+            file_path == project_path
+            or file_path.startswith(
+                project_path + os.sep
+            )
+        ):
+            raise ValueError(
+                "File path is outside project."
+            )
+
+        parent = os.path.dirname(
+            file_path
+        )
+
+        os.makedirs(
+            parent,
+            exist_ok=True
+        )
+
+        with open(
+            file_path,
+            "w",
+            encoding="utf-8"
+        ) as file:
+            file.write(
+                str(content)
+            )
+
+        return file_path
+
+    # ======================================================
+    # WRITE COMPLETE PROJECT
+    # ======================================================
+
+    def write_project(
+        self,
+        project_name,
+        files
+    ):
+
+        if not isinstance(files, dict):
+            raise TypeError(
+                "files must be a dictionary."
+            )
+
+        project_path = self.create_project(
+            project_name
+        )
+
+        created_files = []
+
+        for relative_path, content in files.items():
+
+            file_path = self.write_file(
+                project_path,
+                relative_path,
+                content
+            )
+
+            created_files.append(
+                os.path.relpath(
+                    file_path,
+                    project_path
+                ).replace("\\", "/")
+            )
+
+        manifest = self.create_manifest(
+            project_path,
+            project_name
+        )
+
+        return {
+            "success": True,
+            "project": project_name,
+            "path": project_path,
+            "files": created_files,
+            "manifest": manifest
+        }
+
+    # ======================================================
+    # READ ONE FILE
+    # ======================================================
+
+    def read_file(
+        self,
+        project_path,
+        relative_path
+    ):
+
+        relative_path = os.path.normpath(
+            relative_path.replace(
+                "\\",
+                "/"
+            )
+        )
+
+        if (
+            relative_path == ".."
+            or relative_path.startswith(
+                ".." + os.sep
+            )
+        ):
+            raise ValueError(
+                "Invalid file path."
+            )
+
+        file_path = os.path.join(
+            project_path,
+            relative_path
+        )
+
+        if not os.path.isfile(file_path):
+            raise FileNotFoundError(
+                file_path
+            )
+
+        with open(
+            file_path,
+            "r",
+            encoding="utf-8"
+        ) as file:
+            return file.read()
+
+    # ======================================================
+    # READ COMPLETE PROJECT
+    # ======================================================
+
+    def read_project(
+        self,
+        project_path
+    ):
+
+        project_path = os.path.abspath(
+            os.path.expanduser(
+                project_path
+            )
+        )
+
+        if not os.path.isdir(project_path):
+            raise FileNotFoundError(
+                project_path
+            )
+
+        project_files = {}
+
+        for root, directories, files in os.walk(
+            project_path
+        ):
+
+            # Ignore Python cache
+            directories[:] = [
+                directory
+                for directory in directories
+                if directory != "__pycache__"
+                and directory != ".git"
+            ]
+
+            for filename in files:
+
+                full_path = os.path.join(
+                    root,
+                    filename
+                )
+
+                relative_path = os.path.relpath(
+                    full_path,
+                    project_path
+                )
+
+                relative_path = relative_path.replace(
+                    "\\",
+                    "/"
+                )
+
+                try:
+
+                    with open(
+                        full_path,
+                        "r",
+                        encoding="utf-8"
+                    ) as file:
+
+                        project_files[
+                            relative_path
+                        ] = file.read()
+
+                except (
+                    UnicodeDecodeError,
+                    PermissionError
+                ):
+
+                    # Skip binary/unreadable files
+                    continue
+
+        return project_files
+
+    # ======================================================
+    # UPDATE FILE
+    # ======================================================
+
+    def update_file(
+        self,
+        project_path,
+        relative_path,
+        content
+    ):
+
+        return self.write_file(
+            project_path,
+            relative_path,
+            content
+        )
+
+    # ======================================================
+    # DELETE FILE
+    # ======================================================
+
+    def delete_file(
+        self,
+        project_path,
+        relative_path
+    ):
+
+        relative_path = os.path.normpath(
+            relative_path.replace(
+                "\\",
+                "/"
+            )
+        )
+
+        if (
+            relative_path == ".."
+            or relative_path.startswith(
+                ".." + os.sep
+            )
+        ):
+            raise ValueError(
+                "Invalid file path."
+            )
+
+        file_path = os.path.abspath(
+            os.path.join(
+                project_path,
+                relative_path
+            )
+        )
+
+        if not os.path.isfile(file_path):
+            return False
+
+        os.remove(
+            file_path
+        )
+
+        return True
+
+    # ======================================================
+    # PROJECT MANIFEST
+    # ======================================================
+
+    def create_manifest(
+        self,
+        project_path,
+        project_name,
+        description=""
+    ):
+
+        files = self.read_project(
+            project_path
+        )
+
+        manifest = {
+            "name": project_name,
+            "description": description,
+            "files": sorted(
+                files.keys()
+            )
+        }
+
+        manifest_path = self.write_file(
+            project_path,
+            "nitron_project.json",
+            json.dumps(
+                manifest,
+                indent=4
+            )
+        )
+
+        return {
+            "path": manifest_path,
+            "name": project_name,
+            "description": description,
+            "files": manifest["files"]
+        }
+
+    # ======================================================
+    # PROJECT EXISTS
+    # ======================================================
+
+    def project_exists(
+        self,
+        project_name
+    ):
+
+        project_name = self._safe_name(
+            project_name
+        )
+
+        project_path = os.path.join(
+            self.workspace,
+            project_name
+        )
+
+        return os.path.isdir(
+            project_path
+        )
+
+    # ======================================================
+    # GET PROJECT PATH
+    # ======================================================
+
+    def get_project_path(
+        self,
+        project_name
+    ):
+
+        project_name = self._safe_name(
+            project_name
+        )
+
+        return os.path.join(
+            self.workspace,
+            project_name
+        )
+
+
+# ==========================================================
+# TEST
+# ==========================================================
+
+if __name__ == "__main__":
+
+    print()
+    print("=" * 60)
+    print("NITRON REAL CODE GENERATOR")
+    print("=" * 60)
+
+    generator = CodeGenerator()
+
+    result = generator.write_project(
+        "NitronGeneratorTest",
+        {
+            "main.py": (
+                'def main():\n'
+                '    print("Hello from Nitron!")\n'
+                '\n'
+                '\n'
+                'if __name__ == "__main__":\n'
+                '    main()\n'
+            ),
+
+            "utils/helper.py": (
+                'def hello(name):\n'
+                '    return f"Hello, {name}!"\n'
+            ),
+
+            "README.md": (
+                "# Nitron Generator Test\n\n"
+                "This project was created by "
+                "Nitron's real code generator.\n"
+            )
+        }
+    )
+
+    print()
+    print("Project created successfully.")
+    print()
+    print("Project:")
+    print(result["project"])
+    print()
+    print("Location:")
+    print(result["path"])
+    print()
+    print("Files:")
+
+    for filename in result["files"]:
+        print("  -", filename)
+
+    print()
+    print("=" * 60)
+    print("GENERATOR TEST COMPLETE")
+    print("=" * 60)

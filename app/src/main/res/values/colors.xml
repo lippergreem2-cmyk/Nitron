@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!-- LIGHT MODE -->
+    <color name="nitron_light_background">#FFFFFF</color>
+    <color name="nitron_light_surface">#FFFFFF</color>
+    <color name="nitron_light_input">#F4F4F4</color>
+    <color name="nitron_light_text">#202123</color>
+    <color name="nitron_light_secondary">#6E6E80</color>
+
+    <!-- DARK MODE (unused reference values, kept for compatibility) -->
+    <color name="nitron_dark_background">#171717</color>
+    <color name="nitron_dark_surface">#212121</color>
+    <color name="nitron_dark_input">#2F2F2F</color>
+    <color name="nitron_dark_text">#ECECEC</color>
+    <color name="nitron_dark_secondary">#AFAFAF</color>
+
+    <!-- NITRON BLUE TEXT -->
+    <color name="nitron_blue">#5B8CFF</color>
+
+    <!-- COMPATIBILITY (now correctly light) -->
+    <color name="nitron_background">#FFFFFF</color>
+    <color name="nitron_surface">#FFFFFF</color>
+    <color name="nitron_input">#F4F4F4</color>
+    <color name="nitron_text">#202123</color>
+    <color name="nitron_secondary_text">#6E6E80</color>
+
+    <!-- Input bar accent: black in light mode -->
+    <color name="nitron_composer_bg">#EEEEEE</color>
+
+    <!-- USER MESSAGE -->
+    <color name="user_bubble">#F4F4F4</color>
+    <color name="user_text">#202123</color>
+    <color name="border">#E5E5E5</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+</resources>

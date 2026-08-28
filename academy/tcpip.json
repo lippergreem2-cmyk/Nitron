@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to TCP/IP",
+    "explanation": "TCP/IP (Transmission Control Protocol/Internet Protocol) is the communication protocol suite that allows computers to communicate over networks and the Internet.",
+    "code": "ping 8.8.8.8",
+    "output": "Tests communication using the TCP/IP network.",
+    "practice": "Ping your router and then a public IP address.",
+    "quiz": "What does TCP/IP stand for?"
+  },
+  "2": {
+    "title": "The TCP/IP Layers",
+    "explanation": "The TCP/IP model has four layers: Link, Internet, Transport, and Application. Each layer has a specific responsibility in network communication.",
+    "code": "No code required.",
+    "output": "Understand the four TCP/IP layers.",
+    "practice": "Match HTTP, TCP, IP, and Ethernet to their respective layers.",
+    "quiz": "How many layers does the TCP/IP model have?"
+  },
+  "3": {
+    "title": "TCP vs UDP",
+    "explanation": "TCP provides reliable, ordered communication with error checking. UDP is faster but does not guarantee delivery or order.",
+    "code": "No code required.",
+    "output": "Compare the behavior of TCP and UDP.",
+    "practice": "Research one application that uses TCP and one that uses UDP.",
+    "quiz": "Which protocol is more reliable: TCP or UDP?"
+  },
+  "4": {
+    "title": "IP Addresses",
+    "explanation": "The Internet Protocol (IP) identifies devices on a network. IPv4 uses 32-bit addresses, while IPv6 uses 128-bit addresses.",
+    "code": "ip addr",
+    "output": "Displays your network interfaces and IP addresses.",
+    "practice": "Identify your IPv4 address.",
+    "quiz": "Which version provides a much larger address space: IPv4 or IPv6?"
+  },
+  "5": {
+    "title": "Packets",
+    "explanation": "Data is divided into packets before being transmitted across a network. Each packet contains addressing information and part of the original data.",
+    "code": "traceroute google.com",
+    "output": "Shows the path packets take to reach a destination.",
+    "practice": "Run traceroute (or tracert on Windows) to observe packet routing.",
+    "quiz": "What is a network packet?"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Machine Learning",
+    "explanation": "Machine Learning (ML) is a branch of Artificial Intelligence that enables computers to learn patterns from data and make predictions or decisions without being explicitly programmed for every task.",
+    "code": "from sklearn.linear_model import LinearRegression\n\nmodel = LinearRegression()",
+    "output": "A machine learning model is created.",
+    "practice": "Research three real-world applications of machine learning.",
+    "quiz": "What is Machine Learning?"
+  },
+  "2": {
+    "title": "Types of Machine Learning",
+    "explanation": "The three main types are Supervised Learning, Unsupervised Learning, and Reinforcement Learning.",
+    "code": "Supervised\nUnsupervised\nReinforcement",
+    "output": "Three categories of machine learning.",
+    "practice": "Give one example of each type.",
+    "quiz": "Which type of learning uses labeled data?"
+  },
+  "3": {
+    "title": "Training Data",
+    "explanation": "Training data is the information used to teach a machine learning model. Better quality data generally leads to better models.",
+    "code": "X = [[1],[2],[3]]\ny = [2,4,6]",
+    "output": "Sample training dataset.",
+    "practice": "Create a small dataset with five inputs and outputs.",
+    "quiz": "Why is training data important?"
+  },
+  "4": {
+    "title": "Model Training",
+    "explanation": "Training is the process of allowing a model to learn from data by adjusting its internal parameters.",
+    "code": "model.fit(X, y)",
+    "output": "The model learns from the training data.",
+    "practice": "Train a simple regression model.",
+    "quiz": "What does model.fit() do?"
+  },
+  "5": {
+    "title": "Making Predictions",
+    "explanation": "After training, the model can predict results for new data it has never seen before.",
+    "code": "model.predict([[5]])",
+    "output": "[10]",
+    "practice": "Predict the output for a new value.",
+    "quiz": "What is the purpose of prediction in Machine Learning?"
+  }
+}

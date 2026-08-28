@@ -1,0 +1,62 @@
+{
+  "domain": "Psychology",
+  "description": "Knowledge about human thinking, emotions, behavior, learning, and decision-making.",
+  "topics": [
+    {
+      "name": "Psychology Fundamentals",
+      "knowledge": [
+        "Psychology is the scientific study of the mind and behavior.",
+        "Human behavior is influenced by thoughts, emotions, experiences, and environment.",
+        "Psychology uses observation, research, and experiments to understand people."
+      ]
+    },
+    {
+      "name": "Human Thinking",
+      "knowledge": [
+        "The brain processes information, creates thoughts, and supports decision-making.",
+        "Critical thinking evaluates information using logic and evidence.",
+        "Memory allows humans to store and recall information."
+      ]
+    },
+    {
+      "name": "Learning and Intelligence",
+      "knowledge": [
+        "Learning is the process of gaining knowledge and skills through experience.",
+        "Practice and feedback improve performance.",
+        "Intelligence involves problem-solving, adaptation, and understanding."
+      ]
+    },
+    {
+      "name": "Emotions",
+      "knowledge": [
+        "Emotions influence human decisions and actions.",
+        "Understanding emotions helps improve communication and relationships.",
+        "Emotional awareness supports better decision-making."
+      ]
+    },
+    {
+      "name": "Communication",
+      "knowledge": [
+        "Communication transfers information between people.",
+        "Effective communication requires listening, clarity, and understanding.",
+        "Language allows humans to share ideas and knowledge."
+      ]
+    },
+    {
+      "name": "Decision Making",
+      "knowledge": [
+        "Decision-making involves selecting actions based on available information.",
+        "People may use logic, experience, emotions, and goals when making decisions.",
+        "Good decisions consider consequences and possible risks."
+      ]
+    },
+    {
+      "name": "Human Behavior",
+      "knowledge": [
+        "Behavior is shaped by biology, experiences, culture, and environment.",
+        "Understanding behavior helps improve systems designed for humans.",
+        "Ethical consideration is important when studying and influencing behavior."
+      ]
+    }
+  ]
+}

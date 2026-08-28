@@ -1,0 +1,42 @@
+"""
+Nitron Brain Engine
+"""
+
+from core.state import State
+from core.logger import Logger
+from core.router import Router
+
+
+class BrainEngine:
+    def __init__(self):
+        self.state = State()
+        self.logger = Logger()
+        self.router = Router()
+
+    def think(self, command):
+        """
+        Process a command and decide which module should handle it.
+        """
+        self.state.set(State.THINKING)
+
+        command = command.strip()
+
+        self.logger.info(f"Received command: {command}")
+
+        module = self.router.route(command)
+
+        self.logger.info(f"Routing to: {module}")
+
+        self.state.reset()
+
+        return module
+
+    def status(self):
+        return {
+            "state": self.state.get(),
+            "engine": "BrainEngine",
+            "online": True
+        }
+
+
+brain = BrainEngine()

@@ -1,0 +1,95 @@
+"""
+Nitron Image Learning
+Receives user-provided images, stores them, and records
+a learning entry in Nitron's existing Learner system.
+"""
+
+import base64
+import os
+import uuid
+from datetime import datetime
+
+from brain.learner import learner
+
+
+IMAGE_DIR = os.path.join(
+    os.path.dirname(__file__),
+    "brain",
+    "learned_images"
+)
+
+os.makedirs(IMAGE_DIR, exist_ok=True)
+
+
+def learn_image(image_base64, filename="image.jpg", note=""):
+    """
+    Save an image and create a memory entry for it.
+
+    image_base64:
+        Base64-encoded image data.
+
+    filename:
+        Original filename supplied by Android.
+
+    note:
+        Optional note from the user describing what Nitron
+        should learn from the picture.
+    """
+
+    if not image_base64:
+        raise ValueError("No image data received.")
+
+    # Remove a possible data-URL prefix.
+    if "," in image_base64:
+        image_base64 = image_base64.split(",", 1)[1]
+
+    image_data = base64.b64decode(image_base64)
+
+    extension = os.path.splitext(filename)[1].lower()
+
+    if extension not in (
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".webp",
+    ):
+        extension = ".jpg"
+
+    image_id = uuid.uuid4().hex
+
+    saved_name = f"{image_id}{extension}"
+
+    image_path = os.path.join(
+        IMAGE_DIR,
+        saved_name
+    )
+
+    with open(image_path, "wb") as file:
+        file.write(image_data)
+
+    topic = f"image_{image_id}"
+
+    content = {
+        "type": "image",
+        "title": filename,
+        "image_path": image_path,
+        "note": note,
+        "description": (
+            note
+            if note
+            else "Image received from the user."
+        ),
+        "learned_at": datetime.now().isoformat(),
+    }
+
+    entry = learner.learn(
+        topic,
+        "user_image",
+        content
+    )
+
+    return {
+        "topic": topic,
+        "image_path": image_path,
+        "entry": entry,
+    }

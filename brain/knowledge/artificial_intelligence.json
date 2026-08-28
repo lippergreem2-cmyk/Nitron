@@ -1,0 +1,136 @@
+{
+  "name": "Artificial Intelligence Knowledge",
+  "description": "Core knowledge for understanding, building, and using artificial intelligence systems.",
+
+  "topics": {
+
+    "ai_fundamentals": {
+      "description": "The field of creating systems that can perform tasks requiring human-like intelligence.",
+      "concepts": [
+        "reasoning",
+        "learning",
+        "prediction",
+        "decision making",
+        "automation"
+      ]
+    },
+
+    "machine_learning": {
+      "description": "A method where systems learn patterns from data to make predictions or decisions.",
+      "concepts": [
+        "supervised learning",
+        "unsupervised learning",
+        "reinforcement learning",
+        "training data",
+        "models",
+        "evaluation"
+      ],
+      "skills": [
+        "understand ML workflows",
+        "select suitable models",
+        "analyze results"
+      ]
+    },
+
+    "deep_learning": {
+      "description": "A branch of machine learning using neural networks with multiple layers.",
+      "concepts": [
+        "layers",
+        "neurons",
+        "weights",
+        "training",
+        "optimization"
+      ]
+    },
+
+    "neural_networks": {
+      "knowledge": [
+        "input layer",
+        "hidden layers",
+        "output layer",
+        "activation functions",
+        "backpropagation"
+      ]
+    },
+
+    "natural_language_processing": {
+      "description": "AI systems that understand and generate human language.",
+      "concepts": [
+        "text processing",
+        "tokenization",
+        "embeddings",
+        "language understanding",
+        "text generation"
+      ]
+    },
+
+    "large_language_models": {
+      "description": "Large AI models trained on large amounts of text to understand and generate language.",
+      "concepts": [
+        "tokens",
+        "context windows",
+        "transformers",
+        "attention mechanisms",
+        "fine tuning",
+        "retrieval augmented generation"
+      ]
+    },
+
+    "computer_vision": {
+      "description": "AI systems that understand images and video.",
+      "concepts": [
+        "image recognition",
+        "object detection",
+        "image classification",
+        "feature extraction"
+      ]
+    },
+
+    "ai_agents": {
+      "description": "Systems that can observe, reason, use tools, and complete goals.",
+      "components": [
+        "memory",
+        "planning",
+        "tools",
+        "reasoning",
+        "actions"
+      ],
+      "skills": [
+        "task automation",
+        "decision making",
+        "workflow execution"
+      ]
+    },
+
+    "model_development": {
+      "process": [
+        "collect data",
+        "prepare data",
+        "train model",
+        "evaluate model",
+        "deploy model",
+        "monitor performance"
+      ]
+    },
+
+    "responsible_ai": {
+      "principles": [
+        "fairness",
+        "privacy",
+        "security",
+        "transparency",
+        "human oversight"
+      ]
+    },
+
+    "nitron_ai_architecture": {
+      "components": [
+        "knowledge system",
+        "memory system",
+        "skills",
+        "reasoning engine",
+        "device communication"
+      ]
+    }
+  }
+}

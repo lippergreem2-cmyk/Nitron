@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Computer Networking",
+    "explanation": "A computer network is a group of devices connected together to share data and resources. The Internet is the world's largest computer network.",
+    "code": "ping google.com",
+    "output": "Shows whether your computer can communicate with Google's servers.",
+    "practice": "Use the ping command to test your Internet connection.",
+    "quiz": "What is a computer network?"
+  },
+  "2": {
+    "title": "Network Types",
+    "explanation": "Common network types include LAN (Local Area Network), WAN (Wide Area Network), MAN (Metropolitan Area Network), and PAN (Personal Area Network).",
+    "code": "No code required.",
+    "output": "Understand the different types of networks.",
+    "practice": "Identify whether your home Wi-Fi is a LAN or WAN.",
+    "quiz": "What does LAN stand for?"
+  },
+  "3": {
+    "title": "IP Addresses",
+    "explanation": "Every device connected to a network has an IP address. IPv4 addresses look like 192.168.1.1, while IPv6 addresses are much longer.",
+    "code": "ip addr",
+    "output": "Displays your device's IP addresses.",
+    "practice": "Find the IP address of your computer or phone.",
+    "quiz": "What is the purpose of an IP address?"
+  },
+  "4": {
+    "title": "Ports",
+    "explanation": "Ports identify specific services on a device. Examples include HTTP (80), HTTPS (443), SSH (22), and FTP (21).",
+    "code": "netstat -tuln",
+    "output": "Lists open network ports.",
+    "practice": "Research what port 443 is used for.",
+    "quiz": "Which port is commonly used for HTTPS?"
+  },
+  "5": {
+    "title": "Network Devices",
+    "explanation": "Routers connect different networks, switches connect devices within the same network, and access points provide wireless connectivity.",
+    "code": "No code required.",
+    "output": "Understand the role of routers, switches, and access points.",
+    "practice": "Identify the router in your home network.",
+    "quiz": "What is the main job of a router?"
+  }
+}

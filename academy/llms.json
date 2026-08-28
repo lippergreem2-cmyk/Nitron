@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Large Language Models",
+    "explanation": "Large Language Models (LLMs) are AI models trained on vast amounts of text to understand and generate human language. They can answer questions, summarize text, translate languages, write code, and assist with many other tasks.",
+    "code": "prompt = 'Explain Python.'\nresponse = llm.generate(prompt)",
+    "output": "The model generates a response explaining Python.",
+    "practice": "List five real-world applications of LLMs.",
+    "quiz": "What does LLM stand for?"
+  },
+  "2": {
+    "title": "Tokens and Context",
+    "explanation": "LLMs process text as tokens rather than whole sentences. A context window is the maximum number of tokens the model can consider at one time.",
+    "code": "tokens = tokenizer.encode('Hello Nitron')",
+    "output": "The text is converted into tokens.",
+    "practice": "Research what a context window is and why it matters.",
+    "quiz": "What is a token in an LLM?"
+  },
+  "3": {
+    "title": "Transformer Architecture",
+    "explanation": "Modern LLMs are built using the Transformer architecture, which uses attention mechanisms to understand relationships between words in a sequence.",
+    "code": "model = TransformerModel()",
+    "output": "A Transformer model is created.",
+    "practice": "Research why Transformers replaced many older sequence models.",
+    "quiz": "Which architecture powers most modern LLMs?"
+  },
+  "4": {
+    "title": "Fine-Tuning and RAG",
+    "explanation": "Fine-tuning adapts a pre-trained model to a specific task using additional training data. Retrieval-Augmented Generation (RAG) improves answers by retrieving relevant information from external knowledge sources before generating a response.",
+    "code": "documents = retriever.search(query)\nanswer = llm.generate(query, documents)",
+    "output": "The model generates an answer using retrieved information.",
+    "practice": "Compare fine-tuning with Retrieval-Augmented Generation (RAG).",
+    "quiz": "What is the purpose of RAG?"
+  },
+  "5": {
+    "title": "Responsible Use of LLMs",
+    "explanation": "LLMs can make mistakes or produce biased information. Always verify important facts, protect private data, and use LLMs responsibly.",
+    "code": "# Verify important information using trusted sources.",
+    "output": "Reliable and responsible AI usage.",
+    "practice": "Think of three situations where an AI-generated answer should be verified.",
+    "quiz": "Why should important AI-generated information be checked?"
+  }
+}

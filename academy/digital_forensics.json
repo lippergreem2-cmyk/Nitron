@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Digital Forensics",
+    "explanation": "Digital forensics is the process of identifying, preserving, examining, and analyzing digital evidence to help understand security incidents or support investigations. The goal is to maintain the integrity of the evidence throughout the process.",
+    "code": "# Preserve digital evidence before analysis.",
+    "output": "Digital evidence is collected in a way that helps maintain its integrity.",
+    "practice": "List five types of devices that may contain digital evidence.",
+    "quiz": "What is digital forensics?"
+  },
+  "2": {
+    "title": "Types of Digital Evidence",
+    "explanation": "Digital evidence can include files, emails, photographs, system logs, network logs, databases, and information stored on computers or mobile devices.",
+    "code": "evidence = ['Logs', 'Files', 'Emails']",
+    "output": "Examples of digital evidence are identified.",
+    "practice": "Identify three types of digital evidence from a personal computer.",
+    "quiz": "Name three examples of digital evidence."
+  },
+  "3": {
+    "title": "Evidence Preservation",
+    "explanation": "Preserving evidence means avoiding unnecessary changes to the original data, documenting how it was collected, and maintaining a clear record of who handled it.",
+    "code": "# Document collection and preserve originals.",
+    "output": "Evidence remains reliable for later examination.",
+    "practice": "Explain why preserving original evidence is important.",
+    "quiz": "Why should digital evidence be preserved carefully?"
+  },
+  "4": {
+    "title": "Analysis and Reporting",
+    "explanation": "Investigators analyze collected evidence, identify relevant findings, and prepare clear reports that describe what was observed and how the conclusions were reached.",
+    "code": "report = create_report(findings)",
+    "output": "A structured investigation report is produced.",
+    "practice": "Describe the main sections of a digital forensics report.",
+    "quiz": "Why is reporting an important part of digital forensics?"
+  },
+  "5": {
+    "title": "Ethics and Legal Considerations",
+    "explanation": "Digital forensic work should follow applicable laws, organizational policies, and ethical guidelines. Investigations should be properly authorized, and sensitive information should be handled responsibly.",
+    "code": "# Follow legal and ethical requirements.",
+    "output": "The investigation is conducted responsibly.",
+    "practice": "List three ethical principles that should guide digital forensic investigations.",
+    "quiz": "Why are ethics important in digital forensics?"
+  }
+}

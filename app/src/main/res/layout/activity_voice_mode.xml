@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EE000000">
+
+    <!-- Greeting speech bubble -->
+    <LinearLayout
+        android:id="@+id/voiceGreeting"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp"
+        android:background="@drawable/nitron_speech_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello, I'm Nitron"
+            android:textColor="#FFFFFF"
+            android:textSize="19sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How can I help you?"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:id="@+id/voiceTypingDots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="•••"
+            android:textColor="#FF2D78"
+            android:textSize="16sp"
+            android:layout_marginTop="4dp"/>
+
+    </LinearLayout>
+
+    <!-- Speech bubble tail -->
+    <View
+        android:layout_width="20dp"
+        android:layout_height="12dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="108dp"
+        android:background="@drawable/nitron_speech_tail"/>
+
+    <!-- Menu icon -->
+    <TextView
+        android:id="@+id/voiceMenuIcon"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_gravity="top|start"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="☰"
+        android:textColor="#FF2D78"
+        android:textSize="22sp"
+        android:background="@drawable/nitron_circle_outline"
+        android:clickable="true"
+        android:focusable="true"/>
+
+    <!-- Close icon -->
+    <TextView
+        android:id="@+id/voiceCloseIcon"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="✕"
+        android:textColor="#FF2D78"
+        android:textSize="22sp"
+        android:background="@drawable/nitron_circle_outline"
+        android:clickable="true"
+        android:focusable="true"/>
+
+    <!-- Center orb assembly -->
+    <FrameLayout
+        android:id="@+id/voiceOrbContainer"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="150dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/nitron_voice_glow"/>
+
+        <View
+            android:id="@+id/voiceOrbBg"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center"
+            android:background="@drawable/nitron_orb_bg"/>
+
+        <View
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center"
+            android:background="@drawable/nitron_ring_thin"/>
+
+        <View
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center"
+            android:background="@drawable/nitron_ring_thin"/>
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/nitron_ring_thin"/>
+
+        <!-- Crosshair -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="#33FFFFFF"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="#33FFFFFF"/>
+
+        <View
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:rotation="45"
+            android:background="#22FFFFFF"/>
+
+        <View
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:rotation="-45"
+            android:background="#22FFFFFF"/>
+
+        <!-- Starfield scatter -->
+        <View
+            android:layout_width="3dp"
+            android:layout_height="3dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="60dp"
+            android:background="@drawable/nitron_star_dot"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="55dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/nitron_star_dot"/>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="3dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/nitron_star_dot"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="75dp"
+            android:background="@drawable/nitron_star_dot"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="65dp"
+            android:background="@drawable/nitron_star_dot"/>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="3dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="70dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/nitron_star_dot"/>
+
+        <!-- Orbit ring 1 (rotates) -->
+        <FrameLayout
+            android:id="@+id/orbitRing1"
+            android:layout_width="230dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center"
+            android:rotation="20">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/nitron_orbit_ring"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center_vertical|end"
+                android:background="@drawable/nitron_orbit_dot"/>
+
+            <View
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:layout_gravity="top|center_horizontal"
+                android:background="@drawable/nitron_orbit_dot"/>
+
+        </FrameLayout>
+
+        <!-- Orbit ring 2 (rotates opposite) -->
+        <FrameLayout
+            android:id="@+id/orbitRing2"
+            android:layout_width="230dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center"
+            android:rotation="-35">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/nitron_orbit_ring"/>
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_vertical|start"
+                android:background="@drawable/nitron_orbit_dot"/>
+
+            <View
+                android:layout_width="7dp"
+                android:layout_height="7dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@drawable/nitron_orbit_dot"/>
+
+        </FrameLayout>
+
+        <!-- Glossy sphere highlight -->
+        <View
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center"
+            android:background="@drawable/nitron_sphere_shade"/>
+
+        <!-- N / NITRON text -->
+        <TextView
+            android:id="@+id/voiceOrbText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="N\nNITRON"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:lineSpacingExtra="6dp"
+            android:shadowColor="#FF2D78"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"/>
+
+    </FrameLayout>
+
+    <!-- Reply text area -->
+    <FrameLayout
+        android:id="@+id/voiceReplyFrame"
+        android:layout_width="280dp"
+        android:layout_height="130dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="190dp"
+        android:background="@drawable/nitron_bubble_bg"
+        android:clipChildren="true"
+        android:clipToPadding="true"
+        android:visibility="gone">
+
+        <ScrollView
+            android:id="@+id/voiceReplyScroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/voiceReplyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp" />
+
+        </ScrollView>
+
+    </FrameLayout>
+
+    <!-- Mic icon -->
+    <TextView
+        android:id="@+id/voiceMicIcon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:text="🎤"
+        android:textSize="24sp"
+        android:background="@drawable/nitron_circle_outline"
+        android:clickable="true"
+        android:focusable="true"/>
+
+    <!-- Mic-to-panel connector -->
+    <View
+        android:layout_width="2dp"
+        android:layout_height="70dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="120dp"
+        android:rotation="35"
+        android:background="#FF2D78"/>
+
+    <!-- Action panel -->
+    <LinearLayout
+        android:id="@+id/voiceActionPanel"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="410dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="@drawable/nitron_panel_bg">
+
+        <TextView
+            android:id="@+id/actionTalk"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:text="💬  Talk to Nitron"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:id="@+id/actionScreenshot"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:text="📷  Take Screenshot"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:id="@+id/actionApps"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:text="▦  Open Apps"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:id="@+id/actionQR"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:text="▣  Scan QR Code"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:id="@+id/actionSettings"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:text="⚙  Settings"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+    </LinearLayout>
+
+    <!-- Drag to Move pill -->
+    <LinearLayout
+        android:layout_width="150dp"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/nitron_drag_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⌃"
+            android:textColor="#FF2D78"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Drag to Move"
+            android:textColor="#FF2D78"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+</FrameLayout>

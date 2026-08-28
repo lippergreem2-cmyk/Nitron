@@ -1,0 +1,102 @@
+{
+  "name": "Programming Knowledge",
+  "description": "Core knowledge required for understanding, creating, debugging, and improving software.",
+  "topics": {
+    "python": {
+      "purpose": "General-purpose programming language used for automation, AI, backend systems, scripting, and data processing.",
+      "concepts": [
+        "variables",
+        "data types",
+        "conditions",
+        "loops",
+        "functions",
+        "classes",
+        "modules",
+        "files",
+        "databases",
+        "APIs"
+      ],
+      "skills": [
+        "write Python programs",
+        "debug Python code",
+        "create automation scripts",
+        "build backend services"
+      ]
+    },
+
+    "programming_fundamentals": {
+      "concepts": [
+        "algorithms",
+        "logic",
+        "problem solving",
+        "memory",
+        "input and output",
+        "data structures"
+      ],
+      "data_structures": [
+        "lists",
+        "arrays",
+        "stacks",
+        "queues",
+        "trees",
+        "graphs",
+        "hash tables"
+      ]
+    },
+
+    "software_development": {
+      "knowledge": [
+        "planning software projects",
+        "writing maintainable code",
+        "testing",
+        "debugging",
+        "version control",
+        "documentation"
+      ]
+    },
+
+    "web_development": {
+      "frontend": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "UI design",
+        "responsive websites"
+      ],
+      "backend": [
+        "servers",
+        "databases",
+        "APIs",
+        "authentication",
+        "application logic"
+      ]
+    },
+
+    "mobile_development": {
+      "knowledge": [
+        "Android applications",
+        "mobile interfaces",
+        "device permissions",
+        "application lifecycle"
+      ]
+    },
+
+    "automation": {
+      "skills": [
+        "file management",
+        "task automation",
+        "system scripts",
+        "workflow automation"
+      ]
+    },
+
+    "debugging": {
+      "process": [
+        "read error messages",
+        "find causes",
+        "test solutions",
+        "improve code"
+      ]
+    }
+  }
+}

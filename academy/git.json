@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Git",
+    "explanation": "Git is a distributed version control system used to track changes in files and collaborate on software projects. It allows you to save versions of your code and work with other developers.",
+    "code": "git init",
+    "output": "Initialized empty Git repository.",
+    "practice": "Create a new folder and initialize it as a Git repository.",
+    "quiz": "What is the main purpose of Git?"
+  },
+  "2": {
+    "title": "Git Status",
+    "explanation": "The git status command shows the current state of your repository, including modified, staged, and untracked files.",
+    "code": "git status",
+    "output": "Displays the status of files in the repository.",
+    "practice": "Create a new file and use git status to see how Git reports it.",
+    "quiz": "Which command displays the current repository status?"
+  },
+  "3": {
+    "title": "Staging and Committing",
+    "explanation": "Before saving changes permanently, you stage them with git add and then create a commit with git commit.",
+    "code": "git add .\ngit commit -m \"Initial commit\"",
+    "output": "A new commit is created containing the staged changes.",
+    "practice": "Create a text file, stage it, and commit it with the message 'First commit'.",
+    "quiz": "What command stages all changed files?"
+  },
+  "4": {
+    "title": "Branches",
+    "explanation": "Branches allow you to develop new features without affecting the main branch.",
+    "code": "git branch feature\ngit checkout feature",
+    "output": "Switched to branch 'feature'.",
+    "practice": "Create a branch named 'test' and switch to it.",
+    "quiz": "Why are branches useful?"
+  },
+  "5": {
+    "title": "Remote Repositories",
+    "explanation": "Remote repositories such as GitHub let you back up your code online and collaborate with others.",
+    "code": "git remote add origin https://github.com/username/project.git\ngit push -u origin main",
+    "output": "The project is uploaded to the remote repository.",
+    "practice": "Connect a local repository to a GitHub repository.",
+    "quiz": "Which command uploads commits to a remote repository?"
+  }
+}

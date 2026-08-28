@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Computer Vision",
+    "explanation": "Computer Vision is a field of Artificial Intelligence that enables computers to understand, analyze, and interpret images and videos.",
+    "code": "import cv2\nimage = cv2.imread('image.jpg')",
+    "output": "An image is loaded into memory.",
+    "practice": "Research three real-world applications of computer vision.",
+    "quiz": "What is Computer Vision?"
+  },
+  "2": {
+    "title": "Digital Images",
+    "explanation": "A digital image is made up of tiny picture elements called pixels. Each pixel stores color information.",
+    "code": "print(image.shape)",
+    "output": "Displays the image height, width, and color channels.",
+    "practice": "Open an image and check its dimensions.",
+    "quiz": "What is a pixel?"
+  },
+  "3": {
+    "title": "Image Processing",
+    "explanation": "Image processing includes resizing, cropping, rotating, filtering, and enhancing images before analysis.",
+    "code": "resized = cv2.resize(image, (300,300))",
+    "output": "Creates a resized copy of the image.",
+    "practice": "Resize an image to 300×300 pixels.",
+    "quiz": "Why is image preprocessing important?"
+  },
+  "4": {
+    "title": "Object Detection",
+    "explanation": "Object detection identifies and locates objects such as people, cars, and animals within an image.",
+    "code": "results = model(image)",
+    "output": "The AI model detects objects in the image.",
+    "practice": "Research YOLO and explain its purpose.",
+    "quiz": "What is object detection?"
+  },
+  "5": {
+    "title": "Image Classification",
+    "explanation": "Image classification predicts the category of an image, such as whether it contains a cat, dog, or car.",
+    "code": "prediction = model.predict(image)",
+    "output": "Returns the predicted image category.",
+    "practice": "Research how image classification differs from object detection.",
+    "quiz": "What is the goal of image classification?"
+  }
+}

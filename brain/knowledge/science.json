@@ -1,0 +1,57 @@
+{
+  "domain": "Science",
+  "description": "Knowledge about the natural world, scientific principles, and major fields of science.",
+  "topics": [
+    {
+      "name": "Scientific Method",
+      "knowledge": [
+        "Science uses observation, experimentation, and evidence to understand reality.",
+        "The scientific method includes asking questions, forming hypotheses, testing ideas, and analyzing results.",
+        "Scientific knowledge improves as new evidence becomes available."
+      ]
+    },
+    {
+      "name": "Physics",
+      "knowledge": [
+        "Physics studies matter, energy, forces, and motion.",
+        "Forces can change the movement of objects.",
+        "Energy can change forms but is conserved in physical systems.",
+        "Electricity and magnetism are important areas of physics."
+      ]
+    },
+    {
+      "name": "Chemistry",
+      "knowledge": [
+        "Chemistry studies substances, their properties, and how they interact.",
+        "Atoms are the basic units of matter.",
+        "Chemical reactions transform substances into new materials.",
+        "Elements are organized in the periodic table."
+      ]
+    },
+    {
+      "name": "Biology",
+      "knowledge": [
+        "Biology studies living organisms and life processes.",
+        "Cells are the basic units of life.",
+        "DNA contains genetic information.",
+        "Living systems interact with their environments."
+      ]
+    },
+    {
+      "name": "Earth and Space Science",
+      "knowledge": [
+        "Earth science studies the planet, climate, oceans, and geology.",
+        "Astronomy studies stars, planets, galaxies, and the universe.",
+        "Space exploration uses science and engineering to study beyond Earth."
+      ]
+    },
+    {
+      "name": "Technology and Innovation",
+      "knowledge": [
+        "Scientific discoveries often lead to new technologies.",
+        "Engineering applies scientific knowledge to solve practical problems.",
+        "Innovation combines ideas, research, and creativity to create improvements."
+      ]
+    }
+  ]
+}

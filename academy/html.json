@@ -1,0 +1,18 @@
+{
+  "1": {
+    "title": "Introduction to HTML",
+    "explanation": "HTML (HyperText Markup Language) is the standard language used to build web pages. It defines the structure of a webpage using elements called tags.",
+    "code": "<!DOCTYPE html>\n<html>\n<head>\n<title>My First Page</title>\n</head>\n<body>\n<h1>Hello World</h1>\n<p>This is my first HTML page.</p>\n</body>\n</html>",
+    "output": "A webpage displaying the heading 'Hello World' and a paragraph below it.",
+    "practice": "Create a webpage with your name as a heading and your country in a paragraph.",
+    "quiz": "What does HTML stand for?"
+  },
+  "2": {
+    "title": "HTML Elements",
+    "explanation": "HTML elements include headings, paragraphs, images, links, lists, tables, forms, and many others.",
+    "code": "<h1>Main Heading</h1>\n<p>A paragraph.</p>\n<a href=\"https://example.com\">Visit Example</a>",
+    "output": "A heading, a paragraph, and a clickable link.",
+    "practice": "Create a page containing one heading, two paragraphs, and one link.",
+    "quiz": "Which HTML tag creates a hyperlink?"
+  }
+}

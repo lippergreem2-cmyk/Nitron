@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Natural Language Processing",
+    "explanation": "Natural Language Processing (NLP) is a branch of Artificial Intelligence that enables computers to understand, process, and generate human language.",
+    "code": "text = 'Hello, Nitron!'",
+    "output": "A text string is ready for processing.",
+    "practice": "List five applications of NLP in everyday life.",
+    "quiz": "What does NLP stand for?"
+  },
+  "2": {
+    "title": "Tokenization",
+    "explanation": "Tokenization is the process of splitting text into smaller pieces called tokens, such as words or sentences.",
+    "code": "sentence = 'Nitron is learning AI.'\ntokens = sentence.split()",
+    "output": "['Nitron', 'is', 'learning', 'AI.']",
+    "practice": "Split a sentence into individual words.",
+    "quiz": "What is a token?"
+  },
+  "3": {
+    "title": "Text Preprocessing",
+    "explanation": "Before training NLP models, text is often cleaned by converting it to lowercase, removing punctuation, removing stop words, and sometimes stemming or lemmatization.",
+    "code": "text = text.lower()",
+    "output": "The text is converted to lowercase.",
+    "practice": "Convert a paragraph to lowercase and remove punctuation.",
+    "quiz": "Why is text preprocessing important?"
+  },
+  "4": {
+    "title": "Sentiment Analysis",
+    "explanation": "Sentiment analysis identifies whether text expresses a positive, negative, or neutral opinion.",
+    "code": "sentiment = 'Positive'",
+    "output": "The text is classified by sentiment.",
+    "practice": "Read five product reviews and classify each as positive, negative, or neutral.",
+    "quiz": "What is sentiment analysis used for?"
+  },
+  "5": {
+    "title": "Language Models",
+    "explanation": "Language models learn patterns in text so they can predict words, answer questions, summarize information, translate languages, and generate new text.",
+    "code": "prediction = model.generate(prompt)",
+    "output": "The model generates text based on the prompt.",
+    "practice": "Research three tasks that modern language models can perform.",
+    "quiz": "What is the purpose of a language model?"
+  }
+}

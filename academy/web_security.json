@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Web Security",
+    "explanation": "Web security is the practice of protecting websites, web applications, and APIs from unauthorized access, data loss, and other security threats. Good security helps keep users and their information safe.",
+    "code": "# Security begins during application design.",
+    "output": "Understanding the importance of web security.",
+    "practice": "List five reasons why web security is important.",
+    "quiz": "What is web security?"
+  },
+  "2": {
+    "title": "Authentication and Authorization",
+    "explanation": "Authentication verifies who a user is, while authorization determines what that user is allowed to do after signing in.",
+    "code": "if authenticated:\n    allow_access()",
+    "output": "The authenticated user is granted access according to permissions.",
+    "practice": "Explain the difference between authentication and authorization.",
+    "quiz": "What is the difference between authentication and authorization?"
+  },
+  "3": {
+    "title": "HTTPS and TLS",
+    "explanation": "HTTPS uses TLS encryption to protect data sent between a browser and a web server. This helps keep information private and reduces the risk of tampering while data is in transit.",
+    "code": "https://example.com",
+    "output": "A secure encrypted connection is established.",
+    "practice": "Visit three websites and verify they use HTTPS.",
+    "quiz": "Why is HTTPS more secure than HTTP?"
+  },
+  "4": {
+    "title": "Input Validation",
+    "explanation": "Applications should validate and sanitize user input to improve reliability and reduce the risk of unexpected behavior. Input should never be assumed to be valid.",
+    "code": "username = username.strip()",
+    "output": "The input is cleaned before processing.",
+    "practice": "Think of three kinds of user input that should be validated.",
+    "quiz": "Why is input validation important?"
+  },
+  "5": {
+    "title": "Security Best Practices",
+    "explanation": "Use strong passwords, enable multi-factor authentication where available, keep software updated, apply the principle of least privilege, and monitor systems regularly.",
+    "code": "# Update software regularly\n# Use strong passwords",
+    "output": "The application follows recommended security practices.",
+    "practice": "List five best practices for securing a website.",
+    "quiz": "Name three web security best practices."
+  }
+}

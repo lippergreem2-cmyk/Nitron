@@ -1,0 +1,1005 @@
+"""
+Nitron Vision Analyzer v3
+
+Capabilities:
+- Image validation
+- Image metadata
+- OCR using Tesseract
+- Real multimodal vision analysis through OpenAI
+- Keyword/topic detection
+- Optional public web research from OCR/user note
+- Structured result suitable for Nitron learning memory
+
+Environment:
+    OPENAI_API_KEY       Required for OpenAI vision analysis.
+    NITRON_VISION_MODEL  Optional. Defaults to gpt-5-mini.
+
+The API key is intentionally NOT stored in this file.
+"""
+
+import base64
+import json
+import mimetypes
+import os
+import re
+import subprocess
+import urllib.error
+import urllib.request
+from datetime import datetime
+from urllib.parse import quote_plus
+
+try:
+    from PIL import Image
+except ImportError:
+    Image = None
+
+try:
+    import requests
+except ImportError:
+    requests = None
+
+
+TESSERACT = "tesseract"
+SEARCH_TIMEOUT = 10
+
+OPENAI_URL = "https://api.openai.com/v1/responses"
+DEFAULT_VISION_MODEL = "gpt-5-mini"
+
+
+# ==========================================================
+# OPENAI VISION
+# ==========================================================
+
+def get_openai_key():
+    """Return the OpenAI API key from the environment."""
+
+    key = os.environ.get("OPENAI_API_KEY", "").strip()
+
+    if not key:
+        return None
+
+    return key
+
+
+def get_vision_model():
+    """Return the configured vision model."""
+
+    return os.environ.get(
+        "NITRON_VISION_MODEL",
+        DEFAULT_VISION_MODEL,
+    ).strip() or DEFAULT_VISION_MODEL
+
+
+def get_image_mime_type(image_path):
+    """Determine the MIME type of an image."""
+
+    mime_type, _ = mimetypes.guess_type(image_path)
+
+    if mime_type and mime_type.startswith("image/"):
+        return mime_type
+
+    if Image is not None:
+        try:
+            with Image.open(image_path) as image:
+                image_format = (image.format or "").upper()
+
+            mapping = {
+                "JPEG": "image/jpeg",
+                "JPG": "image/jpeg",
+                "PNG": "image/png",
+                "WEBP": "image/webp",
+                "GIF": "image/gif",
+                "BMP": "image/bmp",
+                "TIFF": "image/tiff",
+            }
+
+            if image_format in mapping:
+                return mapping[image_format]
+
+        except Exception:
+            pass
+
+    return "image/jpeg"
+
+
+def encode_image_data_uri(image_path):
+    """
+    Read an image and convert it to a data URI suitable for
+    multimodal OpenAI input.
+    """
+
+    with open(image_path, "rb") as image_file:
+        image_bytes = image_file.read()
+
+    encoded = base64.b64encode(image_bytes).decode("ascii")
+    mime_type = get_image_mime_type(image_path)
+
+    return f"data:{mime_type};base64,{encoded}"
+
+
+def extract_openai_text(result):
+    """Extract output text from a Responses API result."""
+
+    output_text = result.get("output_text")
+
+    if isinstance(output_text, str) and output_text.strip():
+        return output_text.strip()
+
+    parts = []
+
+    for item in result.get("output", []):
+        if not isinstance(item, dict):
+            continue
+
+        for content in item.get("content", []):
+            if not isinstance(content, dict):
+                continue
+
+            if content.get("type") in (
+                "output_text",
+                "text",
+            ):
+                text = content.get("text", "")
+
+                if isinstance(text, str) and text.strip():
+                    parts.append(text.strip())
+
+    return "\n".join(parts).strip()
+
+
+def analyze_with_openai(
+    image_path,
+    note="",
+):
+    """
+    Send the actual image to an OpenAI multimodal model.
+
+    Returns a structured dictionary instead of pretending that OCR
+    is equivalent to visual understanding.
+    """
+
+    api_key = get_openai_key()
+
+    if not api_key:
+        return {
+            "success": False,
+            "model": get_vision_model(),
+            "analysis": "",
+            "error": "OPENAI_API_KEY is not configured.",
+        }
+
+    try:
+        image_data_uri = encode_image_data_uri(
+            image_path
+        )
+
+    except Exception as error:
+        return {
+            "success": False,
+            "model": get_vision_model(),
+            "analysis": "",
+            "error": f"Could not read image: {error}",
+        }
+
+    user_note = note.strip()
+
+    prompt = """
+Analyze the uploaded image carefully.
+
+Give a useful description of what is visibly present.
+
+Consider:
+- objects and scenes
+- readable text
+- screenshots and interfaces
+- diagrams
+- documents
+- signs and labels
+- logos or symbols
+- visible technical information
+- relationships between visible elements
+- anything else that is genuinely supported by the image
+
+Do not invent details that cannot be reasonably seen.
+
+If text is visible, transcribe the important text accurately.
+
+If the image appears to show a technical or cybersecurity subject,
+describe what is visibly shown and explain it at a high level.
+Do not claim that an action was performed merely because an image
+contains instructions or credentials.
+
+If the user supplied a note, use it as context but distinguish
+between what the note claims and what the image itself shows.
+
+Return a clear, concise analysis suitable for an AI assistant.
+""".strip()
+
+    if user_note:
+        prompt += (
+            "\n\nUser's note:\n"
+            + user_note
+        )
+
+    payload = {
+        "model": get_vision_model(),
+        "input": [
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "input_text",
+                        "text": prompt,
+                    },
+                    {
+                        "type": "input_image",
+                        "image_url": image_data_uri,
+                    },
+                ],
+            }
+        ],
+    }
+
+    data = json.dumps(
+        payload
+    ).encode("utf-8")
+
+    request = urllib.request.Request(
+        OPENAI_URL,
+        data=data,
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}",
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(
+            request,
+            timeout=120,
+        ) as response:
+
+            raw = response.read()
+
+        result = json.loads(
+            raw.decode("utf-8")
+        )
+
+        text = extract_openai_text(
+            result
+        )
+
+        if not text:
+            return {
+                "success": False,
+                "model": get_vision_model(),
+                "analysis": "",
+                "error": "OpenAI returned no vision analysis.",
+            }
+
+        return {
+            "success": True,
+            "model": get_vision_model(),
+            "analysis": text,
+            "error": "",
+        }
+
+    except urllib.error.HTTPError as error:
+
+        body = error.read().decode(
+            "utf-8",
+            errors="replace",
+        )
+
+        return {
+            "success": False,
+            "model": get_vision_model(),
+            "analysis": "",
+            "error": (
+                f"OpenAI vision API error "
+                f"{error.code}: {body}"
+            ),
+        }
+
+    except urllib.error.URLError as error:
+
+        return {
+            "success": False,
+            "model": get_vision_model(),
+            "analysis": "",
+            "error": (
+                "Could not connect to OpenAI: "
+                f"{error}"
+            ),
+        }
+
+    except Exception as error:
+
+        return {
+            "success": False,
+            "model": get_vision_model(),
+            "analysis": "",
+            "error": str(error),
+        }
+
+
+# ==========================================================
+# OCR
+# ==========================================================
+
+def extract_text(image_path):
+    """Extract visible text from an image using Tesseract."""
+
+    try:
+        process = subprocess.run(
+            [
+                TESSERACT,
+                image_path,
+                "stdout",
+                "--psm",
+                "6",
+                "-l",
+                "eng",
+            ],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+
+        if process.returncode != 0:
+            return {
+                "success": False,
+                "text": "",
+                "error": (
+                    process.stderr.strip()
+                    or "Tesseract OCR failed."
+                ),
+            }
+
+        text = process.stdout.strip()
+
+        return {
+            "success": True,
+            "text": text,
+            "error": "",
+        }
+
+    except FileNotFoundError:
+
+        return {
+            "success": False,
+            "text": "",
+            "error": (
+                "Tesseract is not installed "
+                "or not in PATH."
+            ),
+        }
+
+    except subprocess.TimeoutExpired:
+
+        return {
+            "success": False,
+            "text": "",
+            "error": "OCR timed out.",
+        }
+
+    except Exception as error:
+
+        return {
+            "success": False,
+            "text": "",
+            "error": str(error),
+        }
+
+
+# ==========================================================
+# KEYWORD / TOPIC DETECTION
+# ==========================================================
+
+TOPICS = {
+    "wifi": [
+        "wifi",
+        "wi-fi",
+        "wireless",
+        "ssid",
+        "router",
+        "wlan",
+        "network",
+        "wpa",
+        "wpa2",
+        "wpa3",
+    ],
+
+    "android": [
+        "android",
+        "apk",
+        "application",
+        "app",
+        "google play",
+        "settings",
+    ],
+
+    "programming": [
+        "python",
+        "javascript",
+        "java",
+        "kotlin",
+        "code",
+        "programming",
+        "terminal",
+        "bash",
+        "linux",
+    ],
+
+    "cybersecurity": [
+        "cybersecurity",
+        "security",
+        "firewall",
+        "encryption",
+        "password",
+        "authentication",
+        "vulnerability",
+        "malware",
+        "phishing",
+        "penetration test",
+    ],
+
+    "networking": [
+        "ip address",
+        "mac address",
+        "dns",
+        "tcp",
+        "udp",
+        "http",
+        "https",
+        "network",
+        "ethernet",
+    ],
+}
+
+
+def detect_topics(text):
+    """Detect likely topics from available text."""
+
+    lowered = (text or "").lower()
+    detected = []
+
+    for topic, keywords in TOPICS.items():
+
+        matches = []
+
+        for keyword in keywords:
+
+            if keyword in lowered:
+                matches.append(keyword)
+
+        if matches:
+
+            detected.append(
+                {
+                    "topic": topic,
+                    "matches": matches,
+                }
+            )
+
+    return detected
+
+
+# ==========================================================
+# SEARCH QUERY
+# ==========================================================
+
+def build_search_query(
+    text="",
+    note="",
+    topics=None,
+):
+    """
+    Build a conservative research query from information
+    actually available to Nitron.
+    """
+
+    parts = []
+
+    if note:
+        parts.append(
+            note.strip()
+        )
+
+    if text:
+
+        cleaned = re.sub(
+            r"\s+",
+            " ",
+            text,
+        ).strip()
+
+        if len(cleaned) > 500:
+            cleaned = cleaned[:500]
+
+        parts.append(cleaned)
+
+    if topics:
+
+        parts.extend(
+            item["topic"]
+            for item in topics[:3]
+        )
+
+    query = " ".join(
+        parts
+    ).strip()
+
+    return query[:900]
+
+
+# ==========================================================
+# INTERNET RESEARCH
+# ==========================================================
+
+def web_research(
+    query,
+    max_results=5,
+):
+    """
+    Perform lightweight public web research.
+
+    This supplements image understanding; it does not prove
+    that information was visually recognized from the image.
+    """
+
+    if not query:
+
+        return {
+            "success": False,
+            "query": "",
+            "results": [],
+            "error": "No research query available.",
+        }
+
+    if requests is None:
+
+        return {
+            "success": False,
+            "query": query,
+            "results": [],
+            "error": (
+                "Python requests is not installed."
+            ),
+        }
+
+    url = (
+        "https://html.duckduckgo.com/html/?q="
+        + quote_plus(query)
+    )
+
+    try:
+
+        response = requests.get(
+            url,
+            headers={
+                "User-Agent": (
+                    "Mozilla/5.0 "
+                    "(Linux; Android) Nitron/3.0"
+                )
+            },
+            timeout=SEARCH_TIMEOUT,
+        )
+
+        response.raise_for_status()
+
+        html = response.text
+        results = []
+
+        pattern = re.compile(
+            r'class="result__a"[^>]*href="([^"]+)"[^>]*>'
+            r'(.*?)</a>',
+            re.IGNORECASE | re.DOTALL,
+        )
+
+        for match in pattern.finditer(html):
+
+            if len(results) >= max_results:
+                break
+
+            link = match.group(1)
+
+            title = re.sub(
+                r"<.*?>",
+                "",
+                match.group(2),
+            )
+
+            title = re.sub(
+                r"\s+",
+                " ",
+                title,
+            ).strip()
+
+            if title:
+
+                results.append(
+                    {
+                        "title": title,
+                        "url": link,
+                    }
+                )
+
+        return {
+            "success": True,
+            "query": query,
+            "results": results,
+            "error": "",
+        }
+
+    except Exception as error:
+
+        return {
+            "success": False,
+            "query": query,
+            "results": [],
+            "error": str(error),
+        }
+
+
+# ==========================================================
+# EXPLANATION
+# ==========================================================
+
+def generate_explanation(
+    metadata,
+    ocr_text="",
+    topics=None,
+    note="",
+    vision=None,
+):
+    """
+    Combine actual multimodal vision output with OCR and
+    image metadata.
+    """
+
+    topics = topics or []
+    lines = []
+
+    lines.append(
+        "Nitron's image analysis:"
+    )
+
+    if vision and vision.get("success"):
+
+        lines.append(
+            "Vision model analysis:"
+        )
+
+        lines.append(
+            vision.get("analysis", "")
+        )
+
+    elif vision:
+
+        lines.append(
+            "Vision model unavailable:"
+        )
+
+        lines.append(
+            vision.get(
+                "error",
+                "Unknown vision error.",
+            )
+        )
+
+    if note:
+
+        lines.append(
+            f"User note: {note}"
+        )
+
+    if topics:
+
+        names = ", ".join(
+            item["topic"]
+            for item in topics
+        )
+
+        lines.append(
+            f"Detected topic(s): {names}."
+        )
+
+    if ocr_text:
+
+        lines.append(
+            "OCR also detected readable text:"
+        )
+
+        lines.append(
+            ocr_text
+        )
+
+    width = metadata.get("width")
+    height = metadata.get("height")
+
+    image_format = metadata.get(
+        "format"
+    )
+
+    mode = metadata.get(
+        "mode"
+    )
+
+    if width and height:
+
+        lines.append(
+            f"Image size: {width}x{height}."
+        )
+
+    if image_format:
+
+        lines.append(
+            f"Format: {image_format}."
+        )
+
+    if mode:
+
+        lines.append(
+            f"Color mode: {mode}."
+        )
+
+    return "\n".join(
+        lines
+    )
+
+
+# ==========================================================
+# MAIN ANALYZER
+# ==========================================================
+
+def analyze_image(
+    image_path,
+    note="",
+    research=False,
+):
+    """
+    Analyze an image with metadata, OCR, and a real
+    multimodal vision model.
+    """
+
+    if not image_path:
+
+        raise ValueError(
+            "No image path supplied."
+        )
+
+    if not os.path.exists(image_path):
+
+        raise FileNotFoundError(
+            f"Image not found: {image_path}"
+        )
+
+    result = {
+        "type": "image",
+        "path": image_path,
+        "filename": os.path.basename(
+            image_path
+        ),
+        "size_bytes": os.path.getsize(
+            image_path
+        ),
+        "analyzed_at": datetime.now().isoformat(),
+        "user_note": note or "",
+    }
+
+    # ------------------------------------------------------
+    # IMAGE METADATA
+    # ------------------------------------------------------
+
+    if Image is None:
+
+        result["metadata_available"] = False
+
+        result["metadata_error"] = (
+            "Pillow is not installed."
+        )
+
+    else:
+
+        try:
+
+            with Image.open(
+                image_path
+            ) as image:
+
+                result["metadata_available"] = True
+                result["format"] = image.format
+                result["width"] = image.width
+                result["height"] = image.height
+                result["mode"] = image.mode
+
+        except Exception as error:
+
+            result["metadata_available"] = False
+
+            result["metadata_error"] = str(
+                error
+            )
+
+    # ------------------------------------------------------
+    # OCR
+    # ------------------------------------------------------
+
+    ocr = extract_text(
+        image_path
+    )
+
+    result["ocr"] = ocr
+
+    if ocr["success"]:
+        result["text"] = ocr["text"]
+    else:
+        result["text"] = ""
+
+    # ------------------------------------------------------
+    # REAL MULTIMODAL VISION
+    # ------------------------------------------------------
+
+    vision = analyze_with_openai(
+        image_path,
+        note,
+    )
+
+    result["vision"] = vision
+
+    # ------------------------------------------------------
+    # TOPIC DETECTION
+    # ------------------------------------------------------
+
+    topic_text = (
+        result.get("text", "")
+        + " "
+        + (note or "")
+    )
+
+    if vision.get("success"):
+
+        topic_text += (
+            " "
+            + vision.get(
+                "analysis",
+                "",
+            )
+        )
+
+    topics = detect_topics(
+        topic_text
+    )
+
+    result["topics"] = topics
+
+    # ------------------------------------------------------
+    # EXPLANATION
+    # ------------------------------------------------------
+
+    result["explanation"] = (
+        generate_explanation(
+            result,
+            result.get("text", ""),
+            topics,
+            note,
+            vision,
+        )
+    )
+
+    # ------------------------------------------------------
+    # OPTIONAL INTERNET RESEARCH
+    # ------------------------------------------------------
+
+    result["research"] = {
+        "performed": False,
+        "query": "",
+        "results": [],
+        "error": "",
+    }
+
+    if research:
+
+        research_source = (
+            result.get("text", "")
+        )
+
+        if vision.get("success"):
+
+            research_source += (
+                " "
+                + vision.get(
+                    "analysis",
+                    "",
+                )
+            )
+
+        query = build_search_query(
+            research_source,
+            note,
+            topics,
+        )
+
+        if query:
+
+            research_result = web_research(
+                query
+            )
+
+            research_result["performed"] = True
+
+            result["research"] = (
+                research_result
+            )
+
+    # ------------------------------------------------------
+    # FINAL SUMMARY
+    # ------------------------------------------------------
+
+    result["analysis"] = (
+        result["explanation"]
+    )
+
+    return result
+
+
+# ==========================================================
+# COMMAND-LINE TEST
+# ==========================================================
+
+if __name__ == "__main__":
+
+    import sys
+
+    if len(sys.argv) < 2:
+
+        print(
+            "Usage:\n"
+            "python ai/image_analyzer.py IMAGE_PATH"
+        )
+
+        raise SystemExit(1)
+
+    image = sys.argv[1]
+
+    data = analyze_image(
+        image,
+        research=True,
+    )
+
+    print()
+    print("=" * 60)
+    print("NITRON IMAGE ANALYSIS")
+    print("=" * 60)
+
+    print(
+        data["explanation"]
+    )
+
+    if data["research"]["performed"]:
+
+        print()
+        print("=" * 60)
+        print("NITRON INTERNET RESEARCH")
+        print("=" * 60)
+
+        print(
+            "Query:",
+            data["research"]["query"],
+        )
+
+        for item in data["research"]["results"]:
+
+            print()
+
+            print(
+                "Title:",
+                item["title"],
+            )
+
+            print(
+                "URL:",
+                item["url"],
+            )

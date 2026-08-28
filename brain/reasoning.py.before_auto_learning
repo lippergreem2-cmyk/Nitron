@@ -1,0 +1,480 @@
+"""
+Nitron Reasoning Engine
+"""
+
+import re
+
+from brain.memory import memory
+
+try:
+    from brain.knowledge_engine import knowledge
+except ImportError:
+    knowledge = None
+
+try:
+    from brain.learner import learner
+except ImportError:
+    learner = None
+
+try:
+    from brain.search_engine import search_engine
+except ImportError:
+    search_engine = None
+
+
+class ReasoningEngine:
+
+    def __init__(self):
+        self.name = "Nitron Reasoning Engine"
+
+    def analyze(self, command):
+        """
+        Analyze a command and classify its intent.
+        """
+
+        command = command.lower().strip()
+
+        categories = {
+
+            "academy": [
+                "teach",
+                "learn",
+                "lesson",
+                "academy",
+                "study"
+            ],
+
+            "developer": [
+                "build",
+                "create",
+                "generate",
+                "project",
+                "website",
+                "app",
+                "code",
+                "program"
+            ],
+
+            "trading": [
+                "trade",
+                "gold",
+                "forex",
+                "bitcoin",
+                "crypto",
+                "market"
+            ],
+
+            "weather": [
+                "weather",
+                "forecast"
+            ],
+
+            "music": [
+                "music",
+                "song",
+                "play"
+            ],
+
+            "system": [
+                "time",
+                "date"
+            ]
+        }
+
+        for category, words in categories.items():
+
+            if any(word in command for word in words):
+                return category
+
+        return "chat"
+
+    def explain(self, topic):
+        """
+        Search the built-in knowledge base.
+        """
+
+        if knowledge is None:
+            return "Knowledge engine is unavailable."
+
+        result = knowledge.get_category(topic)
+
+        if result:
+            return result
+
+        return f"I don't know enough about '{topic}'."
+
+    def search_learned(self, keyword):
+        """
+        Search learned knowledge using meaningful words.
+        Supports both old and new knowledge formats.
+        """
+
+        if learner is None:
+            return {}
+
+        if not keyword:
+            return {}
+
+        text = str(keyword).lower().strip()
+
+        stop_words = {
+            "what", "what's", "whats", "is", "are", "am",
+            "an", "a", "the", "tell", "me", "about",
+            "explain", "describe", "who", "how", "why",
+            "where", "when", "can", "you", "please",
+            "do", "does", "did", "this", "that", "it",
+            "to", "of", "for", "in", "on", "and"
+        }
+
+        words = re.findall(
+            r"[a-zA-Z0-9_]+",
+            text
+        )
+
+        words = [
+            word for word in words
+            if word not in stop_words and len(word) >= 2
+        ]
+
+        if not words:
+            return {}
+
+        results = {}
+
+        for topic, data in learner.knowledge.items():
+
+            topic_text = str(topic).lower()
+
+            if isinstance(data, dict):
+                searchable = str(data).lower()
+
+                title = str(
+                    data.get("title", "")
+                ).strip()
+
+                summary = data.get(
+                    "summary",
+                    ""
+                )
+
+                # Old format stores the real content inside
+                # data["content"].
+                if not isinstance(summary, str):
+                    old_content = data.get(
+                        "content",
+                        {}
+                    )
+
+                    if isinstance(old_content, dict):
+                        summary = old_content.get(
+                            "summary",
+                            ""
+                        )
+
+            else:
+                searchable = str(data).lower()
+                title = ""
+                summary = str(data)
+
+            score = 0
+
+            for word in words:
+
+                if word == topic_text:
+                    score += 20
+
+                elif word in topic_text:
+                    score += 8
+
+                if word in title.lower():
+                    score += 6
+
+                if word in searchable:
+                    score += 2
+
+            # Strongly prefer usable learned entries.
+            #
+            # Old entries may have empty top-level fields while
+            # storing their real information inside "content".
+            # Keep those entries, but rank complete entries higher.
+            if title and isinstance(summary, str) and summary.strip():
+                score += 25
+
+            elif title:
+                score += 10
+
+            elif isinstance(summary, str) and summary.strip():
+                score += 10
+
+            else:
+                # Old/incomplete top-level format.
+                # It remains searchable but should not beat
+                # a complete learned entry.
+                score -= 15
+
+            if score > 0:
+                results[topic] = {
+                    "score": score,
+                    "data": data
+                }
+
+        ordered = sorted(
+            results.items(),
+            key=lambda item: item[1]["score"],
+            reverse=True
+        )
+
+        return {
+            topic: item["data"]
+            for topic, item in ordered
+        }
+
+    def _normalize_learned(self, topic, data):
+        """
+        Convert old and new learned formats into
+        one clean response structure.
+        """
+
+        if not isinstance(data, dict):
+            return {
+                "source": "learned_knowledge",
+                "topic": topic,
+                "title": topic.title(),
+                "summary": str(data),
+                "keywords": []
+            }
+
+        title = data.get(
+            "title",
+            ""
+        )
+
+        summary = data.get(
+            "summary",
+            ""
+        )
+
+        keywords = data.get(
+            "keywords",
+            []
+        )
+
+        # Handle older Nitron knowledge format.
+        if not isinstance(summary, str):
+
+            content = data.get(
+                "content",
+                {}
+            )
+
+            if isinstance(content, dict):
+
+                if not title:
+                    title = content.get(
+                        "title",
+                        ""
+                    )
+
+                summary = content.get(
+                    "summary",
+                    ""
+                )
+
+                if not keywords:
+                    keywords = content.get(
+                        "keywords",
+                        []
+                    )
+
+        return {
+            "source": "learned_knowledge",
+            "topic": topic,
+            "title": title,
+            "summary": str(summary),
+            "keywords": keywords
+        }
+
+    def learn_from_command(self, command):
+        """
+        Handle explicit web-learning commands.
+
+        Supported forms:
+
+            learn python from https://docs.python.org/3/
+            study python from https://docs.python.org/3/
+        """
+
+        if not command:
+            return {
+                "success": False,
+                "error": "Empty learning command."
+            }
+
+        text = str(command).strip()
+
+        match = re.match(
+            r"^(?:learn|study)\s+(.+?)\s+from\s+(https?://\S+)$",
+            text,
+            re.IGNORECASE
+        )
+
+        if not match:
+            return {
+                "success": False,
+                "error": (
+                    "Use: learn <topic> from <URL>"
+                )
+            }
+
+        topic = match.group(1).strip()
+        url = match.group(2).strip()
+
+        result = self.learn_topic(
+            topic,
+            url
+        )
+
+        if isinstance(result, dict):
+            return {
+                "success": result.get("status") == "success",
+                "topic": topic.lower(),
+                "source": url,
+                "result": result
+            }
+
+        return {
+            "success": False,
+            "topic": topic.lower(),
+            "source": url,
+            "result": result
+        }
+
+    def answer(self, question):
+        """
+        Answer using learned knowledge first,
+        then existing search and built-in knowledge.
+        """
+
+        learned = self.search_learned(question)
+
+        if learned:
+
+            topic = next(iter(learned))
+
+            return self._normalize_learned(
+                topic,
+                learned[topic]
+            )
+
+        if search_engine:
+
+            try:
+
+                results = search_engine.search(
+                    question
+                )
+
+                if results:
+                    return results
+
+            except Exception:
+                pass
+
+        if knowledge:
+
+            try:
+
+                built_in = knowledge.get_category(
+                    question
+                )
+
+                if built_in:
+                    return built_in
+
+            except Exception:
+                pass
+
+        return {
+            "message":
+                "I haven't learned enough about that yet."
+        }
+
+    def think(self, question):
+        """
+        Alias for answer().
+        """
+
+        return self.answer(question)
+
+    def learn_topic(self, topic, url):
+        """
+        Learn from a website.
+        """
+
+        try:
+
+            from brain.study import study_engine
+
+            return study_engine.study(
+                topic,
+                url
+            )
+
+        except Exception as e:
+
+            return str(e)
+
+    def remember_fact(self, key, value):
+        """
+        Store a fact.
+        """
+
+        memory.remember(
+            key,
+            value
+        )
+
+        return "Fact remembered."
+
+    def recall_fact(self, key):
+        """
+        Recall a stored fact.
+        """
+
+        return memory.recall(
+            key,
+            "I don't remember that."
+        )
+
+    def compare(self, first, second):
+        """
+        Compare two values.
+        """
+
+        if first == second:
+            return "They are the same."
+
+        return "They are different."
+
+    def status(self):
+        """
+        Return Nitron brain status.
+        """
+
+        learned = 0
+
+        if learner:
+            learned = len(
+                learner.knowledge
+            )
+
+        return {
+            "name": self.name,
+            "knowledge_loaded": knowledge is not None,
+            "learning_enabled": learner is not None,
+            "search_enabled": search_engine is not None,
+            "learned_topics": learned
+        }
+
+
+reasoning = ReasoningEngine()

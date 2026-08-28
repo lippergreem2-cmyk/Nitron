@@ -1,0 +1,26 @@
+{
+  "1": {
+    "title": "Introduction to JavaScript",
+    "explanation": "JavaScript is the programming language of the web. It makes websites interactive by responding to user actions, changing page content, and communicating with servers.",
+    "code": "console.log('Hello, World!');",
+    "output": "Hello, World! is printed in the browser console.",
+    "practice": "Write a JavaScript program that prints your name to the console.",
+    "quiz": "What is JavaScript mainly used for on web pages?"
+  },
+  "2": {
+    "title": "Variables",
+    "explanation": "Variables store data that your program can use later. JavaScript provides let, const, and var.",
+    "code": "let name = 'Nitron';\nconst version = 1.0;\nconsole.log(name, version);",
+    "output": "Nitron 1",
+    "practice": "Create variables for your name, age, and country, then print them.",
+    "quiz": "Which keyword is used for a variable whose value should not change?"
+  },
+  "3": {
+    "title": "Functions",
+    "explanation": "Functions group code into reusable blocks that perform specific tasks.",
+    "code": "function greet(name) {\n  return 'Hello ' + name;\n}\n\nconsole.log(greet('Lipper'));",
+    "output": "Hello Lipper",
+    "practice": "Create a function that adds two numbers and returns the result.",
+    "quiz": "Which keyword is used to define a function?"
+  }
+}

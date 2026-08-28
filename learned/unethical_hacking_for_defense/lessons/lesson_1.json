@@ -1,0 +1,6 @@
+{
+    "title": "Introduction to Defensive Cybersecurity",
+    "explanation": "Defensive cybersecurity focuses on protecting systems, networks, applications, and data from unauthorized access and other security threats. Ethical security testing should only be performed on systems where the tester has permission.",
+    "practice": "List three ways an organization can improve the security of its systems.",
+    "quiz": "What is the most important requirement before performing a security test on a system?"
+}

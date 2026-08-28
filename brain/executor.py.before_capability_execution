@@ -1,0 +1,45 @@
+"""
+Nitron Task Executor
+"""
+
+from brain.decision import decision
+from brain.conversation import conversation
+from brain.memory import memory
+
+
+class Executor:
+    def __init__(self):
+        self.running = False
+
+    def execute(self, command):
+        """
+        Execute a command by determining the appropriate module and action.
+        """
+        self.running = True
+
+        result = decision.decide(command)
+
+        module = result["module"]
+        action = result["action"]
+
+        response = f"Executing {action} using {module} module."
+
+        conversation.add(command, response)
+        memory.remember("last_command", command)
+        memory.remember("last_module", module)
+        memory.remember("last_action", action)
+
+        self.running = False
+
+        return response
+
+    def status(self):
+        return {
+            "running": self.running
+        }
+
+    def stop(self):
+        self.running = False
+
+
+executor = Executor()

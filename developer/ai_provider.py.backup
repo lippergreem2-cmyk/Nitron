@@ -1,0 +1,199 @@
+# ==========================================================
+# NITRON AI PROVIDER
+# OpenAI API connection
+# ==========================================================
+
+import json
+import os
+import urllib.request
+import urllib.error
+
+
+class OpenAIProvider:
+
+    def __init__(self, model=None):
+
+        self.api_key = os.environ.get(
+            "OPENAI_API_KEY"
+        )
+
+        self.model = (
+            model
+            or os.environ.get(
+                "NITRON_AI_MODEL",
+                "gpt-5-mini"
+            )
+        )
+
+        self.url = (
+            "https://api.openai.com/v1/responses"
+        )
+
+    # ======================================================
+    # STATUS
+    # ======================================================
+
+    def available(self):
+
+        return bool(self.api_key)
+
+    # ======================================================
+    # GENERATE
+    # ======================================================
+
+    def generate(
+        self,
+        prompt
+    ):
+
+        if not self.api_key:
+
+            raise RuntimeError(
+                "OPENAI_API_KEY is not configured."
+            )
+
+        payload = {
+            "model": self.model,
+            "input": prompt
+        }
+
+        data = json.dumps(
+            payload
+        ).encode("utf-8")
+
+        request = urllib.request.Request(
+            self.url,
+            data=data,
+            headers={
+                "Content-Type": "application/json",
+                "Authorization":
+                    f"Bearer {self.api_key}"
+            },
+            method="POST"
+        )
+
+        try:
+
+            with urllib.request.urlopen(
+                request,
+                timeout=120
+            ) as response:
+
+                raw = response.read()
+
+            result = json.loads(
+                raw.decode("utf-8")
+            )
+
+            return self._extract_text(
+                result
+            )
+
+        except urllib.error.HTTPError as error:
+
+            body = error.read().decode(
+                "utf-8",
+                errors="replace"
+            )
+
+            raise RuntimeError(
+                f"OpenAI API error "
+                f"{error.code}: {body}"
+            )
+
+        except urllib.error.URLError as error:
+
+            raise RuntimeError(
+                f"Could not connect to OpenAI: {error}"
+            )
+
+    # ======================================================
+    # EXTRACT RESPONSE TEXT
+    # ======================================================
+
+    def _extract_text(
+        self,
+        result
+    ):
+
+        # Responses API commonly exposes
+        # a convenient output_text field.
+        text = result.get(
+            "output_text"
+        )
+
+        if isinstance(text, str) and text.strip():
+
+            return text
+
+        # Fallback parser
+        output = result.get(
+            "output",
+            []
+        )
+
+        parts = []
+
+        for item in output:
+
+            if not isinstance(
+                item,
+                dict
+            ):
+                continue
+
+            content = item.get(
+                "content",
+                []
+            )
+
+            for block in content:
+
+                if not isinstance(
+                    block,
+                    dict
+                ):
+                    continue
+
+                if block.get("type") == "output_text":
+
+                    value = block.get(
+                        "text",
+                        ""
+                    )
+
+                    if value:
+                        parts.append(
+                            value
+                        )
+
+        text = "\n".join(
+            parts
+        ).strip()
+
+        if not text:
+
+            raise RuntimeError(
+                "OpenAI returned no text."
+            )
+
+        return text
+
+
+# ==========================================================
+# SIMPLE TEST
+# ==========================================================
+
+if __name__ == "__main__":
+
+    provider = OpenAIProvider()
+
+    print(
+        "API key configured:",
+        provider.available()
+    )
+
+    print(
+        "Model:",
+        provider.model
+    )

@@ -1,0 +1,46 @@
+{
+  "domain": "Astronomy",
+  "description": "Knowledge about space, planets, stars, galaxies, and the universe.",
+  "topics": [
+    {
+      "name": "Space Fundamentals",
+      "knowledge": [
+        "Astronomy is the study of objects and events beyond Earth.",
+        "The universe contains galaxies, stars, planets, and many other objects.",
+        "Space science uses physics and mathematics to understand the cosmos."
+      ]
+    },
+    {
+      "name": "Stars",
+      "knowledge": [
+        "Stars are massive objects that produce energy through nuclear fusion.",
+        "The Sun is the closest star to Earth and provides energy for life.",
+        "Stars change throughout their lifetimes depending on their mass."
+      ]
+    },
+    {
+      "name": "Planets",
+      "knowledge": [
+        "Planets orbit stars and can have different compositions and environments.",
+        "Earth is a planet with conditions that support known life.",
+        "Planetary science studies the formation and evolution of worlds."
+      ]
+    },
+    {
+      "name": "Galaxies and Universe",
+      "knowledge": [
+        "Galaxies contain billions of stars, gas, dust, and other objects.",
+        "The Milky Way is the galaxy that contains our Solar System.",
+        "Cosmology studies the origin and evolution of the universe."
+      ]
+    },
+    {
+      "name": "Space Technology",
+      "knowledge": [
+        "Space technology includes rockets, satellites, spacecraft, and telescopes.",
+        "Satellites support communication, navigation, weather monitoring, and research.",
+        "Space exploration expands scientific knowledge about the universe."
+      ]
+    }
+  ]
+}

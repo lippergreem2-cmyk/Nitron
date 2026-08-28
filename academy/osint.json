@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to OSINT",
+    "explanation": "OSINT (Open-Source Intelligence) is the process of collecting and analyzing information from publicly available sources. It is used in journalism, cybersecurity, business research, and investigations while respecting privacy and applicable laws.",
+    "code": "# Gather information from public sources.",
+    "output": "Publicly available information is collected for analysis.",
+    "practice": "List five examples of public information sources.",
+    "quiz": "What does OSINT stand for?"
+  },
+  "2": {
+    "title": "Public Information Sources",
+    "explanation": "OSINT can use sources such as company websites, public reports, news articles, government publications, academic papers, and publicly available social media posts.",
+    "code": "sources = ['News', 'Government', 'Public Websites']",
+    "output": "A list of public information sources.",
+    "practice": "Identify three reliable public sources for researching a company.",
+    "quiz": "Name three examples of OSINT sources."
+  },
+  "3": {
+    "title": "Search Techniques",
+    "explanation": "Effective OSINT relies on organizing searches, comparing multiple reliable sources, and verifying information before drawing conclusions.",
+    "code": "results = search('artificial intelligence')",
+    "output": "Relevant public information is found.",
+    "practice": "Compare information about the same topic from two different public sources.",
+    "quiz": "Why should information be verified using multiple sources?"
+  },
+  "4": {
+    "title": "Verifying Information",
+    "explanation": "Not all public information is accurate. Cross-checking facts, checking publication dates, and evaluating source credibility help improve reliability.",
+    "code": "verify(source1, source2)",
+    "output": "Information is confirmed using multiple sources.",
+    "practice": "Choose a news story and verify it using at least two reputable sources.",
+    "quiz": "Why is verification important in OSINT?"
+  },
+  "5": {
+    "title": "Responsible Use of OSINT",
+    "explanation": "OSINT should be used responsibly and ethically. Respect privacy, follow applicable laws, and avoid collecting or misusing personal information without authorization.",
+    "code": "# Respect privacy and applicable laws.",
+    "output": "Information is gathered responsibly.",
+    "practice": "Write three principles for using OSINT ethically.",
+    "quiz": "Why should OSINT be used responsibly?"
+  }
+}

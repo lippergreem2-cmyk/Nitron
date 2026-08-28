@@ -1,0 +1,2127 @@
+[33ma228cf0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Update Nitron
+ -d                                  |    1 [32m+[m
+ -t                                  |    0
+ .gitignore                          |   11 [32m+[m
+ BubbleService.kt                    |  123 [32m+[m
+ .../Apps/TestApp/README.md          |    5 [32m+[m
+ .../Apps/TestApp/config/config.json |    4 [32m+[m
+ .../Apps/TestApp/src/core/app.py    |   10 [32m+[m
+ .../Apps/TestApp/src/main.py        |   13 [32m+[m
+ .../Apps/TestApp/tests/test_app.py  |    3 [32m+[m
+ .../Dashboard/README.md             |    7 [32m+[m
+ GeneratedProjects/Dashboard/app.py  |   10 [32m+[m
+ .../Dashboard/requirements.txt      |    2 [32m+[m
+ .../Dashboard/static/css/style.css  |    7 [32m+[m
+ .../Dashboard/static/js/app.js      |    2 [32m+[m
+ .../Dashboard/templates/index.html  |   16 [32m+[m
+ .../MyAPI/requirements.txt          |    2 [32m+[m
+ GeneratedProjects/MyAPI/server.py   |   18 [32m+[m
+ .../MyChatBot/README.md             |    9 [32m+[m
+ .../MyChatBot/chatbot.py            |   21 [32m+[m
+ GeneratedProjects/MyChatBot/main.py |   18 [32m+[m
+ .../MyChatBot/requirements.txt      |    1 [32m+[m
+ .../MyDatabase/README.md            |    7 [32m+[m
+ .../MyDatabase/database.py          |   36 [32m+[m
+ .../MyFirstSite/app.js              |    2 [32m+[m
+ .../MyFirstSite/index.html          |   17 [32m+[m
+ .../MyFirstSite/style.css           |    7 [32m+[m
+ GeneratedProjects/MyStore/app.js    |    2 [32m+[m
+ .../MyStore/index.html              |   17 [32m+[m
+ GeneratedProjects/MyStore/style.css |    7 [32m+[m
+ .../requirements.txt                |    2 [32m+[m
+ .../MyStore_backend/server.py       |   18 [32m+[m
+ .../MyStore_database/README.md      |    7 [32m+[m
+ .../MyStore_database/database.py    |   36 [32m+[m
+ GeneratedProjects/MyWebApp/app.js   |    8 [32m+[m
+ .../MyWebApp/index.html             |   21 [32m+[m
+ .../MyWebApp/style.css              |   16 [32m+[m
+ .../MyWebsite/README.md             |   18 [32m+[m
+ .../MyWebsite/css/style.css         |   24 [32m+[m
+ .../MyWebsite/index.html            |   32 [32m+[m
+ .../MyWebsite/js/app.js             |    2 [32m+[m
+ .../com/nitron/app/MainActivity.kt  |   22 [32m+[m
+ .../res/layout/activity_main.xml    |   13 [32m+[m
+ .../settings.gradle                 |   10 [32m+[m
+ .../NitronGeneratorTest/README.md   |    3 [32m+[m
+ .../NitronGeneratorTest/main.py     |    6 [32m+[m
+ .../nitron_project.json             |   10 [32m+[m
+ .../utils/helper.py                 |    2 [32m+[m
+ .../NitronGeneratorTestV2/README.md |    3 [32m+[m
+ .../NitronGeneratorTestV2/main.py   |    6 [32m+[m
+ .../nitron_project.json             |    9 [32m+[m
+ .../utils/helper.py                 |    2 [32m+[m
+ .../NitronStore/.env.example        |    4 [32m+[m
+ .../__pycache__/app.cpython-313.pyc |  Bin [31m0[m -> [32m2408[m bytes
+ .../backend/api/__init__.py         |    2 [32m+[m
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m190[m bytes
+ .../NitronStore/backend/app.py      |  122 [32m+[m
+ .../backend/requirements.txt        |    3 [32m+[m
+ .../NitronStore/css/style.css       |  464 [32m+[m
+ .../database.cpython-313.pyc        |  Bin [31m0[m -> [32m576[m bytes
+ .../database/database.py            |   16 [32m+[m
+ .../NitronStore/images/banner.jpg   |    0
+ .../NitronStore/index.html          |  116 [32m+[m
+ .../NitronStore/js/index.js         |   94 [32m+[m
+ .../NitronStore/js/product.js       |   74 [32m+[m
+ .../NitronStore/product.html        |   95 [32m+[m
+ .../Portfolio/.gitignore            |   19 [32m+[m
+ GeneratedProjects/Portfolio/LICENSE |    8 [32m+[m
+ .../Portfolio/README.md             |   22 [32m+[m
+ .../Portfolio/css/style.css         |   50 [32m+[m
+ .../Portfolio/index.html            |   26 [32m+[m
+ .../Portfolio/js/app.js             |    8 [32m+[m
+ GeneratedProjects/ShopAPI/README.md |    9 [32m+[m
+ GeneratedProjects/ShopAPI/app.py    |   22 [32m+[m
+ .../ShopAPI/config/__init__.py      |    0
+ .../ShopAPI/models/__init__.py      |    0
+ .../ShopAPI/requirements.txt        |    1 [32m+[m
+ .../ShopAPI/routes/__init__.py      |    0
+ .../TutorBot/README.md              |    7 [32m+[m
+ GeneratedProjects/TutorBot/bot.py   |   30 [32m+[m
+ .../TutorBot/memory/history.json    |    1 [32m+[m
+ .../VisionAI/README.md              |   13 [32m+[m
+ .../VisionAI/config.env             |    3 [32m+[m
+ GeneratedProjects/VisionAI/main.py  |   36 [32m+[m
+ GeneratedProjects/VisionAI/model.py |   17 [32m+[m
+ .../prompts/system_prompt.txt       |    2 [32m+[m
+ .../VisionAI/requirements.txt       |    2 [32m+[m
+ .../Websites/TestWebsite/README.md  |   22 [32m+[m
+ .../TestWebsite/backend/app.py      |   62 [32m+[m
+ .../backend/config/__init__.py      |    1 [32m+[m
+ .../backend/middleware/__init__.py  |    1 [32m+[m
+ .../backend/models/__init__.py      |    1 [32m+[m
+ .../backend/routes/__init__.py      |    1 [32m+[m
+ .../backend/services/__init__.py    |    1 [32m+[m
+ .../database/migrations/README.md   |    3 [32m+[m
+ .../TestWebsite/database/schema.sql |    8 [32m+[m
+ .../TestWebsite/docs/api.md         |    5 [32m+[m
+ .../docs/architecture.md            |    3 [32m+[m
+ .../frontend/css/style.css          |   32 [32m+[m
+ .../TestWebsite/frontend/index.html |   28 [32m+[m
+ .../TestWebsite/frontend/js/app.js  |    6 [32m+[m
+ .../tests/backend/test_backend.py   |    2 [32m+[m
+ .../tests/frontend/test_frontend.py |    2 [32m+[m
+ .../a_website/README.md             |    7 [32m+[m
+ .../a_website/backend/app.py        |   16 [32m+[m
+ .../a_website/frontend/index.html   |   18 [32m+[m
+ .../a_website/frontend/src/app.js   |    1 [32m+[m
+ .../frontend/styles/style.css       |   12 [32m+[m
+ .../README.md                       |    7 [32m+[m
+ .../backend/app.py                  |   16 [32m+[m
+ .../frontend/index.html             |   18 [32m+[m
+ .../frontend/src/app.js             |    1 [32m+[m
+ .../frontend/styles/style.css       |   12 [32m+[m
+ .../README.md                       |    7 [32m+[m
+ .../backend/app.py                  |   16 [32m+[m
+ .../frontend/index.html             |   18 [32m+[m
+ .../frontend/src/app.js             |    1 [32m+[m
+ .../frontend/styles/style.css       |   12 [32m+[m
+ .../calculator/README.md            |   12 [32m+[m
+ .../calculator/app/build.gradle     |   16 [32m+[m
+ .../src/main/AndroidManifest.xml    |   26 [32m+[m
+ .../src/main/java/MainActivity.kt   |   16 [32m+[m
+ .../com/nitron/app/MainActivity.kt  |   22 [32m+[m
+ .../res/layout/activity_main.xml    |   13 [32m+[m
+ .../calculator/settings.gradle      |   10 [32m+[m
+ GeneratedProjects/chatbot/README.md |   14 [32m+[m
+ .../chatbot/config/config.json      |    4 [32m+[m
+ GeneratedProjects/chatbot/main.py   |    7 [32m+[m
+ .../chatbot/requirements.txt        |    1 [32m+[m
+ GeneratedProjects/dashboard/app.js  |    8 [32m+[m
+ .../dashboard/index.html            |   21 [32m+[m
+ .../dashboard/style.css             |   16 [32m+[m
+ GeneratedProjects/game/README.md    |    5 [32m+[m
+ .../game/requirements.txt           |    0
+ GeneratedProjects/game/src/main.py  |   13 [32m+[m
+ .../i_chatbot/README.md             |    5 [32m+[m
+ .../i_chatbot/app/chat/engine.py    |    1 [32m+[m
+ .../i_chatbot/app/chat/memory.py    |    1 [32m+[m
+ .../i_chatbot/app/chat/prompts.py   |    1 [32m+[m
+ .../i_chatbot/app/main.py           |   13 [32m+[m
+ .../i_chatbot/requirements.txt      |    0
+ GeneratedProjects/myshop/app.js     |    2 [32m+[m
+ GeneratedProjects/myshop/index.html |   17 [32m+[m
+ GeneratedProjects/myshop/style.css  |    7 [32m+[m
+ GeneratedProjects/mysite/README.md  |    8 [32m+[m
+ .../mysite/css/style.css            |   32 [32m+[m
+ GeneratedProjects/mysite/index.html |   37 [32m+[m
+ GeneratedProjects/mysite/js/app.js  |    3 [32m+[m
+ .../ndroid_calculator/README.md     |    5 [32m+[m
+ .../src/main/AndroidManifest.xml    |    9 [32m+[m
+ .../ndroid_calculator/build.gradle  |    1 [32m+[m
+ .../settings.gradle                 |    1 [32m+[m
+ .../online_store/.gitignore         |    6 [32m+[m
+ .../online_store/README.md          |   27 [32m+[m
+ .../online_store/backend/app.py     |   41 [32m+[m
+ .../backend/config/__init__.py      |    0
+ .../backend/models/__init__.py      |    0
+ .../backend/routes/__init__.py      |    0
+ .../backend/services/__init__.py    |    0
+ .../backend/src/__init__.py         |    0
+ .../database/schema.sql             |    1 [32m+[m
+ .../frontend/css/style.css          |   12 [32m+[m
+ .../frontend/index.html             |   23 [32m+[m
+ .../online_store/frontend/js/app.js |    1 [32m+[m
+ .../frontend/src/app.js             |    1 [32m+[m
+ .../frontend/src/style.css          |   12 [32m+[m
+ GeneratedProjects/projects.json     |   72 [32m+[m
+ .../python_program/README.md        |    5 [32m+[m
+ .../python_program/requirements.txt |    0
+ .../python_program/src/main.py      |   13 [32m+[m
+ GeneratedProjects/shopapi/README.md |    8 [32m+[m
+ GeneratedProjects/shopapi/app.py    |   22 [32m+[m
+ .../shopapi/requirements.txt        |    1 [32m+[m
+ GeneratedProjects/shopapp/app.js    |    2 [32m+[m
+ .../shopapp/index.html              |   17 [32m+[m
+ GeneratedProjects/shopapp/style.css |    7 [32m+[m
+ .../requirements.txt                |    2 [32m+[m
+ .../shopapp_backend/server.py       |   18 [32m+[m
+ .../shopapp_database/README.md      |    7 [32m+[m
+ .../shopapp_database/database.py    |   36 [32m+[m
+ GeneratedProjects/store/app.js      |    2 [32m+[m
+ GeneratedProjects/store/index.html  |   17 [32m+[m
+ GeneratedProjects/store/style.css   |    7 [32m+[m
+ .../storeai/.env.example            |    4 [32m+[m
+ GeneratedProjects/storeai/README.md |   38 [32m+[m
+ .../storeai/docker-compose.yml      |   19 [32m+[m
+ .../storeai/frontend/index.html     |   19 [32m+[m
+ .../storeai/frontend/package.json   |   14 [32m+[m
+ .../storeai/frontend/src/App.jsx    |   18 [32m+[m
+ .../storeai/frontend/src/main.jsx   |   11 [32m+[m
+ GeneratedProjects/test/app.js       |    2 [32m+[m
+ GeneratedProjects/test/index.html   |   17 [32m+[m
+ GeneratedProjects/test/style.css    |    7 [32m+[m
+ .../tutorbot/README.md              |    9 [32m+[m
+ .../tutorbot/chatbot.py             |   21 [32m+[m
+ GeneratedProjects/tutorbot/main.py  |   18 [32m+[m
+ .../tutorbot/requirements.txt       |    1 [32m+[m
+ .../visionai/README.md              |   10 [32m+[m
+ .../visionai/config.env             |    3 [32m+[m
+ GeneratedProjects/visionai/main.py  |   14 [32m+[m
+ GeneratedProjects/visionai/model.py |   17 [32m+[m
+ .../visionai/requirements.txt       |    1 [32m+[m
+ MainActivity.kt                     |  887 [32m++[m
+ MainActivity.kt.before_crash_test   |  341 [32m+[m
+ WifiScanner.kt                      |    0
+ __pycache__/academy.cpython-313.pyc |  Bin [31m0[m -> [32m769[m bytes
+ .../ai_engine.cpython-313.pyc       |  Bin [31m0[m -> [32m1472[m bytes
+ .../ai_local.cpython-313.pyc        |  Bin [31m0[m -> [32m451[m bytes
+ .../anime_quotes.cpython-313.pyc    |  Bin [31m0[m -> [32m2327[m bytes
+ .../asset_detector.cpython-313.pyc  |  Bin [31m0[m -> [32m1857[m bytes
+ ...tomation_manager.cpython-313.pyc |  Bin [31m0[m -> [32m2464[m bytes
+ __pycache__/brain.cpython-313.pyc   |  Bin [31m0[m -> [32m8760[m bytes
+ .../bubble_service.cpython-313.pyc  |  Bin [31m0[m -> [32m1013[m bytes
+ .../code_generator.cpython-313.pyc  |  Bin [31m0[m -> [32m2924[m bytes
+ .../command_router.cpython-313.pyc  |  Bin [31m0[m -> [32m2629[m bytes
+ .../commands.cpython-313.pyc        |  Bin [31m0[m -> [32m60254[m bytes
+ .../confidence.cpython-313.pyc      |  Bin [31m0[m -> [32m2202[m bytes
+ __pycache__/config.cpython-313.pyc  |  Bin [31m0[m -> [32m1243[m bytes
+ .../cpp_teacher.cpython-313.pyc     |  Bin [31m0[m -> [32m151[m bytes
+ .../fair_value_gap.cpython-313.pyc  |  Bin [31m0[m -> [32m2686[m bytes
+ __pycache__/ict.cpython-313.pyc     |  Bin [31m0[m -> [32m1549[m bytes
+ .../image_learning.cpython-313.pyc  |  Bin [31m0[m -> [32m4170[m bytes
+ .../job_manager.cpython-313.pyc     |  Bin [31m0[m -> [32m2502[m bytes
+ .../learning.cpython-313.pyc        |  Bin [31m0[m -> [32m5832[m bytes
+ .../liquidity.cpython-313.pyc       |  Bin [31m0[m -> [32m2551[m bytes
+ __pycache__/main.cpython-313.pyc    |  Bin [31m0[m -> [32m17149[m bytes
+ .../market_parser.cpython-313.pyc   |  Bin [31m0[m -> [32m965[m bytes
+ ...market_structure.cpython-313.pyc |  Bin [31m0[m -> [32m1917[m bytes
+ __pycache__/memory.cpython-313.pyc  |  Bin [31m0[m -> [32m2397[m bytes
+ .../memory_manager.cpython-313.pyc  |  Bin [31m0[m -> [32m2766[m bytes
+ .../mt5_data.cpython-313.pyc        |  Bin [31m0[m -> [32m3845[m bytes
+ __pycache__/music.cpython-313.pyc   |  Bin [31m0[m -> [32m1892[m bytes
+ .../news_filter.cpython-313.pyc     |  Bin [31m0[m -> [32m1747[m bytes
+ .../nitron_core.cpython-313.pyc     |  Bin [31m0[m -> [32m2951[m bytes
+ ...ron_notification.cpython-313.pyc |  Bin [31m0[m -> [32m571[m bytes
+ ...on_step20_broken.cpython-313.pyc |  Bin [31m0[m -> [32m362[m bytes
+ .../online_learning.cpython-313.pyc |  Bin [31m0[m -> [32m1408[m bytes
+ .../order_blocks.cpython-313.pyc    |  Bin [31m0[m -> [32m2715[m bytes
+ __pycache__/phone.cpython-313.pyc   |  Bin [31m0[m -> [32m3126[m bytes
+ __pycache__/physics.cpython-313.pyc |  Bin [31m0[m -> [32m4392[m bytes
+ .../plugin_manager.cpython-313.pyc  |  Bin [31m0[m -> [32m4971[m bytes
+ ...premium_discount.cpython-313.pyc |  Bin [31m0[m -> [32m1219[m bytes
+ .../python_teacher.cpython-313.pyc  |  Bin [31m0[m -> [32m1623[m bytes
+ __pycache__/risk.cpython-313.pyc    |  Bin [31m0[m -> [32m3323[m bytes
+ __pycache__/search.cpython-313.pyc  |  Bin [31m0[m -> [32m2260[m bytes
+ .../security.cpython-313.pyc        |  Bin [31m0[m -> [32m2532[m bytes
+ __pycache__/server.cpython-313.pyc  |  Bin [31m0[m -> [32m8548[m bytes
+ __pycache__/session.cpython-313.pyc |  Bin [31m0[m -> [32m1883[m bytes
+ __pycache__/skills.cpython-313.pyc  |  Bin [31m0[m -> [32m1335[m bytes
+ .../skills_example.cpython-313.pyc  |  Bin [31m0[m -> [32m574[m bytes
+ __pycache__/speech.cpython-313.pyc  |  Bin [31m0[m -> [32m4291[m bytes
+ .../strategy.cpython-313.pyc        |  Bin [31m0[m -> [32m3199[m bytes
+ __pycache__/swings.cpython-313.pyc  |  Bin [31m0[m -> [32m3138[m bytes
+ __pycache__/system.cpython-313.pyc  |  Bin [31m0[m -> [32m2109[m bytes
+ .../task_manager.cpython-313.pyc    |  Bin [31m0[m -> [32m1732[m bytes
+ .../trade_advisor.cpython-313.pyc   |  Bin [31m0[m -> [32m3150[m bytes
+ ...trade_controller.cpython-313.pyc |  Bin [31m0[m -> [32m2725[m bytes
+ .../trade_display.cpython-313.pyc   |  Bin [31m0[m -> [32m3553[m bytes
+ .../trade_executor.cpython-313.pyc  |  Bin [31m0[m -> [32m1603[m bytes
+ __pycache__/trader.cpython-313.pyc  |  Bin [31m0[m -> [32m2290[m bytes
+ __pycache__/weather.cpython-313.pyc |  Bin [31m0[m -> [32m1203[m bytes
+ ...workflow_manager.cpython-313.pyc |  Bin [31m0[m -> [32m1847[m bytes
+ academy.py                          |   26 [32m+[m
+ academy/__init__.py                 |   14 [32m+[m
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m361[m bytes
+ .../academy.cpython-313.pyc         |  Bin [31m0[m -> [32m4624[m bytes
+ .../cpp_teacher.cpython-313.pyc     |  Bin [31m0[m -> [32m1266[m bytes
+ .../japanese.cpython-313.pyc        |  Bin [31m0[m -> [32m1254[m bytes
+ .../mathematics.cpython-313.pyc     |  Bin [31m0[m -> [32m1605[m bytes
+ .../python_teacher.cpython-313.pyc  |  Bin [31m0[m -> [32m4584[m bytes
+ academy/academy.json                |   55 [32m+[m
+ academy/academy.py                  |  110 [32m+[m
+ academy/ai.json                     |    0
+ academy/ai_agents.json              |   42 [32m+[m
+ academy/ai_ethics.json              |   42 [32m+[m
+ academy/ai_teacher.py               |    0
+ academy/biology.json                |    0
+ academy/biology.py                  |    0
+ academy/bug_bounty.json             |   42 [32m+[m
+ academy/c.json                      |    0
+ academy/c_teacher.py                |    0
+ academy/chemistry.json              |    0
+ academy/chemistry.py                |    0
+ academy/cloud_security.json         |   42 [32m+[m
+ academy/computer_vision.json        |   42 [32m+[m
+ academy/cpp.json                    |    0
+ academy/cpp_teacher.py              |   25 [32m+[m
+ academy/cryptography.json           |   42 [32m+[m
+ academy/css.json                    |   18 [32m+[m
+ academy/css_teacher.py              |    0
+ academy/ctf.json                    |   42 [32m+[m
+ academy/cybersecurity.json          |    0
+ academy/cybersecurity_teacher.py    |    0
+ academy/deep_learning.json          |   42 [32m+[m
+ academy/digital_forensics.json      |   42 [32m+[m
+ academy/dns.json                    |   42 [32m+[m
+ academy/docker.json                 |   42 [32m+[m
+ academy/english.json                |    0
+ academy/english.py                  |    0
+ academy/ethical_hacking.json        |   42 [32m+[m
+ academy/firewalls.json              |   42 [32m+[m
+ academy/french.json                 |    0
+ academy/french.py                   |    0
+ academy/german.json                 |    0
+ academy/german.py                   |    0
+ academy/git.json                    |   42 [32m+[m
+ academy/github.json                 |   42 [32m+[m
+ academy/html.json                   |   18 [32m+[m
+ academy/html_teacher.py             |    0
+ academy/http.json                   |   42 [32m+[m
+ academy/japanese.json               |    0
+ academy/japanese.py                 |   48 [32m+[m
+ academy/java.json                   |    0
+ academy/java_teacher.py             |    0
+ academy/javascript.json             |   26 [32m+[m
+ academy/javascript_teacher.py       |    0
+ academy/kubernetes.json             |   42 [32m+[m
+ academy/lessons.json                |   49 [32m+[m
+ academy/linux.json                  |   42 [32m+[m
+ academy/llms.json                   |   42 [32m+[m
+ academy/machine_learning.json       |   42 [32m+[m
+ academy/malware_analysis.json       |   42 [32m+[m
+ academy/mathematics.json            |    0
+ academy/mathematics.py              |   21 [32m+[m
+ academy/networking.json             |   42 [32m+[m
+ academy/neural_networks.json        |   42 [32m+[m
+ academy/nextjs.json                 |   26 [32m+[m
+ academy/nlp.json                    |   42 [32m+[m
+ academy/osint.json                  |   42 [32m+[m
+ academy/physics.json                |    0
+ academy/physics.py                  |    0
+ academy/progress.json               |    0
+ academy/progress.py                 |    0
+ academy/progress/progress.json      |    0
+ academy/prompt_engineering.json     |   42 [32m+[m
+ academy/python.json                 |  443 [32m+[m
+ academy/python_backup.json          |  401 [32m+[m
+ academy/python_teacher.py           |  230 [32m+[m
+ academy/react.json                  |   26 [32m+[m
+ academy/reinforcement_learning.json |   42 [32m+[m
+ academy/reverse_engineering.json    |   42 [32m+[m
+ academy/spanish.json                |    0
+ academy/spanish.py                  |    0
+ academy/sql.json                    |   42 [32m+[m
+ academy/sql_teacher.py              |    0
+ academy/tcpip.json                  |   42 [32m+[m
+ academy/threat_intelligence.json    |   42 [32m+[m
+ academy/typescript.json             |   26 [32m+[m
+ academy/typescript_teacher.py       |    0
+ academy/web_security.json           |   42 [32m+[m
+ academy/wifi.json                   |   42 [32m+[m
+ adx.py                              |   70 [32m+[m
+ ai.py                               |    4 [32m+[m
+ ai/__init__.py                      |    0
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m151[m bytes
+ .../brain.cpython-313.pyc           |  Bin [31m0[m -> [32m148[m bytes
+ .../image_analyzer.cpython-313.pyc  |  Bin [31m0[m -> [32m26041[m bytes
+ ai/api.py                           |    0
+ ai/brain.py                         |    0
+ ai/classifier.py                    |    0
+ ai/code_generator.py                |    0
+ ai/commands.py                      |   80 [32m+[m
+ ai/config.py                        |    0
+ ai/context.py                       |    0
+ ai/conversation.py                  |    0
+ ai/datasets.py                      |    0
+ ai/decision.py                      |    0
+ ai/embeddings.py                    |    0
+ ai/emotions.py                      |    0
+ ai/goals.py                         |    0
+ ai/hearing.py                       |    0
+ ai/history.py                       |    0
+ ai/image_analyzer.py                | 1236 [32m+++[m
+ ai/image_analyzer.py.backup         | 1005 [32m++[m
+ ...mage_analyzer.py.backup_20260817 |  174 [32m+[m
+ ai/image_analyzer.py.before_ocr     |  174 [32m+[m
+ ...analyzer.py.before_query_cleanup | 1023 [32m++[m
+ ...alyzer.py.before_research_filter | 1184 [32m+++[m
+ ...zer.py.before_research_filter_v2 | 1229 [32m+++[m
+ ...analyzer.py.before_topic_upgrade | 1122 [32m++[m
+ ai/inference.py                     |    0
+ ai/knowledge.json                   |    0
+ ai/knowledge.py                     |    0
+ ai/language.py                      |    0
+ ai/learner.py                       |    0
+ ai/memory.py                        |   71 [32m+[m
+ ai/models.py                        |    0
+ ai/personality.json                 |    0
+ ai/personality.py                   |    0
+ ai/planner.py                       |    0
+ ai/prompts.json                     |    0
+ ai/reasoning.py                     |    0
+ ai/scheduler.py                     |    0
+ ai/search.py                        |    0
+ ai/settings.json                    |    0
+ ai/skills.py                        |    0
+ ai/summarizer.py                    |    0
+ ai/tokenizer.py                     |    0
+ ai/tools.py                         |    0
+ ai/training.py                      |    0
+ ai/translator.py                    |    0
+ ai/vision.py                        |    0
+ ai/voice.py                         |    0
+ ai_engine.py                        |   40 [32m+[m
+ ai_local.py                         |   16 [32m+[m
+ analyze_trade                       |   40 [32m+[m
+ anime_quotes.py                     |  122 [32m+[m
+ app/build.gradle                    |   58 [32m+[m
+ app/src/main/AndroidManifest.xml    |  128 [32m+[m
+ ...dManifest.xml.before_permissions |   95 [32m+[m
+ .../nitron/bubble/AppListAdapter.kt |   37 [32m+[m
+ .../bubble/AppsListActivity.kt      |   51 [32m+[m
+ .../nitron/bubble/BootReceiver.kt   |   49 [32m+[m
+ .../com/nitron/bubble/BubbleMenu.kt |   70 [32m+[m
+ .../nitron/bubble/BubbleOverlay.kt  |   69 [32m+[m
+ .../nitron/bubble/BubbleService.kt  |  328 [32m+[m
+ .../bubble/BubbleService.kt.backup  | 1143 [32m++[m
+ .../BubbleService.kt.before_restore |  328 [32m+[m
+ ...eService.kt.before_restore_again | 1143 [32m++[m
+ ...ubbleService.kt.newdesign_backup |  533 [32m+[m
+ .../BubbleService.kt.visual-backup  |  533 [32m+[m
+ .../bubble/BubbleTouchListener.kt   |   46 [32m+[m
+ .../nitron/bubble/ChatActivity.kt   |  175 [32m+[m
+ .../bubble/ChatActivity.kt.backup   |  106 [32m+[m
+ ...tActivity.kt.before_image_button |  106 [32m+[m
+ .../com/nitron/bubble/ChatWindow.kt |  177 [32m+[m
+ .../bubble/ChatWindow.kt.backup     |  151 [32m+[m
+ .../bubble/CybernetXActivity.kt     |  247 [32m+[m
+ .../com/nitron/bubble/GpsLocator.kt |   61 [32m+[m
+ .../bubble/ImagePickerActivity.kt   |  104 [32m+[m
+ ...erActivity.kt.before_analysis_ui |  104 [32m+[m
+ .../nitron/bubble/LocationHelper.kt |   43 [32m+[m
+ .../bubble/LocationTestActivity.kt  |  490 [32m+[m
+ .../nitron/bubble/LoginActivity.kt  |   30 [32m+[m
+ .../nitron/bubble/MainActivity.kt   | 1182 [32m+++[m
+ .../bubble/MainActivity.kt.backup   |  255 [32m+[m
+ ...nActivity.kt.before_bubble_start |  952 [32m++[m
+ ...ctivity.kt.before_full_image_fix |  350 [32m+[m
+ ...ctivity.kt.before_permission_fix |  611 [32m++[m
+ ...ty.kt.before_real_image_learning |  350 [32m+[m
+ ...ainActivity.kt.before_voice_full |  952 [32m++[m
+ .../bubble/NotificationService.kt   |   71 [32m+[m
+ ...tionService.kt.before_bubble_fix |   71 [32m+[m
+ .../bubble/ProjectChatActivity.kt   |  307 [32m+[m
+ .../bubble/ProjectsActivity.kt      |  249 [32m+[m
+ .../bubble/SettingsActivity.kt      |   87 [32m+[m
+ .../nitron/bubble/TermuxBridge.kt   |  675 [32m++[m
+ .../bubble/TermuxBridge.kt.backup   |   99 [32m+[m
+ .../bubble/TermuxBridge.kt.bak      |  645 [32m++[m
+ .../TermuxBridge.kt.before_format   |  166 [32m+[m
+ ...xBridge.kt.before_project_format |  570 [32m+[m
+ .../bubble/VoiceModeActivity.kt     |  287 [32m+[m
+ .../nitron/bubble/WifiScanner.kt    |  190 [32m+[m
+ .../nitron/bubble/activity_main.xml |    0
+ .../com/nitron/bubble/bubble_bg.xml |    0
+ .../nitron/bubble/bubble_layout.xml |    0
+ .../nitron/bubble/bubble_menu.xml   |    0
+ .../bubble/chat/ChatHistoryStore.kt |   75 [32m+[m
+ .../bubble/chat/ChatManager.kt      |   25 [32m+[m
+ .../nitron/bubble/chat/Message.kt   |    8 [32m+[m
+ .../bubble/chat/MessageAdapter.kt   |  227 [32m+[m
+ .../chat/MessageAdapter.kt.backup   |  125 [32m+[m
+ .../com/nitron/bubble/chat_bg.xml   |    0
+ .../nitron/bubble/chat_window.xml   |    0
+ .../com/nitron/bubble/settings.xml  |    0
+ .../main/res/drawable/bubble_bg.xml |   12 [32m+[m
+ .../res/drawable/bubble_glow.xml    |   13 [32m+[m
+ .../main/res/drawable/chat_bg.xml   |    4 [32m+[m
+ .../res/drawable/nitron_bubble.xml  |   11 [32m+[m
+ .../drawable/nitron_bubble_bg.xml   |   11 [32m+[m
+ .../drawable/nitron_bubble_glow.xml |   13 [32m+[m
+ .../nitron_circle_button.xml        |    5 [32m+[m
+ .../nitron_circle_outline.xml       |    8 [32m+[m
+ .../drawable/nitron_down_arrow.xml  |   16 [32m+[m
+ .../res/drawable/nitron_drag_bg.xml |    6 [32m+[m
+ .../nitron_equalizer_icon.xml       |   11 [32m+[m
+ .../res/drawable/nitron_icon.xml    |   19 [32m+[m
+ .../nitron_input_background.xml     |    6 [32m+[m
+ .../drawable/nitron_menu_item.xml   |   19 [32m+[m
+ .../drawable/nitron_message_bg.xml  |    9 [32m+[m
+ .../res/drawable/nitron_orb_bg.xml  |   15 [32m+[m
+ .../drawable/nitron_orbit_dot.xml   |    5 [32m+[m
+ .../drawable/nitron_orbit_ring.xml  |    7 [32m+[m
+ .../drawable/nitron_panel_bg.xml    |    6 [32m+[m
+ .../drawable/nitron_ring_thin.xml   |    7 [32m+[m
+ .../drawable/nitron_send_arrow.xml  |   12 [32m+[m
+ .../drawable/nitron_send_button.xml |    5 [32m+[m
+ .../nitron_slim_down_arrow.xml      |   12 [32m+[m
+ .../drawable/nitron_speech_bg.xml   |   11 [32m+[m
+ .../drawable/nitron_speech_tail.xml |   11 [32m+[m
+ .../nitron_sphere_shade.xml         |   12 [32m+[m
+ .../drawable/nitron_star_dot.xml    |    5 [32m+[m
+ .../drawable/nitron_voice_glow.xml  |   11 [32m+[m
+ .../drawable/user_message_bg.xml    |    9 [32m+[m
+ .../layout/activity_cybernetx.xml   |  129 [32m+[m
+ .../res/layout/activity_login.xml   |   73 [32m+[m
+ .../res/layout/activity_main.xml    |  343 [32m+[m
+ .../layout/activity_voice_mode.xml  |  432 [32m+[m
+ .../res/layout/app_grid_item.xml    |   26 [32m+[m
+ .../main/res/layout/app_item.xml    |   25 [32m+[m
+ .../main/res/layout/apps_list.xml   |   41 [32m+[m
+ .../res/layout/bubble_layout.xml    |   63 [32m+[m
+ .../main/res/layout/bubble_menu.xml |   47 [32m+[m
+ .../main/res/layout/chat_window.xml |  128 [32m+[m
+ .../res/layout/message_item.xml     |   56 [32m+[m
+ .../res/layout/project_chat.xml     |  114 [32m+[m
+ .../res/layout/project_item.xml     |   12 [32m+[m
+ .../main/res/layout/projects.xml    |   47 [32m+[m
+ .../main/res/layout/settings.xml    |  148 [32m+[m
+ .../ic_launcher.xml                 |   19 [32m+[m
+ .../main/res/mipmap/ic_launcher.xml |   19 [32m+[m
+ .../res/values-night/colors.xml     |   35 [32m+[m
+ .../res/values-night/themes.xml     |   23 [32m+[m
+ app/src/main/res/values/colors.xml  |   40 [32m+[m
+ app/src/main/res/values/strings.xml |    7 [32m+[m
+ app/src/main/res/values/themes.xml  |   25 [32m+[m
+ apps.py                             |   37 [32m+[m
+ asset_detector.py                   |  177 [32m+[m
+ atr.py                              |   54 [32m+[m
+ automation_manager.py               |   58 [32m+[m
+ .../BubbleOverlay.kt.bak            |   69 [32m+[m
+ .../BubbleService.kt.bak            |  328 [32m+[m
+ .../NotificationService.kt.bak      |   71 [32m+[m
+ bollinger.py                        |   45 [32m+[m
+ brain.py                            |  531 [32m+[m
+ brain/__init__.py                   |  394 [32m+[m
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m6080[m bytes
+ .../agent_core.cpython-313.pyc      |  Bin [31m0[m -> [32m12135[m bytes
+ .../brain.cpython-313.pyc           |  Bin [31m0[m -> [32m3908[m bytes
+ .../context.cpython-313.pyc         |  Bin [31m0[m -> [32m2547[m bytes
+ .../crawler.cpython-313.pyc         |  Bin [31m0[m -> [32m2197[m bytes
+ .../decision.cpython-313.pyc        |  Bin [31m0[m -> [32m4930[m bytes
+ .../engine.cpython-313.pyc          |  Bin [31m0[m -> [32m1824[m bytes
+ .../executor.cpython-313.pyc        |  Bin [31m0[m -> [32m11536[m bytes
+ ...knowledge_engine.cpython-313.pyc |  Bin [31m0[m -> [32m4075[m bytes
+ ...wledge_formatter.cpython-313.pyc |  Bin [31m0[m -> [32m2909[m bytes
+ .../knowledge_graph.cpython-313.pyc |  Bin [31m0[m -> [32m3047[m bytes
+ ...wledge_processor.cpython-313.pyc |  Bin [31m0[m -> [32m6460[m bytes
+ .../language.cpython-313.pyc        |  Bin [31m0[m -> [32m3631[m bytes
+ .../learner.cpython-313.pyc         |  Bin [31m0[m -> [32m18485[m bytes
+ ...learning_manager.cpython-313.pyc |  Bin [31m0[m -> [32m2524[m bytes
+ .../project_repair.cpython-313.pyc  |  Bin [31m0[m -> [32m8248[m bytes
+ .../project_tester.cpython-313.pyc  |  Bin [31m0[m -> [32m8018[m bytes
+ ...project_verifier.cpython-313.pyc |  Bin [31m0[m -> [32m5755[m bytes
+ .../reasoning.cpython-313.pyc       |  Bin [31m0[m -> [32m46760[m bytes
+ .../search_engine.cpython-313.pyc   |  Bin [31m0[m -> [32m11222[m bytes
+ .../skill_handlers.cpython-313.pyc  |  Bin [31m0[m -> [32m17254[m bytes
+ .../skill_registry.cpython-313.pyc  |  Bin [31m0[m -> [32m10487[m bytes
+ .../study.cpython-313.pyc           |  Bin [31m0[m -> [32m3412[m bytes
+ .../web_reader.cpython-313.pyc      |  Bin [31m0[m -> [32m3452[m bytes
+ brain/actions.py                    |   46 [32m+[m
+ brain/agent_core.py                 |  389 [32m+[m
+ brain/analyzers/__init__.py         |    0
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m164[m bytes
+ .../html_analyzer.cpython-313.pyc   |  Bin [31m0[m -> [32m2184[m bytes
+ brain/analyzers/html_analyzer.py    |  117 [32m+[m
+ brain/analyzers/section_analyzer.py |    0
+ brain/attention.py                  |    0
+ brain/brain.py                      |  231 [32m+[m
+ brain/brain.py.before_chat_format   |  231 [32m+[m
+ brain/brain.py.before_recall_fix    |  216 [32m+[m
+ brain/brain_backup.py               |   72 [32m+[m
+ brain/concept_classifier.py         |  108 [32m+[m
+ brain/concept_extractor.py          |   53 [32m+[m
+ brain/config.py                     |    0
+ brain/context.py                    |   53 [32m+[m
+ brain/conversation/__init__.py      |    0
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m167[m bytes
+ .../interrupt.cpython-313.pyc       |  Bin [31m0[m -> [32m1383[m bytes
+ .../manager.cpython-313.pyc         |  Bin [31m0[m -> [32m2331[m bytes
+ .../pace.cpython-313.pyc            |  Bin [31m0[m -> [32m1524[m bytes
+ .../state.cpython-313.pyc           |  Bin [31m0[m -> [32m2090[m bytes
+ brain/conversation/input_control.py |    0
+ brain/conversation/interrupt.py     |   39 [32m+[m
+ brain/conversation/manager.py       |   47 [32m+[m
+ brain/conversation/pace.py          |   45 [32m+[m
+ brain/conversation/state.py         |   68 [32m+[m
+ brain/conversation_old.py           |   57 [32m+[m
+ brain/crawler.py                    |   74 [32m+[m
+ brain/decision.py                   |  248 [32m+[m
+ ...n.py.before_learned_capabilities |   76 [32m+[m
+ .../decision.py.before_step24d_fix  |  186 [32m+[m
+ .../decision.py.learned_routing_v1  |  184 [32m+[m
+ brain/documentation_parser.py       |  112 [32m+[m
+ brain/emotions.py                   |    0
+ brain/engine.py                     |  126 [32m+[m
+ brain/engine.py.bak                 |   42 [32m+[m
+ brain/executor.py                   |  759 [32m++[m
+ brain/executor.py.bak_capability    |  356 [32m+[m
+ ...r.py.before_capability_execution |   45 [32m+[m
+ brain/executor.py.before_step24_fix |  723 [32m++[m
+ .../executor.py.before_step25a_fix  |  731 [32m++[m
+ brain/executor.py.before_step26     |  731 [32m++[m
+ brain/executor.py.before_step27     |  731 [32m++[m
+ brain/executor.py.before_step27F    |  759 [32m++[m
+ brain/executor.py.before_step27d    |  754 [32m++[m
+ brain/executor.py.before_step27f    |  759 [32m++[m
+ brain/executor.py.before_step27f2   |  759 [32m++[m
+ brain/executor.py.before_step28C    |  759 [32m++[m
+ ...executor.py.failed_import_backup |  165 [32m+[m
+ brain/extractor.py                  |   35 [32m+[m
+ brain/goals.py                      |    0
+ brain/graph/__init__.py             |    0
+ brain/graph/knowledge_graph.py      |    0
+ brain/hearing.py                    |    0
+ brain/history.py                    |   64 [32m+[m
+ brain/html_parser.py                |   41 [32m+[m
+ brain/intent.py                     |    0
+ brain/internet_learning.py          |  103 [32m+[m
+ brain/knowledge.py                  |   65 [32m+[m
+ brain/knowledge/__init__.py         |    0
+ .../artificial_intelligence.json    |  136 [32m+[m
+ brain/knowledge/astronomy.json      |   46 [32m+[m
+ brain/knowledge/builder.py          |    0
+ brain/knowledge/business.json       |   56 [32m+[m
+ brain/knowledge/concepts.py         |    0
+ brain/knowledge/cybersecurity.json  |   72 [32m+[m
+ brain/knowledge/database.py         |    0
+ brain/knowledge/finance.json        |   67 [32m+[m
+ brain/knowledge/geography.json      |   46 [32m+[m
+ brain/knowledge/mathematics.json    |   55 [32m+[m
+ brain/knowledge/medicine.json       |   62 [32m+[m
+ brain/knowledge/mixed.json          |   46 [32m+[m
+ brain/knowledge/networking.json     |  126 [32m+[m
+ brain/knowledge/programming.json    |  102 [32m+[m
+ brain/knowledge/psychology.json     |   62 [32m+[m
+ brain/knowledge/robotics.json       |   55 [32m+[m
+ brain/knowledge/science.json        |   57 [32m+[m
+ .../software_engineering.json       |   49 [32m+[m
+ brain/knowledge_builder.py          |  115 [32m+[m
+ brain/knowledge_engine.py           |  116 [32m+[m
+ brain/knowledge_formatter.py        |  138 [32m+[m
+ ...atter.py.backup_before_image_fix |   90 [32m+[m
+ brain/knowledge_graph.json          |  143 [32m+[m
+ brain/knowledge_graph.py            |  100 [32m+[m
+ brain/knowledge_index.json          |   70 [32m+[m
+ brain/knowledge_index.py            |   89 [32m+[m
+ brain/knowledge_processor.py        |  339 [32m+[m
+ ...e_processor.py.backup_capability |  339 [32m+[m
+ ...e_processor.py.backup_source_fix |  339 [32m+[m
+ ..._processor.py.before_summary_fix |   81 [32m+[m
+ brain/knowledge_store.py            |   86 [32m+[m
+ brain/language.py                   |  102 [32m+[m
+ brain/language.py.before_step28C    |  102 [32m+[m
+ ...677a09ea445aa7ab80f06a6ca462.png |  Bin [31m0[m -> [32m69[m bytes
+ ...af2b6eff4c55969d7c0d7552ba3c.png |  Bin [31m0[m -> [32m69[m bytes
+ ...6ab6c57745c98716229abe5705eb.jpg |  Bin [31m0[m -> [32m451341[m bytes
+ ...625be728418e86d102b6a2cc4852.jpg |  Bin [31m0[m -> [32m513708[m bytes
+ ...5d28761740558f16f6a674dfeb41.png |  Bin [31m0[m -> [32m69[m bytes
+ ...2bd303844502a07bf03370ea5cf9.png |  Bin [31m0[m -> [32m69[m bytes
+ ...8dba07b84d879682021086cccf34.jpg |  Bin [31m0[m -> [32m321724[m bytes
+ ...e18499f645a49d37b6b53c81af83.jpg |  Bin [31m0[m -> [32m238324[m bytes
+ ...96fd37404248a760778e94c5e9d3.png |  Bin [31m0[m -> [32m69[m bytes
+ ...4fd52ebb477d95939e077b26c46f.png |  Bin [31m0[m -> [32m69[m bytes
+ ...8418486f4555b65b45a9619018e4.png |  Bin [31m0[m -> [32m69[m bytes
+ ...7f701c384d43b4a84051cbf9070b.jpg |  Bin [31m0[m -> [32m363077[m bytes
+ ...76aee199462d95d86f225fa68871.jpg |  Bin [31m0[m -> [32m453738[m bytes
+ ...6542ef774805bf68dbf556c7f5f4.jpg |  Bin [31m0[m -> [32m314762[m bytes
+ brain/learned_knowledge.json        | 2759 [32m+++++[m
+ brain/learner.py                    |  873 [32m++[m
+ brain/learner.py.backup             |  417 [32m+[m
+ ...py.before_capability_acquisition |  462 [32m+[m
+ ...learner.py.before_image_learning |  127 [32m+[m
+ ....py.before_richer_image_learning |  238 [32m+[m
+ brain/learner.py.before_step28D     |  722 [32m++[m
+ brain/learning.py                   |   73 [32m+[m
+ brain/learning/__init__.py          |    0
+ brain/learning/learner.py           |    0
+ brain/learning/study_engine.py      |    0
+ brain/learning_manager.py           |   78 [32m+[m
+ brain/memory/__init__.py            |  123 [32m+[m
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m2776[m bytes
+ brain/memory_old.py                 |   54 [32m+[m
+ brain/models/__init__.py            |    0
+ brain/models/knowledge_model.py     |    0
+ brain/parser.py                     |    0
+ brain/personality.py                |    0
+ brain/planner.py                    |   76 [32m+[m
+ brain/processors/__init__.py        |    0
+ .../knowledge_processor.py          |    0
+ brain/project_repair.py             |  364 [32m+[m
+ brain/project_tester.py             |  356 [32m+[m
+ brain/project_verifier.py           |  284 [32m+[m
+ brain/reasoning.py                  | 2160 [32m++++[m
+ brain/reasoning.py.backup           | 2283 [32m++++[m
+ .../reasoning.py.backup_capability  | 1908 [32m++++[m
+ .../reasoning.py.backup_source_fix  | 1908 [32m++++[m
+ brain/reasoning.py.bak              | 1510 [32m+++[m
+ brain/reasoning.py.bak2             | 1512 [32m+++[m
+ brain/reasoning.py.bak3             | 1729 [32m++++[m
+ brain/reasoning.py.bak4             | 1796 [32m++++[m
+ brain/reasoning.py.bak6             | 1815 [32m++++[m
+ brain/reasoning.py.bak7             | 1816 [32m++++[m
+ ...before_answer_project_connection | 1447 [32m+++[m
+ ...easoning.py.before_auto_learning |  480 [32m+[m
+ ...asoning.py.before_calculator_fix | 2183 [32m++++[m
+ ...y.before_canonical_selection_fix | 2691 [32m+++++[m
+ ....before_canonical_selection_fix2 | 2691 [32m+++++[m
+ ...g.py.before_capability_generator | 2031 [32m++++[m
+ ...reasoning.py.before_code_display | 1502 [32m+++[m
+ ...soning.py.before_code_generation |  794 [32m++[m
+ ...oning.py.before_code_priority_v2 |  910 [32m++[m
+ ...ng.py.before_final_title_handoff | 2634 [32m+++++[m
+ ...ning.py.before_general_generator | 1016 [32m++[m
+ ...soning.py.before_generation_gate | 2183 [32m++++[m
+ ...reasoning.py.before_image_recall |  656 [32m++[m
+ ...ng.py.before_learn_execution_fix | 2639 [32m+++++[m
+ ...ing.py.before_learn_priority_fix | 2678 [32m+++++[m
+ ...ng.py.before_learn_priority_fix2 | 2691 [32m+++++[m
+ ...ng.py.before_learn_priority_fix3 | 2691 [32m+++++[m
+ ...easoning.py.before_normalize_fix |  541 [32m+[m
+ brain/reasoning.py.before_path_fix  | 1446 [32m+++[m
+ ...ning.py.before_program_generator | 2187 [32m++++[m
+ ...reasoning.py.before_program_type | 2183 [32m++++[m
+ ...g.py.before_project_generator_v2 | 1163 [32m+++[m
+ ...g.py.before_project_generator_v3 | 1163 [32m+++[m
+ ...g.py.before_project_generator_v4 | 1163 [32m+++[m
+ ...easoning.py.before_project_types | 2031 [32m++++[m
+ .../reasoning.py.before_ranking_fix |  409 [32m+[m
+ ...easoning.py.before_relevance_fix |  613 [32m++[m
+ ...asoning.py.before_skill_learning | 2346 [32m+++++[m
+ ...asoning.py.before_skill_metadata | 2325 [32m+++++[m
+ ...easoning.py.before_skill_routing | 2325 [32m+++++[m
+ ...oning.py.before_stale_recall_fix | 2634 [32m+++++[m
+ .../reasoning.py.before_step17_fix  | 2590 [32m+++++[m
+ .../reasoning.py.before_step24_fix  | 2590 [32m+++++[m
+ brain/reasoning.py.before_step28C   | 2643 [32m+++++[m
+ brain/reasoning.py.before_step28D10 | 2643 [32m+++++[m
+ .../reasoning.py.before_step28D10b  | 2643 [32m+++++[m
+ .../reasoning.py.before_step28D10c  | 2643 [32m+++++[m
+ brain/reasoning.py.before_step28D12 | 2653 [32m+++++[m
+ .../reasoning.py.before_step28D12C  | 2653 [32m+++++[m
+ ...ning.py.before_step28D14_cleanup | 2671 [32m+++++[m
+ ...soning.py.before_step28D14_final | 2691 [32m+++++[m
+ brain/reasoning.py.before_topic_fix |  605 [32m++[m
+ ...soning.py.before_trace_wikipedia | 2637 [32m+++++[m
+ brain/reasoning.py.corrupted_backup |    1 [32m+[m
+ brain/reasoning.py.v2               |  374 [32m+[m
+ brain/reflection.py                 |    0
+ brain/response.py                   |   69 [32m+[m
+ brain/router.py                     |    0
+ brain/router.py.before_step24_fix   |    0
+ brain/scheduler.py                  |    0
+ brain/search_engine.py              |  500 [32m+[m
+ brain/section_analyzer.py           |   36 [32m+[m
+ brain/skill_handlers.py             |  872 [32m++[m
+ .../skill_handlers.py.before_28D22  |  873 [32m++[m
+ ...dlers.py.before_28D23_indent_fix |  870 [32m++[m
+ .../skill_handlers.py.before_28D25  |  866 [32m++[m
+ ...l_handlers.py.before_28D25_exact |  866 [32m++[m
+ .../skill_handlers.py.before_28D26  |  867 [32m++[m
+ ...ll_handlers.py.before_import_fix |  670 [32m++[m
+ ...rs.py.before_programming_handler |  870 [32m++[m
+ ...ll_handlers.py.before_step18_fix |  702 [32m++[m
+ .../skill_handlers.py.before_step19 |  675 [32m++[m
+ ...ll_handlers.py.before_step19_fix |  578 [32m++[m
+ ...handlers.py.before_step20_repair |  599 [32m++[m
+ .../skill_handlers.py.before_step21 |  599 [32m++[m
+ .../skill_handlers.py.before_step22 |  599 [32m++[m
+ .../skill_handlers.py.before_step26 |  599 [32m++[m
+ ...skill_handlers.py.before_step27h |  693 [32m++[m
+ .../skill_handlers.py.before_step28 |  727 [32m++[m
+ ...skill_handlers.py.before_step28C |  727 [32m++[m
+ ...kill_handlers.py.before_step28D4 |  830 [32m++[m
+ ...kill_handlers.py.before_step28D7 |  830 [32m++[m
+ ...kill_handlers.py.before_step28D8 |  863 [32m++[m
+ ...ill_handlers.py.before_step28D8b |  863 [32m++[m
+ brain/skill_registry.py             |  506 [32m+[m
+ brain/skill_registry.py.bak         |  446 [32m+[m
+ brain/skill_registry.py.bak2        |  446 [32m+[m
+ brain/skill_registry.py.bak_step14  |  445 [32m+[m
+ ...y.py.before_project_capabilities |  420 [32m+[m
+ ...ll_registry.py.before_step17_fix |  506 [32m+[m
+ .../skill_registry.py.before_step26 |  506 [32m+[m
+ brain/skills.json                   |  602 [32m++[m
+ brain/skills.py                     |   78 [32m+[m
+ brain/source_manager.py             |   78 [32m+[m
+ brain/sources.json                  |    7 [32m+[m
+ brain/state.py                      |    0
+ brain/storage/__init__.py           |    0
+ brain/storage/knowledge_store.py    |    0
+ brain/storage/memory_store.py       |    0
+ brain/study.py                      |  149 [32m+[m
+ brain/study.py.backup_capability    |  149 [32m+[m
+ brain/thinking.py                   |    0
+ brain/tools/__init__.py             |    0
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m160[m bytes
+ .../web_reader.cpython-313.pyc      |  Bin [31m0[m -> [32m1877[m bytes
+ brain/tools/web_reader.py           |   90 [32m+[m
+ brain/vision.py                     |    0
+ brain/web_reader.py                 |  202 [32m+[m
+ brain_api.py                        |  112 [32m+[m
+ bubble_controller.py                |   61 [32m+[m
+ ...layout_orb_design_backup.xml.txt |   32 [32m+[m
+ bubble_service.py                   |   46 [32m+[m
+ bubble_service_backup.py            |   46 [32m+[m
+ build.gradle                        |    4 [32m+[m
+ butterfly.py                        |   88 [32m+[m
+ calculator.py                       |   30 [32m+[m
+ chat_window.xml.before_image_button |  116 [32m+[m
+ chatbot.py                          |   11 [32m+[m
+ client.py                           |   53 [32m+[m
+ code_generator.py                   |  201 [32m+[m
+ code_generator_backup.py            | 1902 [32m++++[m
+ command_router.py                   |  108 [32m+[m
+ commands.py                         | 2865 [32m+++++[m
+ commands.py.backup                  | 2655 [32m+++++[m
+ ...ands.py.before_brain_project_fix | 2815 [32m+++++[m
+ commands.py.before_brain_result_fix | 2809 [32m+++++[m
+ commands.py.before_learning         | 3297 [32m++++++[m
+ commands.py.save                    |    0
+ commands_backup.py                  |  782 [32m++[m
+ commands_backup_old.py              |  701 [32m++[m
+ commands_old.py                     |  951 [32m++[m
+ confidence.py                       |  180 [32m+[m
+ config.py                           |   42 [32m+[m
+ config/settings.py                  |   28 [32m+[m
+ contacts.json                       |    4 [32m+[m
+ contacts.py                         |    4 [32m+[m
+ contant.py                          |    5 [32m+[m
+ contqcts.py                         |    5 [32m+[m
+ core/__init__.py                    |    0
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m153[m bytes
+ .../logger.cpython-313.pyc          |  Bin [31m0[m -> [32m2071[m bytes
+ .../router.cpython-313.pyc          |  Bin [31m0[m -> [32m1517[m bytes
+ .../state.cpython-313.pyc           |  Bin [31m0[m -> [32m2494[m bytes
+ core/bootstrap.py                   |    0
+ core/cache.py                       |    0
+ core/config.py                      |   36 [32m+[m
+ core/constants.py                   |    0
+ core/diagnostics.py                 |    0
+ core/dispatcher.py                  |    0
+ core/engine.py                      |   27 [32m+[m
+ core/environment.py                 |    0
+ core/events.py                      |    0
+ core/exceptions.py                  |    0
+ core/health.py                      |    0
+ core/helpers.py                     |    0
+ core/lifecycle.py                   |    0
+ core/logger.py                      |   34 [32m+[m
+ core/manager.py                     |   50 [32m+[m
+ core/monitor.py                     |    0
+ core/permissions.py                 |    0
+ core/registry.py                    |    0
+ core/router.py                      |   60 [32m+[m
+ core/security.py                    |    0
+ core/session.py                     |    0
+ core/settings.py                    |    0
+ core/shutdown.py                    |    0
+ core/startup.py                     |    0
+ core/state.py                       |   46 [32m+[m
+ core/storage.py                     |    0
+ core/updater.py                     |    0
+ core/utils.py                       |   61 [32m+[m
+ core/version.py                     |    0
+ cybernet-x/index.html               |  306 [32m+[m
+ cybernetx.py                        |  219 [32m+[m
+ cybernetx/learner.py                |  244 [32m+[m
+ cybersecurity/__init__.py           |    0
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m162[m bytes
+ .../ctf_tools.cpython-313.pyc       |  Bin [31m0[m -> [32m2631[m bytes
+ .../cyber.cpython-313.pyc           |  Bin [31m0[m -> [32m4288[m bytes
+ .../linux_helper.cpython-313.pyc    |  Bin [31m0[m -> [32m2171[m bytes
+ .../log_analyzer.cpython-313.pyc    |  Bin [31m0[m -> [32m2242[m bytes
+ .../network_tools.cpython-313.pyc   |  Bin [31m0[m -> [32m3186[m bytes
+ .../password_audit.cpython-313.pyc  |  Bin [31m0[m -> [32m4755[m bytes
+ .../port_scanner.cpython-313.pyc    |  Bin [31m0[m -> [32m2943[m bytes
+ ...security_advisor.cpython-313.pyc |  Bin [31m0[m -> [32m3118[m bytes
+ .../wifi_tools.cpython-313.pyc      |  Bin [31m0[m -> [32m3508[m bytes
+ cybersecurity/config.json           |    0
+ cybersecurity/ctf_tools.py          |   99 [32m+[m
+ cybersecurity/cyber.py              |  120 [32m+[m
+ cybersecurity/decryption.py         |    0
+ cybersecurity/dns_tools.py          |    0
+ cybersecurity/encryption.py         |    0
+ cybersecurity/file_integrity.py     |    0
+ cybersecurity/firewall.py           |    0
+ cybersecurity/forensics.py          |    0
+ cybersecurity/hash_tools.py         |    0
+ cybersecurity/history.py            |    0
+ cybersecurity/http_tools.py         |    0
+ cybersecurity/linux_helper.py       |  114 [32m+[m
+ cybersecurity/log_analyzer.py       |   72 [32m+[m
+ cybersecurity/malware_scanner.py    |    0
+ cybersecurity/network_tools.py      |   75 [32m+[m
+ cybersecurity/osint.py              |    0
+ cybersecurity/packet_analyzer.py    |    0
+ cybersecurity/password_audit.py     |  112 [32m+[m
+ cybersecurity/permissions.py        |    0
+ cybersecurity/port_scanner.py       |   86 [32m+[m
+ cybersecurity/process_monitor.py    |    0
+ cybersecurity/recon.py              |    0
+ cybersecurity/report.py             |    0
+ cybersecurity/scanner.py            |    0
+ cybersecurity/security_advisor.py   |  128 [32m+[m
+ cybersecurity/settings.py           |    0
+ cybersecurity/signatures.json       |    0
+ cybersecurity/vulnerabilities.json  |    0
+ cybersecurity/vulnerability_db.py   |    0
+ .../vulnerability_scanner.py        |    0
+ cybersecurity/wifi_tools.py         |   91 [32m+[m
+ daily/__init__.py                   |    0
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m154[m bytes
+ .../bible_verses.cpython-313.pyc    |  Bin [31m0[m -> [32m28323[m bytes
+ .../devotion.cpython-313.pyc        |  Bin [31m0[m -> [32m2381[m bytes
+ .../prayers.cpython-313.pyc         |  Bin [31m0[m -> [32m462[m bytes
+ .../quotes.cpython-313.pyc          |  Bin [31m0[m -> [32m14731[m bytes
+ daily/bible_verses.py               | 1077 [32m++[m
+ daily/daily_routine.py              |   68 [32m+[m
+ daily/devotion.py                   |   89 [32m+[m
+ daily/prayers.py                    |   16 [32m+[m
+ daily/quotes.py                     |  390 [32m+[m
+ data/academy_progress.json          |    0
+ data/backups.json                   |    0
+ data/bookmarks.json                 |    0
+ data/cache.json                     |    0
+ data/calendar.json                  |    0
+ data/config.json                    |    0
+ data/contacts.json                  |    0
+ data/developer_projects.json        |    0
+ data/devices.json                   |    0
+ data/goals.json                     |    0
+ data/history.json                   |    0
+ data/journal.json                   |    0
+ data/knowledge.json                 |    0
+ data/languages.json                 |    0
+ data/logs.json                      |    0
+ data/memory.json                    |    3 [32m+[m
+ data/notes.json                     |    0
+ data/plugins.json                   |    0
+ data/preferences.json               |    0
+ data/profile.json                   |    0
+ data/reminders.json                 |    0
+ data/settings.json                  |    0
+ data/skills.json                    |    0
+ data/statistics.json                |    0
+ data/tasks.json                     |    0
+ data/trading_history.json           |    0
+ data/updates.json                   |    0
+ data/users.json                     |    0
+ data/voice_profiles.json            |    0
+ data/watchlist.json                 |    0
+ developer/__init__.py               |    0
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m158[m bytes
+ ...d_game_generator.cpython-313.pyc |  Bin [31m0[m -> [32m2118[m bytes
+ ...i_code_generator.cpython-313.pyc |  Bin [31m0[m -> [32m12557[m bytes
+ .../ai_generator.cpython-313.pyc    |  Bin [31m0[m -> [32m2760[m bytes
+ .../ai_provider.cpython-313.pyc     |  Bin [31m0[m -> [32m14384[m bytes
+ .../ai_studio.cpython-313.pyc       |  Bin [31m0[m -> [32m2150[m bytes
+ .../api_generator.cpython-313.pyc   |  Bin [31m0[m -> [32m2589[m bytes
+ .../app_builder.cpython-313.pyc     |  Bin [31m0[m -> [32m3326[m bytes
+ .../app_generator.cpython-313.pyc   |  Bin [31m0[m -> [32m2634[m bytes
+ .../app_launcher.cpython-313.pyc    |  Bin [31m0[m -> [32m3223[m bytes
+ ...ssistant_builder.cpython-313.pyc |  Bin [31m0[m -> [32m4877[m bytes
+ ...tomation_builder.cpython-313.pyc |  Bin [31m0[m -> [32m4587[m bytes
+ ...mation_generator.cpython-313.pyc |  Bin [31m0[m -> [32m2731[m bytes
+ ...ockchain_builder.cpython-313.pyc |  Bin [31m0[m -> [32m5558[m bytes
+ .../builder_manager.cpython-313.pyc |  Bin [31m0[m -> [32m5782[m bytes
+ ...hatbot_generator.cpython-313.pyc |  Bin [31m0[m -> [32m2071[m bytes
+ .../cloud_builder.cpython-313.pyc   |  Bin [31m0[m -> [32m5429[m bytes
+ .../code_ai.cpython-313.pyc         |  Bin [31m0[m -> [32m9435[m bytes
+ .../code_generator.cpython-313.pyc  |  Bin [31m0[m -> [32m12904[m bytes
+ ...r_vision_builder.cpython-313.pyc |  Bin [31m0[m -> [32m5146[m bytes
+ ..._science_builder.cpython-313.pyc |  Bin [31m0[m -> [32m5605[m bytes
+ ...tabase_generator.cpython-313.pyc |  Bin [31m0[m -> [32m2488[m bytes
+ ...learning_builder.cpython-313.pyc |  Bin [31m0[m -> [32m4474[m bytes
+ ...esktop_generator.cpython-313.pyc |  Bin [31m0[m -> [32m2562[m bytes
+ .../developer.cpython-313.pyc       |  Bin [31m0[m -> [32m3666[m bytes
+ .../flask_generator.cpython-313.pyc |  Bin [31m0[m -> [32m3180[m bytes
+ .../game_builder.cpython-313.pyc    |  Bin [31m0[m -> [32m4900[m bytes
+ .../game_generator.cpython-313.pyc  |  Bin [31m0[m -> [32m2494[m bytes
+ ...learning_builder.cpython-313.pyc |  Bin [31m0[m -> [32m5343[m bytes
+ .../ml_generator.cpython-313.pyc    |  Bin [31m0[m -> [32m2995[m bytes
+ .../nlp_builder.cpython-313.pyc     |  Bin [31m0[m -> [32m5451[m bytes
+ ...g_system_builder.cpython-313.pyc |  Bin [31m0[m -> [32m5042[m bytes
+ .../package_builder.cpython-313.pyc |  Bin [31m0[m -> [32m4568[m bytes
+ ...project_analyzer.cpython-313.pyc |  Bin [31m0[m -> [32m1758[m bytes
+ .../project_builder.cpython-313.pyc |  Bin [31m0[m -> [32m8675[m bytes
+ .../project_engine.cpython-313.pyc  |  Bin [31m0[m -> [32m1618[m bytes
+ ...roject_generator.cpython-313.pyc |  Bin [31m0[m -> [32m5869[m bytes
+ .../project_manager.cpython-313.pyc |  Bin [31m0[m -> [32m23486[m bytes
+ .../project_planner.cpython-313.pyc |  Bin [31m0[m -> [32m1345[m bytes
+ ...pygame_generator.cpython-313.pyc |  Bin [31m0[m -> [32m2487[m bytes
+ .../python_builder.cpython-313.pyc  |  Bin [31m0[m -> [32m4041[m bytes
+ ...ister_generators.cpython-313.pyc |  Bin [31m0[m -> [32m4047[m bytes
+ ...robotics_builder.cpython-313.pyc |  Bin [31m0[m -> [32m5478[m bytes
+ ...versal_generator.cpython-313.pyc |  Bin [31m0[m -> [32m1527[m bytes
+ .../web_builder.cpython-313.pyc     |  Bin [31m0[m -> [32m8452[m bytes
+ ...ebsite_generator.cpython-313.pyc |  Bin [31m0[m -> [32m2530[m bytes
+ .../advanced_game_generator.py      |  107 [32m+[m
+ developer/ai_builder.py             |  241 [32m+[m
+ developer/ai_code_generator.py      |  685 [32m++[m
+ .../ai_code_generator.py.v3.backup  |  476 [32m+[m
+ developer/ai_generator.py           |   92 [32m+[m
+ developer/ai_provider.py            |  620 [32m++[m
+ developer/ai_provider.py.backup     |  199 [32m+[m
+ developer/ai_provider.py.v2.backup  |  494 [32m+[m
+ developer/ai_studio.py              |   56 [32m+[m
+ developer/android_builder.py        |  172 [32m+[m
+ developer/api_builder.py            |  238 [32m+[m
+ developer/api_generator.py          |   79 [32m+[m
+ developer/app_builder.py            |  188 [32m+[m
+ developer/app_generator.py          |   73 [32m+[m
+ developer/app_launcher.py           |  108 [32m+[m
+ developer/assistant_builder.py      |  207 [32m+[m
+ developer/automation_builder.py     |  195 [32m+[m
+ developer/automation_generator.py   |   88 [32m+[m
+ developer/blockchain_builder.py     |  235 [32m+[m
+ developer/builder_manager.py        |  239 [32m+[m
+ developer/c_builder.py              |    0
+ developer/chatbot_builder.py        |    0
+ developer/chatbot_generator.py      |   69 [32m+[m
+ developer/cloud_builder.py          |  227 [32m+[m
+ developer/code_ai.py                |  526 [32m+[m
+ developer/code_ai.py.backup         |  442 [32m+[m
+ developer/code_engine/__init__.py   |    6 [32m+[m
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m502[m bytes
+ .../ai_generator.cpython-313.pyc    |  Bin [31m0[m -> [32m2500[m bytes
+ .../android.cpython-313.pyc         |  Bin [31m0[m -> [32m2579[m bytes
+ .../api_generator.cpython-313.pyc   |  Bin [31m0[m -> [32m2462[m bytes
+ .../backend.cpython-313.pyc         |  Bin [31m0[m -> [32m1793[m bytes
+ ...hatbot_generator.cpython-313.pyc |  Bin [31m0[m -> [32m2141[m bytes
+ .../database.cpython-313.pyc        |  Bin [31m0[m -> [32m2038[m bytes
+ .../fixer.cpython-313.pyc           |  Bin [31m0[m -> [32m2279[m bytes
+ .../fullstack.cpython-313.pyc       |  Bin [31m0[m -> [32m1577[m bytes
+ ...lstack_generator.cpython-313.pyc |  Bin [31m0[m -> [32m5218[m bytes
+ .../generator.cpython-313.pyc       |  Bin [31m0[m -> [32m2414[m bytes
+ .../project_manager.cpython-313.pyc |  Bin [31m0[m -> [32m2946[m bytes
+ ...project_registry.cpython-313.pyc |  Bin [31m0[m -> [32m2589[m bytes
+ ...template_manager.cpython-313.pyc |  Bin [31m0[m -> [32m2077[m bytes
+ ...webapp_generator.cpython-313.pyc |  Bin [31m0[m -> [32m2984[m bytes
+ ...ebsite_generator.cpython-313.pyc |  Bin [31m0[m -> [32m3848[m bytes
+ .../code_engine/ai_generator.py     |   88 [32m+[m
+ developer/code_engine/android.py    |  109 [32m+[m
+ .../code_engine/api_generator.py    |   66 [32m+[m
+ developer/code_engine/backend.py    |   61 [32m+[m
+ .../chatbot_generator.py            |   65 [32m+[m
+ developer/code_engine/database.py   |   85 [32m+[m
+ developer/code_engine/fixer.py      |   72 [32m+[m
+ developer/code_engine/fullstack.py  |   36 [32m+[m
+ .../fullstack_generator.py          |  385 [32m+[m
+ developer/code_engine/generator.py  |   98 [32m+[m
+ .../code_engine/project_manager.py  |   69 [32m+[m
+ .../code_engine/project_registry.py |   60 [32m+[m
+ .../code_engine/react_generator.py  |   72 [32m+[m
+ .../code_engine/template_manager.py |   41 [32m+[m
+ .../code_engine/tool_runner.py      |   31 [32m+[m
+ .../code_engine/webapp_generator.py |   87 [32m+[m
+ .../website_generator.py            |  257 [32m+[m
+ .../workspace_manager.py            |   36 [32m+[m
+ developer/code_generator.py         |  652 [32m++[m
+ developer/code_generator.py.backup  |  510 [32m+[m
+ .../computer_vision_builder.py      |  219 [32m+[m
+ developer/cpp_builder.py            |    0
+ developer/css_builder.py            |    0
+ developer/data_science_builder.py   |  239 [32m+[m
+ developer/database_builder.py       |  329 [32m+[m
+ developer/database_generator.py     |   75 [32m+[m
+ developer/debugger.py               |    0
+ developer/deep_learning_builder.py  |  175 [32m+[m
+ developer/desktop_builder.py        |  263 [32m+[m
+ developer/desktop_generator.py      |   79 [32m+[m
+ developer/developer.py              |   51 [32m+[m
+ developer/django_builder.py         |  127 [32m+[m
+ developer/docker_builder.py         |  263 [32m+[m
+ developer/documentation.py          |    0
+ developer/fastapi_builder.py        |    0
+ developer/file_builder.py           |    0
+ developer/flask_builder.py          |  117 [32m+[m
+ developer/flask_generator.py        |   99 [32m+[m
+ developer/fullstack_builder.py      |    0
+ developer/game_builder.py           |  211 [32m+[m
+ developer/game_generator.py         |  100 [32m+[m
+ developer/git_builder.py            |  231 [32m+[m
+ developer/html_builder.py           |    0
+ developer/java_builder.py           |    0
+ developer/javascript_builder.py     |    0
+ developer/learning_builder.py       |  227 [32m+[m
+ .../machine_learning_builder.py     |  209 [32m+[m
+ developer/ml_generator.py           |   86 [32m+[m
+ developer/mobile_builder.py         |  260 [32m+[m
+ developer/nlp_builder.py            |  229 [32m+[m
+ developer/node_builder.py           |  113 [32m+[m
+ .../operating_system_builder.py     |  204 [32m+[m
+ developer/optimizer.py              |    0
+ developer/package_builder.py        |  227 [32m+[m
+ developer/plugin_manager.py         |  179 [32m+[m
+ developer/project_analyzer.py       |   89 [32m+[m
+ developer/project_builder.backup.py |  455 [32m+[m
+ developer/project_builder.py        |  511 [32m+[m
+ developer/project_engine.py         |   33 [32m+[m
+ developer/project_generator.py      |  261 [32m+[m
+ developer/project_manager.py        | 1278 [32m+++[m
+ developer/project_planner.py        |   91 [32m+[m
+ developer/pygame_generator.py       |   92 [32m+[m
+ developer/python_builder.py         |  202 [32m+[m
+ developer/react_builder.py          |  171 [32m+[m
+ developer/register_generators.py    |  111 [32m+[m
+ developer/robotics_builder.py       |  227 [32m+[m
+ developer/security_builder.py       |  226 [32m+[m
+ developer/template_manager.py       |  142 [32m+[m
+ .../templates/websites/index.html   |   26 [32m+[m
+ developer/tester.py                 |    0
+ developer/testing_builder.py        |  214 [32m+[m
+ developer/typescript_builder.py     |    0
+ developer/universal_builder.py      |  593 [32m++[m
+ developer/universal_generator.py    |   33 [32m+[m
+ developer/web_builder.py            |  497 [32m+[m
+ developer/website_generator.py      |   71 [32m+[m
+ docs/ACADEMY.md                     |    0
+ docs/API.md                         |    0
+ docs/ARCHITECTURE.md                |    0
+ docs/BRAIN.md                       |    0
+ docs/CHANGELOG.md                   |    0
+ docs/COMMANDS.md                    |    0
+ docs/CONFIGURATION.md               |    0
+ docs/CONTRIBUTING.md                |    0
+ docs/CORE.md                        |    0
+ docs/CYBERSECURITY.md               |    0
+ docs/DEVELOPER.md                   |    0
+ docs/FAQ.md                         |    0
+ docs/INSTALL.md                     |    0
+ docs/LICENSE.md                     |    0
+ docs/MEMORY.md                      |    0
+ docs/PLUGINS.md                     |    0
+ docs/QUICK_START.md                 |    0
+ docs/README.md                      |    0
+ docs/ROADMAP.md                     |    0
+ docs/SERVICES.md                    |    0
+ docs/SETTINGS.md                    |    0
+ docs/TRADING.md                     |    0
+ docs/TROUBLESHOOTING.md             |    0
+ docs/VOICE.md                       |    0
+ download_nitron.py                  |   38 [32m+[m
+ earch jdk                           |   36 [32m+[m
+ ema.py                              |   38 [32m+[m
+ fair_value_gap.py                   |  102 [32m+[m
+ flower.py                           |   58 [32m+[m
+ form1.json                          |  985 [32m++[m
+ gane                                |   27 [32m+[m
+ .../generated_1787490736.png        |  Bin [31m0[m -> [32m35834[m bytes
+ .../generated_1787561730.jpg        |  Bin [31m0[m -> [32m49990[m bytes
+ .../generated_1787579481.jpg        |  Bin [31m0[m -> [32m41715[m bytes
+ .../generated_1787579932.jpg        |  Bin [31m0[m -> [32m41715[m bytes
+ .../generated_1787580691.jpg        |  Bin [31m0[m -> [32m41715[m bytes
+ .../generated_1787580725.jpg        |  Bin [31m0[m -> [32m61114[m bytes
+ .../generated_1787580847.jpg        |  Bin [31m0[m -> [32m40640[m bytes
+ .../generated_1787580945.jpg        |  Bin [31m0[m -> [32m70367[m bytes
+ .../generated_1787580989.jpg        |  Bin [31m0[m -> [32m77568[m bytes
+ .../generated_1787581878.jpg        |  Bin [31m0[m -> [32m84092[m bytes
+ .../generated_1787581907.jpg        |  Bin [31m0[m -> [32m48068[m bytes
+ .../generated_1787586861.jpg        |  Bin [31m0[m -> [32m81302[m bytes
+ .../generated_1787591226.jpg        |  Bin [31m0[m -> [32m98311[m bytes
+ .../generated_1787591296.jpg        |  Bin [31m0[m -> [32m69029[m bytes
+ .../generated_1787591529.jpg        |  Bin [31m0[m -> [32m61633[m bytes
+ .../generated_1787904301.jpg        |  Bin [31m0[m -> [32m81982[m bytes
+ .../generated_1787904328.jpg        |  Bin [31m0[m -> [32m77568[m bytes
+ .../generated_1787904417.jpg        |  Bin [31m0[m -> [32m37802[m bytes
+ .../generated_1787904462.jpg        |  Bin [31m0[m -> [32m71376[m bytes
+ .../generated_1787904576.jpg        |  Bin [31m0[m -> [32m34952[m bytes
+ .../generated_1787904620.jpg        |  Bin [31m0[m -> [32m32716[m bytes
+ .../generated_1787904666.jpg        |  Bin [31m0[m -> [32m71351[m bytes
+ .../generated_1787904875.jpg        |  Bin [31m0[m -> [32m53112[m bytes
+ .../generated_1787904920.jpg        |  Bin [31m0[m -> [32m42231[m bytes
+ .../generated_1787904965.jpg        |  Bin [31m0[m -> [32m52634[m bytes
+ .../Clean_Code_Test/README.md       |    5 [32m+[m
+ .../Clean_Code_Test/index.html      |   16 [32m+[m
+ .../Clean_Code_Test/script.js       |    1 [32m+[m
+ .../Clean_Code_Test/style.css       |   10 [32m+[m
+ .../README.md                       |    7 [32m+[m
+ .../main.py                         |   34 [32m+[m
+ .../My_School/README.md             |    5 [32m+[m
+ .../My_School/index.html            |   16 [32m+[m
+ .../My_School/script.js             |    1 [32m+[m
+ .../My_School/style.css             |   10 [32m+[m
+ .../Nitro_AI/README.md              |    7 [32m+[m
+ generated_projects/Nitro_AI/main.py |    9 [32m+[m
+ .../Nitro_Notes/MainActivity.kt     |   11 [32m+[m
+ .../Nitro_Notes/README.md           |    5 [32m+[m
+ .../Nitro_Notes_2/MainActivity.kt   |   11 [32m+[m
+ .../Nitro_Notes_2/README.md         |    5 [32m+[m
+ .../Nitro_Tools/README.md           |    7 [32m+[m
+ .../Nitro_Tools/main.py             |   19 [32m+[m
+ .../Nitro_Tools_2/README.md         |    7 [32m+[m
+ .../Nitro_Tools_2/main.py           |   19 [32m+[m
+ .../Nitro_Web/README.md             |    5 [32m+[m
+ .../Nitro_Web/index.html            |   16 [32m+[m
+ .../Nitro_Web/script.js             |    1 [32m+[m
+ .../Nitro_Web/style.css             |   10 [32m+[m
+ .../Nitro_Web_2/README.md           |    5 [32m+[m
+ .../Nitro_Web_2/index.html          |   16 [32m+[m
+ .../Nitro_Web_2/script.js           |    1 [32m+[m
+ .../Nitro_Web_2/style.css           |   10 [32m+[m
+ .../Nitron_Project/README.md        |    5 [32m+[m
+ .../Nitron_Project/index.html       |   18 [32m+[m
+ .../Nitron_Project/main.py          |   34 [32m+[m
+ .../Nitron_Project/script.js        |    6 [32m+[m
+ .../Nitron_Project/style.css        |   15 [32m+[m
+ .../Nitron_Project_10/README.md     |    7 [32m+[m
+ .../Nitron_Project_10/main.py       |   34 [32m+[m
+ .../Nitron_Project_100/README.md    |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_100/main.py      |    9 [32m+[m
+ .../Nitron_Project_101/README.md    |    8 [32m+[m
+ .../Nitron_Project_101/main.rs      |    6 [32m+[m
+ .../Nitron_Project_102/README.md    |    7 [32m+[m
+ .../Nitron_Project_102/index.js     |    8 [32m+[m
+ .../Nitron_Project_103/README.md    |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_103/main.py      |    9 [32m+[m
+ .../Nitron_Project_104/README.md    |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_104/main.py      |    9 [32m+[m
+ .../Nitron_Project_105/README.md    |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_105/main.py      |    9 [32m+[m
+ .../Nitron_Project_106/README.md    |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_106/main.py      |    9 [32m+[m
+ .../Nitron_Project_107/README.md    |    7 [32m+[m
+ .../Nitron_Project_107/main.py      |    9 [32m+[m
+ .../Nitron_Project_108/README.md    |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_108/main.py      |    9 [32m+[m
+ .../Nitron_Project_109/README.md    |    7 [32m+[m
+ .../Nitron_Project_109/main.py      |    9 [32m+[m
+ .../Nitron_Project_11/README.md     |    6 [32m+[m
+ .../Nitron_Project_110/README.md    |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_110/main.py      |    9 [32m+[m
+ .../Nitron_Project_111/README.md    |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_111/main.py      |    9 [32m+[m
+ .../Nitron_Project_112/README.md    |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_112/main.py      |    9 [32m+[m
+ .../Nitron_Project_113/README.md    |    7 [32m+[m
+ .../Nitron_Project_113/main.py      |    9 [32m+[m
+ .../Nitron_Project_114/README.md    |    7 [32m+[m
+ .../Nitron_Project_114/main.py      |    9 [32m+[m
+ .../Nitron_Project_115/README.md    |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_115/main.py      |    9 [32m+[m
+ .../Nitron_Project_116/README.md    |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_116/main.py      |    9 [32m+[m
+ .../Nitron_Project_117/README.md    |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_117/main.py      |    9 [32m+[m
+ .../Nitron_Project_118/README.md    |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_118/main.py      |    9 [32m+[m
+ .../Nitron_Project_119/README.md    |    7 [32m+[m
+ .../Nitron_Project_119/main.py      |   19 [32m+[m
+ .../Nitron_Project_12/README.md     |    7 [32m+[m
+ .../Nitron_Project_12/main.py       |    9 [32m+[m
+ .../Nitron_Project_120/README.md    |    7 [32m+[m
+ .../Nitron_Project_120/main.py      |   19 [32m+[m
+ .../Nitron_Project_121/README.md    |    7 [32m+[m
+ .../Nitron_Project_121/main.py      |   19 [32m+[m
+ .../Nitron_Project_122/README.md    |    7 [32m+[m
+ .../Nitron_Project_122/main.py      |   30 [32m+[m
+ .../Nitron_Project_123/README.md    |    7 [32m+[m
+ .../Nitron_Project_123/main.py      |    9 [32m+[m
+ .../Nitron_Project_124/README.md    |    7 [32m+[m
+ .../Nitron_Project_124/main.py      |   30 [32m+[m
+ .../Nitron_Project_125/README.md    |    7 [32m+[m
+ .../Nitron_Project_125/main.py      |    9 [32m+[m
+ .../Nitron_Project_126/README.md    |    7 [32m+[m
+ .../Nitron_Project_126/main.py      |    9 [32m+[m
+ .../Nitron_Project_127/README.md    |    7 [32m+[m
+ .../Nitron_Project_127/main.py      |    9 [32m+[m
+ .../Nitron_Project_128/README.md    |    7 [32m+[m
+ .../Nitron_Project_128/main.py      |   34 [32m+[m
+ .../Nitron_Project_13/README.md     |    7 [32m+[m
+ .../Nitron_Project_13/main.py       |    9 [32m+[m
+ .../Nitron_Project_14/README.md     |    7 [32m+[m
+ .../Nitron_Project_14/main.py       |   34 [32m+[m
+ .../Nitron_Project_15/README.md     |    7 [32m+[m
+ .../Nitron_Project_15/main.py       |   34 [32m+[m
+ .../Nitron_Project_16/README.md     |    7 [32m+[m
+ .../Nitron_Project_16/main.py       |    9 [32m+[m
+ .../Nitron_Project_17/README.md     |    7 [32m+[m
+ .../Nitron_Project_17/main.py       |    9 [32m+[m
+ .../Nitron_Project_18/README.md     |    7 [32m+[m
+ .../Nitron_Project_18/main.py       |    9 [32m+[m
+ .../Nitron_Project_19/README.md     |    5 [32m+[m
+ .../Nitron_Project_19/index.html    |   16 [32m+[m
+ .../Nitron_Project_19/script.js     |    1 [32m+[m
+ .../Nitron_Project_19/style.css     |   10 [32m+[m
+ .../Nitron_Project_2/README.md      |    7 [32m+[m
+ .../Nitron_Project_2/main.py        |   34 [32m+[m
+ .../Nitron_Project_20/README.md     |    7 [32m+[m
+ .../Nitron_Project_20/main.py       |   34 [32m+[m
+ .../Nitron_Project_21/README.md     |    7 [32m+[m
+ .../Nitron_Project_21/index.js      |    8 [32m+[m
+ .../MainActivity.kt                 |   11 [32m+[m
+ .../Nitron_Project_22/README.md     |    5 [32m+[m
+ .../Nitron_Project_23/README.md     |    5 [32m+[m
+ .../Nitron_Project_23/index.html    |   16 [32m+[m
+ .../Nitron_Project_23/script.js     |    1 [32m+[m
+ .../Nitron_Project_23/style.css     |   10 [32m+[m
+ .../Nitron_Project_24/README.md     |    7 [32m+[m
+ .../Nitron_Project_24/main.py       |    9 [32m+[m
+ .../Nitron_Project_25/README.md     |    7 [32m+[m
+ .../Nitron_Project_25/index.js      |    8 [32m+[m
+ .../MainActivity.kt                 |   11 [32m+[m
+ .../Nitron_Project_26/README.md     |    5 [32m+[m
+ .../Nitron_Project_27/README.md     |    5 [32m+[m
+ .../Nitron_Project_27/index.html    |   16 [32m+[m
+ .../Nitron_Project_27/script.js     |    1 [32m+[m
+ .../Nitron_Project_27/style.css     |   10 [32m+[m
+ .../Nitron_Project_28/README.md     |    7 [32m+[m
+ .../Nitron_Project_28/main.py       |    9 [32m+[m
+ .../Nitron_Project_29/README.md     |    7 [32m+[m
+ .../Nitron_Project_29/main.py       |   30 [32m+[m
+ .../Nitron_Project_3/README.md      |    5 [32m+[m
+ .../Nitron_Project_3/index.html     |   18 [32m+[m
+ .../Nitron_Project_3/script.js      |    6 [32m+[m
+ .../Nitron_Project_3/style.css      |   15 [32m+[m
+ .../Nitron_Project_30/README.md     |    7 [32m+[m
+ .../Nitron_Project_30/main.py       |   30 [32m+[m
+ .../MainActivity.kt                 |   11 [32m+[m
+ .../Nitron_Project_31/README.md     |    5 [32m+[m
+ .../Nitron_Project_32/README.md     |    5 [32m+[m
+ .../Nitron_Project_32/index.html    |   16 [32m+[m
+ .../Nitron_Project_32/script.js     |    1 [32m+[m
+ .../Nitron_Project_32/style.css     |   10 [32m+[m
+ .../Nitron_Project_33/README.md     |    7 [32m+[m
+ .../Nitron_Project_33/main.py       |   30 [32m+[m
+ .../Nitron_Project_34/README.md     |    7 [32m+[m
+ .../Nitron_Project_34/main.py       |   30 [32m+[m
+ .../MainActivity.kt                 |   11 [32m+[m
+ .../Nitron_Project_35/README.md     |    5 [32m+[m
+ .../Nitron_Project_36/README.md     |    5 [32m+[m
+ .../Nitron_Project_36/index.html    |   16 [32m+[m
+ .../Nitron_Project_36/script.js     |    1 [32m+[m
+ .../Nitron_Project_36/style.css     |   10 [32m+[m
+ .../Nitron_Project_37/README.md     |    7 [32m+[m
+ .../Nitron_Project_37/main.py       |   30 [32m+[m
+ .../MainActivity.kt                 |   11 [32m+[m
+ .../Nitron_Project_38/README.md     |    5 [32m+[m
+ .../Nitron_Project_39/README.md     |    5 [32m+[m
+ .../Nitron_Project_39/index.html    |   16 [32m+[m
+ .../Nitron_Project_39/script.js     |    1 [32m+[m
+ .../Nitron_Project_39/style.css     |   10 [32m+[m
+ .../Nitron_Project_4/README.md      |    7 [32m+[m
+ .../Nitron_Project_4/main.py        |   34 [32m+[m
+ .../Nitron_Project_40/README.md     |    7 [32m+[m
+ .../Nitron_Project_40/main.py       |   30 [32m+[m
+ .../Nitron_Project_41/README.md     |    7 [32m+[m
+ .../Nitron_Project_41/main.py       |   30 [32m+[m
+ .../Nitron_Project_42/README.md     |    7 [32m+[m
+ .../Nitron_Project_42/main.py       |   30 [32m+[m
+ .../MainActivity.kt                 |   11 [32m+[m
+ .../Nitron_Project_43/README.md     |    5 [32m+[m
+ .../Nitron_Project_44/README.md     |    5 [32m+[m
+ .../Nitron_Project_44/index.html    |   16 [32m+[m
+ .../Nitron_Project_44/script.js     |    1 [32m+[m
+ .../Nitron_Project_44/style.css     |   10 [32m+[m
+ .../Nitron_Project_45/README.md     |    7 [32m+[m
+ .../Nitron_Project_45/main.py       |   30 [32m+[m
+ .../MainActivity.kt                 |   11 [32m+[m
+ .../Nitron_Project_46/README.md     |    5 [32m+[m
+ .../Nitron_Project_47/README.md     |    5 [32m+[m
+ .../Nitron_Project_47/index.html    |   16 [32m+[m
+ .../Nitron_Project_47/script.js     |    1 [32m+[m
+ .../Nitron_Project_47/style.css     |   10 [32m+[m
+ .../Nitron_Project_48/README.md     |    7 [32m+[m
+ .../Nitron_Project_48/main.py       |   30 [32m+[m
+ .../MainActivity.kt                 |   11 [32m+[m
+ .../Nitron_Project_49/README.md     |    5 [32m+[m
+ .../Nitron_Project_5/README.md      |    7 [32m+[m
+ .../Nitron_Project_5/main.py        |   34 [32m+[m
+ .../Nitron_Project_50/README.md     |    5 [32m+[m
+ .../Nitron_Project_50/index.html    |   16 [32m+[m
+ .../Nitron_Project_50/script.js     |    1 [32m+[m
+ .../Nitron_Project_50/style.css     |   10 [32m+[m
+ .../Nitron_Project_51/README.md     |    7 [32m+[m
+ .../Nitron_Project_51/main.py       |   30 [32m+[m
+ .../MainActivity.kt                 |   11 [32m+[m
+ .../Nitron_Project_52/README.md     |    5 [32m+[m
+ .../Nitron_Project_53/README.md     |    5 [32m+[m
+ .../Nitron_Project_53/index.html    |   16 [32m+[m
+ .../Nitron_Project_53/script.js     |    1 [32m+[m
+ .../Nitron_Project_53/style.css     |   10 [32m+[m
+ .../Nitron_Project_54/README.md     |    7 [32m+[m
+ .../Nitron_Project_54/main.py       |   30 [32m+[m
+ .../MainActivity.kt                 |   11 [32m+[m
+ .../Nitron_Project_55/README.md     |    5 [32m+[m
+ .../Nitron_Project_56/README.md     |    5 [32m+[m
+ .../Nitron_Project_56/index.html    |   16 [32m+[m
+ .../Nitron_Project_56/script.js     |    1 [32m+[m
+ .../Nitron_Project_56/style.css     |   10 [32m+[m
+ .../Nitron_Project_57/README.md     |    7 [32m+[m
+ .../Nitron_Project_57/main.py       |   30 [32m+[m
+ .../MainActivity.kt                 |   11 [32m+[m
+ .../Nitron_Project_58/README.md     |    5 [32m+[m
+ .../Nitron_Project_59/README.md     |    5 [32m+[m
+ .../Nitron_Project_59/index.html    |   16 [32m+[m
+ .../Nitron_Project_59/script.js     |    1 [32m+[m
+ .../Nitron_Project_59/style.css     |   10 [32m+[m
+ .../Nitron_Project_6/README.md      |    5 [32m+[m
+ .../Nitron_Project_6/index.html     |   18 [32m+[m
+ .../Nitron_Project_6/script.js      |    6 [32m+[m
+ .../Nitron_Project_6/style.css      |   15 [32m+[m
+ .../Nitron_Project_60/README.md     |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m914[m bytes
+ .../Nitron_Project_60/main.py       |   30 [32m+[m
+ .../Nitron_Project_61/README.md     |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m914[m bytes
+ .../Nitron_Project_61/main.py       |   30 [32m+[m
+ .../Nitron_Project_62/README.md     |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m914[m bytes
+ .../Nitron_Project_62/main.py       |   30 [32m+[m
+ .../Nitron_Project_63/README.md     |    5 [32m+[m
+ .../Nitron_Project_64/README.md     |    8 [32m+[m
+ .../Nitron_Project_64/main.rs       |    6 [32m+[m
+ .../Nitron_Project_65/README.md     |    8 [32m+[m
+ .../Nitron_Project_65/main.rs       |    6 [32m+[m
+ .../Nitron_Project_66/README.md     |    8 [32m+[m
+ .../Nitron_Project_66/main.rs       |    6 [32m+[m
+ .../Nitron_Project_67/README.md     |    7 [32m+[m
+ .../Nitron_Project_67/main.py       |    9 [32m+[m
+ .../Nitron_Project_68/README.md     |    7 [32m+[m
+ .../Nitron_Project_68/main.py       |    9 [32m+[m
+ .../Nitron_Project_69/README.md     |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_69/main.py       |    9 [32m+[m
+ .../Nitron_Project_7/README.md      |    7 [32m+[m
+ .../Nitron_Project_7/main.py        |   34 [32m+[m
+ .../Nitron_Project_70/README.md     |    8 [32m+[m
+ .../Nitron_Project_70/main.rs       |    6 [32m+[m
+ .../Nitron_Project_71/README.md     |    8 [32m+[m
+ .../Nitron_Project_71/main.rs       |    6 [32m+[m
+ .../Nitron_Project_72/README.md     |    7 [32m+[m
+ .../Nitron_Project_72/index.js      |    8 [32m+[m
+ .../Nitron_Project_73/README.md     |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_73/main.py       |    9 [32m+[m
+ .../Nitron_Project_74/README.md     |    8 [32m+[m
+ .../Nitron_Project_74/main.rs       |    6 [32m+[m
+ .../Nitron_Project_75/README.md     |    7 [32m+[m
+ .../Nitron_Project_75/index.js      |    8 [32m+[m
+ .../Nitron_Project_76/README.md     |    7 [32m+[m
+ .../Nitron_Project_76/index.js      |    8 [32m+[m
+ .../Nitron_Project_77/README.md     |    7 [32m+[m
+ .../Nitron_Project_77/index.js      |    8 [32m+[m
+ .../Nitron_Project_78/README.md     |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_78/main.py       |    9 [32m+[m
+ .../Nitron_Project_79/README.md     |    8 [32m+[m
+ .../Nitron_Project_79/main.rs       |    6 [32m+[m
+ .../Nitron_Project_8/README.md      |    7 [32m+[m
+ .../Nitron_Project_8/main.py        |   34 [32m+[m
+ .../Nitron_Project_80/README.md     |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_80/main.py       |    9 [32m+[m
+ .../Nitron_Project_81/README.md     |    8 [32m+[m
+ .../Nitron_Project_81/main.rs       |    6 [32m+[m
+ .../Nitron_Project_82/README.md     |    7 [32m+[m
+ .../Nitron_Project_82/index.js      |    8 [32m+[m
+ .../Nitron_Project_83/README.md     |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_83/main.py       |    9 [32m+[m
+ .../Nitron_Project_84/README.md     |    8 [32m+[m
+ .../Nitron_Project_84/main.rs       |    6 [32m+[m
+ .../Nitron_Project_85/README.md     |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_85/main.py       |    9 [32m+[m
+ .../Nitron_Project_86/README.md     |    8 [32m+[m
+ .../Nitron_Project_86/main.rs       |    6 [32m+[m
+ .../Nitron_Project_87/README.md     |    7 [32m+[m
+ .../Nitron_Project_87/index.js      |    8 [32m+[m
+ .../Nitron_Project_88/README.md     |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_88/main.py       |    9 [32m+[m
+ .../Nitron_Project_89/README.md     |    8 [32m+[m
+ .../Nitron_Project_89/main.rs       |    6 [32m+[m
+ .../Nitron_Project_9/README.md      |    5 [32m+[m
+ .../Nitron_Project_9/index.html     |   18 [32m+[m
+ .../Nitron_Project_9/script.js      |    6 [32m+[m
+ .../Nitron_Project_9/style.css      |   15 [32m+[m
+ .../Nitron_Project_90/README.md     |    7 [32m+[m
+ .../Nitron_Project_90/index.js      |    8 [32m+[m
+ .../Nitron_Project_91/README.md     |    7 [32m+[m
+ .../Nitron_Project_91/main.py       |    9 [32m+[m
+ .../Nitron_Project_92/README.md     |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_92/main.py       |    9 [32m+[m
+ .../Nitron_Project_93/README.md     |    8 [32m+[m
+ .../Nitron_Project_93/main.rs       |    6 [32m+[m
+ .../Nitron_Project_94/README.md     |    7 [32m+[m
+ .../Nitron_Project_94/index.js      |    8 [32m+[m
+ .../Nitron_Project_95/README.md     |    7 [32m+[m
+ .../Nitron_Project_95/main.py       |    9 [32m+[m
+ .../Nitron_Project_96/README.md     |    7 [32m+[m
+ .../Nitron_Project_96/main.py       |    9 [32m+[m
+ .../Nitron_Project_97/README.md     |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_97/main.py       |    9 [32m+[m
+ .../Nitron_Project_98/README.md     |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_98/main.py       |    9 [32m+[m
+ .../Nitron_Project_99/README.md     |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m328[m bytes
+ .../Nitron_Project_99/main.py       |    9 [32m+[m
+ .../Number_Quest/README.md          |    7 [32m+[m
+ .../Number_Quest/main.py            |   30 [32m+[m
+ .../Number_Quest_2/README.md        |    7 [32m+[m
+ .../Number_Quest_2/main.py          |   30 [32m+[m
+ .../Quick_Calc/README.md            |    7 [32m+[m
+ .../Quick_Calc/index.js             |    8 [32m+[m
+ .../Science_Club/README.md          |    5 [32m+[m
+ .../Science_Club/index.html         |   16 [32m+[m
+ .../Science_Club/script.js          |    1 [32m+[m
+ .../Science_Club/style.css          |   10 [32m+[m
+ .../Science_Club_2/README.md        |    5 [32m+[m
+ .../Science_Club_2/index.html       |   16 [32m+[m
+ .../Science_Club_2/script.js        |    1 [32m+[m
+ .../Science_Club_2/style.css        |   10 [32m+[m
+ .../Science_Club_Test/README.md     |    5 [32m+[m
+ .../Science_Club_Test/index.html    |   16 [32m+[m
+ .../Science_Club_Test/script.js     |    1 [32m+[m
+ .../Science_Club_Test/style.css     |   10 [32m+[m
+ .../Skill_Test/README.md            |    7 [32m+[m
+ .../Skill_Test/main.py              |   30 [32m+[m
+ .../Test_Bash/README.md             |    8 [32m+[m
+ .../Test_Bash/main.sh               |    5 [32m+[m
+ .../Test_JS/README.md               |    7 [32m+[m
+ generated_projects/Test_JS/index.js |    8 [32m+[m
+ .../Test_JS_2/README.md             |    7 [32m+[m
+ .../Test_JS_2/index.js              |    8 [32m+[m
+ .../Test_Java/Main.class            |  Bin [31m0[m -> [32m423[m bytes
+ .../Test_Java/Main.java             |    8 [32m+[m
+ .../Test_Java/README.md             |    3 [32m+[m
+ .../Test_Kotlin/Main.kt             |    6 [32m+[m
+ .../Test_Kotlin/README.md           |    3 [32m+[m
+ .../Test_Kotlin_2/Main.kt           |    6 [32m+[m
+ .../Test_Kotlin_2/README.md         |    3 [32m+[m
+ .../Test_Python/README.md           |    7 [32m+[m
+ .../Test_Python/main.py             |    9 [32m+[m
+ .../Test_Python_2/README.md         |    7 [32m+[m
+ .../Test_Python_2/main.py           |    9 [32m+[m
+ .../adventure_game/README.md        |    7 [32m+[m
+ .../adventure_game/enemy.py         |    9 [32m+[m
+ .../adventure_game/main.py          |    9 [32m+[m
+ .../adventure_game/player.py        |   13 [32m+[m
+ .../adventure_game/requirements.txt |    1 [32m+[m
+ .../adventure_game/settings.py      |    5 [32m+[m
+ .../ai_assistant/main.py            |   23 [32m+[m
+ .../app_code_test/README.md         |    5 [32m+[m
+ .../app_code_test/index.html        |   16 [32m+[m
+ .../app_code_test/script.js         |    1 [32m+[m
+ .../app_code_test/style.css         |   10 [32m+[m
+ .../backup_script/main.py           |   33 [32m+[m
+ .../calculator/AndroidManifest.xml  |   21 [32m+[m
+ .../calculator/MainActivity.java    |    9 [32m+[m
+ .../calculator_ai/main.py           |    8 [32m+[m
+ .../coding_assistant/main.py        |   19 [32m+[m
+ .../.gitignore                      |    2 [32m+[m
+ .../README.md                       |    3 [32m+[m
+ .../requirements.txt                |    0
+ .../src/main.py                     |    5 [32m+[m
+ .../desktop_calculator/README.md    |    7 [32m+[m
+ .../desktop_calculator/main.py      |   24 [32m+[m
+ .../executor_repair_test/README.md  |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m914[m bytes
+ .../executor_repair_test/main.py    |   30 [32m+[m
+ .../README.md                       |    1 [32m+[m
+ .../index.html                      |   10 [32m+[m
+ .../script.js                       |    1 [32m+[m
+ .../style.css                       |    1 [32m+[m
+ .../final_code_test/README.md       |    5 [32m+[m
+ .../final_code_test/index.html      |   16 [32m+[m
+ .../final_code_test/script.js       |    1 [32m+[m
+ .../final_code_test/style.css       |   10 [32m+[m
+ generated_projects/game/.gitignore  |    2 [32m+[m
+ generated_projects/game/README.md   |    3 [32m+[m
+ .../game/requirements.txt           |    0
+ generated_projects/game/src/main.py |    5 [32m+[m
+ .../my_calculator/main.py           |   10 [32m+[m
+ .../nitron_api/README.md            |   11 [32m+[m
+ .../nitron_api/app.py               |   19 [32m+[m
+ .../nitron_api/requirements.txt     |    1 [32m+[m
+ .../nitron_website/README.md        |    9 [32m+[m
+ .../nitron_website/app.py           |   10 [32m+[m
+ .../nitron_website/requirements.txt |    1 [32m+[m
+ .../nitron_website/static/style.css |   13 [32m+[m
+ .../templates/index.html            |   17 [32m+[m
+ .../pink_nitron_test/README.md      |    5 [32m+[m
+ .../pink_nitron_test/index.html     |   16 [32m+[m
+ .../pink_nitron_test/script.js      |    1 [32m+[m
+ .../pink_nitron_test/style.css      |   10 [32m+[m
+ .../portfolio/index.html            |   16 [32m+[m
+ .../portfolio/script.js             |    1 [32m+[m
+ .../portfolio/style.css             |   11 [32m+[m
+ .../prediction_model/README.md      |   11 [32m+[m
+ .../prediction_model/main.py        |   17 [32m+[m
+ .../requirements.txt                |    2 [32m+[m
+ .../repair_test/README.md           |    7 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m914[m bytes
+ .../repair_test/main.py             |   30 [32m+[m
+ .../science_club/README.md          |    5 [32m+[m
+ .../science_club/index.html         |   16 [32m+[m
+ .../science_club/script.js          |    1 [32m+[m
+ .../science_club/style.css          |   10 [32m+[m
+ .../science_club_2/README.md        |    5 [32m+[m
+ .../science_club_2/index.html       |   16 [32m+[m
+ .../science_club_2/script.js        |    1 [32m+[m
+ .../science_club_2/style.css        |   10 [32m+[m
+ .../science_club_3/README.md        |    5 [32m+[m
+ .../science_club_3/index.html       |   16 [32m+[m
+ .../science_club_3/script.js        |    1 [32m+[m
+ .../science_club_3/style.css        |   10 [32m+[m
+ .../README.md                       |    5 [32m+[m
+ .../index.html                      |   16 [32m+[m
+ .../script.js                       |    1 [32m+[m
+ .../style.css                       |   10 [32m+[m
+ .../README.md                       |    5 [32m+[m
+ .../index.html                      |   16 [32m+[m
+ .../script.js                       |    1 [32m+[m
+ .../style.css                       |   10 [32m+[m
+ .../README.md                       |    5 [32m+[m
+ .../index.html                      |   16 [32m+[m
+ .../script.js                       |    1 [32m+[m
+ .../style.css                       |   10 [32m+[m
+ .../self_repair_test/README.md      |    1 [32m+[m
+ .../self_repair_test/main.py        |    9 [32m+[m
+ .../self_repair_test_2/README.md    |    1 [32m+[m
+ .../main.cpython-313.pyc            |  Bin [31m0[m -> [32m393[m bytes
+ .../self_repair_test_2/main.py      |    8 [32m+[m
+ generated_projects/snake/main.py    |   54 [32m+[m
+ .../space_adventure/README.md       |   11 [32m+[m
+ .../space_adventure/main.py         |   30 [32m+[m
+ .../requirements.txt                |    1 [32m+[m
+ .../sqlite_database/README.md       |    7 [32m+[m
+ .../sqlite_database/database.py     |   21 [32m+[m
+ .../super_ai/.gitignore             |    2 [32m+[m
+ .../super_ai/README.md              |    3 [32m+[m
+ .../super_ai/requirements.txt       |    0
+ .../super_ai/src/main.py            |    5 [32m+[m
+ generated_projects/test/main.py     |   10 [32m+[m
+ generated_projects/test2/main.py    |   10 [32m+[m
+ .../web_repair_test/README.md       |    1 [32m+[m
+ .../web_repair_test/index.html      |   10 [32m+[m
+ .../web_repair_test/script.js       |    1 [32m+[m
+ .../web_repair_test/style.css       |    1 [32m+[m
+ gps_map.py                          |  111 [32m+[m
+ gradle.properties                   |    3 [32m+[m
+ gradle/wrapper/gradle-wrapper.jar   |  Bin [31m0[m -> [32m48462[m bytes
+ .../gradle-wrapper.properties       |    9 [32m+[m
+ gradlew                             |  248 [32m+[m
+ gradlew.bat                         |   82 [32m+[m
+ history.py                          |  118 [32m+[m
+ ict.py                              |   67 [32m+[m
+ image_learning.py                   |  166 [32m+[m
+ image_learning.py.before_analyzer   |   95 [32m+[m
+ ...learning.py.before_auto_analysis |  103 [32m+[m
+ ...rning.py.before_image_validation |  113 [32m+[m
+ indicators/__init__.py              |    0
+ indicators/ema.py                   |   26 [32m+[m
+ indicators/macd.py                  |   33 [32m+[m
+ indicators/rsi.py                   |   45 [32m+[m
+ ip_location.py                      |   22 [32m+[m
+ job_manager.py                      |   60 [32m+[m
+ journal.py                          |   96 [32m+[m
+ knowledge.py                        |  377 [32m+[m
+ ...bubble_layout.xml.before_restore |   63 [32m+[m
+ ..._layout.xml.before_restore_again |  186 [32m+[m
+ ...ble_layout.xml.orb_design_backup |  186 [32m+[m
+ .../README.md                       |    5 [32m+[m
+ .../knowledge.json                  |    7 [32m+[m
+ learned/cybersecurity/README.md     |    5 [32m+[m
+ learned/ethical_hacking/README.md   |    5 [32m+[m
+ .../ethical_hacking/knowledge.json  |    7 [32m+[m
+ .../README.md                       |    5 [32m+[m
+ .../knowledge.json                  |    7 [32m+[m
+ learned/python/README.md            |    5 [32m+[m
+ learned/python/code/example_1.py    |    1 [32m+[m
+ learned/python/knowledge.json       |   16 [32m+[m
+ .../python/lessons/lesson_1.json    |    6 [32m+[m
+ .../spanish_learn_spanish/README.md |    5 [32m+[m
+ .../knowledge.json                  |    7 [32m+[m
+ learned/termux_coding/README.md     |    5 [32m+[m
+ .../termux_coding/knowledge.json    |    7 [32m+[m
+ learned/unethical_hacking/README.md |    5 [32m+[m
+ .../knowledge.json                  |    7 [32m+[m
+ .../README.md                       |    5 [32m+[m
+ .../code/example_1.py               |    1 [32m+[m
+ .../knowledge.json                  |   16 [32m+[m
+ .../lessons/lesson_1.json           |    6 [32m+[m
+ learned/wps/README.md               |    5 [32m+[m
+ learned/wps/knowledge.json          |    7 [32m+[m
+ learning.py                         |   89 [32m+[m
+ learning_manager/__init__.py        |    0
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m165[m bytes
+ ...learning_manager.cpython-313.pyc |  Bin [31m0[m -> [32m8847[m bytes
+ .../learning_manager.py             |  454 [32m+[m
+ .../learning_manager.py.backup      |  454 [32m+[m
+ liquidity.py                        |   67 [32m+[m
+ listener/listener.py                |   48 [32m+[m
+ logs/academy.log                    |    0
+ logs/app.log                        |    0
+ logs/brain.log                      |    0
+ logs/client.log                     |    0
+ logs/commands.log                   |    0
+ logs/cybersecurity.log              |    0
+ logs/debug.log                      |    0
+ logs/developer.log                  |    0
+ logs/errors.log                     |    0
+ logs/history.log                    |    0
+ logs/memory.log                     |    0
+ logs/network.log                    |    0
+ logs/nitron.log                     |  761 [32m++[m
+ logs/notifications.log              |    0
+ logs/performance.log                |    0
+ logs/plugins.log                    |    0
+ logs/scheduler.log                  |    0
+ logs/security.log                   |    0
+ logs/server.log                     |    0
+ logs/shutdown.log                   |    0
+ logs/speech.log                     |    0
+ logs/startup.log                    |    0
+ logs/system.log                     |  194 [32m+[m
+ logs/trading.log                    |    0
+ logs/updates.log                    |    0
+ logs/voice.log                      |    0
+ macd.py                             |   52 [32m+[m
+ main.py                             |  913 [32m++[m
+ main_backup.py                      |  818 [32m++[m
+ main_backup_old.py                  | 1050 [32m++[m
+ main_backup_v3.py                   | 1389 [32m+++[m
+ main_old_backup.py                  |  694 [32m++[m
+ main_stable_backup.py               |  694 [32m++[m
+ market_parser.py                    |   51 [32m+[m
+ market_structure.py                 |   65 [32m+[m
+ matrix.py                           |   60 [32m+[m
+ media/__init__.py                   |    0
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m154[m bytes
+ .../image_generator.cpython-313.pyc |  Bin [31m0[m -> [32m1178[m bytes
+ .../image_jobs.cpython-313.pyc      |  Bin [31m0[m -> [32m1406[m bytes
+ .../prompt_builder.cpython-313.pyc  |  Bin [31m0[m -> [32m686[m bytes
+ .../video_generator.cpython-313.pyc |  Bin [31m0[m -> [32m161[m bytes
+ .../a_futuristic_robot.json         |    6 [32m+[m
+ .../a_futuristic_robot.txt          |    1 [32m+[m
+ .../generated/futuristic_robot.txt  |    4 [32m+[m
+ media/image_generator.py            |   22 [32m+[m
+ media/image_jobs.py                 |   40 [32m+[m
+ media/prompt_builder.py             |   10 [32m+[m
+ media/templates.py                  |    0
+ media/video_generator.py            |    0
+ memory.json                         |   13 [32m+[m
+ memory.py                           |   76 [32m+[m
+ memory_manager.py                   |   59 [32m+[m
+ mt5_config.py                       |   15 [32m+[m
+ mt5_data.py                         |  152 [32m+[m
+ mt5_trader.py                       |  106 [32m+[m
+ music.py                            |   39 [32m+[m
+ netscan.sh                          |   20 [32m+[m
+ news_filter.py                      |  110 [32m+[m
+ nim.py                              |   15 [32m+[m
+ nitron_core.py                      |   71 [32m+[m
+ nitron_notification.py              |   22 [32m+[m
+ nitron_step19_broken.py             |    2 [32m+[m
+ nitron_step20_broken.py             |    6 [32m+[m
+ number_info.py                      |   56 [32m+[m
+ number_map.py                       |   77 [32m+[m
+ ollama_brain.py                     |   43 [32m+[m
+ online_learning.py                  |   47 [32m+[m
+ order_blocks.py                     |   84 [32m+[m
+ phone.py                            |   87 [32m+[m
+ physics.json                        | 1578 [32m+++[m
+ physics.py                          |  108 [32m+[m
+ plugin.log                          |  340 [32m+[m
+ plugin_config.json                  |    7 [32m+[m
+ plugin_manager.py                   |  154 [32m+[m
+ plugin_manager_old.py               | 1249 [32m+++[m
+ plugins/__init__.py                 |    0
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m156[m bytes
+ .../device_check.cpython-313.pyc    |  Bin [31m0[m -> [32m2773[m bytes
+ .../file_manager.cpython-313.pyc    |  Bin [31m0[m -> [32m7768[m bytes
+ .../image_generator.cpython-313.pyc |  Bin [31m0[m -> [32m2871[m bytes
+ .../image_plugin.cpython-313.pyc    |  Bin [31m0[m -> [32m2085[m bytes
+ .../network_scanner.cpython-313.pyc |  Bin [31m0[m -> [32m6629[m bytes
+ .../plugin_api.cpython-313.pyc      |  Bin [31m0[m -> [32m158[m bytes
+ .../plugin_config.cpython-313.pyc   |  Bin [31m0[m -> [32m161[m bytes
+ .../plugin_creator.cpython-313.pyc  |  Bin [31m0[m -> [32m162[m bytes
+ .../plugin_docs.cpython-313.pyc     |  Bin [31m0[m -> [32m159[m bytes
+ .../plugin_events.cpython-313.pyc   |  Bin [31m0[m -> [32m161[m bytes
+ .../plugin_examples.cpython-313.pyc |  Bin [31m0[m -> [32m163[m bytes
+ .../plugin_hooks.cpython-313.pyc    |  Bin [31m0[m -> [32m160[m bytes
+ ...plugin_installer.cpython-313.pyc |  Bin [31m0[m -> [32m164[m bytes
+ .../plugin_loader.cpython-313.pyc   |  Bin [31m0[m -> [32m161[m bytes
+ .../plugin_logger.cpython-313.pyc   |  Bin [31m0[m -> [32m161[m bytes
+ .../plugin_manager.cpython-313.pyc  |  Bin [31m0[m -> [32m162[m bytes
+ ...ugin_permissions.cpython-313.pyc |  Bin [31m0[m -> [32m166[m bytes
+ .../plugin_registry.cpython-313.pyc |  Bin [31m0[m -> [32m163[m bytes
+ .../plugin_remover.cpython-313.pyc  |  Bin [31m0[m -> [32m162[m bytes
+ ...lugin_repository.cpython-313.pyc |  Bin [31m0[m -> [32m165[m bytes
+ .../plugin_security.cpython-313.pyc |  Bin [31m0[m -> [32m163[m bytes
+ .../plugin_settings.cpython-313.pyc |  Bin [31m0[m -> [32m163[m bytes
+ .../plugin_store.cpython-313.pyc    |  Bin [31m0[m -> [32m160[m bytes
+ .../plugin_template.cpython-313.pyc |  Bin [31m0[m -> [32m163[m bytes
+ .../plugin_tests.cpython-313.pyc    |  Bin [31m0[m -> [32m160[m bytes
+ .../plugin_updater.cpython-313.pyc  |  Bin [31m0[m -> [32m162[m bytes
+ .../plugin_utils.cpython-313.pyc    |  Bin [31m0[m -> [32m160[m bytes
+ ...plugin_validator.cpython-313.pyc |  Bin [31m0[m -> [32m164[m bytes
+ .../wifi_scanner.cpython-313.pyc    |  Bin [31m0[m -> [32m4326[m bytes
+ plugins/available.json              |    0
+ plugins/config.json                 |    0
+ plugins/device_check.py             |   59 [32m+[m
+ plugins/file_manager.py             |  279 [32m+[m
+ plugins/image_generator.py          |   75 [32m+[m
+ plugins/image_plugin.py             |   90 [32m+[m
+ plugins/installed.json              |    0
+ plugins/network_scanner.py          |  245 [32m+[m
+ plugins/network_scanner_state.json  |   85 [32m+[m
+ plugins/plugin_api.py               |    0
+ plugins/plugin_config.py            |    0
+ plugins/plugin_creator.py           |    0
+ plugins/plugin_docs.py              |    0
+ plugins/plugin_events.py            |    0
+ plugins/plugin_examples.py          |    0
+ plugins/plugin_hooks.py             |    0
+ plugins/plugin_installer.py         |    0
+ plugins/plugin_loader.py            |    0
+ plugins/plugin_logger.py            |    0
+ plugins/plugin_manager.py           |    0
+ plugins/plugin_permissions.py       |    0
+ plugins/plugin_registry.py          |    0
+ plugins/plugin_remover.py           |    0
+ plugins/plugin_repository.py        |    0
+ plugins/plugin_security.py          |    0
+ plugins/plugin_settings.py          |    0
+ plugins/plugin_store.py             |    0
+ plugins/plugin_template.py          |    0
+ plugins/plugin_tests.py             |    0
+ plugins/plugin_updater.py           |    0
+ plugins/plugin_utils.py             |    0
+ plugins/plugin_validator.py         |    0
+ plugins/wifi_scanner.py             |  156 [32m+[m
+ premium_discount.py                 |   48 [32m+[m
+ project_manager.py                  |   69 [32m+[m
+ .../exam_system.cpython-313.pyc     |  Bin [31m0[m -> [32m4370[m bytes
+ .../learning_hub.cpython-313.pyc    |  Bin [31m0[m -> [32m4000[m bytes
+ .../math_quiz.cpython-313.pyc       |  Bin [31m0[m -> [32m2595[m bytes
+ .../progress.cpython-313.pyc        |  Bin [31m0[m -> [32m2574[m bytes
+ .../random_quiz.cpython-313.pyc     |  Bin [31m0[m -> [32m3328[m bytes
+ .../study_tracker.cpython-313.pyc   |  Bin [31m0[m -> [32m4061[m bytes
+ .../tutor.cpython-313.pyc           |  Bin [31m0[m -> [32m3602[m bytes
+ quiz/exam_system.py                 |  154 [32m+[m
+ quiz/learning_hub.py                |  120 [32m+[m
+ quiz/math_quiz.py                   |  121 [32m+[m
+ quiz/math_teacher.py                |  127 [32m+[m
+ quiz/progress.py                    |  102 [32m+[m
+ quiz/random_quiz.py                 |   98 [32m+[m
+ quiz/study_tracker.py               |  124 [32m+[m
+ quiz/tutor.py                       |  135 [32m+[m
+ requirements.txt                    |    0
+ resistance.py                       |   60 [32m+[m
+ risk.py                             |  127 [32m+[m
+ rsi.py                              |   53 [32m+[m
+ s make/game.py                      |    2 [32m+[m
+ scanner.py                          |  103 [32m+[m
+ scheduler.py                        |   27 [32m+[m
+ search.py                           |  108 [32m+[m
+ security.py                         |  112 [32m+[m
+ security/__init__.py                |    0
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m157[m bytes
+ ...efensive_scanner.cpython-313.pyc |  Bin [31m0[m -> [32m5785[m bytes
+ security/defensive_scanner.py       |  194 [32m+[m
+ ...curity_scan_20260816_095632.json |   45 [32m+[m
+ server.py                           |  248 [32m+[m
+ ....py.backup_before_image_learning |  120 [32m+[m
+ server.py.before_dedup_fix          |  206 [32m+[m
+ server.py.before_image_analyzer     |  184 [32m+[m
+ server.py.before_threading_fix      |  201 [32m+[m
+ services/__init__.py                |    0
+ services/api.py                     |    0
+ services/api_service.py             |    0
+ services/auth.py                    |    0
+ services/auth_service.py            |    0
+ services/backup.py                  |    0
+ services/backup_service.py          |    0
+ services/browser_service.py         |    0
+ services/calendar.py                |    0
+ services/calendar_service.py        |    0
+ services/camera.py                  |    0
+ services/camera_service.py          |    0
+ services/client.py                  |    0
+ services/client_service.py          |    0
+ services/config.py                  |    0
+ services/contacts.py                |    0
+ services/contacts_service.py        |    0
+ services/database.py                |    0
+ services/download_service.py        |    0
+ services/downloads.py               |    0
+ services/email.py                   |    0
+ services/email_service.py           |    0
+ services/file_manager.py            |    0
+ services/gallery.py                 |    0
+ services/gallery_service.py         |    0
+ services/geolocation.py             |    0
+ services/http.py                    |    0
+ services/logger.py                  |    0
+ services/logger_service.py          |    0
+ services/maps.py                    |    0
+ services/maps_service.py            |    0
+ services/media.py                   |    0
+ services/microphone.py              |    0
+ services/music.py                   |    0
+ services/music_service.py           |    0
+ services/network.py                 |    0
+ services/notification.py            |    0
+ services/notification_service.py    |    0
+ services/ocr.py                     |    0
+ services/phone.py                   |    0
+ services/phone_service.py           |    0
+ services/plugin_service.py          |    0
+ services/plugins.py                 |    0
+ services/restore_service.py         |    0
+ services/scheduler.py               |    0
+ services/scheduler_service.py       |    0
+ services/search.py                  |    0
+ services/search_service.py          |    0
+ services/server.py                  |    0
+ services/server_service.py          |    0
+ services/settings.py                |    0
+ services/settings_service.py        |    0
+ services/sms.py                     |    0
+ services/sms_service.py             |    0
+ services/speech.py                  |    0
+ services/speech_service.py          |    0
+ services/storage.py                 |    0
+ services/storage_service.py         |    0
+ services/sync.py                    |    0
+ services/terminal.py                |    0
+ services/translator.py              |    0
+ services/tts.py                     |    0
+ services/update_service.py          |    0
+ services/updates.py                 |    0
+ services/upload_service.py          |    0
+ services/uploads.py                 |    0
+ services/voice.py                   |    0
+ services/weather.py                 |    0
+ services/weather_service.py         |    0
+ services/websocket.py               |    0
+ services/wifi.py                    |    0
+ session.py                          |   73 [32m+[m
+ settings.gradle                     |   19 [32m+[m
+ skills.py                           |   26 [32m+[m
+ skills_example.py                   |   10 [32m+[m
+ speech.py                           |  326 [32m+[m
+ speech/speaker.py                   |   47 [32m+[m
+ start_nitron.sh                     |    7 [32m+[m
+ startup.py                          |   12 [32m+[m
+ startup/__init__.py                 |    0
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m156[m bytes
+ .../startup_engine.cpython-313.pyc  |  Bin [31m0[m -> [32m3069[m bytes
+ startup/ideas.json                  |   10 [32m+[m
+ startup/startup_engine.py           |  159 [32m+[m
+ stochastic.py                       |   58 [32m+[m
+ strategy.py                         |  311 [32m+[m
+ strategy_backup.py                  |  224 [32m+[m
+ structure.py                        |  120 [32m+[m
+ study_tracker.json                  |    5 [32m+[m
+ support.py                          |   60 [32m+[m
+ swings.py                           |   87 [32m+[m
+ system.py                           |   76 [32m+[m
+ task_manager.py                     |   49 [32m+[m
+ terminal.py                         |   92 [32m+[m
+ terminal/__init__.py                |    0
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m157[m bytes
+ .../commands.cpython-313.pyc        |  Bin [31m0[m -> [32m1362[m bytes
+ .../history.cpython-313.pyc         |  Bin [31m0[m -> [32m156[m bytes
+ .../security.cpython-313.pyc        |  Bin [31m0[m -> [32m157[m bytes
+ .../terminal.cpython-313.pyc        |  Bin [31m0[m -> [32m26123[m bytes
+ terminal/commands.py                |   31 [32m+[m
+ terminal/filesystem.py              |    0
+ terminal/history.py                 |    0
+ terminal/process.py                 |    0
+ terminal/security.py                |    0
+ terminal/terminal.py                |  933 [32m++[m
+ test.py                             |   12 [32m+[m
+ test_project/index.html             |    1 [32m+[m
+ tests/__init__.py                   |    0
+ tests/run_tests.py                  |    0
+ tests/test_academy.py               |    0
+ tests/test_api.py                   |    0
+ tests/test_brain.py                 |    0
+ tests/test_client.py                |    0
+ tests/test_commands.py              |    0
+ tests/test_config.py                |    0
+ tests/test_core.py                  |    0
+ tests/test_cybersecurity.py         |    0
+ tests/test_database.py              |    0
+ tests/test_developer.py             |    0
+ tests/test_engine.py                |    0
+ tests/test_main.py                  |    0
+ tests/test_memory.py                |    0
+ tests/test_plugins.py               |    0
+ tests/test_router.py                |    0
+ tests/test_server.py                |    0
+ tests/test_services.py              |    0
+ tests/test_speech.py                |    0
+ tests/test_trading.py               |    0
+ tests/test_utils.py                 |    0
+ tests/test_voice.py                 |    0
+ trade_advisor.py                    |  283 [32m+[m
+ trade_advisor_backup.py             |  115 [32m+[m
+ trade_ai.py                         |   61 [32m+[m
+ trade_analyzer.py                   |   65 [32m+[m
+ trade_controller.py                 |  261 [32m+[m
+ trade_display.py                    |   78 [32m+[m
+ trade_executor.py                   |  141 [32m+[m
+ trader.py                           |   96 [32m+[m
+ trading.json                        | 5180 [32m++++++++++[m
+ trading.py                          |   68 [32m+[m
+ trading/__init__.py                 |    0
+ .../__init__.cpython-313.pyc        |  Bin [31m0[m -> [32m156[m bytes
+ ...versation_parser.cpython-313.pyc |  Bin [31m0[m -> [32m1269[m bytes
+ trading/advisor.py                  |    0
+ trading/alerts.py                   |  114 [32m+[m
+ trading/analyzer.py                 |    0
+ trading/backtest.py                 |    0
+ trading/backtester.py               |   94 [32m+[m
+ trading/btcusd.py                   |    0
+ trading/commodities.py              |    0
+ trading/config.py                   |    0
+ trading/conversation_parser.py      |   61 [32m+[m
+ trading/crypto.py                   |    0
+ trading/decision_engine.py          |   66 [32m+[m
+ trading/economic_calendar.py        |    0
+ trading/executor.py                 |    0
+ trading/fair_value_gap.py           |    0
+ trading/forex.py                    |    0
+ trading/history.py                  |    0
+ trading/ict.py                      |    0
+ trading/indicators.py               |    0
+ trading/journal.json                |    0
+ trading/journal.py                  |   85 [32m+[m
+ trading/learning.py                 |   91 [32m+[m
+ trading/liquidity.py                |    0
+ trading/live_data.py                |   54 [32m+[m
+ trading/market.py                   |    0
+ trading/market_data.py              |   74 [32m+[m
+ trading/market_scanner.py           |   66 [32m+[m
+ trading/market_structure.py         |    0
+ trading/mt5.py                      |    0
+ trading/mt5_trader.py.              |   75 [32m+[m
+ trading/news.py                     |    0
+ trading/news_filter.py              |   64 [32m+[m
+ trading/order_blocks.py             |    0
+ trading/patterns.py                 |    0
+ trading/performance.py              |   66 [32m+[m
+ trading/pipeline.py                 |   92 [32m+[m
+ trading/portfolio.py                |  108 [32m+[m
+ trading/psychology.py               |    0
+ trading/risk.py                     |    0
+ trading/scanner.py                  |    0
+ trading/settings.json               |    0
+ trading/settings.py                 |    0
+ trading/signals.py                  |    0
+ trading/smart_money.py              |    0
+ trading/statistics.py               |    0
+ trading/stocks.py                   |    0
+ trading/strategy.py                 |    0
+ trading/symbols.json                |    0
+ trading/trade_ai.py                 |   87 [32m+[m
+ trading/trade_executor.py           |   78 [32m+[m
+ trading/trader.py                   |    0
+ trading/tradingview.py              |    0
+ trading/watchlist.py                |    0
+ trading/xauusd.py                   |    0
+ trading_backup.json                 | 5180 [32m++++++++++[m
+ trading_bot/config.py               |   39 [32m+[m
+ trading_bot/data_feed.py            |   45 [32m+[m
+ trading_bot/executor.py             |   69 [32m+[m
+ trading_bot/main.py                 |   48 [32m+[m
+ trading_bot/requirements.txt        |    2 [32m+[m
+ trading_bot/risk_manager.py         |   36 [32m+[m
+ trading_bot/strategy.py             |   42 [32m+[m
+ trading_system.txt                  |  Bin [31m0[m -> [32m71850[m bytes
+ trading_v1.json                     | 5180 [32m++++++++++[m
+ trading_v2.json                     | 5180 [32m++++++++++[m
+ trading_v3.json                     | 5180 [32m++++++++++[m
+ trend.py                            |   66 [32m+[m
+ utils.py                            |   17 [32m+[m
+ utils/__init__.py                   |    0
+ voice.py                            |   36 [32m+[m
+ voice/__init__.py                   |    0
+ voice/audio_input.py                |    0
+ voice/audio_output.py               |    0
+ voice/conversation.py               |    0
+ voice/language_detector.py          |    0
+ voice/languages.json                |    0
+ voice/listener.py                   |    0
+ voice/microphone.py                 |    0
+ voice/noise_reduction.py            |    0
+ voice/recognizer.py                 |    0
+ voice/settings.json                 |    0
+ voice/speaker.py                    |    0
+ voice/speech_to_text.py             |    0
+ voice/text_to_speech.py             |    0
+ voice/translator.py                 |    0
+ voice/voice_activity.py             |    0
+ voice/voice_commands.py             |    0
+ voice/voice_config.py               |    0
+ voice/voice_engine.py               |    0
+ voice/voice_history.py              |    0
+ voice/voice_logger.py               |    0
+ voice/voice_memory.py               |    0
+ voice/voice_profiles.py             |    0
+ voice/voice_settings.py             |    0
+ voice/voice_training.py             |    0
+ voice/voice_utils.py                |    0
+ voice/voices.json                   |    0
+ voice/wake_word.py                  |    0
+ voice_commands.py                   |  165 [32m+[m
+ wake_nitron.py                      |   34 [32m+[m
+ wakeword.py                         |   22 [32m+[m
+ wakeword/wakeword.py                |   39 [32m+[m
+ weather.py                          |   52 [32m+[m
+ workflow_manager.py                 |   47 [32m+[m
+ {                                   |    0
+ 2125 files changed, 278544 insertions(+)

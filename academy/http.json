@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to HTTP",
+    "explanation": "HTTP (HyperText Transfer Protocol) is the protocol used by web browsers and web servers to exchange web pages, images, videos, and other resources.",
+    "code": "curl https://example.com",
+    "output": "Downloads the HTML content of the web page.",
+    "practice": "Use curl to request a webpage and view its HTML.",
+    "quiz": "What does HTTP stand for?"
+  },
+  "2": {
+    "title": "HTTP Methods",
+    "explanation": "HTTP methods define the action to perform. Common methods are GET, POST, PUT, PATCH, and DELETE.",
+    "code": "GET /products\nPOST /login\nPUT /users/1\nDELETE /products/5",
+    "output": "Different requests perform different actions on the server.",
+    "practice": "Identify which method should be used to create a new user.",
+    "quiz": "Which HTTP method is commonly used to retrieve data?"
+  },
+  "3": {
+    "title": "HTTP Status Codes",
+    "explanation": "Servers respond with status codes that indicate whether a request succeeded or failed.",
+    "code": "200 OK\n201 Created\n400 Bad Request\n401 Unauthorized\n403 Forbidden\n404 Not Found\n500 Internal Server Error",
+    "output": "The client knows the result of the request.",
+    "practice": "Look at your browser's developer tools and find the status codes of requests.",
+    "quiz": "What does a 404 status code mean?"
+  },
+  "4": {
+    "title": "HTTP Headers",
+    "explanation": "Headers provide additional information about requests and responses, such as content type, authentication, caching, and browser details.",
+    "code": "Content-Type: application/json\nAuthorization: Bearer TOKEN\nUser-Agent: Mozilla/5.0",
+    "output": "The server and client exchange metadata.",
+    "practice": "Use curl -I https://example.com to view response headers.",
+    "quiz": "Which header is commonly used to send an API access token?"
+  },
+  "5": {
+    "title": "HTTPS",
+    "explanation": "HTTPS is HTTP protected with TLS encryption. It secures data sent between the client and server and helps prevent eavesdropping and tampering.",
+    "code": "https://example.com",
+    "output": "A secure encrypted connection is established.",
+    "practice": "Visit a website and verify that it uses HTTPS.",
+    "quiz": "What is the main advantage of HTTPS over HTTP?"
+  }
+}

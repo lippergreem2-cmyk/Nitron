@@ -1,0 +1,248 @@
+import os
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from socketserver import ThreadingMixIn
+import json
+
+HOST = "127.0.0.1"
+PORT = 8000
+
+from commands import execute
+from image_learning import learn_image
+
+
+class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
+    daemon_threads = True
+
+
+class NitronHandler(BaseHTTPRequestHandler):
+
+    def send_json(self, data):
+        response = json.dumps(data, ensure_ascii=False).encode("utf-8")
+
+        self.send_response(200)
+        self.send_header(
+            "Content-Type",
+            "application/json; charset=utf-8"
+        )
+        self.send_header(
+            "Content-Length",
+            str(len(response))
+        )
+        self.end_headers()
+
+        self.wfile.write(response)
+
+    def handle_image_learning(self):
+
+        try:
+            length = int(
+                self.headers.get("Content-Length", 0)
+            )
+
+            raw_data = self.rfile.read(length).decode(
+                "utf-8"
+            )
+
+            data = json.loads(raw_data)
+
+            if not isinstance(data, dict):
+                raise ValueError(
+                    "Image request must be a JSON object."
+                )
+
+            image_data = data.get("image")
+            filename = data.get("filename") or "image.jpg"
+            note = data.get("note") or ""
+
+            if not image_data:
+                self.send_json({
+                    "success": False,
+                    "response": "No image was received."
+                })
+                return
+
+            result = learn_image(
+                image_data,
+                filename,
+                note
+            )
+
+            analysis = result.get(
+                "analysis",
+                {}
+            )
+
+            entry = result.get(
+                "entry",
+                {}
+            )
+
+            self.send_json({
+                "success": True,
+                "response": (
+                    "I received the picture, analyzed it, "
+                    "and saved it to Nitron's learning memory."
+                ),
+                "topic": result["topic"],
+                "image_path": result["image_path"],
+                "analysis": analysis,
+                "memory": entry
+            })
+
+        except Exception as e:
+
+            print(
+                f"Image learning error: {e}"
+            )
+
+            self.send_json({
+                "success": False,
+                "response": (
+                    f"I could not learn that picture: {e}"
+                )
+            })
+
+    def do_GET(self):
+
+        if self.path.startswith("/image/"):
+            filename = self.path[len("/image/"):]
+            filename = filename.split("?")[0]
+
+            if "/" in filename or ".." in filename:
+                self.send_response(400)
+                self.end_headers()
+                return
+
+            filepath = os.path.join(
+                os.path.dirname(__file__), "generated_images", filename
+            )
+
+            if not os.path.isfile(filepath):
+                self.send_response(404)
+                self.end_headers()
+                return
+
+            with open(filepath, "rb") as f:
+                data = f.read()
+
+            self.send_response(200)
+            self.send_header("Content-Type", "image/jpeg")
+            self.send_header("Content-Length", str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+            return
+
+        self.send_response(404)
+        self.end_headers()
+
+    def do_POST(self):
+
+        if self.path == "/learn-image":
+            self.handle_image_learning()
+            return
+
+
+        if self.path != "/command":
+            self.send_response(404)
+            self.end_headers()
+            return
+
+        try:
+            length = int(self.headers.get("Content-Length", 0))
+
+            raw_data = (
+                self.rfile
+                .read(length)
+                .decode("utf-8")
+            )
+
+            print(f"Received: {raw_data}")
+
+            try:
+                data = json.loads(raw_data)
+
+                if isinstance(data, dict):
+                    command = (
+                        data.get("message")
+                        or data.get("command")
+                        or data.get("text")
+                        or ""
+                    )
+                else:
+                    command = str(data)
+
+            except json.JSONDecodeError:
+                command = raw_data
+
+            command = command.strip()
+
+            if not command:
+                self.send_json({
+                    "success": False,
+                    "response": "I didn't receive a message."
+                })
+                return
+
+            print(f"Nitron input: {command}")
+
+            response = execute(command)
+
+            if response is None:
+                response = "I'm here."
+
+            response = str(response)
+
+            image_url = None
+            if "[NITRON_IMAGE]" in response and "[/NITRON_IMAGE]" in response:
+                start = response.index("[NITRON_IMAGE]") + len("[NITRON_IMAGE]")
+                end = response.index("[/NITRON_IMAGE]")
+                filename = response[start:end]
+                image_url = f"http://127.0.0.1:8000/image/{filename}"
+                response = response[end + len("[/NITRON_IMAGE]"):]
+
+            print(f"Nitron response: {response}")
+
+            payload = {
+                "success": True,
+                "response": response
+            }
+
+            if image_url:
+                payload["image_url"] = image_url
+
+            self.send_json(payload)
+
+        except Exception as e:
+
+            print(f"Server error: {e}")
+
+            self.send_json({
+                "success": False,
+                "response": f"I encountered an error: {e}"
+            })
+
+    def log_message(self, format, *args):
+        print(f"[HTTP] {format % args}")
+
+
+if __name__ == "__main__":
+
+    print("=" * 50)
+    print("NITRON SERVER")
+    print("=" * 50)
+    print(f"Running on http://{HOST}:{PORT}")
+    print("Conversation endpoint: /command")
+    print("Waiting for Nitron...")
+    print("=" * 50)
+
+    server = ThreadingHTTPServer(
+        (HOST, PORT),
+        NitronHandler
+    )
+
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print("\nNitron server stopped.")
+    finally:
+        server.server_close()

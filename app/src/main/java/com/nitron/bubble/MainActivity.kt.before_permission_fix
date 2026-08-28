@@ -1,0 +1,611 @@
+package com.nitron.bubble
+
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.provider.Settings
+import android.view.View
+import android.view.WindowInsets
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.nitron.bubble.chat.ChatManager
+import com.nitron.bubble.chat.Message
+import com.nitron.bubble.chat.MessageAdapter
+import java.io.ByteArrayOutputStream
+import android.util.Base64
+
+
+class MainActivity : AppCompatActivity() {
+
+    /*
+     * =========================================================
+     * IMAGE PICKER
+     * =========================================================
+     *
+     * Select an image, read its bytes, convert to Base64,
+     * and send the actual image to Nitron through TermuxBridge.
+     *
+     * The old implementation only placed the content:// URI
+     * into the message box. This implementation sends the
+     * actual image data instead.
+     */
+
+    private val photoPicker =
+        registerForActivityResult(
+            ActivityResultContracts.GetContent()
+        ) { uri ->
+
+            if (uri == null) {
+                return@registerForActivityResult
+            }
+
+            try {
+
+                val resolver = contentResolver
+
+                val bytes =
+                    resolver.openInputStream(uri).use { input ->
+
+                        if (input == null) {
+                            throw Exception(
+                                "Could not open selected image."
+                            )
+                        }
+
+                        val output =
+                            ByteArrayOutputStream()
+
+                        val buffer =
+                            ByteArray(8192)
+
+                        while (true) {
+
+                            val count =
+                                input.read(buffer)
+
+                            if (count == -1) {
+                                break
+                            }
+
+                            output.write(
+                                buffer,
+                                0,
+                                count
+                            )
+                        }
+
+                        output.toByteArray()
+                    }
+
+                if (bytes.isEmpty()) {
+                    throw Exception(
+                        "Selected image is empty."
+                    )
+                }
+
+                /*
+                 * Convert the actual image bytes to Base64.
+                 */
+                val base64Image =
+                    Base64.encodeToString(
+                        bytes,
+                        Base64.NO_WRAP
+                    )
+
+                /*
+                 * Try to obtain a useful filename.
+                 */
+                val filename =
+                    uri.lastPathSegment
+                        ?.substringAfterLast("/")
+                        ?.substringAfterLast(":")
+                        ?.takeIf {
+                            it.isNotBlank()
+                        }
+                        ?: "picture.jpg"
+
+                /*
+                 * Show the image action in the chat.
+                 */
+                welcomeText.visibility =
+                    View.GONE
+
+                messageAdapter.addMessage(
+                    Message(
+                        "📷 Learning image: $filename",
+                        true
+                    )
+                )
+
+                messageList.smoothScrollToPosition(
+                    messageAdapter.itemCount - 1
+                )
+
+                /*
+                 * Send the REAL image to the Python server.
+                 */
+                TermuxBridge.sendImage(
+                    base64Image,
+                    filename
+                ) { reply ->
+
+                    runOnUiThread {
+
+                        messageAdapter.addMessage(
+                            Message(
+                                reply,
+                                false
+                            )
+                        )
+
+                        messageList.smoothScrollToPosition(
+                            messageAdapter.itemCount - 1
+                        )
+                    }
+                }
+
+            } catch (e: Exception) {
+
+                messageAdapter.addMessage(
+                    Message(
+                        "Could not read image: ${e.message}",
+                        false
+                    )
+                )
+
+                messageList.smoothScrollToPosition(
+                    messageAdapter.itemCount - 1
+                )
+            }
+        }
+
+
+    /*
+     * =========================================================
+     * THEME
+     * =========================================================
+     */
+
+    private fun applySavedTheme() {
+
+        val mode =
+            getSharedPreferences(
+                "nitron_settings",
+                MODE_PRIVATE
+            ).getString(
+                "theme",
+                "system"
+            )
+
+        when (mode) {
+
+            "light" ->
+                AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_NO
+                )
+
+            "dark" ->
+                AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_YES
+                )
+
+            else ->
+                AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                )
+        }
+    }
+
+
+    /*
+     * =========================================================
+     * UI VARIABLES
+     * =========================================================
+     */
+
+    private lateinit var drawerLayout: DrawerLayout
+
+    private lateinit var messageInput: EditText
+
+    private lateinit var welcomeText: TextView
+
+    private lateinit var messageList: RecyclerView
+
+    private lateinit var messageAdapter: MessageAdapter
+
+    private lateinit var chatManager: ChatManager
+
+
+    /*
+     * =========================================================
+     * ACTIVITY START
+     * =========================================================
+     */
+
+    override fun onCreate(
+        savedInstanceState: Bundle?
+    ) {
+
+        super.onCreate(
+            savedInstanceState
+        )
+
+        applySavedTheme()
+
+        setContentView(
+            R.layout.activity_main
+        )
+
+        setupKeyboardInsets()
+
+
+        /*
+         * -----------------------------------------------------
+         * FIND UI ELEMENTS
+         * -----------------------------------------------------
+         */
+
+        drawerLayout =
+            findViewById(
+                R.id.drawerLayout
+            )
+
+        messageInput =
+            findViewById(
+                R.id.messageInput
+            )
+
+        welcomeText =
+            findViewById(
+                R.id.welcomeText
+            )
+
+
+        /*
+         * -----------------------------------------------------
+         * CHAT MESSAGE LIST
+         * -----------------------------------------------------
+         */
+
+        messageList =
+            findViewById(
+                R.id.messageList
+            )
+
+        messageAdapter =
+            MessageAdapter()
+
+        messageList.layoutManager =
+            LinearLayoutManager(this)
+
+        messageList.adapter =
+            messageAdapter
+
+
+        /*
+         * -----------------------------------------------------
+         * CHAT MANAGER
+         * -----------------------------------------------------
+         */
+
+        chatManager =
+            ChatManager()
+
+        chatManager.setListener(
+            object :
+                ChatManager.ChatListener {
+
+                override fun onReply(
+                    reply: String
+                ) {
+
+                    runOnUiThread {
+
+                        messageAdapter.addMessage(
+                            Message(
+                                reply,
+                                false
+                            )
+                        )
+
+                        messageList.smoothScrollToPosition(
+                            messageAdapter.itemCount - 1
+                        )
+                    }
+                }
+            }
+        )
+
+
+        /*
+         * -----------------------------------------------------
+         * BUTTONS
+         * -----------------------------------------------------
+         */
+
+        val menuButton =
+            findViewById<ImageButton>(
+                R.id.menuButton
+            )
+
+        val editButton =
+            findViewById<ImageButton>(
+                R.id.editButton
+            )
+
+        val closeButton =
+            findViewById<ImageButton>(
+                R.id.closeButton
+            )
+
+        val sendButton =
+            findViewById<ImageButton>(
+                R.id.sendButton
+            )
+
+        val attachButton =
+            findViewById<ImageButton>(
+                R.id.attachButton
+            )
+
+
+        /*
+         * -----------------------------------------------------
+         * ATTACH / IMAGE BUTTON
+         * -----------------------------------------------------
+         *
+         * Opens Android's image picker.
+         */
+
+        attachButton.setOnClickListener {
+
+            photoPicker.launch(
+                "image/*"
+            )
+        }
+
+
+        /*
+         * -----------------------------------------------------
+         * SIDE MENU
+         * -----------------------------------------------------
+         */
+
+        menuButton.setOnClickListener {
+
+            drawerLayout.openDrawer(
+                android.view.Gravity.START
+            )
+        }
+
+
+        /*
+         * -----------------------------------------------------
+         * NEW CHAT
+         * -----------------------------------------------------
+         */
+
+        editButton.setOnClickListener {
+
+            messageInput.setText("")
+
+            welcomeText.visibility =
+                View.VISIBLE
+
+            drawerLayout.closeDrawers()
+        }
+
+
+        /*
+         * -----------------------------------------------------
+         * CLOSE / CLEAR MESSAGE
+         * -----------------------------------------------------
+         */
+
+        closeButton.setOnClickListener {
+
+            messageInput.setText("")
+
+            messageInput.clearFocus()
+        }
+
+
+        /*
+         * -----------------------------------------------------
+         * SEND TEXT MESSAGE
+         * -----------------------------------------------------
+         */
+
+        sendButton.setOnClickListener {
+
+            val text =
+                messageInput.text
+                    .toString()
+                    .trim()
+
+            if (text.isNotEmpty()) {
+
+                welcomeText.visibility =
+                    View.GONE
+
+
+                /*
+                 * Add user's message.
+                 */
+
+                messageAdapter.addMessage(
+                    Message(
+                        text,
+                        true
+                    )
+                )
+
+                messageList.smoothScrollToPosition(
+                    messageAdapter.itemCount - 1
+                )
+
+
+                /*
+                 * Clear input.
+                 */
+
+                messageInput.setText("")
+
+
+                /*
+                 * Send text to Nitron.
+                 */
+
+                chatManager.sendMessage(
+                    text
+                )
+            }
+        }
+
+
+        /*
+         * =====================================================
+         * DRAWER BUTTONS
+         * =====================================================
+         */
+
+        findViewById<TextView>(
+            R.id.projectsButton
+        ).setOnClickListener {
+
+            drawerLayout.closeDrawers()
+
+            startActivity(
+                Intent(
+                    this,
+                    ProjectsActivity::class.java
+                )
+            )
+        }
+
+
+        findViewById<TextView>(
+            R.id.libraryButton
+        ).setOnClickListener {
+
+            drawerLayout.closeDrawers()
+
+            welcomeText.text =
+                "Library"
+
+            welcomeText.visibility =
+                View.VISIBLE
+        }
+
+
+        findViewById<TextView>(
+            R.id.imagesButton
+        ).setOnClickListener {
+
+            drawerLayout.closeDrawers()
+
+            welcomeText.text =
+                "Images"
+
+            welcomeText.visibility =
+                View.VISIBLE
+        }
+
+
+        findViewById<TextView>(
+            R.id.recentButton
+        ).setOnClickListener {
+
+            drawerLayout.closeDrawers()
+
+            welcomeText.text =
+                "Recent"
+
+            welcomeText.visibility =
+                View.VISIBLE
+        }
+
+
+        findViewById<TextView>(
+            R.id.settingsButton
+        ).setOnClickListener {
+
+            startActivity(
+                Intent(
+                    this@MainActivity,
+                    SettingsActivity::class.java
+                )
+            )
+        }
+
+
+        /*
+         * -----------------------------------------------------
+         * ANDROID BACK BUTTON
+         * -----------------------------------------------------
+         */
+
+        onBackPressedDispatcher.addCallback(
+            this,
+            object :
+                OnBackPressedCallback(true) {
+
+                override fun handleOnBackPressed() {
+
+                    if (
+                        drawerLayout.isDrawerOpen(
+                            android.view.Gravity.START
+                        )
+                    ) {
+
+                        drawerLayout.closeDrawers()
+
+                    } else {
+
+                        finish()
+                    }
+                }
+            }
+        )
+    }
+
+
+    /*
+     * =========================================================
+     * KEYBOARD / WINDOW INSETS
+     * =========================================================
+     */
+
+    private fun setupKeyboardInsets() {
+
+        if (android.os.Build.VERSION.SDK_INT >= 30) {
+
+            window.decorView.setOnApplyWindowInsetsListener {
+                    view,
+                    insets ->
+
+                val imeInsets =
+                    insets.getInsets(
+                        WindowInsets.Type.ime()
+                    )
+
+                view.setPadding(
+                    view.paddingLeft,
+                    view.paddingTop,
+                    view.paddingRight,
+                    imeInsets.bottom
+                )
+
+                insets
+            }
+        }
+    }
+}

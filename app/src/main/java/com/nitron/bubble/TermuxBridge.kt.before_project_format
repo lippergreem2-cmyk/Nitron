@@ -1,0 +1,570 @@
+package com.nitron.bubble
+
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
+import java.net.HttpURLConnection
+import java.net.URL
+import kotlin.concurrent.thread
+
+object TermuxBridge {
+
+    private const val SERVER_URL =
+        "http://127.0.0.1:8000/command"
+
+    private const val IMAGE_SERVER_URL =
+        "http://127.0.0.1:8000/learn-image"
+
+
+    /*
+     * ============================================================
+     * NITRON CHAT FORMATTER
+     * ============================================================
+     *
+     * Converts raw backend responses into clean chat text.
+     *
+     * The stored knowledge is NOT changed.
+     * Only the text displayed in the Android chat is formatted.
+     */
+    private fun formatReply(raw: String): String {
+
+        var text = raw.trim()
+
+        if (text.isEmpty()) {
+            return ""
+        }
+
+        /*
+         * --------------------------------------------------------
+         * Try to detect a JSON object returned by Nitron.
+         * --------------------------------------------------------
+         */
+        try {
+
+            val json = JSONObject(text)
+
+            if (json.has("message")) {
+
+                val message =
+                    json.optString("message", "").trim()
+
+                val topic =
+                    json.optString("topic", "").trim()
+
+                val learned =
+                    json.optBoolean("learned", false)
+
+                val imageLearned =
+                    json.optBoolean("image_learned", false)
+
+                val detectedTopics =
+                    json.optJSONArray("detected_topics")
+
+                val imageMetadata =
+                    json.optJSONObject("image_metadata")
+
+                val output = StringBuilder()
+
+                /*
+                 * ------------------------------------------------
+                 * Main message
+                 * ------------------------------------------------
+                 */
+                if (message.isNotEmpty()) {
+
+                    output.append(cleanSentence(message))
+                    output.append("\n")
+                }
+
+                /*
+                 * ------------------------------------------------
+                 * Learned topic
+                 * ------------------------------------------------
+                 */
+                if (learned && topic.isNotEmpty()) {
+
+                    if (output.isNotEmpty()) {
+                        output.append("\n")
+                    }
+
+                    output.append(
+                        "Topic\n"
+                    )
+
+                    output.append(
+                        prettyTopic(topic)
+                    )
+
+                    output.append("\n")
+                }
+
+                /*
+                 * ------------------------------------------------
+                 * Image learning
+                 * ------------------------------------------------
+                 */
+                if (imageLearned) {
+
+                    if (output.isNotEmpty()) {
+                        output.append("\n")
+                    }
+
+                    output.append(
+                        "What I detected\n"
+                    )
+
+                    if (detectedTopics != null) {
+
+                        for (i in 0 until detectedTopics.length()) {
+
+                            val item =
+                                detectedTopics.optString(i)
+
+                            if (item.isNotBlank()) {
+
+                                output.append(
+                                    "• "
+                                )
+
+                                output.append(
+                                    prettyTopic(item)
+                                )
+
+                                output.append("\n")
+                            }
+                        }
+                    }
+
+                    /*
+                     * Image metadata
+                     */
+                    if (imageMetadata != null) {
+
+                        val width =
+                            imageMetadata.optInt("width", 0)
+
+                        val height =
+                            imageMetadata.optInt("height", 0)
+
+                        val format =
+                            imageMetadata.optString("format", "")
+
+                        if (width > 0 && height > 0) {
+
+                            output.append("\n")
+                            output.append(
+                                "Image size\n"
+                            )
+
+                            output.append(
+                                "${width} × ${height}"
+                            )
+
+                            output.append("\n")
+                        }
+
+                        if (format.isNotBlank()) {
+
+                            output.append(
+                                "Format\n"
+                            )
+
+                            output.append(
+                                format
+                            )
+
+                            output.append("\n")
+                        }
+                    }
+                }
+
+                return cleanFinalText(
+                    output.toString()
+                )
+            }
+
+        } catch (_: Exception) {
+            /*
+             * Not JSON.
+             * Continue with normal text formatting.
+             */
+        }
+
+        /*
+         * --------------------------------------------------------
+         * Normal plain-text response
+         * --------------------------------------------------------
+         */
+        return cleanFinalText(text)
+    }
+
+
+    /*
+     * ============================================================
+     * SENTENCE CLEANER
+     * ============================================================
+     */
+    private fun cleanSentence(value: String): String {
+
+        var text = value.trim()
+
+        /*
+         * Remove Python dictionary artifacts.
+         */
+        text = text
+            .replace("True", "")
+            .replace("False", "")
+            .replace("None", "")
+
+        /*
+         * Remove repeated spaces.
+         */
+        text = text.replace(
+            Regex("[ \\t]+"),
+            " "
+        )
+
+        /*
+         * Remove repeated punctuation.
+         */
+        text = text.replace(
+            Regex(",\\s*,+"),
+            ","
+        )
+
+        text = text.replace(
+            Regex("\\.{2,}"),
+            "."
+        )
+
+        /*
+         * Remove spaces before punctuation.
+         */
+        text = text.replace(
+            Regex("\\s+([,.!?])"),
+            "$1"
+        )
+
+        return text.trim()
+    }
+
+
+    /*
+     * ============================================================
+     * TOPIC FORMATTER
+     * ============================================================
+     */
+    private fun prettyTopic(topic: String): String {
+
+        if (topic.isBlank()) {
+            return ""
+        }
+
+        return topic
+            .trim()
+            .replace("_", " ")
+            .split(" ")
+            .joinToString(" ") { word ->
+
+                if (word.isEmpty()) {
+                    ""
+                } else {
+                    word.substring(0, 1).uppercase() +
+                            word.substring(1).lowercase()
+                }
+            }
+    }
+
+
+    /*
+     * ============================================================
+     * FINAL CHAT CLEANUP
+     * ============================================================
+     */
+    private fun cleanFinalText(value: String): String {
+
+        var text = value.trim()
+
+        /*
+         * Remove Python dictionary braces if a backend response
+         * escaped the JSON handling.
+         */
+        text = text
+            .replace("{", "")
+            .replace("}", "")
+
+        /*
+         * Remove excessive blank lines.
+         */
+        text = text.replace(
+            Regex("\\n{3,}"),
+            "\n\n"
+        )
+
+        /*
+         * Remove whitespace at the end of lines.
+         */
+        text = text.lines()
+            .joinToString("\n") {
+                it.trimEnd()
+            }
+
+        /*
+         * Clean repeated spaces.
+         */
+        text = text.replace(
+            Regex("[ \\t]{2,}"),
+            " "
+        )
+
+        return text.trim()
+    }
+
+
+    /*
+     * ============================================================
+     * TEXT MESSAGE
+     * ============================================================
+     */
+    fun send(
+        message: String,
+        callback: (String) -> Unit
+    ) {
+
+        thread {
+
+            try {
+
+                val url =
+                    URL(SERVER_URL)
+
+                val connection =
+                    url.openConnection()
+                            as HttpURLConnection
+
+                connection.requestMethod =
+                    "POST"
+
+                connection.doOutput =
+                    true
+
+                connection.connectTimeout =
+                    5000
+
+                connection.readTimeout =
+                    10000
+
+                connection.setRequestProperty(
+                    "Content-Type",
+                    "application/json; charset=UTF-8"
+                )
+
+                val json =
+                    JSONObject()
+                        .put(
+                            "message",
+                            message
+                        )
+
+                OutputStreamWriter(
+                    connection.outputStream,
+                    Charsets.UTF_8
+                ).use { writer ->
+
+                    writer.write(
+                        json.toString()
+                    )
+
+                    writer.flush()
+                }
+
+                val inputStream =
+                    if (
+                        connection.responseCode
+                        in 200..299
+                    ) {
+                        connection.inputStream
+                    } else {
+                        connection.errorStream
+                    }
+
+                val reply =
+                    BufferedReader(
+                        InputStreamReader(
+                            inputStream,
+                            Charsets.UTF_8
+                        )
+                    ).use {
+                        it.readText()
+                    }
+
+                val cleanReply =
+                    try {
+
+                        val responseJson =
+                            JSONObject(reply)
+
+                        if (
+                            responseJson.has(
+                                "response"
+                            )
+                        ) {
+
+                            responseJson.getString(
+                                "response"
+                            )
+
+                        } else {
+
+                            reply
+                        }
+
+                    } catch (_: Exception) {
+
+                        reply
+                    }
+
+                callback(
+                    formatReply(cleanReply)
+                )
+
+                connection.disconnect()
+
+            } catch (e: Exception) {
+
+                callback(
+                    "Nitron is offline\n\n${e.message}"
+                )
+            }
+        }
+    }
+
+
+    /*
+     * ============================================================
+     * IMAGE MESSAGE
+     * ============================================================
+     */
+    fun sendImage(
+        base64Image: String,
+        filename: String,
+        callback: (String) -> Unit
+    ) {
+
+        thread {
+
+            try {
+
+                val url =
+                    URL(IMAGE_SERVER_URL)
+
+                val connection =
+                    url.openConnection()
+                            as HttpURLConnection
+
+                connection.requestMethod =
+                    "POST"
+
+                connection.doOutput =
+                    true
+
+                connection.connectTimeout =
+                    10000
+
+                connection.readTimeout =
+                    30000
+
+                connection.setRequestProperty(
+                    "Content-Type",
+                    "application/json; charset=UTF-8"
+                )
+
+                val json =
+                    JSONObject()
+                        .put(
+                            "image",
+                            base64Image
+                        )
+                        .put(
+                            "filename",
+                            filename
+                        )
+                        .put(
+                            "note",
+                            "Image selected from Nitron Android app"
+                        )
+
+                OutputStreamWriter(
+                    connection.outputStream,
+                    Charsets.UTF_8
+                ).use { writer ->
+
+                    writer.write(
+                        json.toString()
+                    )
+
+                    writer.flush()
+                }
+
+                val inputStream =
+                    if (
+                        connection.responseCode
+                        in 200..299
+                    ) {
+                        connection.inputStream
+                    } else {
+                        connection.errorStream
+                    }
+
+                val reply =
+                    BufferedReader(
+                        InputStreamReader(
+                            inputStream,
+                            Charsets.UTF_8
+                        )
+                    ).use {
+                        it.readText()
+                    }
+
+                val response =
+                    try {
+
+                        val responseJson =
+                            JSONObject(reply)
+
+                        if (
+                            responseJson.has(
+                                "response"
+                            )
+                        ) {
+
+                            responseJson.getString(
+                                "response"
+                            )
+
+                        } else {
+
+                            reply
+                        }
+
+                    } catch (_: Exception) {
+
+                        reply
+                    }
+
+                callback(
+                    formatReply(response)
+                )
+
+                connection.disconnect()
+
+            } catch (e: Exception) {
+
+                callback(
+                    "Could not send picture to Nitron\n\n${e.message}"
+                )
+            }
+        }
+    }
+}

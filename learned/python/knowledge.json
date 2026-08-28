@@ -1,0 +1,16 @@
+{
+    "topic": "Python",
+    "status": "learning",
+    "lessons": [
+        {
+            "title": "Introduction to Python",
+            "explanation": "Python is a powerful programming language used to build software, websites, games, automation tools, data science applications, and artificial intelligence.",
+            "practice": "Write a program that prints your name.",
+            "quiz": "Which function displays text in Python?"
+        }
+    ],
+    "code": [
+        "/data/data/com.termux/files/home/Nitron/learned/python/code/example_1.py"
+    ],
+    "notes": []
+}

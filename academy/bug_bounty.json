@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Bug Bounty Programs",
+    "explanation": "A bug bounty program allows security researchers to report security vulnerabilities to an organization in a responsible way. Many organizations reward valid reports that help improve the security of their products.",
+    "code": "# Follow the program's published rules and scope.",
+    "output": "The purpose of bug bounty programs is understood.",
+    "practice": "Research three organizations that run public bug bounty programs.",
+    "quiz": "What is a bug bounty program?"
+  },
+  "2": {
+    "title": "Program Scope",
+    "explanation": "Every bug bounty program defines which systems, applications, or services are in scope for testing. Researchers should only assess targets that are explicitly included in the program.",
+    "code": "scope = ['app.example.com', 'api.example.com']",
+    "output": "The authorized testing scope is identified.",
+    "practice": "Explain why respecting the published scope is important.",
+    "quiz": "What does 'scope' mean in a bug bounty program?"
+  },
+  "3": {
+    "title": "Responsible Disclosure",
+    "explanation": "Responsible disclosure means privately reporting a vulnerability to the affected organization and allowing time for it to be addressed before public disclosure, according to the program's policy.",
+    "code": "report = {\n  'title': 'Security Issue',\n  'description': 'Detailed findings'\n}",
+    "output": "A structured vulnerability report is prepared.",
+    "practice": "List the sections that should be included in a vulnerability report.",
+    "quiz": "What is responsible disclosure?"
+  },
+  "4": {
+    "title": "Writing Quality Reports",
+    "explanation": "A good vulnerability report clearly explains the issue, its impact, the affected component, evidence supporting the finding, and recommended remediation. Clear communication helps organizations reproduce and fix issues.",
+    "code": "# Title\n# Summary\n# Evidence\n# Impact\n# Recommendation",
+    "output": "A clear and organized report is created.",
+    "practice": "Write a sample report for a fictional application.",
+    "quiz": "Why are clear reports important?"
+  },
+  "5": {
+    "title": "Professional Conduct",
+    "explanation": "Bug bounty participants should always follow program rules, respect user privacy, avoid unnecessary disruption, and communicate professionally throughout the disclosure process.",
+    "code": "# Act responsibly and professionally.",
+    "output": "The researcher follows ethical practices.",
+    "practice": "List five principles of professional conduct for bug bounty researchers.",
+    "quiz": "Why is professional conduct important in bug bounty programs?"
+  }
+}

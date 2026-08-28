@@ -1,0 +1,55 @@
+{
+  "domain": "Robotics",
+  "description": "Knowledge about robots, automation systems, sensors, control systems, and intelligent machines.",
+  "topics": [
+    {
+      "name": "Robotics Fundamentals",
+      "knowledge": [
+        "Robotics is the field of designing, building, and programming machines that perform tasks automatically.",
+        "A robot combines mechanical parts, electronics, software, and control systems.",
+        "Robots can perform tasks that are repetitive, dangerous, or require high precision."
+      ]
+    },
+    {
+      "name": "Robot Components",
+      "knowledge": [
+        "Sensors allow robots to detect and measure information from their environment.",
+        "Actuators create movement by converting energy into motion.",
+        "Controllers process information and decide robot actions.",
+        "Processors run the software that controls robotic systems."
+      ]
+    },
+    {
+      "name": "Automation",
+      "knowledge": [
+        "Automation uses technology to perform tasks with reduced human intervention.",
+        "Industrial automation improves speed, accuracy, and efficiency.",
+        "Software automation can control digital tasks and workflows."
+      ]
+    },
+    {
+      "name": "Artificial Intelligence in Robotics",
+      "knowledge": [
+        "AI allows robots to understand environments and make decisions.",
+        "Machine learning helps robots improve from data and experience.",
+        "Computer vision enables robots to analyze images and objects."
+      ]
+    },
+    {
+      "name": "Control Systems",
+      "knowledge": [
+        "Control systems manage how machines respond to inputs.",
+        "Feedback systems allow robots to adjust their actions.",
+        "Precise control is important for movement and stability."
+      ]
+    },
+    {
+      "name": "Future Robotics",
+      "knowledge": [
+        "Future robots may assist in healthcare, manufacturing, exploration, and daily life.",
+        "Robotics combines engineering, programming, artificial intelligence, and science.",
+        "Responsible development ensures robots are safe and useful."
+      ]
+    }
+  ]
+}

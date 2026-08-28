@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Wi-Fi",
+    "explanation": "Wi-Fi is a wireless networking technology that allows devices to connect to a local network and the Internet without cables using radio waves.",
+    "code": "nmcli device wifi list",
+    "output": "Displays nearby Wi-Fi networks (on systems with NetworkManager).",
+    "practice": "View the available Wi-Fi networks on your device.",
+    "quiz": "What is Wi-Fi used for?"
+  },
+  "2": {
+    "title": "Wi-Fi Standards",
+    "explanation": "Modern Wi-Fi standards include Wi-Fi 4 (802.11n), Wi-Fi 5 (802.11ac), Wi-Fi 6 (802.11ax), and Wi-Fi 7. Each generation improves speed, efficiency, and capacity.",
+    "code": "No code required.",
+    "output": "Understand the different Wi-Fi generations.",
+    "practice": "Find out which Wi-Fi standard your router supports.",
+    "quiz": "Which Wi-Fi standard introduced 802.11ax?"
+  },
+  "3": {
+    "title": "2.4 GHz vs 5 GHz",
+    "explanation": "The 2.4 GHz band provides longer range but lower speeds, while the 5 GHz band offers higher speeds over shorter distances. Many routers support both.",
+    "code": "No code required.",
+    "output": "Compare the advantages of each frequency band.",
+    "practice": "Check whether your router broadcasts both 2.4 GHz and 5 GHz networks.",
+    "quiz": "Which frequency usually provides higher speeds?"
+  },
+  "4": {
+    "title": "Wi-Fi Security",
+    "explanation": "Use WPA2 or WPA3 security with a strong password to help protect your wireless network from unauthorized access.",
+    "code": "No code required.",
+    "output": "Understand common Wi-Fi security methods.",
+    "practice": "Check the security mode used by your home Wi-Fi.",
+    "quiz": "Which is more secure: WPA2 or WEP?"
+  },
+  "5": {
+    "title": "Troubleshooting Wi-Fi",
+    "explanation": "If your Wi-Fi connection is slow or unstable, check signal strength, reduce interference, restart the router, update firmware, and verify network settings.",
+    "code": "ping 8.8.8.8",
+    "output": "Tests whether the network connection is working.",
+    "practice": "Run a ping test while connected to Wi-Fi.",
+    "quiz": "Name two common causes of a slow Wi-Fi connection."
+  }
+}

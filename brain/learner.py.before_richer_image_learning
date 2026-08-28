@@ -1,0 +1,238 @@
+"""
+Nitron Learner
+"""
+
+import json
+import os
+from datetime import datetime
+
+try:
+    from brain.knowledge_formatter import formatter
+except ImportError:
+    from knowledge_formatter import formatter
+
+
+class Learner:
+
+    def __init__(self):
+
+        self.file = os.path.join(
+            os.path.dirname(__file__),
+            "learned_knowledge.json"
+        )
+
+        self.knowledge = self.load()
+
+    def load(self):
+
+        if not os.path.exists(self.file):
+            return {}
+
+        try:
+            with open(
+                self.file,
+                "r",
+                encoding="utf-8"
+            ) as f:
+                return json.load(f)
+
+        except Exception:
+            return {}
+
+    def save(self):
+
+        with open(
+            self.file,
+            "w",
+            encoding="utf-8"
+        ) as f:
+
+            json.dump(
+                self.knowledge,
+                f,
+                indent=4,
+                ensure_ascii=False
+            )
+
+    def learn(self, topic, source, content):
+
+        topic = topic.strip().lower()
+
+        if isinstance(content, dict):
+
+            entry = formatter.format(
+                topic,
+                source,
+                content
+            )
+
+        else:
+
+            entry = {
+                "topic": topic,
+                "title": topic.title(),
+                "source": source,
+                "date": str(datetime.now()),
+                "summary": str(content),
+                "keywords": [],
+                "sections": {},
+                "examples": [],
+                "related_topics": [],
+                "notes": [],
+                "confidence": 1.0
+            }
+
+        self.knowledge[topic] = entry
+
+        self.save()
+
+        return entry
+
+    def learn_image(self, image_result, source="image"):
+        """
+        Learn structured information from an image analysis.
+
+        Raw OCR is never stored. Image metadata, detected topics,
+        safe vision output, and public research references may be
+        retained.
+        """
+
+        if not isinstance(image_result, dict):
+            raise ValueError("image_result must be a dictionary.")
+
+        topics = image_result.get("topics", [])
+
+        if not topics:
+            topics = [{"topic": "image_analysis"}]
+
+        # Store only topic information in the learning summary.
+        topic_names = [
+            str(item.get("topic", "")).strip().lower()
+            for item in topics
+            if isinstance(item, dict) and item.get("topic")
+        ]
+
+        topic_names = list(dict.fromkeys(topic_names))
+
+        safe_research = image_result.get("research", {})
+        research_items = []
+
+        if isinstance(safe_research, dict):
+            for item in safe_research.get("results", [])[:5]:
+                if isinstance(item, dict):
+                    title = str(item.get("title", "")).strip()
+                    url = str(item.get("url", "")).strip()
+
+                    if title and url:
+                        research_items.append({
+                            "title": title,
+                            "url": url,
+                        })
+
+        vision = image_result.get("vision", {})
+
+        safe_vision = {
+            "success": bool(
+                isinstance(vision, dict)
+                and vision.get("success")
+            ),
+            "model": (
+                str(vision.get("model", ""))
+                if isinstance(vision, dict)
+                else ""
+            ),
+        }
+
+        if isinstance(vision, dict) and vision.get("success"):
+            safe_vision["analysis"] = str(
+                vision.get("analysis", "")
+            )
+
+        elif isinstance(vision, dict):
+            safe_vision["error_type"] = str(
+                vision.get("error_type", "unavailable")
+            )
+
+        metadata = {
+            "width": image_result.get("width"),
+            "height": image_result.get("height"),
+            "format": image_result.get("format"),
+            "mode": image_result.get("mode"),
+        }
+
+        safe_data = {
+            "title": (
+                "Image analysis: "
+                + str(image_result.get("filename", "image"))
+            ),
+            "summary": (
+                "Image analyzed. Detected topics: "
+                + ", ".join(topic_names)
+                + "."
+            ),
+            "sections": {
+                "image_metadata": metadata,
+                "topics": topic_names,
+                "vision": safe_vision,
+                "research": {
+                    "query": str(
+                        safe_research.get("query", "")
+                    ),
+                    "results": research_items,
+                },
+            },
+            "related_topics": topic_names,
+            "confidence": (
+                1.0 if safe_vision["success"] else 0.7
+            ),
+        }
+
+        learned = []
+
+        for topic in topic_names:
+            entry = self.learn(
+                topic,
+                source,
+                safe_data,
+            )
+            learned.append(entry)
+
+        return learned
+
+    def recall(self, topic):
+
+        topic = topic.strip().lower()
+
+        return self.knowledge.get(
+            topic,
+            None
+        )
+
+    def topics(self):
+
+        return sorted(
+            self.knowledge.keys()
+        )
+
+    def exists(self, topic):
+
+        topic = topic.strip().lower()
+
+        return topic in self.knowledge
+
+    def remove(self, topic):
+
+        topic = topic.strip().lower()
+
+        if topic in self.knowledge:
+
+            del self.knowledge[topic]
+
+            self.save()
+
+            return True
+
+        return False
+
+
+learner = Learner()

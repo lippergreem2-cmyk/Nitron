@@ -1,0 +1,40 @@
+def analyze_trade(symbol, candles):
+
+    structure = analyze_market_structure(candles)
+    ict = analyze_ict(candles)
+    risk = calculate_trade_levels(candles, structure)
+    confidence = calculate_confidence(structure, ict, risk)
+
+    recommendation = "WAIT"
+
+    if structure["trend"] == "Bullish":
+
+        if confidence >= 70:
+            recommendation = "BUY"
+
+        elif (
+            ict["order_block"] == "Bullish"
+            and confidence >= 60
+        ):
+            recommendation = "BUY"
+
+    elif structure["trend"] == "Bearish":
+
+        if confidence >= 70:
+            recommendation = "SELL"
+
+        elif (
+            ict["order_block"] == "Bearish"
+            and confidence >= 60
+        ):
+            recommendation = "SELL"
+
+    return {
+        "symbol": symbol,
+        "trend": structure["trend"],
+        "market_structure": structure,
+        "ict": ict,
+        "risk": risk,
+        "confidence": confidence,
+        "recommendation": recommendation
+    }

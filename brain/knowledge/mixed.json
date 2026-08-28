@@ -1,0 +1,46 @@
+{
+  "domain": "Mixed Knowledge",
+  "description": "General connected knowledge across multiple fields, concepts, and real-world applications.",
+  "topics": [
+    {
+      "name": "Technology and Society",
+      "knowledge": [
+        "Technology changes how people communicate, work, learn, and solve problems.",
+        "Modern systems combine software, hardware, networks, and human interaction.",
+        "Responsible technology considers safety, privacy, and usefulness."
+      ]
+    },
+    {
+      "name": "Innovation",
+      "knowledge": [
+        "Innovation creates new solutions by combining ideas and knowledge.",
+        "Research, experimentation, and creativity drive progress.",
+        "Many breakthroughs happen when different fields work together."
+      ]
+    },
+    {
+      "name": "Problem Solving",
+      "knowledge": [
+        "Problem solving involves understanding a challenge, analyzing information, and creating solutions.",
+        "Logical thinking and creativity help solve complex problems.",
+        "Testing and improvement are important parts of solving problems."
+      ]
+    },
+    {
+      "name": "Systems Thinking",
+      "knowledge": [
+        "Systems thinking studies how parts interact to create larger systems.",
+        "Computers, businesses, ecosystems, and societies are examples of systems.",
+        "Understanding connections helps predict outcomes and improve designs."
+      ]
+    },
+    {
+      "name": "Knowledge Integration",
+      "knowledge": [
+        "Artificial intelligence combines knowledge from mathematics, programming, data, and science.",
+        "Robotics combines engineering, software, electronics, and AI.",
+        "Complex problems often require knowledge from multiple domains."
+      ]
+    }
+  ]
+}

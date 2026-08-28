@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Firewalls",
+    "explanation": "A firewall is a security system that monitors and controls incoming and outgoing network traffic based on security rules. It helps protect computers and networks from unauthorized access.",
+    "code": "sudo ufw status",
+    "output": "Displays the current firewall status (Ubuntu systems with UFW).",
+    "practice": "Check whether the firewall on your system is enabled.",
+    "quiz": "What is the main purpose of a firewall?"
+  },
+  "2": {
+    "title": "Types of Firewalls",
+    "explanation": "Common firewall types include packet-filtering firewalls, stateful inspection firewalls, proxy firewalls, and next-generation firewalls (NGFWs).",
+    "code": "No code required.",
+    "output": "Understand the different types of firewalls.",
+    "practice": "Research one advantage of a next-generation firewall.",
+    "quiz": "Which firewall type keeps track of active connections?"
+  },
+  "3": {
+    "title": "Firewall Rules",
+    "explanation": "Firewall rules determine which network traffic is allowed or blocked based on IP addresses, ports, protocols, or applications.",
+    "code": "sudo ufw allow 22\nsudo ufw deny 23",
+    "output": "Allows SSH (port 22) and blocks Telnet (port 23).",
+    "practice": "Identify which service normally uses port 22.",
+    "quiz": "What is a firewall rule?"
+  },
+  "4": {
+    "title": "Common Ports",
+    "explanation": "Many network services use well-known ports. Examples include HTTP (80), HTTPS (443), SSH (22), FTP (21), SMTP (25), and DNS (53).",
+    "code": "netstat -tuln",
+    "output": "Lists listening network ports.",
+    "practice": "Find three common ports and describe their purpose.",
+    "quiz": "Which port is commonly used for HTTPS?"
+  },
+  "5": {
+    "title": "Firewall Best Practices",
+    "explanation": "Use the principle of least privilege, keep firewall software updated, review rules regularly, disable unused services, and monitor logs for suspicious activity.",
+    "code": "sudo ufw enable",
+    "output": "Enables the UFW firewall.",
+    "practice": "List three best practices for maintaining a firewall.",
+    "quiz": "Why should unused ports be blocked?"
+  }
+}

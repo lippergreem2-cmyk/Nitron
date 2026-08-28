@@ -1,0 +1,26 @@
+{
+  "1": {
+    "title": "Introduction to TypeScript",
+    "explanation": "TypeScript is a programming language built on JavaScript. It adds static types, making code easier to understand, maintain, and debug.",
+    "code": "let name: string = 'Nitron';\nlet version: number = 1;\n\nconsole.log(name, version);",
+    "output": "Nitron 1",
+    "practice": "Create variables for your name, age, and favorite language using TypeScript types.",
+    "quiz": "What is the main advantage of TypeScript over JavaScript?"
+  },
+  "2": {
+    "title": "Basic Types",
+    "explanation": "TypeScript supports types such as string, number, boolean, array, object, and more.",
+    "code": "let age: number = 20;\nlet online: boolean = true;\nlet languages: string[] = ['HTML', 'CSS', 'JavaScript'];",
+    "output": "Variables are created with explicit types.",
+    "practice": "Create one variable of each basic type.",
+    "quiz": "Which type is used for true or false values?"
+  },
+  "3": {
+    "title": "Functions",
+    "explanation": "Functions in TypeScript can define the types of their parameters and return values.",
+    "code": "function add(a: number, b: number): number {\n  return a + b;\n}\n\nconsole.log(add(5, 3));",
+    "output": "8",
+    "practice": "Create a function that multiplies two numbers and returns the result.",
+    "quiz": "Why are parameter types useful in TypeScript?"
+  }
+}

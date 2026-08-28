@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Linux",
+    "explanation": "Linux is a free and open-source operating system used on servers, cloud platforms, Android, and many developer computers. It is known for its stability, security, and flexibility.",
+    "code": "uname -a",
+    "output": "Displays information about the Linux system.",
+    "practice": "Run uname -a and identify your Linux kernel version.",
+    "quiz": "What is Linux?"
+  },
+  "2": {
+    "title": "Navigating the File System",
+    "explanation": "Linux organizes files into directories. Commands like pwd, ls, and cd help you navigate.",
+    "code": "pwd\nls\ncd Documents",
+    "output": "Shows the current directory, lists files, and changes into the Documents directory.",
+    "practice": "Navigate to your home directory and list its contents.",
+    "quiz": "Which command lists files in the current directory?"
+  },
+  "3": {
+    "title": "Managing Files",
+    "explanation": "Linux provides commands to create, copy, move, rename, and delete files and directories.",
+    "code": "touch notes.txt\ncp notes.txt backup.txt\nmv backup.txt archive.txt\nrm archive.txt",
+    "output": "Creates, copies, renames, and deletes files.",
+    "practice": "Create a file, copy it, rename the copy, then delete it.",
+    "quiz": "Which command deletes a file?"
+  },
+  "4": {
+    "title": "Permissions",
+    "explanation": "Linux uses read (r), write (w), and execute (x) permissions to control access to files and directories.",
+    "code": "ls -l\nchmod +x script.sh",
+    "output": "Displays file permissions and makes a script executable.",
+    "practice": "Create a shell script and make it executable.",
+    "quiz": "What does chmod do?"
+  },
+  "5": {
+    "title": "Processes",
+    "explanation": "Every running program in Linux is a process. You can view and manage processes using commands like ps, top, and kill.",
+    "code": "ps\ntop\nkill 1234",
+    "output": "Lists processes, shows live system activity, and stops a process.",
+    "practice": "Run ps and identify your current shell process.",
+    "quiz": "Which command displays running processes?"
+  }
+}

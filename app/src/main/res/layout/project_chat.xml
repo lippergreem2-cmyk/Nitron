@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?android:attr/colorBackground">
+
+    <!-- TOP BAR -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="12dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+            android:padding="10dp"
+            android:src="@android:drawable/ic_menu_revert"/>
+
+        <TextView
+            android:id="@+id/projectTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:textSize="19sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <!-- CONVERSATION -->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/projectMessageList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="12dp"/>
+
+    </FrameLayout>
+
+    <!-- COMPOSER -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="8dp">
+
+        <LinearLayout
+            android:id="@+id/projectComposer"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:background="@drawable/nitron_input_background">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Add image"
+                android:padding="10dp"
+                android:src="@android:drawable/ic_menu_gallery"/>
+
+            <EditText
+                android:id="@+id/projectMessageInput"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:hint="Message Nitron"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLines="5"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                android:textSize="16sp"/>
+
+            <ImageButton
+                android:id="@+id/projectSendButton"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/nitron_send_button"
+                android:contentDescription="Send"
+                android:padding="10dp"
+                android:src="@android:drawable/arrow_up_float"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

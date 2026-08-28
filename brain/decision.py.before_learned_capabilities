@@ -1,0 +1,76 @@
+"""
+Nitron Decision Engine
+"""
+
+from brain.context import context
+from brain.memory import memory
+from brain.knowledge import knowledge
+
+
+class DecisionEngine:
+    """
+    Makes simple decisions based on the user's command.
+    """
+
+    def decide(self, command):
+        command = command.lower().strip()
+
+        context.update(command)
+
+        if any(word in command for word in [
+            "teach", "lesson", "academy", "learn", "study"
+        ]):
+            return {
+                "module": "academy",
+                "action": "teach"
+            }
+
+        if any(word in command for word in [
+            "create", "build", "generate", "project"
+        ]):
+            return {
+                "module": "developer",
+                "action": "build"
+            }
+
+        if any(word in command for word in [
+            "trade", "gold", "forex", "bitcoin", "btc"
+        ]):
+            return {
+                "module": "trading",
+                "action": "analyze"
+            }
+
+        if any(word in command for word in [
+            "weather", "temperature", "forecast"
+        ]):
+            return {
+                "module": "weather",
+                "action": "forecast"
+            }
+
+        if any(word in command for word in [
+            "music", "song", "play"
+        ]):
+            return {
+                "module": "music",
+                "action": "play"
+            }
+
+        if any(word in command for word in [
+            "time", "date"
+        ]):
+            return {
+                "module": "system",
+                "action": "clock"
+            }
+
+        memory.remember("last_command", command)
+
+        return {
+            "module": "chat",
+            "action": "respond"
+        }
+
+
+decision = DecisionEngine()

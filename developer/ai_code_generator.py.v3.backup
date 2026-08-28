@@ -1,0 +1,476 @@
+# ==========================================================
+# NITRON AI CODE GENERATOR v3.0
+# ==========================================================
+
+import json
+import re
+
+from developer.ai_provider import OpenAIProvider
+from developer.code_generator import CodeGenerator
+
+
+class AICodeGenerator:
+
+    def __init__(self, provider=None):
+
+        self.provider = (
+            provider
+            or OpenAIProvider()
+        )
+
+        self.generator = CodeGenerator()
+
+    # ======================================================
+    # BUILD PROMPT
+    # ======================================================
+
+    def build_prompt(
+        self,
+        request,
+        existing_files=None
+    ):
+
+        existing_files = existing_files or {}
+
+        context = ""
+
+        if existing_files:
+
+            context = (
+                "\n\nEXISTING PROJECT FILES:\n"
+            )
+
+            for path, content in existing_files.items():
+
+                context += (
+                    f"\n--- {path} ---\n"
+                )
+
+                context += str(content)
+
+                context += (
+                    "\n--- END FILE ---\n"
+                )
+
+        return f"""
+You are Nitron's senior software engineer.
+
+USER REQUEST:
+{request}
+
+Generate REAL, COMPLETE, RUNNABLE software.
+
+Requirements:
+
+1. Understand the user's request before generating code.
+2. Create all necessary files.
+3. Write complete implementations.
+4. Do not use fake functions.
+5. Do not leave TODO placeholders.
+6. Include all required imports.
+7. Keep every file internally consistent.
+8. Use sensible project structure.
+9. Include README.md when useful.
+10. If existing files are supplied, improve the existing project.
+11. Do not unnecessarily remove working functionality.
+12. Make the generated project runnable.
+13. Return ONLY valid JSON.
+
+Required JSON structure:
+
+{{
+    "project_name": "ExampleProject",
+    "description": "Short description",
+    "files": {{
+        "main.py": "complete source code",
+        "README.md": "documentation"
+    }}
+}}
+
+IMPORTANT:
+
+- The value of every file must be a STRING.
+- Escape newlines correctly for JSON.
+- Do not use Markdown code fences.
+- Do not put explanations outside the JSON.
+- Return valid JSON only.
+
+{context}
+"""
+
+    # ======================================================
+    # CLEAN RESPONSE
+    # ======================================================
+
+    def clean_response(
+        self,
+        response
+    ):
+
+        if not isinstance(
+            response,
+            str
+        ):
+
+            raise RuntimeError(
+                "AI provider returned a non-text response."
+            )
+
+        response = response.strip()
+
+        # Remove markdown fences if the model
+        # accidentally uses them.
+
+        response = re.sub(
+            r"^```json\s*",
+            "",
+            response,
+            flags=re.IGNORECASE
+        )
+
+        response = re.sub(
+            r"^```\s*",
+            "",
+            response
+        )
+
+        response = re.sub(
+            r"\s*```$",
+            "",
+            response
+        )
+
+        return response.strip()
+
+    # ======================================================
+    # PARSE PROJECT
+    # ======================================================
+
+    def parse_project(
+        self,
+        response
+    ):
+
+        response = self.clean_response(
+            response
+        )
+
+        try:
+
+            data = json.loads(
+                response
+            )
+
+        except json.JSONDecodeError as error:
+
+            raise RuntimeError(
+                "The AI returned invalid JSON.\n"
+                f"JSON error: {error}"
+            )
+
+        if not isinstance(
+            data,
+            dict
+        ):
+
+            raise RuntimeError(
+                "AI response must be a JSON object."
+            )
+
+        files = data.get(
+            "files"
+        )
+
+        if not isinstance(
+            files,
+            dict
+        ):
+
+            raise RuntimeError(
+                "AI response does not contain "
+                "a valid files object."
+            )
+
+        if not files:
+
+            raise RuntimeError(
+                "AI returned an empty project."
+            )
+
+        for filename, content in files.items():
+
+            if not isinstance(
+                filename,
+                str
+            ):
+
+                raise RuntimeError(
+                    "Every file name must be a string."
+                )
+
+            if not isinstance(
+                content,
+                str
+            ):
+
+                raise RuntimeError(
+                    f"File '{filename}' must contain text."
+                )
+
+        project_name = data.get(
+            "project_name",
+            "NitronProject"
+        )
+
+        description = data.get(
+            "description",
+            ""
+        )
+
+        return {
+            "project_name": str(
+                project_name
+            ),
+            "description": str(
+                description
+            ),
+            "files": files
+        }
+
+    # ======================================================
+    # MERGE EXISTING PROJECT
+    # ======================================================
+
+    def merge_files(
+        self,
+        existing_files,
+        generated_files
+    ):
+
+        merged = dict(
+            existing_files
+        )
+
+        for path, content in generated_files.items():
+
+            merged[path] = content
+
+        return merged
+
+    # ======================================================
+    # GENERATE PROJECT
+    # ======================================================
+
+    def generate(
+        self,
+        request,
+        project_name=None,
+        existing_project=None
+    ):
+
+        if not request or not request.strip():
+
+            return {
+                "success": False,
+                "error": "No request provided."
+            }
+
+        existing_files = {}
+
+        # --------------------------------------------------
+        # READ EXISTING PROJECT
+        # --------------------------------------------------
+
+        if existing_project:
+
+            try:
+
+                existing_files = (
+                    self.generator.read_project(
+                        existing_project
+                    )
+                )
+
+            except Exception as error:
+
+                return {
+                    "success": False,
+                    "error": (
+                        "Could not read existing project: "
+                        f"{error}"
+                    )
+                }
+
+        # --------------------------------------------------
+        # BUILD PROMPT
+        # --------------------------------------------------
+
+        prompt = self.build_prompt(
+            request,
+            existing_files
+        )
+
+        # --------------------------------------------------
+        # ASK AI
+        # --------------------------------------------------
+
+        try:
+
+            response = self.provider.generate(
+                prompt
+            )
+
+        except Exception as error:
+
+            return {
+                "success": False,
+                "error": str(error)
+            }
+
+        # --------------------------------------------------
+        # PARSE AI RESPONSE
+        # --------------------------------------------------
+
+        try:
+
+            project = self.parse_project(
+                response
+            )
+
+        except Exception as error:
+
+            return {
+                "success": False,
+                "error": str(error)
+            }
+
+        # --------------------------------------------------
+        # PROJECT NAME
+        # --------------------------------------------------
+
+        if project_name:
+
+            project["project_name"] = (
+                project_name
+            )
+
+        # --------------------------------------------------
+        # MERGE PROJECT
+        # --------------------------------------------------
+
+        files = project["files"]
+
+        if existing_files:
+
+            files = self.merge_files(
+                existing_files,
+                files
+            )
+
+        # --------------------------------------------------
+        # WRITE PROJECT
+        # --------------------------------------------------
+
+        try:
+
+            result = self.generator.write_ai_project(
+                project["project_name"],
+                files,
+                project["description"]
+            )
+
+        except Exception as error:
+
+            return {
+                "success": False,
+                "error": (
+                    "AI generated the code, "
+                    "but Nitron could not write "
+                    f"the project: {error}"
+                )
+            }
+
+        # --------------------------------------------------
+        # RESULT
+        # --------------------------------------------------
+
+        return {
+            "success": True,
+            "project": project["project_name"],
+            "description": project["description"],
+            "path": result["path"],
+            "files": result["files"]
+        }
+
+    # ======================================================
+    # USER INTERFACE
+    # ======================================================
+
+    def generate_code(
+        self,
+        request,
+        project_name=None
+    ):
+
+        result = self.generate(
+            request,
+            project_name
+        )
+
+        if not result["success"]:
+
+            return (
+                "Code generation failed.\n"
+                + result["error"]
+            )
+
+        lines = [
+
+            "Project generated successfully.",
+            "",
+
+            f"Project: {result['project']}",
+
+            f"Location: {result['path']}",
+
+            "",
+
+            "Files:"
+
+        ]
+
+        for filename in result["files"]:
+
+            lines.append(
+                f"  - {filename}"
+            )
+
+        return "\n".join(
+            lines
+        )
+
+
+# ==========================================================
+# DIRECT TEST
+# ==========================================================
+
+if __name__ == "__main__":
+
+    generator = AICodeGenerator()
+
+    print()
+    print("=" * 60)
+    print("NITRON AI CODE GENERATOR v3.0")
+    print("=" * 60)
+
+    result = generator.generate_code(
+        "Create a Python calculator with "
+        "addition, subtraction, multiplication "
+        "and division."
+    )
+
+    print()
+    print(result)
+
+    print()
+    print("=" * 60)

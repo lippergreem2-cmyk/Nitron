@@ -1,0 +1,26 @@
+{
+  "1": {
+    "title": "Introduction to Next.js",
+    "explanation": "Next.js is a React framework used to build fast, scalable web applications. It provides file-based routing, server-side rendering (SSR), static site generation (SSG), and API routes.",
+    "code": "export default function Home() {\n  return (\n    <h1>Welcome to Next.js</h1>\n  );\n}",
+    "output": "A webpage displaying 'Welcome to Next.js'.",
+    "practice": "Create a Home page that displays your name and a short welcome message.",
+    "quiz": "What JavaScript library is Next.js built on?"
+  },
+  "2": {
+    "title": "Pages and Routing",
+    "explanation": "Each file inside the pages (or app) directory automatically becomes a route in your application.",
+    "code": "// pages/about.js\nexport default function About() {\n  return <h1>About Us</h1>;\n}",
+    "output": "Opening /about displays the About Us page.",
+    "practice": "Create a contact page and access it through its route.",
+    "quiz": "How does Next.js create routes?"
+  },
+  "3": {
+    "title": "API Routes",
+    "explanation": "Next.js can create backend API endpoints inside the project, allowing frontend and backend code to live together.",
+    "code": "export default function handler(req, res) {\n  res.status(200).json({ message: 'Hello from API' });\n}",
+    "output": "{ \"message\": \"Hello from API\" }",
+    "practice": "Create an API route that returns your name and country in JSON format.",
+    "quiz": "What is the purpose of an API route in Next.js?"
+  }
+}

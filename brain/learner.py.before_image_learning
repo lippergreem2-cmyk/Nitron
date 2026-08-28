@@ -1,0 +1,127 @@
+"""
+Nitron Learner
+"""
+
+import json
+import os
+from datetime import datetime
+
+try:
+    from brain.knowledge_formatter import formatter
+except ImportError:
+    from knowledge_formatter import formatter
+
+
+class Learner:
+
+    def __init__(self):
+
+        self.file = os.path.join(
+            os.path.dirname(__file__),
+            "learned_knowledge.json"
+        )
+
+        self.knowledge = self.load()
+
+    def load(self):
+
+        if not os.path.exists(self.file):
+            return {}
+
+        try:
+            with open(
+                self.file,
+                "r",
+                encoding="utf-8"
+            ) as f:
+                return json.load(f)
+
+        except Exception:
+            return {}
+
+    def save(self):
+
+        with open(
+            self.file,
+            "w",
+            encoding="utf-8"
+        ) as f:
+
+            json.dump(
+                self.knowledge,
+                f,
+                indent=4,
+                ensure_ascii=False
+            )
+
+    def learn(self, topic, source, content):
+
+        topic = topic.strip().lower()
+
+        if isinstance(content, dict):
+
+            entry = formatter.format(
+                topic,
+                source,
+                content
+            )
+
+        else:
+
+            entry = {
+                "topic": topic,
+                "title": topic.title(),
+                "source": source,
+                "date": str(datetime.now()),
+                "summary": str(content),
+                "keywords": [],
+                "sections": {},
+                "examples": [],
+                "related_topics": [],
+                "notes": [],
+                "confidence": 1.0
+            }
+
+        self.knowledge[topic] = entry
+
+        self.save()
+
+        return entry
+
+    def recall(self, topic):
+
+        topic = topic.strip().lower()
+
+        return self.knowledge.get(
+            topic,
+            None
+        )
+
+    def topics(self):
+
+        return sorted(
+            self.knowledge.keys()
+        )
+
+    def exists(self, topic):
+
+        topic = topic.strip().lower()
+
+        return topic in self.knowledge
+
+    def remove(self, topic):
+
+        topic = topic.strip().lower()
+
+        if topic in self.knowledge:
+
+            del self.knowledge[topic]
+
+            self.save()
+
+            return True
+
+        return False
+
+
+learner = Learner()

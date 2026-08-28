@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Internet / Network -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Voice / Camera -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Notifications -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- Floating Nitron Bubble -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- Background Services -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <!-- Start Nitron after reboot -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="true"
+        android:label="Nitron"
+        android:icon="@mipmap/ic_launcher"
+        android:theme="@style/Theme.Nitron"
+        android:usesCleartextTraffic="true"
+        android:supportsRtl="true">
+
+        <!-- Nitron Login -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+
+        <!-- Main Nitron Chat -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <!-- Nitron Chat Page -->
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
+
+        <!-- Image Picker -->
+        <activity
+            android:name=".ImagePickerActivity"
+            android:exported="false" />
+
+        <!-- Nitron Projects -->
+        <activity
+            android:name=".ProjectsActivity"
+            android:exported="false" />
+
+        <!-- Project Chat -->
+        <activity
+            android:name=".ProjectChatActivity"
+            android:exported="false" />
+
+        <!-- Floating Nitron Bubble -->
+        <service
+            android:name=".BubbleService"
+            android:exported="false" />
+
+        <!-- Nitron Notification Service -->
+        <service
+            android:name=".NotificationService"
+            android:exported="false" />
+
+        <!-- Start Nitron after phone reboot -->
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+
+        </receiver>
+
+    </application>
+
+</manifest>

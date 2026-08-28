@@ -1,0 +1,255 @@
+package com.nitron.bubble
+
+import android.content.Intent
+import android.graphics.Color
+import android.net.Uri
+import android.os.Build
+import android.os.Bundle
+import android.provider.Settings
+import android.view.View
+import android.view.WindowInsets
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
+import com.nitron.bubble.chat.MessageAdapter
+import com.nitron.bubble.chat.Message
+import com.nitron.bubble.chat.ChatManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var messageInput: EditText
+    private lateinit var welcomeText: TextView
+
+    private lateinit var messageList: RecyclerView
+    private lateinit var messageAdapter: MessageAdapter
+    private lateinit var chatManager: ChatManager
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_main)
+        setupKeyboardInsets()
+
+        drawerLayout = findViewById(R.id.drawerLayout)
+        messageInput = findViewById(R.id.messageInput)
+        welcomeText = findViewById(R.id.welcomeText)
+
+        // Proper Nitron conversation
+        messageList = findViewById(R.id.messageList)
+        messageAdapter = MessageAdapter()
+        messageList.layoutManager = LinearLayoutManager(this)
+        messageList.adapter = messageAdapter
+
+        chatManager = ChatManager()
+        chatManager.setListener(object : ChatManager.ChatListener {
+            override fun onReply(reply: String) {
+                runOnUiThread {
+                    messageAdapter.addMessage(Message(reply, false))
+                    messageList.smoothScrollToPosition(messageAdapter.itemCount - 1)
+                }
+            }
+        })
+
+        val menuButton = findViewById<ImageButton>(R.id.menuButton)
+        val editButton = findViewById<ImageButton>(R.id.editButton)
+        val closeButton = findViewById<ImageButton>(R.id.closeButton)
+        val sendButton = findViewById<ImageButton>(R.id.sendButton)
+
+        // Open side menu
+        menuButton.setOnClickListener {
+            drawerLayout.openDrawer(android.view.Gravity.START)
+        }
+
+        // New chat
+        editButton.setOnClickListener {
+            messageInput.setText("")
+            welcomeText.visibility = View.VISIBLE
+            drawerLayout.closeDrawers()
+        }
+
+        // Close button
+        closeButton.setOnClickListener {
+            messageInput.setText("")
+            messageInput.clearFocus()
+        }
+
+        // Send button
+        sendButton.setOnClickListener {
+            val text = messageInput.text.toString().trim()
+
+            if (text.isNotEmpty()) {
+                welcomeText.visibility = View.GONE
+
+                // User message
+                messageAdapter.addMessage(Message(text, true))
+                messageList.smoothScrollToPosition(messageAdapter.itemCount - 1)
+
+                messageInput.setText("")
+
+                // Send to Nitron
+                chatManager.sendMessage(text)
+            }
+        }
+
+        // Drawer items
+        findViewById<TextView>(R.id.projectsButton).setOnClickListener {
+            drawerLayout.closeDrawers()
+
+            startActivity(
+                Intent(this, ProjectsActivity::class.java)
+            )
+        }
+
+        findViewById<TextView>(R.id.libraryButton).setOnClickListener {
+            drawerLayout.closeDrawers()
+            welcomeText.text = "Library"
+            welcomeText.visibility = View.VISIBLE
+        }
+
+        findViewById<TextView>(R.id.imagesButton).setOnClickListener {
+            drawerLayout.closeDrawers()
+            welcomeText.text = "Images"
+            welcomeText.visibility = View.VISIBLE
+        }
+
+        findViewById<TextView>(R.id.recentButton).setOnClickListener {
+            drawerLayout.closeDrawers()
+            welcomeText.text = "Recent"
+            welcomeText.visibility = View.VISIBLE
+        }
+
+        findViewById<TextView>(R.id.searchButton).setOnClickListener {
+            drawerLayout.closeDrawers()
+            welcomeText.text = "Search"
+            welcomeText.visibility = View.VISIBLE
+        }
+
+        // Down arrow → scroll to the latest conversation message
+        findViewById<ImageButton>(R.id.downArrowButton).setOnClickListener {
+            if (messageAdapter.itemCount > 0) {
+                messageList.post {
+                    messageList.smoothScrollToPosition(messageAdapter.itemCount - 1)
+                }
+            }
+        }
+
+        // Text color setting
+        findViewById<TextView>(R.id.textColorSettings).setOnClickListener {
+            toggleTextColor()
+        }
+
+        // Check overlay permission
+        val startButton = findViewById<Button>(R.id.startBubble)
+
+        if (
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+            !Settings.canDrawOverlays(this)
+        ) {
+            startButton.isEnabled = false
+
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:$packageName")
+            )
+
+            startActivity(intent)
+        } else {
+            startButton.isEnabled = true
+        }
+
+        // Existing Nitron overlay
+        startButton.setOnClickListener {
+
+            if (
+                Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
+                Settings.canDrawOverlays(this)
+            ) {
+                val overlay = BubbleOverlay(this)
+                overlay.show()
+                finish()
+            }
+        }
+
+        // Android Back button
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+
+                override fun handleOnBackPressed() {
+
+                    if (drawerLayout.isDrawerOpen(android.view.Gravity.START)) {
+                        drawerLayout.closeDrawer(android.view.Gravity.START)
+                    } else {
+                        finish()
+                    }
+                }
+            }
+        )
+    }
+
+    private fun setupKeyboardInsets() {
+        val inputContainer = findViewById<View>(R.id.inputContainer)
+
+        inputContainer.setOnApplyWindowInsetsListener { view, insets ->
+
+            val imeBottom =
+                insets.getInsets(WindowInsets.Type.ime()).bottom
+
+            val systemBottom =
+                insets.getInsets(WindowInsets.Type.systemBars()).bottom
+
+            val bottomInset = maxOf(imeBottom, systemBottom)
+
+            view.setPadding(
+                view.paddingLeft,
+                view.paddingTop,
+                view.paddingRight,
+                8 + bottomInset
+            )
+
+            insets
+        }
+
+        inputContainer.requestApplyInsets()
+    }
+
+    private fun toggleTextColor() {
+
+        val currentColor = messageInput.currentTextColor
+
+        if (currentColor == Color.rgb(40, 40, 40)) {
+            setConversationTextColor(Color.rgb(45, 90, 180))
+        } else {
+            setConversationTextColor(Color.rgb(40, 40, 40))
+        }
+    }
+
+    private fun setConversationTextColor(color: Int) {
+
+        messageInput.setTextColor(color)
+        welcomeText.setTextColor(color)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (!::drawerLayout.isInitialized) return
+
+        val startButton =
+            findViewById<Button?>(R.id.startBubble)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            startButton?.isEnabled =
+                Settings.canDrawOverlays(this)
+        } else {
+            startButton?.isEnabled = true
+        }
+    }
+}

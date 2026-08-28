@@ -1,0 +1,90 @@
+"""
+Nitron Knowledge Formatter
+"""
+
+from datetime import datetime
+import re
+
+
+class KnowledgeFormatter:
+
+    def __init__(self):
+        self.name = "Nitron Knowledge Formatter"
+
+    def format(self, topic, source, knowledge):
+
+        topic = topic.strip().lower()
+
+        title = knowledge.get(
+            "title",
+            ""
+        )
+
+        summary = knowledge.get(
+            "summary",
+            ""
+        )
+
+        # Support WebReader output directly
+        if not summary:
+            summary = knowledge.get(
+                "content",
+                ""
+            )
+
+        # Generate simple keywords
+        words = re.findall(
+            r"\b[a-zA-Z]{4,}\b",
+            summary.lower()
+        )
+
+        keywords = []
+
+        for word in words:
+
+            if word not in keywords:
+                keywords.append(word)
+
+            if len(keywords) >= 20:
+                break
+
+        # Preserve explicitly supplied keywords
+        supplied_keywords = knowledge.get(
+            "keywords",
+            []
+        )
+
+        if supplied_keywords:
+            keywords = supplied_keywords
+
+        return {
+            "topic": topic,
+            "title": title,
+            "source": source,
+            "date": str(datetime.now()),
+            "summary": summary,
+            "keywords": keywords,
+            "sections": knowledge.get(
+                "sections",
+                {}
+            ),
+            "examples": knowledge.get(
+                "examples",
+                []
+            ),
+            "related_topics": knowledge.get(
+                "related_topics",
+                []
+            ),
+            "notes": knowledge.get(
+                "notes",
+                []
+            ),
+            "confidence": knowledge.get(
+                "confidence",
+                1.0
+            )
+        }
+
+
+formatter = KnowledgeFormatter()

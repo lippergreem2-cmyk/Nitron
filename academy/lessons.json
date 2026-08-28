@@ -1,0 +1,49 @@
+{
+    "python": {
+        "intro": {
+            "title": "Introduction to Python",
+            "lesson": "Python is a programming language used to create apps, websites, AI systems, and automation programs.",
+            "example": "print('Hello Nitron')"
+        }
+    },
+
+    "mathematics": {
+        "algebra": {
+            "title": "Algebra Basics",
+            "lesson": "Algebra uses letters and symbols to represent unknown numbers.",
+            "example": "x + 5 = 10, therefore x = 5"
+        }
+    },
+
+    "physics": {
+        "motion": {
+            "title": "Motion",
+            "lesson": "Motion is the change of position of an object over time.",
+            "example": "Speed = Distance / Time"
+        }
+    },
+
+    "biology": {
+        "cells": {
+            "title": "Cells",
+            "lesson": "Cells are the basic units that make up living things.",
+            "example": "Plants and animals are made of cells."
+        }
+    },
+
+    "chemistry": {
+        "atoms": {
+            "title": "Atoms",
+            "lesson": "Atoms are the basic building blocks of matter.",
+            "example": "Water is made from hydrogen and oxygen atoms."
+        }
+    },
+
+    "japanese": {
+        "basic": {
+            "title": "Japanese Basics",
+            "lesson": "Japanese is a language that uses Hiragana, Katakana, and Kanji.",
+            "example": "こんにちは means Hello."
+        }
+    }
+}

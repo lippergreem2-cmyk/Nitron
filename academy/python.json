@@ -1,0 +1,443 @@
+{
+    "1": {
+        "title": "Introduction to Python",
+        "explanation": "Python is a powerful programming language used to build software, websites, games, automation tools, data science applications, and artificial intelligence.",
+        "code": "print(\"Hello Python\")",
+        "output": "Hello Python",
+        "practice": "Write a program that prints your name.",
+        "quiz": "Which function displays text in Python?"
+    },
+
+    "2": {
+        "title": "Comments",
+        "explanation": "Comments are notes that Python ignores. They help programmers explain their code.",
+        "code": "# This is a comment\nprint(\"Learning Python\")",
+        "output": "Learning Python",
+        "practice": "Create a comment above a print statement.",
+        "quiz": "Which symbol starts a single-line comment?"
+    },
+
+    "3": {
+        "title": "Variables",
+        "explanation": "Variables store information so it can be used later in a program.",
+        "code": "name = \"Nitron\"\nprint(name)",
+        "output": "Nitron",
+        "practice": "Create variables named age and city.",
+        "quiz": "What stores information in Python?"
+    },
+
+    "4": {
+        "title": "Data Types",
+        "explanation": "Python supports strings, integers, floats, booleans, lists, tuples, dictionaries, and more.",
+        "code": "name = \"Alex\"\nage = 18\nheight = 1.75\nstudent = True",
+        "output": "",
+        "practice": "Create one variable of each basic data type.",
+        "quiz": "Which data type stores True or False?"
+    },
+
+    "5": {
+        "title": "Printing Output",
+        "explanation": "The print() function displays information on the screen.",
+        "code": "print(\"Welcome to Nitron\")",
+        "output": "Welcome to Nitron",
+        "practice": "Print your favourite anime.",
+        "quiz": "Which function displays output?"
+    },
+
+    "6": {
+        "title": "User Input",
+        "explanation": "The input() function allows users to type information.",
+        "code": "name = input(\"Name: \")\nprint(name)",
+        "output": "",
+        "practice": "Ask the user for their age.",
+        "quiz": "Which function receives user input?"
+    },
+
+    "7": {
+        "title": "Arithmetic Operators",
+        "explanation": "Python can add, subtract, multiply, divide, and perform many other calculations.",
+        "code": "a = 10\nb = 5\nprint(a+b)\nprint(a-b)\nprint(a*b)\nprint(a/b)",
+        "output": "15\n5\n50\n2.0",
+        "practice": "Calculate the area of a rectangle.",
+        "quiz": "Which operator performs multiplication?"
+    },
+
+    "8": {
+        "title": "Strings",
+        "explanation": "Strings store text inside quotation marks.",
+        "code": "anime = \"Solo Leveling\"\nprint(anime)",
+        "output": "Solo Leveling",
+        "practice": "Store your favourite anime in a variable.",
+        "quiz": "What data type stores text?"
+    },
+
+    "9": {
+        "title": "Lists",
+        "explanation": "Lists store multiple values in a single variable.",
+        "code": "anime = [\"Naruto\", \"Bleach\", \"Jujutsu Kaisen\"]\nprint(anime)",
+        "output": "['Naruto', 'Bleach', 'Jujutsu Kaisen']",
+        "practice": "Create a list containing five numbers.",
+        "quiz": "Which brackets define a list?"
+    },
+
+    "10": {
+        "title": "If Statements",
+        "explanation": "If statements allow programs to make decisions.",
+        "code": "age = 18\nif age >= 18:\n    print(\"Adult\")",
+        "output": "Adult",
+        "practice": "Create a program that checks if a number is positive.",
+        "quiz": "Which keyword begins a decision statement?"
+    },    "11": {
+        "title": "Else Statements",
+        "explanation": "The else statement runs when the if condition is false.",
+        "code": "age = 15\nif age >= 18:\n    print(\"Adult\")\nelse:\n    print(\"Minor\")",
+        "output": "Minor",
+        "practice": "Write a program that checks if someone can vote.",
+        "quiz": "When does the else block run?"
+    },
+
+    "12": {
+        "title": "Elif Statements",
+        "explanation": "The elif statement allows multiple conditions to be checked.",
+        "code": "score = 75\nif score >= 90:\n    print(\"A\")\nelif score >= 70:\n    print(\"B\")\nelse:\n    print(\"C\")",
+        "output": "B",
+        "practice": "Create a grading program.",
+        "quiz": "Which keyword checks another condition?"
+    },
+
+    "13": {
+        "title": "Comparison Operators",
+        "explanation": "Comparison operators compare two values and return True or False.",
+        "code": "print(10 > 5)\nprint(5 == 5)\nprint(3 != 2)",
+        "output": "True\nTrue\nTrue",
+        "practice": "Compare two numbers.",
+        "quiz": "Which operator checks equality?"
+    },
+
+    "14": {
+        "title": "Logical Operators",
+        "explanation": "Logical operators combine multiple conditions.",
+        "code": "age = 20\ncitizen = True\nprint(age >= 18 and citizen)",
+        "output": "True",
+        "practice": "Use and, or, and not in a program.",
+        "quiz": "Which operator returns True only if both conditions are true?"
+    },
+
+    "15": {
+        "title": "For Loops",
+        "explanation": "For loops repeat code over a sequence.",
+        "code": "for i in range(5):\n    print(i)",
+        "output": "0\n1\n2\n3\n4",
+        "practice": "Print numbers from 1 to 10.",
+        "quiz": "Which keyword starts a for loop?"
+    },
+
+    "16": {
+        "title": "While Loops",
+        "explanation": "While loops repeat as long as a condition remains true.",
+        "code": "count = 1\nwhile count <= 3:\n    print(count)\n    count += 1",
+        "output": "1\n2\n3",
+        "practice": "Create a countdown from 10.",
+        "quiz": "When does a while loop stop?"
+    },
+
+    "17": {
+        "title": "Break Statement",
+        "explanation": "The break statement immediately exits a loop.",
+        "code": "for i in range(10):\n    if i == 5:\n        break\n    print(i)",
+        "output": "0\n1\n2\n3\n4",
+        "practice": "Stop a loop when the value reaches 7.",
+        "quiz": "Which keyword exits a loop?"
+    },
+
+    "18": {
+        "title": "Continue Statement",
+        "explanation": "The continue statement skips the current loop iteration.",
+        "code": "for i in range(5):\n    if i == 2:\n        continue\n    print(i)",
+        "output": "0\n1\n3\n4",
+        "practice": "Skip printing the number 5.",
+        "quiz": "Which keyword skips one iteration?"
+    },
+
+    "19": {
+        "title": "Functions",
+        "explanation": "Functions group reusable code into a single block.",
+        "code": "def greet():\n    print(\"Hello\")\n\ngreet()",
+        "output": "Hello",
+        "practice": "Create a function named hello().",
+        "quiz": "Which keyword defines a function?"
+    },
+
+    "20": {
+        "title": "Function Parameters",
+        "explanation": "Parameters allow functions to receive data.",
+        "code": "def greet(name):\n    print(\"Hello\", name)\n\ngreet(\"Nitron\")",
+        "output": "Hello Nitron",
+        "practice": "Create a function that accepts an age parameter.",
+        "quiz": "What are the variables inside a function definition called?"
+    },    "21": {
+        "title": "Return Statement",
+        "explanation": "The return statement sends a value back from a function.",
+        "code": "def add(a, b):\n    return a + b\n\nprint(add(5, 3))",
+        "output": "8",
+        "practice": "Create a function that returns the square of a number.",
+        "quiz": "Which keyword sends a value back from a function?"
+    },
+
+    "22": {
+        "title": "Scope",
+        "explanation": "Variables created inside a function are local. Variables outside are global.",
+        "code": "name = \"Nitron\"\n\ndef show():\n    print(name)\n\nshow()",
+        "output": "Nitron",
+        "practice": "Create both a global and a local variable.",
+        "quiz": "What is a variable created inside a function called?"
+    },
+
+    "23": {
+        "title": "Modules",
+        "explanation": "Modules are Python files that contain reusable code.",
+        "code": "import math\nprint(math.sqrt(25))",
+        "output": "5.0",
+        "practice": "Import the random module.",
+        "quiz": "Which keyword imports a module?"
+    },
+
+    "24": {
+        "title": "Packages",
+        "explanation": "Packages organize multiple Python modules into one directory.",
+        "code": "import random\nprint(random.randint(1,10))",
+        "output": "Random number",
+        "practice": "Import and use the random package.",
+        "quiz": "What is a package?"
+    },
+
+    "25": {
+        "title": "Exception Handling",
+        "explanation": "Exceptions prevent programs from crashing when errors occur.",
+        "code": "try:\n    print(10/0)\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero\")",
+        "output": "Cannot divide by zero",
+        "practice": "Handle a ValueError.",
+        "quiz": "Which keyword starts exception handling?"
+    },
+
+    "26": {
+        "title": "Reading Files",
+        "explanation": "Python can read text files stored on your computer.",
+        "code": "with open(\"notes.txt\", \"r\") as file:\n    print(file.read())",
+        "output": "Contents of the file",
+        "practice": "Read a text file.",
+        "quiz": "Which mode opens a file for reading?"
+    },
+
+    "27": {
+        "title": "Writing Files",
+        "explanation": "Python can create and write information into files.",
+        "code": "with open(\"notes.txt\", \"w\") as file:\n    file.write(\"Hello\")",
+        "output": "File written",
+        "practice": "Write your name into a file.",
+        "quiz": "Which mode writes to a file?"
+    },
+
+    "28": {
+        "title": "Classes",
+        "explanation": "Classes are templates used to create objects.",
+        "code": "class Robot:\n    pass",
+        "output": "",
+        "practice": "Create a class named Car.",
+        "quiz": "Which keyword creates a class?"
+    },
+
+    "29": {
+        "title": "Objects",
+        "explanation": "Objects are instances created from classes.",
+        "code": "class Robot:\n    pass\n\nr = Robot()\nprint(type(r))",
+        "output": "<class '__main__.Robot'>",
+        "practice": "Create an object from your Car class.",
+        "quiz": "What is an object?"
+    },
+
+    "30": {
+        "title": "Constructors",
+        "explanation": "The __init__ method initializes object data when an object is created.",
+        "code": "class Person:\n    def __init__(self, name):\n        self.name = name\n\np = Person(\"Alex\")\nprint(p.name)",
+        "output": "Alex",
+        "practice": "Create a constructor with an age parameter.",
+        "quiz": "Which special method acts as a constructor?"
+    },    "31": {
+        "title": "Inheritance",
+        "explanation": "Inheritance allows one class to reuse the features of another class.",
+        "code": "class Animal:\n    def speak(self):\n        print(\"Animal\")\n\nclass Dog(Animal):\n    pass\n\nDog().speak()",
+        "output": "Animal",
+        "practice": "Create a Student class that inherits from Person.",
+        "quiz": "What is inheritance?"
+    },
+
+    "32": {
+        "title": "Polymorphism",
+        "explanation": "Polymorphism allows different objects to use the same method name in different ways.",
+        "code": "class Dog:\n    def sound(self):\n        print(\"Bark\")\n\nclass Cat:\n    def sound(self):\n        print(\"Meow\")",
+        "output": "",
+        "practice": "Create two classes with the same method name.",
+        "quiz": "What does polymorphism allow?"
+    },
+
+    "33": {
+        "title": "Encapsulation",
+        "explanation": "Encapsulation protects an object's data by keeping it inside the class.",
+        "code": "class Bank:\n    def __init__(self):\n        self.__money = 100",
+        "output": "",
+        "practice": "Create a class with a private variable.",
+        "quiz": "Why is encapsulation useful?"
+    },
+
+    "34": {
+        "title": "Python Libraries",
+        "explanation": "Libraries provide ready-made code that saves development time.",
+        "code": "import datetime\nprint(datetime.date.today())",
+        "output": "Current date",
+        "practice": "Import the calendar module.",
+        "quiz": "What is a Python library?"
+    },
+
+    "35": {
+        "title": "Installing Packages",
+        "explanation": "Pip installs packages from the Python Package Index.",
+        "code": "pip install requests",
+        "output": "Package installed",
+        "practice": "Install a package using pip.",
+        "quiz": "Which command installs Python packages?"
+    },
+
+    "36": {
+        "title": "Virtual Environments",
+        "explanation": "Virtual environments isolate project dependencies.",
+        "code": "python -m venv myenv",
+        "output": "Environment created",
+        "practice": "Create a virtual environment.",
+        "quiz": "Why use virtual environments?"
+    },
+
+    "37": {
+        "title": "Lambda Functions",
+        "explanation": "Lambda functions are short anonymous functions.",
+        "code": "square = lambda x: x*x\nprint(square(6))",
+        "output": "36",
+        "practice": "Create a lambda that doubles a number.",
+        "quiz": "What keyword creates a lambda function?"
+    },
+
+    "38": {
+        "title": "List Comprehensions",
+        "explanation": "List comprehensions create lists using concise syntax.",
+        "code": "numbers = [x*x for x in range(5)]\nprint(numbers)",
+        "output": "[0, 1, 4, 9, 16]",
+        "practice": "Create a list of even numbers.",
+        "quiz": "What is a list comprehension?"
+    },
+
+    "39": {
+        "title": "Dictionaries",
+        "explanation": "Dictionaries store data as key-value pairs.",
+        "code": "robot = {\"name\":\"Nitron\",\"version\":\"2.0\"}\nprint(robot[\"name\"])",
+        "output": "Nitron",
+        "practice": "Create a dictionary describing yourself.",
+        "quiz": "What do dictionaries store?"
+    },
+
+    "40": {
+        "title": "Tuples",
+        "explanation": "Tuples are ordered collections that cannot be changed after creation.",
+        "code": "numbers = (1,2,3)\nprint(numbers)",
+        "output": "(1, 2, 3)",
+        "practice": "Create a tuple containing five values.",
+        "quiz": "Can tuples be modified after they are created?"
+    },    "41": {
+        "title": "Sets",
+        "explanation": "Sets store unique values and automatically remove duplicates.",
+        "code": "numbers = {1,2,2,3,4}\nprint(numbers)",
+        "output": "{1, 2, 3, 4}",
+        "practice": "Create a set of your favorite numbers.",
+        "quiz": "Can a set contain duplicate values?"
+    },
+
+    "42": {
+        "title": "JSON",
+        "explanation": "JSON is a common format for storing and exchanging structured data.",
+        "code": "import json\nperson = {\"name\":\"Nitron\"}\nprint(json.dumps(person))",
+        "output": "{\"name\": \"Nitron\"}",
+        "practice": "Convert a dictionary into JSON.",
+        "quiz": "What module works with JSON?"
+    },
+
+    "43": {
+        "title": "Working with APIs",
+        "explanation": "APIs allow Python programs to communicate with other applications and web services.",
+        "code": "import requests\nprint(\"API Ready\")",
+        "output": "API Ready",
+        "practice": "Install the requests package.",
+        "quiz": "What does API stand for?"
+    },
+
+    "44": {
+        "title": "SQLite Databases",
+        "explanation": "SQLite stores information inside a local database file.",
+        "code": "import sqlite3\nconn = sqlite3.connect('data.db')",
+        "output": "",
+        "practice": "Create a SQLite database.",
+        "quiz": "Which module works with SQLite?"
+    },
+
+    "45": {
+        "title": "Flask Basics",
+        "explanation": "Flask is a lightweight Python framework for building websites and APIs.",
+        "code": "from flask import Flask\napp = Flask(__name__)",
+        "output": "",
+        "practice": "Create a simple Flask application.",
+        "quiz": "What is Flask used for?"
+    },
+
+    "46": {
+        "title": "Automation",
+        "explanation": "Python can automate repetitive computer tasks.",
+        "code": "print(\"Automation Started\")",
+        "output": "Automation Started",
+        "practice": "Think of one task you could automate.",
+        "quiz": "What is automation?"
+    },
+
+    "47": {
+        "title": "Artificial Intelligence",
+        "explanation": "Python is one of the most popular languages for artificial intelligence and machine learning.",
+        "code": "print(\"Learning AI\")",
+        "output": "Learning AI",
+        "practice": "Research one Python AI library.",
+        "quiz": "Name one AI library for Python."
+    },
+
+    "48": {
+        "title": "Building Projects",
+        "explanation": "Projects combine everything you've learned into real applications.",
+        "code": "print(\"My Project\")",
+        "output": "My Project",
+        "practice": "Plan a calculator, game, or website.",
+        "quiz": "Why are projects important?"
+    },
+
+    "49": {
+        "title": "Python Best Practices",
+        "explanation": "Writing clean, readable code makes programs easier to maintain.",
+        "code": "def greet(name):\n    print(f\"Hello {name}\")",
+        "output": "",
+        "practice": "Rename unclear variables to meaningful names.",
+        "quiz": "Why should code be readable?"
+    },
+
+    "50": {
+        "title": "Congratulations",
+        "explanation": "You have completed the Nitron Academy Python course. Continue practicing by building your own applications.",
+        "code": "print(\"Congratulations! You completed Nitron Academy Python.\")",
+        "output": "Congratulations! You completed Nitron Academy Python.",
+        "practice": "Build your own Python project from scratch.",
+        "quiz": "What is the best way to improve your Python skills?"
+    }
+}

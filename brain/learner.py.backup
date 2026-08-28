@@ -1,0 +1,417 @@
+"""
+Nitron Learner
+"""
+
+import json
+import os
+from datetime import datetime
+
+try:
+    from brain.knowledge_formatter import formatter
+except ImportError:
+    from knowledge_formatter import formatter
+
+
+class Learner:
+
+    def __init__(self):
+
+        self.file = os.path.join(
+            os.path.dirname(__file__),
+            "learned_knowledge.json"
+        )
+
+        self.knowledge = self.load()
+
+    def load(self):
+
+        if not os.path.exists(self.file):
+            return {}
+
+        try:
+            with open(
+                self.file,
+                "r",
+                encoding="utf-8"
+            ) as f:
+                return json.load(f)
+
+        except Exception:
+            return {}
+
+    def save(self):
+
+        with open(
+            self.file,
+            "w",
+            encoding="utf-8"
+        ) as f:
+
+            json.dump(
+                self.knowledge,
+                f,
+                indent=4,
+                ensure_ascii=False
+            )
+
+    def learn(self, topic, source, content):
+
+        topic = topic.strip().lower()
+
+        if isinstance(content, dict):
+
+            entry = formatter.format(
+                topic,
+                source,
+                content
+            )
+
+        else:
+
+            entry = {
+                "topic": topic,
+                "title": topic.title(),
+                "source": source,
+                "date": str(datetime.now()),
+                "summary": str(content),
+                "keywords": [],
+                "sections": {},
+                "examples": [],
+                "related_topics": [],
+                "notes": [],
+                "confidence": 1.0
+            }
+
+        self.knowledge[topic] = entry
+
+        self.save()
+
+        return entry
+
+    def learn_image(self, image_result, source="image"):
+        """
+        Learn structured, sanitized information from an image analysis.
+
+        Raw OCR is never stored. Potential passwords, credentials,
+        tokens, and other sensitive text are excluded.
+        """
+
+        if not isinstance(image_result, dict):
+            raise ValueError("image_result must be a dictionary.")
+
+        topics = image_result.get("topics", [])
+
+        if not topics:
+            topics = [{"topic": "image_analysis"}]
+
+        topic_names = [
+            str(item.get("topic", "")).strip().lower()
+            for item in topics
+            if isinstance(item, dict) and item.get("topic")
+        ]
+
+        topic_names = list(dict.fromkeys(topic_names))
+
+        # ------------------------------------------------------
+        # SAFE IMAGE METADATA
+        # ------------------------------------------------------
+
+        metadata = {
+            "width": image_result.get("width"),
+            "height": image_result.get("height"),
+            "format": image_result.get("format"),
+            "mode": image_result.get("mode"),
+        }
+
+        # ------------------------------------------------------
+        # SAFE VISION INFORMATION
+        # ------------------------------------------------------
+
+        vision = image_result.get("vision", {})
+
+        safe_vision = {
+            "success": bool(
+                isinstance(vision, dict)
+                and vision.get("success")
+            ),
+            "model": (
+                str(vision.get("model", ""))
+                if isinstance(vision, dict)
+                else ""
+            ),
+        }
+
+        if isinstance(vision, dict) and vision.get("success"):
+            safe_vision["analysis"] = str(
+                vision.get("analysis", "")
+            ).strip()
+
+        elif isinstance(vision, dict):
+            safe_vision["error_type"] = str(
+                vision.get("error_type", "unavailable")
+            )
+
+        # ------------------------------------------------------
+        # SAFE PUBLIC RESEARCH REFERENCES
+        # ------------------------------------------------------
+
+        safe_research = image_result.get("research", {})
+        research_items = []
+
+        if isinstance(safe_research, dict):
+
+            for item in safe_research.get("results", [])[:5]:
+
+                if not isinstance(item, dict):
+                    continue
+
+                title = str(
+                    item.get("title", "")
+                ).strip()
+
+                url = str(
+                    item.get("url", "")
+                ).strip()
+
+                if title and url:
+                    research_items.append({
+                        "title": title,
+                        "url": url,
+                    })
+
+        # ------------------------------------------------------
+        # BUILD A USEFUL SAFE SUMMARY
+        # ------------------------------------------------------
+
+        summary_parts = []
+
+        if topic_names:
+            summary_parts.append(
+                "The image was classified as involving "
+                + ", ".join(topic_names)
+                + "."
+            )
+
+        if safe_vision.get("success"):
+            analysis = safe_vision.get("analysis", "")
+
+            if analysis:
+                # Keep the learned vision description bounded.
+                summary_parts.append(
+                    "Vision analysis: "
+                    + analysis[:1200]
+                )
+
+        else:
+            summary_parts.append(
+                "Detailed vision analysis was unavailable."
+            )
+
+        if research_items:
+            research_titles = [
+                item["title"]
+                for item in research_items
+            ]
+
+            summary_parts.append(
+                "Related public research included: "
+                + "; ".join(research_titles)
+                + "."
+            )
+
+        summary = " ".join(summary_parts).strip()
+
+        if not summary:
+            summary = (
+                "Image analyzed. Detected topics: "
+                + ", ".join(topic_names)
+                + "."
+            )
+
+        # ------------------------------------------------------
+        # STRUCTURED LEARNED DATA
+        # ------------------------------------------------------
+
+        safe_data = {
+            "title": (
+                "Image analysis: "
+                + str(
+                    image_result.get(
+                        "filename",
+                        "image"
+                    )
+                )
+            ),
+
+            "summary": summary,
+
+            "sections": {
+                "image_metadata": metadata,
+
+                "topics": topic_names,
+
+                "vision": safe_vision,
+
+                "research": {
+                    "query": str(
+                        safe_research.get(
+                            "query",
+                            ""
+                        )
+                    ),
+                    "results": research_items,
+                },
+            },
+
+            "related_topics": topic_names,
+
+            "confidence": (
+                1.0
+                if safe_vision["success"]
+                else 0.7
+            ),
+        }
+
+        # ------------------------------------------------------
+        # SAVE UNDER EACH DETECTED TOPIC
+        # ------------------------------------------------------
+
+        learned = []
+
+        for topic in topic_names:
+
+            entry = self.learn(
+                topic,
+                source,
+                safe_data,
+            )
+
+            learned.append(entry)
+
+        return learned
+
+    def recall(self, topic):
+
+        topic = topic.strip().lower()
+
+        return self.knowledge.get(
+            topic,
+            None
+        )
+
+    def topics(self):
+
+        return sorted(
+            self.knowledge.keys()
+        )
+
+    def exists(self, topic):
+
+        topic = topic.strip().lower()
+
+        return topic in self.knowledge
+
+    def remove(self, topic):
+
+        topic = topic.strip().lower()
+
+        if topic in self.knowledge:
+
+            del self.knowledge[topic]
+
+            self.save()
+
+            return True
+
+        return False
+
+
+learner = Learner()
+
+# ============================================================
+# NITRON CAPABILITY LEARNING
+# ============================================================
+
+def learn_capability(
+    topic,
+    description="",
+    abilities=None,
+    evidence=None
+):
+    """
+    Learn a topic and register it as a usable Nitron capability.
+    """
+    try:
+        from brain.skill_registry import learn_skill
+
+        return learn_skill(
+            name=topic,
+            description=description,
+            abilities=abilities or [],
+            evidence=evidence or []
+        )
+    except Exception as e:
+        print(f"[Capability] Could not register skill: {e}")
+        return None
+
+# ============================================================
+# NITRON UNIVERSAL CAPABILITY LEARNING
+# ============================================================
+
+def learn_and_register(
+    topic,
+    description="",
+    abilities=None,
+    evidence=None
+):
+    """
+    Universal entry point for Nitron learning.
+    Anything learned through this function becomes
+    both knowledge and a registered capability.
+    """
+
+    topic = str(topic).strip()
+
+    if not topic:
+        return None
+
+    # Existing knowledge learner
+    knowledge_result = None
+
+    try:
+        knowledge_result = learner.learn(
+            topic,
+            source="nitron_learning",
+            content=description or f"Learning {topic}"
+        )
+    except Exception as e:
+        print(f"[Learner] Knowledge learning warning: {e}")
+
+    # Capability memory
+    capability_result = learn_capability(
+        topic=topic,
+        description=description,
+        abilities=abilities or [
+            f"understand {topic}",
+            f"work with {topic}",
+            f"apply {topic}",
+            f"build using {topic}",
+            f"debug {topic}"
+        ],
+        evidence=evidence or ["Nitron learning system"]
+    )
+
+    return {
+        "topic": topic,
+        "knowledge": knowledge_result,
+        "capability": capability_result,
+        "status": "learned"
+    }
+
+
+def capability_status(topic):
+    try:
+        from brain.skill_registry import get_skill
+        return get_skill(topic)
+    except Exception:
+        return None

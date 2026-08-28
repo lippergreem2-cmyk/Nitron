@@ -1,0 +1,2809 @@
+# ==========================================================
+# NITRON COMMAND SYSTEM v18.0
+# PART 1 OF 2
+# ==========================================================
+
+import json
+import logging
+import re
+import subprocess
+import sys
+from pathlib import Path
+from collections import deque
+from urllib.parse import quote_plus
+
+
+# ==========================================================
+# VERSION / PATHS
+# ==========================================================
+
+VERSION = "18.0"
+
+ROOT_DIR = Path(__file__).resolve().parent
+DATA_DIR = ROOT_DIR / "data"
+LOG_DIR = ROOT_DIR / "logs"
+GENERATED_PROJECTS = ROOT_DIR / "GeneratedProjects"
+LEARNED_DIR = ROOT_DIR / "learned"
+
+for directory in (
+    DATA_DIR,
+    LOG_DIR,
+    GENERATED_PROJECTS,
+    LEARNED_DIR,
+):
+    directory.mkdir(parents=True, exist_ok=True)
+
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+
+# ==========================================================
+# LOGGING
+# ==========================================================
+
+LOG_FILE = LOG_DIR / "nitron.log"
+
+try:
+    logging.basicConfig(
+        filename=str(LOG_FILE),
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(message)s",
+    )
+except Exception:
+    pass
+
+
+def log(message, level="info"):
+    try:
+        logger = getattr(logging, level, logging.info)
+        logger(str(message))
+    except Exception:
+        pass
+
+
+# ==========================================================
+# STARTUP
+# ==========================================================
+
+print("=" * 60)
+print(f"NITRON COMMAND SYSTEM v{VERSION}")
+print("=" * 60)
+
+
+# ==========================================================
+# OPTIONAL MODULE LOADER
+# ==========================================================
+
+def load_optional(module_name, attribute_name=None, label=None):
+    try:
+        module = __import__(
+            module_name,
+            fromlist=[attribute_name] if attribute_name else ["*"],
+        )
+
+        if attribute_name:
+            value = getattr(module, attribute_name)
+        else:
+            value = module
+
+        if label:
+            print(f"[OK] {label} connected.")
+
+        return value
+
+    except Exception as error:
+        if label:
+            print(f"[WARNING] {label} unavailable.")
+
+        log(f"{module_name}: {error}", "warning")
+        return None
+
+
+# ==========================================================
+# BRAIN
+# ==========================================================
+
+brain = load_optional(
+    "brain.brain",
+    "brain",
+    "Brain",
+)
+
+
+# ==========================================================
+# BRAIN REASONING
+# ==========================================================
+
+reasoning = load_optional(
+    "brain.reasoning",
+    "reasoning",
+    "Brain reasoning",
+)
+
+
+def brain_available():
+    return brain is not None
+
+
+def ask_brain(message):
+    if brain is None:
+        return "My brain system is currently unavailable."
+
+    try:
+        result = brain.think(message)
+
+        if result is None:
+            return "I couldn't generate a response."
+
+        return str(result)
+
+    except Exception as error:
+        log(f"Brain error: {error}", "error")
+        return "I had trouble processing that."
+
+
+# ==========================================================
+# CONVERSATION MEMORY
+# ==========================================================
+
+conversation = {
+    "topic": None,
+    "mode": "conversation",
+    "speaking": False,
+    "listening": True,
+    "interrupted": False,
+    "last_user": None,
+    "last_reply": None,
+    "history": deque(maxlen=100),
+}
+
+
+def remember(user, assistant):
+    conversation["history"].append(
+        {
+            "user": str(user),
+            "assistant": str(assistant),
+        }
+    )
+
+
+def remember_user(message):
+    conversation["last_user"] = str(message)
+
+
+def remember_reply(message):
+    conversation["last_reply"] = str(message)
+
+
+def clear_history():
+    conversation["history"].clear()
+    conversation["topic"] = None
+    conversation["last_user"] = None
+    conversation["last_reply"] = None
+
+
+def set_topic(topic):
+    conversation["topic"] = topic
+
+
+def get_topic():
+    return conversation["topic"]
+
+
+def conversation_history():
+    return list(conversation["history"])
+
+
+def start_speaking():
+    conversation["speaking"] = True
+    conversation["interrupted"] = False
+
+
+def stop_speaking():
+    conversation["speaking"] = False
+
+
+def interrupt():
+    conversation["interrupted"] = True
+    conversation["speaking"] = False
+
+
+def is_speaking():
+    return conversation["speaking"]
+
+
+def is_interrupted():
+    return conversation["interrupted"]
+
+
+# ==========================================================
+# NORMALIZATION
+# ==========================================================
+
+def normalize_command(command):
+    if command is None:
+        return ""
+
+    return " ".join(
+        str(command)
+        .strip()
+        .lower()
+        .split()
+    )
+
+
+# ==========================================================
+# ANDROID APPLICATIONS
+# ==========================================================
+
+APPS = {
+    "chrome": "com.android.chrome",
+    "youtube": "com.google.android.youtube",
+    "gmail": "com.google.android.gm",
+    "maps": "com.google.android.apps.maps",
+    "drive": "com.google.android.apps.docs",
+    "photos": "com.google.android.apps.photos",
+    "play store": "com.android.vending",
+    "chatgpt": "com.openai.chatgpt",
+    "whatsapp": "com.whatsapp",
+    "telegram": "org.telegram.messenger",
+    "facebook": "com.facebook.katana",
+    "messenger": "com.facebook.orca",
+    "instagram": "com.instagram.android",
+    "x": "com.twitter.android",
+    "twitter": "com.twitter.android",
+    "tradingview": "com.tradingview.tradingviewapp",
+    "metatrader": "net.metaquotes.metatrader5",
+    "mt5": "net.metaquotes.metatrader5",
+    "camera": "com.sec.android.app.camera",
+    "gallery": "com.sec.android.gallery3d",
+    "calculator": "com.sec.android.app.popupcalculator",
+    "calendar": "com.samsung.android.calendar",
+    "clock": "com.sec.android.app.clockpackage",
+    "contacts": "com.samsung.android.contacts",
+    "phone": "com.samsung.android.dialer",
+    "messages": "com.google.android.apps.messaging",
+    "settings": "com.android.settings",
+    "my files": "com.sec.android.app.myfiles",
+    "spotify": "com.spotify.music",
+    "netflix": "com.netflix.mediaclient",
+}
+
+
+# ==========================================================
+# DEVELOPMENT TOOLS
+# ==========================================================
+
+DEVELOPMENT_TOOLS = {
+    "vscode": {
+        "name": "VS Code",
+        "url": "https://vscode.dev",
+        "aliases": [
+            "vscode",
+            "vs code",
+            "visual studio code",
+        ],
+    },
+    "antigravity": {
+        "name": "Antigravity",
+        "url": "https://antigravity.google",
+        "aliases": [
+            "antigravity",
+            "google antigravity",
+        ],
+    },
+}
+
+
+# ==========================================================
+# LEARNING RESOURCES
+# ==========================================================
+
+LEARNING_RESOURCES = {
+    "python": "https://www.python.org/about/gettingstarted/",
+    "physics": "https://www.khanacademy.org/science/physics",
+    "mathematics": "https://www.khanacademy.org/math",
+    "javascript": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    "html": "https://developer.mozilla.org/en-US/docs/Web/HTML",
+    "css": "https://developer.mozilla.org/en-US/docs/Web/CSS",
+    "programming": "https://www.freecodecamp.org/learn/",
+}
+
+
+# ==========================================================
+# SAFE PROJECT NAME
+# ==========================================================
+
+def safe_project_name(name):
+    if not name:
+        return "NitronProject"
+
+    value = str(name).strip()
+
+    value = re.sub(
+        r"[^a-zA-Z0-9_-]+",
+        "_",
+        value,
+    )
+
+    value = re.sub(
+        r"_+",
+        "_",
+        value,
+    )
+
+    value = value.strip("_")
+
+    return value[:80] if value else "NitronProject"
+
+
+# ==========================================================
+# FILE WRITER
+# ==========================================================
+
+def write_file(path, content=""):
+    path = Path(path)
+
+    path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    path.write_text(
+        str(content),
+        encoding="utf-8",
+    )
+
+    return path
+
+
+# ==========================================================
+# OPEN URL
+# ==========================================================
+
+def open_url(url):
+    if not url:
+        return False
+
+    try:
+        result = subprocess.run(
+            [
+                "am",
+                "start",
+                "-a",
+                "android.intent.action.VIEW",
+                "-d",
+                str(url),
+            ],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=False,
+        )
+
+        return result.returncode == 0
+
+    except Exception as error:
+        log(f"URL opening error: {error}", "error")
+        return False
+
+
+# ==========================================================
+# SEARCH
+# ==========================================================
+
+def search_url(query):
+    if not query:
+        return False
+
+    url = (
+        "https://www.google.com/search?q="
+        + quote_plus(str(query))
+    )
+
+    return open_url(url)
+
+
+def search(query):
+    query = str(query).strip()
+
+    if not query:
+        return "What should I search for?"
+
+    web_search = load_optional(
+        "search",
+        "web_search",
+        None,
+    )
+
+    if web_search:
+        try:
+            result = web_search(query)
+            search_url(query)
+            return str(result)
+        except Exception as error:
+            log(f"Search error: {error}", "error")
+
+    if search_url(query):
+        return f"I'll search for {query}."
+
+    return "I couldn't open the search."
+
+
+# ==========================================================
+# LEARNING FOLDER HELPERS
+# ==========================================================
+
+def learning_folder(topic):
+    name = safe_project_name(topic.lower())
+    folder = LEARNED_DIR / name
+    folder.mkdir(parents=True, exist_ok=True)
+    return folder
+
+
+def create_learning_folder(topic):
+    folder = learning_folder(topic)
+
+    write_file(
+        folder / "README.md",
+        f"""# Nitron Learning: {topic.title()}
+
+This folder contains knowledge Nitron has learned about {topic}.
+
+Nitron can use these files later to teach the subject.
+""",
+    )
+
+    return folder
+
+
+def save_learning_note(topic, title, content):
+    folder = create_learning_folder(topic)
+
+    filename = safe_project_name(title)
+    if not filename:
+        filename = "lesson"
+
+    path = folder / f"{filename}.md"
+
+    write_file(
+        path,
+        f"""# {title}
+
+Subject: {topic.title()}
+
+{content}
+""",
+    )
+
+    return path
+
+
+# ==========================================================
+# LEARNING REQUEST STATE
+# ==========================================================
+
+learning_state = {
+    "waiting_for_permission": False,
+    "topic": None,
+    "save_code": False,
+}
+
+
+def request_learning(topic):
+    topic = str(topic).strip()
+
+    if not topic:
+        return "What would you like me to learn?"
+
+    learning_state["waiting_for_permission"] = True
+    learning_state["topic"] = topic
+    learning_state["save_code"] = False
+
+    return (
+        f"Sure, Boss. I can learn {topic}. "
+        "Would you like me to write code and create a folder "
+        "to save what I learn so I can teach it to you later?"
+    )
+
+
+def confirm_learning_permission(answer):
+    answer = normalize_command(answer)
+
+    yes_words = (
+        "yes",
+        "yeah",
+        "yep",
+        "sure",
+        "okay",
+        "ok",
+        "do it",
+        "yes do it",
+        "go ahead",
+        "save it",
+    )
+
+    no_words = (
+        "no",
+        "no thanks",
+        "not now",
+        "don't",
+        "do not",
+    )
+
+    if answer in yes_words:
+        topic = learning_state["topic"]
+
+        if not topic:
+            learning_state["waiting_for_permission"] = False
+            return "I don't have a learning topic yet."
+
+        folder = create_learning_folder(topic)
+
+        learning_state["waiting_for_permission"] = False
+        learning_state["save_code"] = True
+
+        return (
+            f"Yes, Boss. I'll learn {topic}, write useful code "
+            f"when appropriate, and save what I learn in:\n{folder}"
+        )
+
+    if answer in no_words:
+        topic = learning_state["topic"]
+
+        learning_state["waiting_for_permission"] = False
+        learning_state["save_code"] = False
+
+        return (
+            f"Okay, Boss. I'll learn {topic} without creating "
+            "a saved learning folder."
+        )
+
+    return (
+        "Please tell me yes or no. "
+        "Should I write code and create a folder to save what I learn?"
+    )
+
+
+# ==========================================================
+# OPEN LEARNING RESOURCE
+# ==========================================================
+
+def open_learning_resource(topic):
+    topic = normalize_command(topic)
+
+    url = LEARNING_RESOURCES.get(topic)
+
+    if url:
+        return open_url(url)
+
+    return search_url(f"learn {topic}")
+
+
+# ==========================================================
+# DEVELOPMENT TOOL HELPERS
+# ==========================================================
+
+def get_development_tool(name):
+    value = normalize_command(name)
+
+    for tool, data in DEVELOPMENT_TOOLS.items():
+        if value == tool:
+            return tool
+
+        for alias in data.get("aliases", []):
+            if value == normalize_command(alias):
+                return tool
+
+    return None
+
+
+def open_development_tool(name):
+    tool = get_development_tool(name)
+
+    if not tool:
+        return None
+
+    data = DEVELOPMENT_TOOLS[tool]
+
+    if open_url(data["url"]):
+        return f"Opening {data['name']}."
+
+    return f"I couldn't open {data['name']}."
+
+
+# ==========================================================
+# OPEN APP
+# ==========================================================
+
+def open_app(name):
+    app = normalize_command(name)
+
+    if not app:
+        return "Which app should I open?"
+
+    development = open_development_tool(app)
+
+    if development:
+        return development
+
+    if app not in APPS:
+        matches = [
+            item
+            for item in APPS
+            if app in item or item in app
+        ]
+
+        if matches:
+            return (
+                "I found these possible apps: "
+                + ", ".join(matches)
+            )
+
+        return f"I don't know the app '{app}'."
+
+    package = APPS[app]
+
+    try:
+        installed = subprocess.run(
+            ["pm", "path", package],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=False,
+        )
+
+        if installed.returncode != 0:
+            return f"{app.title()} is not installed."
+
+        result = subprocess.run(
+            [
+                "monkey",
+                "-p",
+                package,
+                "-c",
+                "android.intent.category.LAUNCHER",
+                "1",
+            ],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=False,
+        )
+
+        if result.returncode == 0:
+            return f"Opening {app}."
+
+        return f"I couldn't open {app}."
+
+    except Exception as error:
+        log(f"Open app error: {error}", "error")
+        return f"Failed to open {app}."
+
+
+# ==========================================================
+# CLOSE APP
+# ==========================================================
+
+def close_app(name):
+    app = normalize_command(name)
+
+    if not app:
+        return "Which app should I close?"
+
+    if app not in APPS:
+        return f"I don't know how to close {app}."
+
+    try:
+        result = subprocess.run(
+            [
+                "am",
+                "force-stop",
+                APPS[app],
+            ],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=False,
+        )
+
+        if result.returncode == 0:
+            return f"Closed {app}."
+
+        return f"I couldn't close {app}."
+
+    except Exception as error:
+        log(f"Close app error: {error}", "error")
+        return f"Unable to close {app}."
+
+
+# ==========================================================
+# PHONE CONTROLS
+# ==========================================================
+
+def run_phone_command(reply, args):
+    try:
+        result = subprocess.run(
+            args,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=False,
+        )
+
+        if result.returncode == 0:
+            return reply
+
+        return f"{reply} Android returned an error."
+
+    except Exception as error:
+        log(f"Phone command error: {error}", "error")
+        return "Phone control failed."
+
+
+def go_home():
+    return run_phone_command(
+        "Going home.",
+        ["input", "keyevent", "3"],
+    )
+
+
+def go_back():
+    return run_phone_command(
+        "Going back.",
+        ["input", "keyevent", "4"],
+    )
+
+
+def lock_screen():
+    return run_phone_command(
+        "Locking screen.",
+        ["input", "keyevent", "26"],
+    )
+
+
+def open_recent_apps():
+    return run_phone_command(
+        "Opening recent apps.",
+        ["input", "keyevent", "187"],
+    )
+
+
+def notifications():
+    return run_phone_command(
+        "Opening notifications.",
+        ["cmd", "statusbar", "expand-notifications"],
+    )
+
+
+def quick_settings():
+    return run_phone_command(
+        "Opening quick settings.",
+        ["cmd", "statusbar", "expand-settings"],
+    )
+
+
+# ==========================================================
+# SCREENSHOT
+# ==========================================================
+
+def screenshot():
+    path = ROOT_DIR / "screenshot.png"
+
+    try:
+        result = subprocess.run(
+            [
+                "screencap",
+                "-p",
+                str(path),
+            ],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=False,
+        )
+
+        if result.returncode == 0:
+            return f"Screenshot saved to {path}"
+
+        return "Screenshot failed."
+
+    except Exception as error:
+        log(f"Screenshot error: {error}", "error")
+        return "Screenshot failed."
+
+
+# ==========================================================
+# MUSIC
+# ==========================================================
+
+play_song = load_optional(
+    "music",
+    "play_song",
+    "Music system",
+)
+
+
+def play_music(song=""):
+    if play_song is None:
+        return "Music system unavailable."
+
+    try:
+        return str(play_song(song))
+    except Exception as error:
+        log(f"Music error: {error}", "error")
+        return "Music system encountered an error."
+
+
+# ==========================================================
+# WEATHER
+# ==========================================================
+
+get_weather = load_optional(
+    "weather",
+    "get_weather",
+    "Weather system",
+)
+
+
+def weather_report():
+    if get_weather is None:
+        return "Weather system unavailable."
+
+    try:
+        return str(get_weather())
+    except Exception as error:
+        log(f"Weather error: {error}", "error")
+        return "I couldn't get the weather."
+
+
+# ==========================================================
+# BATTERY
+# ==========================================================
+
+def battery_status():
+    try:
+        result = subprocess.run(
+            ["termux-battery-status"],
+            capture_output=True,
+            text=True,
+            timeout=5,
+            check=False,
+        )
+
+        if result.returncode != 0:
+            return (
+                "I couldn't read the battery status. "
+                "Make sure Termux:API is installed."
+            )
+
+        data = json.loads(result.stdout)
+
+        percentage = data.get("percentage", "unknown")
+        status = data.get("status", "unknown")
+        plugged = data.get("plugged", "unknown")
+        temperature = data.get("temperature", "unknown")
+
+        return (
+            "Battery status:\n"
+            f"Level: {percentage}%\n"
+            f"Status: {status}\n"
+            f"Power: {plugged}\n"
+            f"Temperature: {temperature}°C"
+        )
+
+    except FileNotFoundError:
+        return "Termux:API is not available."
+
+    except Exception as error:
+        log(f"Battery error: {error}", "error")
+        return "I couldn't read the battery."
+
+
+# ==========================================================
+# OPTIONAL TRADING SYSTEMS
+# ==========================================================
+
+extract_symbol = load_optional(
+    "market_parser",
+    "extract_symbol",
+    "Market parser",
+)
+
+market_profile = load_optional(
+    "asset_detector",
+    "market_profile",
+    "Asset detector",
+)
+
+advise = load_optional(
+    "trade_advisor",
+    "advise",
+    "Trading advisor",
+)
+
+
+def analyze_market(command):
+    if extract_symbol is None:
+        return "Market parser unavailable."
+
+    try:
+        symbol = extract_symbol(command)
+    except Exception as error:
+        log(f"Market parser error: {error}", "error")
+        return "I couldn't read that market."
+
+    if not symbol:
+        return "I couldn't identify the market."
+
+    if advise is None:
+        return "Trading advisor unavailable."
+
+    try:
+        analysis = advise(symbol)
+
+        profile = None
+
+        if market_profile:
+            try:
+                profile = market_profile(symbol)
+            except Exception as error:
+                log(f"Market profile error: {error}", "warning")
+
+        return {
+            "symbol": symbol,
+            "market_profile": profile,
+            "analysis": analysis,
+        }
+
+    except Exception as error:
+        log(f"Trading error: {error}", "error")
+        return "Market analysis failed."
+
+
+# ==========================================================
+# END OF PART 1
+# ==========================================================
+#
+# PART 2 will add:
+# - AI code generator
+# - Builder
+# - Project manager
+# - Python teacher
+# - Physics teacher
+# - Learning command handling
+# - Permission confirmation
+# - Conversation commands
+# - Main execute()
+# - Test mode
+#
+# ==========================================================
+
+# ==========================================================
+# AI CODE GENERATOR
+# ==========================================================
+
+ai_code_generator = None
+
+try:
+    from developer.ai_code_generator import AICodeGenerator
+
+    ai_code_generator = AICodeGenerator()
+    print("[OK] AI code generator connected.")
+
+except Exception as error:
+    print("[WARNING] AI code generator unavailable.")
+    log(f"AI generator: {error}", "warning")
+
+
+# ==========================================================
+# BUILDER MANAGER
+# ==========================================================
+
+builder = None
+
+try:
+    from developer.builder_manager import BuilderManager
+
+    builder = BuilderManager()
+    print("[OK] Builder manager connected.")
+
+except Exception as error:
+    print("[WARNING] Builder manager unavailable.")
+    log(f"Builder manager: {error}", "warning")
+
+
+# ==========================================================
+# PROJECT MANAGER
+# ==========================================================
+
+project_manager = None
+
+try:
+    from developer.project_manager import project_manager
+
+    print("[OK] Project manager connected.")
+
+except Exception as error:
+    print("[WARNING] Project manager unavailable.")
+    log(f"Project manager: {error}", "warning")
+
+
+def project_command(command):
+    if project_manager is None:
+        return "Project manager unavailable."
+
+    try:
+        result = project_manager.handle(command)
+
+        if result is not None:
+            return str(result)
+
+    except Exception as error:
+        log(f"Project manager error: {error}", "error")
+        return "Project manager encountered an error."
+
+    return None
+
+
+# ==========================================================
+# PROJECT TYPE
+# ==========================================================
+
+def detect_project_type(request):
+    text = normalize_command(request)
+
+    if any(term in text for term in (
+        "artificial intelligence",
+        "machine learning",
+        "deep learning",
+        "chatbot",
+        "llm",
+        "ai assistant",
+        "ai agent",
+        "neural network",
+    )):
+        return "ai"
+
+    if any(term in text for term in (
+        "website",
+        "web site",
+        "web app",
+        "web application",
+        "webapp",
+        "online store",
+        "ecommerce",
+        "e-commerce",
+        "frontend",
+        "full stack",
+        "fullstack",
+    )):
+        return "web"
+
+    if any(term in text for term in (
+        "android app",
+        "mobile app",
+        "phone app",
+        "android application",
+        "mobile application",
+    )):
+        return "app"
+
+    if any(term in text for term in (
+        "python project",
+        "python program",
+        "python application",
+    )):
+        return "python"
+
+    return "generic"
+
+
+# ==========================================================
+# AI PROJECT BUILDER
+# ==========================================================
+
+def ai_build_project(request):
+    if not request or ai_code_generator is None:
+        return None
+
+    try:
+        result = ai_code_generator.generate(request)
+
+        if not isinstance(result, dict):
+            return str(result)
+
+        if not result.get("success", False):
+            return None
+
+        files = result.get("files", {})
+        project = result.get("project", "NitronProject")
+        path = result.get("path", "")
+
+        reply = [
+            "Project built successfully.",
+            "",
+            f"Project: {project}",
+            f"Location: {path}",
+            "",
+            "Files created:",
+        ]
+
+        if isinstance(files, dict):
+            filenames = files.keys()
+        elif isinstance(files, list):
+            filenames = files
+        else:
+            filenames = []
+
+        for filename in filenames:
+            reply.append(f"- {filename}")
+
+        return "\n".join(reply)
+
+    except Exception as error:
+        log(f"AI build error: {error}", "error")
+        return None
+
+
+# ==========================================================
+# BUILDER MANAGER
+# ==========================================================
+
+def manager_build_project(request, project_type):
+    if builder is None:
+        return None
+
+    methods = {
+        "web": (
+            "build_web",
+            "create_web_project",
+            "website",
+        ),
+        "app": (
+            "build_app",
+            "create_app_project",
+            "mobile_app",
+        ),
+        "ai": (
+            "build_ai",
+            "create_ai_project",
+        ),
+        "python": (
+            "build_python",
+            "create_python_project",
+        ),
+        "generic": (
+            "build",
+            "create_project",
+        ),
+    }
+
+    candidates = methods.get(
+        project_type,
+        methods["generic"],
+    )
+
+    for method_name in candidates:
+        method = getattr(
+            builder,
+            method_name,
+            None,
+        )
+
+        if not callable(method):
+            continue
+
+        try:
+            result = method(request)
+
+            if result:
+                return result
+
+        except Exception as error:
+            log(
+                f"Builder {method_name}: {error}",
+                "warning",
+            )
+
+    return None
+
+
+# ==========================================================
+# LOCAL PROJECT FALLBACK
+# ==========================================================
+
+def local_fallback_project(request, project_type):
+    name = safe_project_name(request)
+
+    project_dir = GENERATED_PROJECTS / name
+
+    project_dir.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    if project_type == "web":
+
+        directories = (
+            "frontend",
+            "frontend/src",
+            "frontend/public",
+            "frontend/components",
+            "frontend/pages",
+            "frontend/styles",
+            "backend",
+            "backend/api",
+            "backend/routes",
+            "backend/models",
+            "backend/services",
+            "database",
+            "docs",
+            "tests",
+        )
+
+        for directory in directories:
+            (project_dir / directory).mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+
+        write_file(
+            project_dir / "frontend/index.html",
+            f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{request}</title>
+<link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+<main>
+<h1>{request}</h1>
+<p>Project created by Nitron.</p>
+</main>
+
+<script src="src/app.js"></script>
+</body>
+</html>
+""",
+        )
+
+        write_file(
+            project_dir / "frontend/styles/style.css",
+            """* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+main {
+    padding: 40px;
+}
+""",
+        )
+
+        write_file(
+            project_dir / "frontend/src/app.js",
+            """console.log("Nitron project started.");
+""",
+        )
+
+        write_file(
+            project_dir / "backend/app.py",
+            """from http.server import HTTPServer, SimpleHTTPRequestHandler
+
+HOST = "127.0.0.1"
+PORT = 8000
+
+if __name__ == "__main__":
+    server = HTTPServer(
+        (HOST, PORT),
+        SimpleHTTPRequestHandler,
+    )
+
+    print(
+        f"Server running on http://{HOST}:{PORT}"
+    )
+
+    server.serve_forever()
+""",
+        )
+
+    elif project_type == "ai":
+
+        for directory in (
+            "models",
+            "data",
+            "prompts",
+            "agents",
+            "tools",
+            "memory",
+            "api",
+            "tests",
+            "docs",
+        ):
+            (project_dir / directory).mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+
+        write_file(
+            project_dir / "main.py",
+            """def main():
+    print("Nitron AI project started.")
+
+
+if __name__ == "__main__":
+    main()
+""",
+        )
+
+        write_file(
+            project_dir / "config.json",
+            json.dumps(
+                {
+                    "provider": "ollama",
+                    "model": "qwen2.5-coder:1.5b",
+                },
+                indent=4,
+            ),
+        )
+
+    elif project_type == "python":
+
+        for directory in (
+            "src",
+            "tests",
+            "docs",
+        ):
+            (project_dir / directory).mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+
+        write_file(
+            project_dir / "src/main.py",
+            """def main():
+    print("Python project created by Nitron.")
+
+
+if __name__ == "__main__":
+    main()
+""",
+        )
+
+    else:
+
+        for directory in (
+            "src",
+            "docs",
+            "tests",
+            "config",
+        ):
+            (project_dir / directory).mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+
+    write_file(
+        project_dir / "README.md",
+        f"""# {request}
+
+Generated by Nitron v{VERSION}.
+
+Project type: {project_type}
+
+This project was generated automatically by Nitron.
+""",
+    )
+
+    return (
+        "Project created successfully.\n\n"
+        f"Project: {name}\n"
+        f"Type: {project_type}\n"
+        f"Location: {project_dir}"
+    )
+
+
+# ==========================================================
+# MASTER PROJECT BUILDER
+# ==========================================================
+
+def build_project(request):
+    request = str(request).strip()
+
+    if not request:
+        return "Tell me what you want me to build."
+
+    project_type = detect_project_type(request)
+
+    result = ai_build_project(request)
+
+    if result:
+        return result
+
+    result = manager_build_project(
+        request,
+        project_type,
+    )
+
+    if result:
+        return str(result)
+
+    return local_fallback_project(
+        request,
+        project_type,
+    )
+
+
+# ==========================================================
+# BUILD REQUEST
+# ==========================================================
+
+def extract_build_request(command):
+    prefixes = (
+        "build ",
+        "create project ",
+        "make project ",
+        "make a project ",
+        "develop ",
+    )
+
+    for prefix in prefixes:
+        if command.startswith(prefix):
+            request = command[len(prefix):].strip()
+
+            if request:
+                return request
+
+    return None
+
+
+# ==========================================================
+# CODE GENERATION
+# ==========================================================
+
+def generate_code(command):
+    if ai_code_generator is None:
+        return "AI code generator is unavailable."
+
+    prefixes = (
+        "generate code ",
+        "write code ",
+        "write the code ",
+        "code for ",
+        "give me code for ",
+        "create code for ",
+    )
+
+    request = None
+
+    for prefix in prefixes:
+        if command.startswith(prefix):
+            request = command[len(prefix):].strip()
+            break
+
+    if not request:
+        return None
+
+    try:
+        result = ai_code_generator.generate(request)
+
+        if not isinstance(result, dict):
+            return str(result)
+
+        if not result.get("success", False):
+            return "Code generation failed."
+
+        reply = [
+            "Code generated successfully.",
+            "",
+            "Project: "
+            + str(result.get("project", "Unknown")),
+            "Location: "
+            + str(result.get("path", "Unknown")),
+            "",
+            "Files:",
+        ]
+
+        files = result.get("files", {})
+
+        if isinstance(files, dict):
+            files = files.keys()
+
+        if isinstance(files, (list, tuple)):
+            for filename in files:
+                reply.append(f"- {filename}")
+
+        return "\n".join(reply)
+
+    except Exception as error:
+        log(f"Code generation error: {error}", "error")
+        return "Code generation failed."
+
+
+# ==========================================================
+# DEFENSIVE SECURITY SCANNER
+# ==========================================================
+
+try:
+    from security.defensive_scanner import print_report as defensive_scan
+    print("[OK] Defensive security scanner connected.")
+except Exception as error:
+    defensive_scan = None
+    print(f"[WARNING] Defensive security scanner unavailable: {error}")
+
+
+# ==========================================================
+# LEARNING SYSTEM
+# ==========================================================
+
+ask_python = load_optional(
+    "academy.python_teacher",
+    "ask_python",
+    "Python teacher",
+)
+
+ask_physics = load_optional(
+    "physics",
+    "ask_physics",
+    "Physics teacher",
+)
+
+
+# ==========================================================
+# LEARNING COMMAND
+# ==========================================================
+
+# ==========================================================
+# NITRON LEARNING MEMORY
+# ==========================================================
+
+try:
+    from learning_manager.learning_manager import learning_manager
+
+    print("[OK] Learning memory connected.")
+
+except Exception as error:
+
+    learning_manager = None
+
+    print("[WARNING] Learning memory unavailable.")
+
+    try:
+        log(
+            f"Learning manager: {error}",
+            "warning"
+        )
+    except Exception:
+        pass
+
+
+def _save_python_lesson(lesson):
+    """
+    Save a lesson returned by academy.python_teacher.
+    """
+
+    if learning_manager is None:
+        return None
+
+    if not isinstance(lesson, dict):
+        return None
+
+    try:
+        return learning_manager.save_knowledge(
+            topic="Python",
+            title=lesson.get(
+                "title",
+                "Python Lesson"
+            ),
+            explanation=lesson.get(
+                "explanation",
+                ""
+            ),
+            code=lesson.get(
+                "code",
+                ""
+            ),
+            practice=lesson.get(
+                "practice",
+                ""
+            ),
+            quiz=lesson.get(
+                "quiz",
+                ""
+            )
+        )
+
+    except Exception as error:
+
+        log(
+            f"Python lesson save error: {error}",
+            "error"
+        )
+
+        return None
+
+
+def _learn_python_lesson():
+    """
+    Learn the next Python lesson and save it.
+
+    This function is separate from teaching.
+
+    learn python
+        -> Nitron learns/saves a lesson
+
+    teach me python
+        -> PythonTeacher teaches the user
+    """
+
+    if ask_python is None:
+        return "Python teacher unavailable."
+
+    if learning_manager is None:
+        return "Learning memory system unavailable."
+
+    try:
+        # --------------------------------------------------
+        # Find how many Python lessons Nitron already saved.
+        # --------------------------------------------------
+
+        knowledge = learning_manager.get_knowledge("Python")
+
+        if not isinstance(knowledge, dict):
+            knowledge = {}
+
+        saved_lessons = knowledge.get(
+            "lessons",
+            []
+        )
+
+        if not isinstance(saved_lessons, list):
+            saved_lessons = []
+
+        next_lesson = len(saved_lessons) + 1
+
+        # --------------------------------------------------
+        # Get the next lesson from the Python academy.
+        # --------------------------------------------------
+
+        from academy.python_teacher import python_teacher
+
+        lesson = python_teacher.teach(
+            next_lesson
+        )
+
+        if not isinstance(lesson, dict):
+            return "I couldn't retrieve the next Python lesson."
+
+        # The teacher returns {"message": "..."} when
+        # the requested lesson does not exist.
+        if "title" not in lesson:
+
+            return lesson.get(
+                "message",
+                f"I have no more Python lessons after Lesson {next_lesson}."
+            )
+
+        # --------------------------------------------------
+        # Save the lesson.
+        # --------------------------------------------------
+
+        saved = _save_python_lesson(
+            lesson
+        )
+
+        if saved:
+
+            folder = learning_manager.topic_folder(
+                "Python"
+            )
+
+            return (
+                f"I learned Python Lesson {next_lesson}: "
+                f"{lesson.get('title', 'Python')}\n\n"
+                f"I saved it to:\n{folder}"
+            )
+
+        return (
+            f"I learned Python Lesson {next_lesson}, "
+            "but I couldn't save it."
+        )
+
+    except Exception as error:
+
+        log(
+            f"Python learning error: {error}",
+            "error"
+        )
+
+        return "I couldn't learn the Python lesson."
+
+
+
+def security_command(command):
+    """
+    Safe defensive-security commands.
+
+    These commands inspect the local environment and report findings.
+    They do not automatically delete files, kill processes, or disable
+    services.
+    """
+
+    command = normalize_command(command)
+
+    scan_commands = (
+        "check my device for hacking",
+        "check my device for hackers",
+        "check my device for hacking attempts",
+        "scan my device for hacking",
+        "scan my device for hackers",
+        "check for hacking",
+        "check for hackers",
+        "security scan",
+        "run security scan",
+        "defensive security scan",
+        "check my security",
+    )
+
+    if command in scan_commands:
+        if defensive_scan is None:
+            return "My defensive security scanner is unavailable."
+
+        try:
+            defensive_scan()
+            return (
+                "Security scan completed. "
+                "The scanner only reports possible indicators; "
+                "it does not automatically remove or disable anything."
+            )
+        except Exception as error:
+            log(
+                f"Defensive security scan error: {error}",
+                "error"
+            )
+            return "I couldn't complete the defensive security scan."
+
+    return None
+
+
+
+def learning_command(command):
+
+    command = normalize_command(command)
+
+    # ======================================================
+    # DIRECT WEB LEARNING
+    #
+    # Examples:
+    #   learn python from https://docs.python.org/3/
+    #   study fastapi from https://fastapi.tiangolo.com/
+    #
+    # These commands go directly through the Brain reasoning
+    # learning pipeline and do not require the normal
+    # permission-based "learn <topic>" flow.
+    # ======================================================
+
+    if re.match(
+        r"^(?:learn|study)\s+.+?\s+from\s+https?://\S+$",
+        command,
+        re.IGNORECASE
+    ):
+
+        try:
+
+            result = reasoning.learn_from_command(
+                command
+            )
+
+            if result.get("success"):
+
+                return {
+                    "message": (
+                        f"Learned {result.get('topic')} "
+                        f"from {result.get('source')}."
+                    ),
+                    "learning": result
+                }
+
+            return {
+                "message": (
+                    "I couldn't complete the web-learning request."
+                ),
+                "learning": result
+            }
+
+        except Exception as error:
+
+            log(
+                f"Direct web learning error: {error}",
+                "error"
+            )
+
+            return (
+                "I couldn't complete the web-learning request."
+            )
+
+
+    # ======================================================
+    # PENDING LEARNING PERMISSION
+    # ======================================================
+
+    if learning_manager is not None:
+
+        pending_topic = getattr(
+            learning_manager,
+            "pending_topic",
+            None
+        )
+
+        if pending_topic:
+
+            yes_words = (
+                "yes",
+                "yeah",
+                "yep",
+                "sure",
+                "okay",
+                "ok",
+                "do it",
+                "create it",
+                "save it",
+                "go ahead"
+            )
+
+            no_words = (
+                "no",
+                "nope",
+                "not now",
+                "don't",
+                "do not"
+            )
+
+            if command in yes_words:
+
+                try:
+                    # Remember the topic before answer_permission()
+                    # clears the pending request.
+                    topic = str(
+                        pending_topic
+                    ).strip()
+
+                    result = learning_manager.answer_permission(
+                        command
+                    )
+
+                    # Python learning continues here.
+                    if normalize_command(topic) == "python":
+
+                        learned = _learn_python_lesson()
+
+                        if learned:
+                            return learned
+
+                    return result
+
+                except Exception as error:
+
+                    log(
+                        f"Learning permission error: {error}",
+                        "error"
+                    )
+
+                    return (
+                        "I received your permission, "
+                        "but I had trouble starting the learning process."
+                    )
+
+            if command in no_words:
+
+                try:
+                    return learning_manager.answer_permission(
+                        command
+                    )
+
+                except Exception as error:
+
+                    log(
+                        f"Learning permission error: {error}",
+                        "error"
+                    )
+
+                    return (
+                        "I had trouble handling the learning request."
+                    )
+
+        # ======================================================
+    # NITRON LEARNS A TOPIC
+    #
+    # "learn python" means Nitron learns Python.
+    # ======================================================
+
+    # ======================================================
+    # DEFENSIVE CYBERSECURITY LEARNING
+    # ======================================================
+
+    defensive_hacking_phrases = (
+        "unethical hacking for defense",
+        "unethical hacking for defensive purposes",
+        "unethical hacking for defence",
+        "unethical hacking defensively",
+    )
+
+    if command in defensive_hacking_phrases:
+        if learning_manager is None:
+            return "My learning memory system is unavailable."
+
+        try:
+            return learning_manager.request_learning(
+                "defensive cybersecurity"
+            )
+        except Exception as error:
+            log(
+                f"Defensive hacking learning error: {error}",
+                "error"
+            )
+            return "I couldn't start defensive cybersecurity learning."
+
+    learn_prefixes = (
+        "learn ",
+        "nitron learn ",
+        "i want you to learn ",
+        "i want nitron to learn ",
+        "learn about "
+    )
+
+    for prefix in learn_prefixes:
+
+        if command.startswith(prefix):
+
+            topic = command[len(prefix):].strip()
+
+            if not topic:
+                return "What would you like me to learn?"
+
+            if learning_manager is None:
+                return "My learning memory system is unavailable."
+
+            try:
+                return learning_manager.request_learning(topic)
+
+            except Exception as error:
+
+                log(
+                    f"Learning request error: {error}",
+                    "error"
+                )
+
+                return "I couldn't start the learning request."
+
+    # ======================================================
+    # TEACH USER PYTHON
+    # ======================================================
+
+    python_teach_commands = (
+        "teach me python",
+        "teach python",
+        "python lessons",
+        "start python lesson",
+        "start learning python with me"
+    )
+
+    if command in python_teach_commands:
+
+        if ask_python is None:
+            return "Python teacher unavailable."
+
+        try:
+            set_topic("python")
+            return ask_python("teach me python")
+
+        except Exception as error:
+
+            log(
+                f"Python teaching error: {error}",
+                "error"
+            )
+
+            return "I couldn't start the Python lesson."
+
+    # ======================================================
+    # SPECIFIC PYTHON LESSON
+    # ======================================================
+
+    if command.startswith("python lesson "):
+
+        if ask_python is None:
+            return "Python teacher unavailable."
+
+        lesson_number = command[len("python lesson "):].strip()
+
+        try:
+            return ask_python(
+                f"lesson {lesson_number}"
+            )
+
+        except Exception as error:
+
+            log(
+                f"Python lesson error: {error}",
+                "error"
+            )
+
+            return "I couldn't open that Python lesson."
+
+    # ======================================================
+    # PHYSICS
+    # ======================================================
+
+    physics_commands = (
+        "teach me physics",
+        "learn physics",
+        "physics lessons",
+        "start physics",
+        "start learning physics"
+    )
+
+    if command in physics_commands:
+
+        if ask_physics:
+
+            try:
+                set_topic("physics")
+                return ask_physics("topics")
+
+            except Exception as error:
+
+                log(
+                    f"Physics lesson error: {error}",
+                    "error"
+                )
+
+                return "I couldn't start the physics lesson."
+
+        return "Physics teacher unavailable."
+
+    # ======================================================
+    # PHYSICS TOPIC
+    # ======================================================
+
+    if command.startswith("learn physics "):
+
+        topic = command[len("learn physics "):].strip()
+
+        if ask_physics and topic:
+
+            try:
+                set_topic("physics")
+                return ask_physics(topic)
+
+            except Exception as error:
+
+                log(
+                    f"Physics topic error: {error}",
+                    "error"
+                )
+
+                return "I couldn't teach that physics topic."
+
+    if command.startswith("physics "):
+
+        topic = command[len("physics "):].strip()
+
+        if ask_physics and topic:
+
+            try:
+                set_topic("physics")
+                return ask_physics(topic)
+
+            except Exception as error:
+
+                log(
+                    f"Physics topic error: {error}",
+                    "error"
+                )
+
+                return "I couldn't teach that physics topic."
+
+    return None
+
+
+def common_conversation(command):
+
+    replies = {
+        "hi": "Hi Boss. I'm here.",
+        "hello": "Hello Boss. How can I help?",
+        "hey": "Hey Boss. I'm listening.",
+        "hey nitron": "Yes Boss. I'm listening.",
+        "hello nitron": "Hello Boss. Nitron is ready.",
+        "hi nitron": "Hi Boss. I'm ready.",
+        "good morning": "Good morning, Boss. Ready when you are.",
+        "good afternoon": "Good afternoon, Boss. How can I help?",
+        "good evening": "Good evening, Boss. I'm ready.",
+        "good night": "Good night, Boss. I'll be here when you need me.",
+        "how are you": "I'm doing well, Boss. All my systems are ready.",
+        "how are you nitron": "I'm doing well, Boss. All my systems are ready.",
+        "what are you doing": "I'm here waiting for your next command.",
+        "what are you up to": "I'm here and ready to work.",
+        "are you there": "Yes Boss. I'm listening.",
+        "are you listening": "Yes Boss. I'm listening.",
+        "can you hear me": "Yes Boss. I'm listening.",
+        "thanks": "You're welcome, Boss.",
+        "thank you": "You're welcome, Boss.",
+        "thanks nitron": "You're welcome, Boss.",
+        "thank you nitron": "You're welcome, Boss.",
+        "who are you": "I'm Nitron, your AI assistant.",
+        "what are you": "I'm Nitron, your AI assistant.",
+        "what is nitron": "I'm Nitron, your AI assistant.",
+        "what is your name": "My name is Nitron, Boss.",
+        "whats your name": "My name is Nitron, Boss.",
+        "your name": "My name is Nitron, Boss.",
+        "good job": "Thanks, Boss. Let's keep building.",
+        "well done": "Thanks, Boss. Let's keep building.",
+        "nice": "Thanks, Boss.",
+        "awesome": "Thanks, Boss.",
+        "are you ready": "Always ready, Boss.",
+        "ready": "Always ready, Boss.",
+        "wake up": "I'm awake and ready.",
+        "wake up nitron": "I'm awake, Boss.",
+        "lets go": "Let's go, Boss. What are we building?",
+        "let's go": "Let's go, Boss. What are we building?",
+        "okay": "Alright, Boss.",
+        "ok": "Alright, Boss.",
+    }
+
+    return replies.get(command)
+
+
+# ==========================================================
+# SYSTEM STATUS
+# ==========================================================
+
+def system_status():
+
+    provider = None
+
+    if ai_code_generator:
+
+        try:
+            provider = ai_code_generator.provider_info()
+
+        except Exception:
+            provider = None
+
+    lines = [
+        "NITRON SYSTEM STATUS",
+        "",
+        f"Version: {VERSION}",
+        "Brain: "
+        + ("ONLINE" if brain else "OFFLINE"),
+        "AI Builder: "
+        + ("ONLINE" if ai_code_generator else "OFFLINE"),
+        "Builder Manager: "
+        + ("ONLINE" if builder else "OFFLINE"),
+        "Project Manager: "
+        + ("ONLINE" if project_manager else "OFFLINE"),
+        "Music: "
+        + ("ONLINE" if play_song else "OFFLINE"),
+        "Weather: "
+        + ("ONLINE" if get_weather else "OFFLINE"),
+        "Python Teacher: "
+        + ("ONLINE" if ask_python else "OFFLINE"),
+        "Physics Teacher: "
+        + ("ONLINE" if ask_physics else "OFFLINE"),
+        f"Learning Folder: {LEARNED_DIR}",
+        f"Projects: {GENERATED_PROJECTS}",
+    ]
+
+    if provider and isinstance(provider, dict):
+
+        lines.extend(
+            [
+                "Provider: "
+                + str(provider.get("provider")),
+                "Model: "
+                + str(provider.get("model")),
+            ]
+        )
+
+    return "\n".join(lines)
+
+
+# ==========================================================
+# MEMORY COMMANDS
+# ==========================================================
+
+def memory_command(command):
+
+    if command in (
+        "clear conversation",
+        "clear chat",
+        "forget conversation",
+    ):
+
+        clear_history()
+
+        return "Conversation history cleared."
+
+    if command in (
+        "conversation history",
+        "show conversation history",
+        "chat history",
+    ):
+
+        history = conversation_history()
+
+        if not history:
+            return "Conversation history is empty."
+
+        lines = []
+
+        for item in history:
+
+            lines.append(
+                f"You: {item['user']}"
+            )
+
+            lines.append(
+                f"Nitron: {item['assistant']}"
+            )
+
+            lines.append("")
+
+        return "\n".join(lines)
+
+    return None
+
+
+# ==========================================================
+# PERSONAL STATEMENT
+# ==========================================================
+
+def personal_statement(command):
+
+    if command.startswith("my name is "):
+
+        name = command[len("my name is "):].strip()
+
+        if name:
+            return f"Nice to meet you, {name}."
+
+    if command.startswith("i am "):
+
+        value = command[len("i am "):].strip()
+
+        if value:
+            return f"Got it. You're {value}."
+
+    if command.startswith("i'm "):
+
+        value = command[len("i'm "):].strip()
+
+        if value:
+            return f"Got it. You're {value}."
+
+    return None
+
+
+# ==========================================================
+# MAIN COMMAND EXECUTOR
+# ==========================================================
+
+def execute(command):
+
+    if command is None:
+        return "Please say something."
+
+    original = str(command).strip()
+
+    if not original:
+        return "I'm listening."
+
+    command = normalize_command(original)
+
+    remember_user(original)
+
+    # ------------------------------------------------------
+    # LEARNING PERMISSION MUST COME EARLY
+    # ------------------------------------------------------
+
+    if learning_state["waiting_for_permission"]:
+
+        result = confirm_learning_permission(command)
+
+        remember_reply(result)
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # COMMON CONVERSATION
+    # ------------------------------------------------------
+
+    result = common_conversation(command)
+
+    if result:
+
+        remember_reply(result)
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # EXIT
+    # ------------------------------------------------------
+
+    if command in (
+        "exit",
+        "quit",
+        "q",
+        "goodbye",
+        "bye",
+    ):
+
+        result = "Goodbye Boss."
+
+        remember_reply(result)
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # PERSONAL STATEMENT
+    # ------------------------------------------------------
+
+    result = personal_statement(command)
+
+    if result:
+
+        remember_reply(result)
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # SYSTEM STATUS
+    # ------------------------------------------------------
+
+    if command in (
+        "status",
+        "system status",
+        "nitron status",
+    ):
+
+        result = system_status()
+
+        remember_reply(result)
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # BATTERY
+    # ------------------------------------------------------
+
+    if command in (
+        "battery",
+        "battery status",
+        "battery level",
+        "how much battery",
+        "how much battery do i have",
+        "what is my battery",
+        "check battery",
+        "is my phone charging",
+        "am i charging",
+    ):
+
+        result = battery_status()
+
+        remember_reply(result)
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # MEMORY
+    # ------------------------------------------------------
+
+    result = memory_command(command)
+
+    if result:
+
+        remember_reply(result)
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # PROJECT MANAGER
+    # ------------------------------------------------------
+
+    if (
+        command in (
+            "list projects",
+            "show projects",
+            "my projects",
+            "show my projects",
+        )
+        or command.startswith(
+            (
+                "inspect project ",
+                "show project ",
+                "project status ",
+                "check project ",
+                "run project ",
+                "test project ",
+            )
+        )
+    ):
+
+        result = project_command(command)
+
+        if result is not None:
+
+            remember_reply(result)
+            remember(original, result)
+
+            return result
+
+    # ------------------------------------------------------
+    # OPEN APP
+    # ------------------------------------------------------
+
+    if command.startswith("open "):
+
+        result = open_app(
+            command[len("open "):]
+        )
+
+        remember_reply(result)
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # CLOSE APP
+    # ------------------------------------------------------
+
+    if command.startswith("close "):
+
+        result = close_app(
+            command[len("close "):]
+        )
+
+        remember_reply(result)
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # LIST APPS
+    # ------------------------------------------------------
+
+    if command in (
+        "list apps",
+        "show apps",
+        "available apps",
+    ):
+
+        result = (
+            "Available apps:\n\n"
+            + "\n".join(
+                f"- {app}"
+                for app in sorted(APPS)
+            )
+        )
+
+        remember_reply(result)
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # PHONE CONTROLS
+    # ------------------------------------------------------
+
+    phone_commands = {
+        "home": go_home,
+        "go home": go_home,
+        "back": go_back,
+        "go back": go_back,
+        "lock": lock_screen,
+        "lock screen": lock_screen,
+        "lock phone": lock_screen,
+        "recent apps": open_recent_apps,
+        "open recent apps": open_recent_apps,
+        "notifications": notifications,
+        "open notifications": notifications,
+        "quick settings": quick_settings,
+        "settings panel": quick_settings,
+        "screenshot": screenshot,
+        "take screenshot": screenshot,
+    }
+
+    if command in phone_commands:
+
+        result = phone_commands[command]()
+
+        remember_reply(result)
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # SEARCH
+    # ------------------------------------------------------
+
+    if command.startswith("search "):
+
+        result = search(
+            command[len("search "):]
+        )
+
+        remember_reply(result)
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # NATURAL WEB SEARCH
+    # ------------------------------------------------------
+
+    natural_search_prefixes = (
+        "look up ",
+        "find information about ",
+        "find information on ",
+        "look for ",
+        "find ",
+        "research ",
+    )
+
+    for prefix in natural_search_prefixes:
+
+        if command.startswith(prefix):
+
+            query = command[len(prefix):].strip()
+
+            if query:
+
+                result = search(query)
+
+                remember_reply(result)
+                remember(original, result)
+
+                return result
+
+    # ------------------------------------------------------
+    # WEATHER
+    # ------------------------------------------------------
+
+    if (
+        command == "weather"
+        or command.startswith("weather ")
+        or "weather today" in command
+        or "what is the weather" in command
+        or "what's the weather" in command
+        or "forecast" in command
+    ):
+
+        result = weather_report()
+
+        remember_reply(result)
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # MUSIC
+    # ------------------------------------------------------
+
+    if command == "play music":
+
+        result = play_music()
+
+        remember_reply(result)
+        remember(original, result)
+
+        return result
+
+    if command.startswith("play "):
+
+        result = play_music(
+            command[len("play "):]
+        )
+
+        remember_reply(result)
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # TRADING
+    # ------------------------------------------------------
+
+    trading_words = (
+        "trade",
+        "analyze",
+        "analyse",
+        "market",
+        "buy",
+        "sell",
+        "xauusd",
+        "xagusd",
+        "btc",
+        "bitcoin",
+        "ethereum",
+        "apple",
+        "aapl",
+        "tesla",
+    )
+
+    if any(word in command for word in trading_words):
+
+        result = analyze_market(command)
+
+        remember_reply(str(result))
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # BUILD PROJECT
+    # ------------------------------------------------------
+
+    build_request = extract_build_request(command)
+
+    if build_request:
+
+        result = build_project(build_request)
+
+        remember_reply(str(result))
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # CODE GENERATION
+    # ------------------------------------------------------
+
+    result = generate_code(command)
+
+    if result:
+
+        remember_reply(str(result))
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # LEARNING
+    # ------------------------------------------------------
+
+    security_result = security_command(command)
+
+    if security_result is not None:
+        return security_result
+
+    result = learning_command(command)
+
+    if result:
+
+        remember_reply(str(result))
+        remember(original, result)
+
+        return result
+
+    # ------------------------------------------------------
+    # GENERAL BRAIN CHAT
+    # ------------------------------------------------------
+
+    result = ask_brain(original)
+
+    remember_reply(result)
+    remember(original, result)
+
+    return {
+        "message": result
+    }
+
+
+# ==========================================================
+# TEST MODE
+# ==========================================================
+
+def test_mode():
+
+    print()
+    print("=" * 60)
+    print(f"NITRON v{VERSION} TEST MODE")
+    print("=" * 60)
+
+    print()
+    print("Try:")
+    print("  hi")
+    print("  status")
+    print("  battery status")
+    print("  list apps")
+    print("  open youtube")
+    print("  search artificial intelligence")
+    print("  learn python")
+    print("  learn cybersecurity")
+    print("  python variables")
+    print("  learn physics")
+    print("  build a website")
+    print("  generate code for a calculator")
+    print("  list projects")
+    print()
+    print("Type exit to stop.")
+    print()
+
+    while True:
+
+        try:
+
+            user = input("You: ").strip()
+
+            if user.lower() in (
+                "exit",
+                "quit",
+                "q",
+            ):
+
+                print("Nitron: Goodbye Boss.")
+                break
+
+            if not user:
+                continue
+
+            answer = execute(user)
+
+            print()
+            print("Nitron:", answer)
+            print()
+
+        except KeyboardInterrupt:
+
+            print()
+            print("Nitron stopped.")
+            break
+
+        except Exception as error:
+
+            log(
+                f"Runtime error: {error}",
+                "error",
+            )
+
+            print(
+                "Nitron error:",
+                error,
+            )
+
+
+# ==========================================================
+# STARTUP COMPLETE
+# ==========================================================
+
+print("[OK] Conversation system loaded.")
+print("[OK] Android controls loaded.")
+print("[OK] Search system loaded.")
+print("[OK] Learning system loaded.")
+print("[OK] Learning memory loaded.")
+print("[OK] Battery system loaded.")
+print("[OK] Music system loaded.")
+print("[OK] Weather system loaded.")
+print("[OK] Trading system loaded.")
+print("[OK] AI builder loaded.")
+print("[OK] Project manager loaded.")
+print("[OK] Command executor loaded.")
+print(f"[OK] Nitron Command System v{VERSION} ready.")
+
+
+# ==========================================================
+# ENTRY POINT
+# ==========================================================
+
+if __name__ == "__main__":
+    test_mode()
+

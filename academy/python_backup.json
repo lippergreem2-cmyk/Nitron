@@ -1,0 +1,401 @@
+{
+    "1": {
+        "title": "Introduction to Python",
+        "explanation": "Python is a programming language used to create software, websites, games, automation tools, and artificial intelligence applications.",
+        "code": "print(\"Hello Python\")",
+        "output": "Hello Python",
+        "practice": "Write a program that prints your name.",
+        "quiz": "Which function displays text in Python?"
+    },
+    "2": {
+        "title": "Python Comments",
+        "explanation": "Comments are notes in code that Python ignores. They help programmers understand programs.",
+        "code": "# This is a comment\nprint(\"Learning Python\")",
+        "output": "Learning Python",
+        "practice": "Add a comment to your program.",
+        "quiz": "Which symbol creates a comment?"
+    },
+    "3": {
+        "title": "Variables",
+        "explanation": "Variables store information that can be used later in a program.",
+        "code": "name = \"Nitron\"\nprint(name)",
+        "output": "Nitron",
+        "practice": "Create a variable called age.",
+        "quiz": "What stores information in Python?"
+    },
+    "4": {
+        "title": "Data Types",
+        "explanation": "Python has different data types such as strings, integers, floats, and booleans.",
+        "code": "name = \"AI\"\nage = 10\nprint(name)\nprint(age)",
+        "output": "AI\n10",
+        "practice": "Create variables with different data types.",
+        "quiz": "Name two Python data types."
+    },
+    "5": {
+        "title": "Input Function",
+        "explanation": "The input function allows users to enter information into a program.",
+        "code": "name = input(\"Enter name: \")\nprint(name)",
+        "output": "Enter name: Alex\nAlex",
+        "practice": "Ask the user for their favorite color.",
+        "quiz": "Which function receives user input?"
+    },
+    "6": {
+        "title": "Operators",
+        "explanation": "Operators perform calculations and comparisons.",
+        "code": "a = 10\nb = 5\nprint(a+b)\nprint(a*b)",
+        "output": "15\n50",
+        "practice": "Try subtraction and division.",
+        "quiz": "Which operator performs multiplication?"
+    },
+    "7": {
+        "title": "Strings",
+        "explanation": "Strings are text values stored inside quotes.",
+        "code": "text = \"Python\"\nprint(text)",
+        "output": "Python",
+        "practice": "Create your own string.",
+        "quiz": "What stores text?"
+    },
+    "8": {
+        "title": "String Methods",
+        "explanation": "String methods change or analyze text.",
+        "code": "word = \"python\"\nprint(word.upper())",
+        "output": "PYTHON",
+        "practice": "Try upper and lower methods.",
+        "quiz": "Which method makes letters uppercase?"
+    },
+    "9": {
+        "title": "Lists",
+        "explanation": "Lists store multiple values in one variable.",
+        "code": "items = [\"phone\", \"computer\"]\nprint(items)",
+        "output": "[\"phone\", \"computer\"]",
+        "practice": "Create a list of three items.",
+        "quiz": "Which brackets create a list?"
+    },
+    "10": {
+        "title": "If Statements",
+        "explanation": "If statements allow programs to make decisions.",
+        "code": "age = 18\nif age >= 18:\n    print(\"Adult\")",
+        "output": "Adult",
+        "practice": "Create your own condition.",
+        "quiz": "Which keyword creates a decision?"
+},
+"11": {
+    "title": "Else Statements",
+    "explanation": "Else runs when an if condition is false.",
+    "code": "age = 12\nif age >= 18:\n    print(\"Adult\")\nelse:\n    print(\"Child\")",
+    "output": "Child",
+    "practice": "Create an if else program.",
+    "quiz": "What runs when if is false?"
+},
+"12": {
+    "title": "Elif Statements",
+    "explanation": "Elif allows multiple conditions in one decision.",
+    "code": "score = 80\nif score >= 90:\n    print(\"A\")\nelif score >= 70:\n    print(\"B\")",
+    "output": "B",
+    "practice": "Create a grading program.",
+    "quiz": "What keyword adds another condition?"
+},
+"13": {
+    "title": "For Loops",
+    "explanation": "For loops repeat code for each item in a sequence.",
+    "code": "for i in range(5):\n    print(i)",
+    "output": "0\n1\n2\n3\n4",
+    "practice": "Create a loop that prints numbers.",
+    "quiz": "Which keyword creates a for loop?"
+},
+"14": {
+    "title": "While Loops",
+    "explanation": "While loops repeat while a condition is true.",
+    "code": "x = 0\nwhile x < 3:\n    print(x)\n    x += 1",
+    "output": "0\n1\n2",
+    "practice": "Create a countdown.",
+    "quiz": "When does a while loop stop?"
+},
+"15": {
+    "title": "Break and Continue",
+    "explanation": "Break stops a loop and continue skips to the next loop step.",
+    "code": "for i in range(5):\n    if i == 3:\n        break\n    print(i)",
+    "output": "0\n1\n2",
+    "practice": "Stop a loop using break.",
+    "quiz": "What stops a loop immediately?"
+},
+"16": {
+    "title": "Functions",
+    "explanation": "Functions are reusable blocks of code.",
+    "code": "def hello():\n    print(\"Hello\")\n\nhello()",
+    "output": "Hello",
+    "practice": "Create your own function.",
+    "quiz": "Which keyword creates a function?"
+},
+"17": {
+    "title": "Function Parameters",
+    "explanation": "Parameters allow functions to receive information.",
+    "code": "def greet(name):\n    print(name)\n\ngreet(\"Nitron\")",
+    "output": "Nitron",
+    "practice": "Create a function with a parameter.",
+    "quiz": "What passes information into functions?"
+},
+"18": {
+    "title": "Return Values",
+    "explanation": "Return sends a result back from a function.",
+    "code": "def add(a,b):\n    return a+b\n\nprint(add(2,3))",
+    "output": "5",
+    "practice": "Create a function that returns a value.",
+    "quiz": "Which keyword returns data?"
+},
+"19": {
+    "title": "Modules",
+    "explanation": "Modules contain reusable Python code.",
+    "code": "import math\nprint(math.sqrt(16))",
+    "output": "4.0",
+    "practice": "Import a Python module.",
+    "quiz": "Which keyword loads a module?"
+},
+"20": {
+    "title": "Packages",
+    "explanation": "Packages are collections of modules.",
+    "code": "import random\nprint(random.randint(1,10))",
+    "output": "Random number",
+    "practice": "Use the random package.",
+    "quiz": "What contains multiple modules?"
+},
+"21": {
+    "title": "Error Handling",
+    "explanation": "Error handling prevents programs from crashing by managing unexpected problems.",
+    "code": "try:\n    number = 10 / 0\nexcept:\n    print(\"Error found\")",
+    "output": "Error found",
+    "practice": "Create a program using try and except.",
+    "quiz": "Which block handles errors?"
+},
+"22": {
+    "title": "File Reading",
+    "explanation": "Python can open and read information stored in files.",
+    "code": "file = open(\"test.txt\", \"r\")",
+    "output": "File opened",
+    "practice": "Create a text file and read it.",
+    "quiz": "Which mode reads a file?"
+},
+"23": {
+    "title": "File Writing",
+    "explanation": "Python can save information by writing to files.",
+    "code": "file = open(\"test.txt\", \"w\")\nfile.write(\"Hello\")",
+    "output": "Data saved",
+    "practice": "Write text into a file.",
+    "quiz": "Which mode writes files?"
+},
+"24": {
+    "title": "Classes",
+    "explanation": "Classes are blueprints for creating objects.",
+    "code": "class Robot:\n    pass",
+    "output": "Class created",
+    "practice": "Create a simple class.",
+    "quiz": "Which keyword creates a class?"
+},
+"25": {
+    "title": "Objects",
+    "explanation": "Objects are created from classes and contain data and actions.",
+    "code": "class Car:\n    pass\n\nmy_car = Car()",
+    "output": "Object created",
+    "practice": "Create an object from a class.",
+    "quiz": "Objects are created from what?"
+},
+"26": {
+    "title": "Constructors",
+    "explanation": "Constructors initialize object data when created.",
+    "code": "class Person:\n    def __init__(self,name):\n        self.name=name",
+    "output": "Object initialized",
+    "practice": "Create a class with a constructor.",
+    "quiz": "Which method initializes objects?"
+},
+"27": {
+    "title": "Inheritance",
+    "explanation": "Inheritance allows one class to receive features from another class.",
+    "code": "class Animal:\n    pass\n\nclass Dog(Animal):\n    pass",
+    "output": "Inherited",
+    "practice": "Create a child class.",
+    "quiz": "What allows classes to share features?"
+},
+"28": {
+    "title": "Polymorphism",
+    "explanation": "Polymorphism allows the same action to work in different ways.",
+    "code": "print(len(\"Python\"))",
+    "output": "6",
+    "practice": "Use the same function with different data.",
+    "quiz": "What means many forms?"
+},
+"29": {
+    "title": "Python Libraries",
+    "explanation": "Libraries provide ready-made tools for programmers.",
+    "code": "import datetime\nprint(datetime.datetime.now())",
+    "output": "Current date and time",
+    "practice": "Try importing a library.",
+    "quiz": "What do libraries provide?"
+},
+"30": {
+    "title": "Installing Packages",
+    "explanation": "Packages can be installed to add new Python features.",
+    "code": "pip install package_name",
+    "output": "Package installed",
+    "practice": "Learn how pip works.",
+    "quiz": "What tool installs Python packages?"
+},
+"31": {
+    "title": "Virtual Environments",
+    "explanation": "Virtual environments create separate spaces for Python projects and their packages.",
+    "code": "python -m venv myenv",
+    "output": "Virtual environment created",
+    "practice": "Create a virtual environment for a project.",
+    "quiz": "Why are virtual environments useful?"
+},
+"32": {
+    "title": "Lambda Functions",
+    "explanation": "Lambda functions are small anonymous functions written in one line.",
+    "code": "square = lambda x: x*x\nprint(square(5))",
+    "output": "25",
+    "practice": "Create a lambda function.",
+    "quiz": "What are small one-line functions called?"
+},
+"33": {
+    "title": "Map Function",
+    "explanation": "Map applies a function to every item in a list.",
+    "code": "numbers = [1,2,3]\nresult = list(map(lambda x:x*2,numbers))\nprint(result)",
+    "output": "[2,4,6]",
+    "practice": "Use map on a list.",
+    "quiz": "What does map do?"
+},
+"34": {
+    "title": "Filter Function",
+    "explanation": "Filter selects items that match a condition.",
+    "code": "numbers = [1,2,3,4]\nresult = list(filter(lambda x:x>2,numbers))\nprint(result)",
+    "output": "[3,4]",
+    "practice": "Filter a list of numbers.",
+    "quiz": "What does filter return?"
+},
+"35": {
+    "title": "List Comprehensions",
+    "explanation": "List comprehensions create lists using short syntax.",
+    "code": "numbers = [x for x in range(5)]\nprint(numbers)",
+    "output": "[0,1,2,3,4]",
+    "practice": "Create a list comprehension.",
+    "quiz": "What creates lists quickly?"
+},
+"36": {
+    "title": "JSON Data",
+    "explanation": "JSON stores structured information that programs can read and write.",
+    "code": "import json\nprint(json.dumps({\"name\":\"Nitron\"}))",
+    "output": "{\"name\": \"Nitron\"}",
+    "practice": "Create a JSON object.",
+    "quiz": "What format stores structured data?"
+},
+"37": {
+    "title": "APIs",
+    "explanation": "APIs allow programs to communicate with other services.",
+    "code": "import requests",
+    "output": "Requests library loaded",
+    "practice": "Learn how APIs send data.",
+    "quiz": "What connects software systems?"
+},
+"38": {
+    "title": "Regular Expressions",
+    "explanation": "Regular expressions search and process patterns in text.",
+    "code": "import re\nprint(re.findall(\"Python\",\"Learn Python\"))",
+    "output": "[\"Python\"]",
+    "practice": "Search text using regex.",
+    "quiz": "What is regex used for?"
+},
+"39": {
+    "title": "Testing Python Code",
+    "explanation": "Testing checks whether programs work correctly.",
+    "code": "assert 2 + 2 == 4",
+    "output": "Test passed",
+    "practice": "Write a simple test.",
+    "quiz": "Why do programmers test code?"
+},
+"40": {
+    "title": "Debugging Tools",
+    "explanation": "Debugging tools help find and fix problems in programs.",
+    "code": "print(\"Finding errors\")",
+    "output": "Finding errors",
+    "practice": "Debug a simple program.",
+    "quiz": "What is debugging?"
+},
+"41": {
+    "title": "Python Databases",
+    "explanation": "Python can connect to databases to store and retrieve information.",
+    "code": "import sqlite3\nconnection = sqlite3.connect(\"data.db\")",
+    "output": "Database connected",
+    "practice": "Create a small database.",
+    "quiz": "Which module works with SQLite?"
+},
+"42": {
+    "title": "SQLite Tables",
+    "explanation": "Tables store organized data inside databases.",
+    "code": "CREATE TABLE users(name TEXT)",
+    "output": "Table created",
+    "practice": "Create a database table.",
+    "quiz": "Where is database information stored?"
+},
+"43": {
+    "title": "Web Development with Python",
+    "explanation": "Python can create websites using frameworks like Flask and Django.",
+    "code": "from flask import Flask\napp = Flask(__name__)",
+    "output": "Web app created",
+    "practice": "Create a simple web server.",
+    "quiz": "Name a Python web framework."
+},
+"44": {
+    "title": "Automation",
+    "explanation": "Python can automate repeated computer tasks.",
+    "code": "print(\"Automation started\")",
+    "output": "Automation started",
+    "practice": "Create an automation script.",
+    "quiz": "What does automation do?"
+},
+"45": {
+    "title": "Working with Dates",
+    "explanation": "Python can handle dates and times.",
+    "code": "import datetime\nprint(datetime.date.today())",
+    "output": "Current date",
+    "practice": "Display today's date.",
+    "quiz": "Which module handles dates?"
+},
+"46": {
+    "title": "Multithreading",
+    "explanation": "Threads allow programs to perform multiple tasks.",
+    "code": "import threading\nprint(\"Thread started\")",
+    "output": "Thread started",
+    "practice": "Learn how threads work.",
+    "quiz": "What allows tasks to run together?"
+},
+"47": {
+    "title": "Machine Learning Basics",
+    "explanation": "Machine learning allows computers to learn from data.",
+    "code": "print(\"AI Learning\")",
+    "output": "AI Learning",
+    "practice": "Study machine learning concepts.",
+    "quiz": "What does machine learning use?"
+},
+"48": {
+    "title": "Artificial Intelligence",
+    "explanation": "AI allows computers to perform tasks that normally require intelligence.",
+    "code": "print(\"Artificial Intelligence\")",
+    "output": "Artificial Intelligence",
+    "practice": "Create a simple AI idea.",
+    "quiz": "What does AI stand for?"
+},
+"49": {
+    "title": "Creating Python Projects",
+    "explanation": "Projects combine Python skills to build useful applications.",
+    "code": "print(\"My Python Project\")",
+    "output": "My Python Project",
+    "practice": "Build a small Python application.",
+    "quiz": "Why create projects?"
+},
+"50": {
+    "title": "Python Mastery",
+    "explanation": "You now understand the foundations of Python programming.",
+    "code": "print(\"I completed Python\")",
+    "output": "I completed Python",
+    "practice": "Create your own advanced project.",
+    "quiz": "What is the next step after learning basics?"
+}

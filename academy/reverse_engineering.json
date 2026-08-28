@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Reverse Engineering",
+    "explanation": "Reverse engineering is the process of studying how software or hardware works by examining it. It is commonly used for debugging, interoperability, software maintenance, security research, and malware analysis when done with proper authorization.",
+    "code": "# Examine software to understand its behavior.",
+    "output": "The purpose of reverse engineering is understood.",
+    "practice": "Research three legitimate uses of reverse engineering.",
+    "quiz": "What is reverse engineering?"
+  },
+  "2": {
+    "title": "Compiled and Source Code",
+    "explanation": "Source code is the human-readable program written by developers. Compiled code is the machine-readable version that computers execute.",
+    "code": "print('Hello, World!')",
+    "output": "Source code is converted into an executable program during compilation.",
+    "practice": "Explain the difference between source code and compiled code.",
+    "quiz": "What is source code?"
+  },
+  "3": {
+    "title": "Static and Dynamic Analysis",
+    "explanation": "Static analysis examines a program without running it. Dynamic analysis observes the program while it is executing to understand its behavior.",
+    "code": "# Static Analysis\n# Dynamic Analysis",
+    "output": "Two common software analysis techniques are introduced.",
+    "practice": "Compare the advantages of static and dynamic analysis.",
+    "quiz": "What is the difference between static and dynamic analysis?"
+  },
+  "4": {
+    "title": "Common File Formats",
+    "explanation": "Executable file formats vary by operating system. Examples include ELF on Linux, PE on Windows, and Mach-O on macOS.",
+    "code": "file program",
+    "output": "Displays the type of an executable file.",
+    "practice": "Identify the executable format used by your operating system.",
+    "quiz": "Which executable format is commonly used on Linux?"
+  },
+  "5": {
+    "title": "Ethics and Legal Considerations",
+    "explanation": "Reverse engineering should only be performed when you have the legal right or permission to do so, or when allowed by applicable laws. Respect licenses, intellectual property, and privacy.",
+    "code": "# Always obtain authorization when required.",
+    "output": "Responsible reverse engineering practices.",
+    "practice": "List five ethical guidelines for reverse engineering.",
+    "quiz": "Why is authorization important in reverse engineering?"
+  }
+}

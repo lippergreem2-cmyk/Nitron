@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybernet X</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #05070a;
+    color: #e8f7ff;
+    font-family: monospace;
+    height: 100vh;
+    overflow: hidden;
+}
+
+header {
+    height: 58px;
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    border-bottom: 1px solid #17313d;
+    background: #080d12;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.logo span {
+    color: #00ff88;
+}
+
+.status {
+    margin-left: auto;
+    color: #00ff88;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 190px 1fr 300px;
+    height: calc(100vh - 58px);
+}
+
+.sidebar {
+    border-right: 1px solid #17313d;
+    padding: 15px;
+    background: #070b0f;
+}
+
+.sidebar button {
+    width: 100%;
+    margin-bottom: 9px;
+    padding: 12px;
+    text-align: left;
+    background: #0b1218;
+    color: #bdefff;
+    border: 1px solid #17313d;
+    cursor: pointer;
+}
+
+.sidebar button:hover {
+    border-color: #00ff88;
+    color: #00ff88;
+}
+
+.workspace {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.toolbar {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px;
+    border-bottom: 1px solid #17313d;
+}
+
+.toolbar button {
+    background: #0b1218;
+    border: 1px solid #17313d;
+    color: #dff;
+    padding: 8px 14px;
+    cursor: pointer;
+}
+
+.toolbar button:hover {
+    border-color: #00ff88;
+}
+
+.editor {
+    flex: 1;
+    width: 100%;
+    resize: none;
+    outline: none;
+    border: 0;
+    padding: 18px;
+    background: #030506;
+    color: #baffd8;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.right {
+    border-left: 1px solid #17313d;
+    display: flex;
+    flex-direction: column;
+    background: #070b0f;
+}
+
+.panel-title {
+    padding: 12px;
+    border-bottom: 1px solid #17313d;
+    color: #00ff88;
+}
+
+.terminal {
+    flex: 1;
+    padding: 12px;
+    overflow: auto;
+    color: #9fffc8;
+    white-space: pre-wrap;
+}
+
+.input-row {
+    display: flex;
+    border-top: 1px solid #17313d;
+}
+
+.input-row input {
+    flex: 1;
+    background: #030506;
+    color: white;
+    border: 0;
+    outline: none;
+    padding: 12px;
+    font-family: monospace;
+}
+
+.input-row button {
+    background: #00ff88;
+    border: 0;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+@media (max-width: 800px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar,
+    .right {
+        display: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">CYBERNET <span>X</span></div>
+    <div class="status">● ONLINE</div>
+</header>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <button onclick="newFile()">＋ New File</button>
+        <button onclick="saveFile()">💾 Save</button>
+        <button onclick="loadDemo()">📄 Demo</button>
+        <button onclick="clearEditor()">🗑 Clear</button>
+        <button onclick="showAbout()">ℹ About</button>
+    </aside>
+
+    <main class="workspace">
+
+        <div class="toolbar">
+            <button onclick="runCode()">▶ Run</button>
+            <button onclick="clearOutput()">Clear Output</button>
+        </div>
+
+        <textarea id="editor" class="editor">print("Welcome to Cybernet X")
+
+# Write your code here.
+# This editor currently works as a local prototype.</textarea>
+
+    </main>
+
+    <aside class="right">
+
+        <div class="panel-title">TERMINAL</div>
+
+        <div id="terminal" class="terminal">
+Cybernet X terminal
+Ready.
+        </div>
+
+        <div class="input-row">
+            <input
+                id="command"
+                placeholder="command..."
+                onkeydown="if(event.key==='Enter') terminalCommand()"
+            >
+            <button onclick="terminalCommand()">↵</button>
+        </div>
+
+    </aside>
+
+</div>
+
+<script>
+
+const editor = document.getElementById("editor");
+const terminal = document.getElementById("terminal");
+
+function output(text) {
+    terminal.textContent += "\n" + text;
+    terminal.scrollTop = terminal.scrollHeight;
+}
+
+function runCode() {
+    output("\n> Running...");
+    output("Code submitted to Cybernet X workspace.");
+    output("(Local browser prototype — no server execution yet.)");
+}
+
+function clearOutput() {
+    terminal.textContent = "Cybernet X terminal\nReady.";
+}
+
+function terminalCommand() {
+    const input = document.getElementById("command");
+    const command = input.value.trim();
+
+    if (!command) return;
+
+    output("> " + command);
+
+    if (command === "help") {
+        output("Commands: help, clear, status, about");
+    } else if (command === "clear") {
+        clearOutput();
+    } else if (command === "status") {
+        output("CYBERNET X: ONLINE");
+    } else if (command === "about") {
+        showAbout();
+    } else {
+        output("Unknown command: " + command);
+    }
+
+    input.value = "";
+}
+
+function newFile() {
+    editor.value = "";
+    output("New file created.");
+}
+
+function clearEditor() {
+    editor.value = "";
+}
+
+function loadDemo() {
+    editor.value =
+`print("Cybernet X")
+
+message = "Hello from the workspace"
+
+print(message)`;
+    output("Demo loaded.");
+}
+
+function saveFile() {
+    const blob = new Blob([editor.value], {
+        type: "text/plain"
+    });
+
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "cybernet_x_code.py";
+    link.click();
+
+    output("File saved.");
+}
+
+function showAbout() {
+    output("Cybernet X — local coding workspace.");
+}
+
+</script>
+
+</body>
+</html>

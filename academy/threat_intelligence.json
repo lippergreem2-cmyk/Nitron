@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Threat Intelligence",
+    "explanation": "Threat intelligence is the process of collecting, analyzing, and sharing information about current and emerging cyber threats. It helps organizations understand risks and improve their defenses.",
+    "code": "# Gather and analyze threat information.",
+    "output": "Threat information is collected for defensive purposes.",
+    "practice": "List five sources of cybersecurity threat information.",
+    "quiz": "What is threat intelligence?"
+  },
+  "2": {
+    "title": "Types of Threat Intelligence",
+    "explanation": "Threat intelligence is often grouped into strategic, operational, tactical, and technical intelligence. Each type supports different security decisions, from long-term planning to day-to-day defense.",
+    "code": "Strategic\nOperational\nTactical\nTechnical",
+    "output": "The four categories of threat intelligence are identified.",
+    "practice": "Explain one use case for each type of threat intelligence.",
+    "quiz": "How many main types of threat intelligence are commonly recognized?"
+  },
+  "3": {
+    "title": "Indicators of Compromise",
+    "explanation": "Indicators of Compromise (IOCs) are observable pieces of information that may suggest malicious activity, such as suspicious domains, IP addresses, file hashes, or unusual system behavior.",
+    "code": "ioc = {'type':'ip','value':'203.0.113.10'}",
+    "output": "An example IOC is recorded.",
+    "practice": "Research three examples of IOCs used by security teams.",
+    "quiz": "What does IOC stand for?"
+  },
+  "4": {
+    "title": "Threat Hunting",
+    "explanation": "Threat hunting is the proactive search for signs of malicious activity within systems and networks before automated tools detect them. It combines data analysis with knowledge of attacker behavior.",
+    "code": "# Review logs and investigate unusual activity.",
+    "output": "Potential security threats are investigated.",
+    "practice": "List three data sources that could help during threat hunting.",
+    "quiz": "What is the goal of threat hunting?"
+  },
+  "5": {
+    "title": "Sharing Threat Intelligence",
+    "explanation": "Organizations often share threat intelligence with trusted partners and communities to improve collective defenses. Shared information should be accurate, timely, and handled according to applicable policies and agreements.",
+    "code": "# Share verified threat information responsibly.",
+    "output": "Threat information helps strengthen security.",
+    "practice": "Explain why organizations benefit from sharing threat intelligence.",
+    "quiz": "Why is sharing threat intelligence valuable?"
+  }
+}

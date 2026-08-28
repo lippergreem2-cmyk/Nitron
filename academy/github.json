@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to GitHub",
+    "explanation": "GitHub is a cloud platform that hosts Git repositories. It allows developers to store code, collaborate on projects, review changes, and manage software development.",
+    "code": "git remote add origin https://github.com/username/repository.git",
+    "output": "Your local Git repository is connected to a GitHub repository.",
+    "practice": "Create a GitHub account and create your first repository.",
+    "quiz": "What is GitHub mainly used for?"
+  },
+  "2": {
+    "title": "Cloning a Repository",
+    "explanation": "Cloning creates a copy of a remote repository on your local computer.",
+    "code": "git clone https://github.com/username/repository.git",
+    "output": "The repository is downloaded to your computer.",
+    "practice": "Clone one of your GitHub repositories.",
+    "quiz": "Which command downloads a GitHub repository?"
+  },
+  "3": {
+    "title": "Pushing Changes",
+    "explanation": "After committing changes locally, use git push to upload them to GitHub.",
+    "code": "git add .\ngit commit -m \"Update project\"\ngit push origin main",
+    "output": "Your latest commits are uploaded to GitHub.",
+    "practice": "Modify a file, commit it, and push it to GitHub.",
+    "quiz": "Which command uploads local commits to GitHub?"
+  },
+  "4": {
+    "title": "Pull Requests",
+    "explanation": "A pull request lets you propose changes to a repository so they can be reviewed before being merged.",
+    "code": "Open GitHub → New Pull Request",
+    "output": "A pull request is created for review.",
+    "practice": "Create a feature branch and open a pull request.",
+    "quiz": "Why are pull requests important?"
+  },
+  "5": {
+    "title": "Forking Repositories",
+    "explanation": "Forking creates your own copy of another person's repository, allowing you to experiment or contribute changes.",
+    "code": "Click the 'Fork' button on GitHub.",
+    "output": "A copy of the repository appears in your GitHub account.",
+    "practice": "Fork an open-source repository and explore its files.",
+    "quiz": "What is the difference between a fork and a clone?"
+  }
+}

@@ -1,0 +1,675 @@
+"""
+Nitron Learned Skill Handler Bridge
+
+Connects persistent learned-skill handler names to
+existing Nitron capabilities.
+"""
+
+from brain.reasoning import reasoning
+
+
+def generate_project(command):
+    """
+    Use Nitron's existing reasoning engine to generate a project.
+    """
+    return reasoning.generate_project(command)
+
+
+HANDLERS = {
+    "reasoning.generate_project": generate_project,
+}
+
+
+def get_handler(name):
+    """
+    Resolve an approved learned-skill handler.
+    """
+    return HANDLERS.get(str(name).strip())
+
+
+def run_handler(name, command):
+    """
+    Execute an approved learned-skill handler.
+    """
+    handler = get_handler(name)
+
+    if handler is None:
+        raise ValueError(
+            f"Unknown skill handler: {name}"
+        )
+
+    return handler(command)
+
+# ============================================================
+# LEARNED LANGUAGE CAPABILITIES
+# ============================================================
+
+def language_capability(command, language):
+    """
+    Handle a learned human-language capability.
+
+    The language itself is selected dynamically from the
+    learned skill. Actual speech output can later be connected
+    to Nitron's TTS system.
+    """
+
+    from brain.language import language_engine
+
+    language = str(language).strip()
+
+    result = language_engine.execute(
+        command,
+        language
+    )
+
+    result["abilities"] = [
+        f"understand {language}",
+        f"write {language}",
+        f"translate {language}",
+        f"answer in {language}",
+        f"converse in {language}",
+        f"speak {language}",
+    ]
+
+    result["speech_ready"] = (
+        result.get("operation") == "speak"
+    )
+
+    return result
+
+
+def learned_language(command):
+    """
+    Execute a learned language capability.
+
+    The language is resolved from the learned capability
+    registry instead of requiring the caller to provide it.
+    """
+
+    from brain.skill_registry import best_for_task
+
+    skill = best_for_task(command)
+
+    if not skill:
+        return {
+            "success": False,
+            "capability": "language",
+            "language": "",
+            "speech_ready": False,
+            "abilities": [],
+            "message": "No learned language capability matched."
+        }
+
+    language = str(
+        skill.get("name", "")
+    ).strip()
+
+    if str(
+        skill.get("capability_type", "")
+    ).lower() != "language":
+        return {
+            "success": False,
+            "capability": "language",
+            "language": language,
+            "speech_ready": False,
+            "abilities": [],
+            "message": (
+                f"{language} is not registered as a language capability."
+            )
+        }
+
+    return language_capability(
+        command,
+        language
+    )
+
+
+# ============================================================
+# GENERIC PROGRAMMING CAPABILITY
+# ============================================================
+
+def learned_programming(command):
+    """
+    Execute a learned programming capability.
+
+    Supports:
+        - write/create/build/test projects
+        - analyze source files
+        - debug source files
+    """
+
+    from brain.skill_registry import best_for_task
+    from brain.reasoning import reasoning
+
+    command_text = str(command).strip()
+    command_lower = command_text.lower()
+
+    # ------------------------------------------------------
+    # DETECT OPERATION
+    # ------------------------------------------------------
+
+    operations = [
+        "analyze",
+        "debug",
+        "write",
+        "create",
+        "build",
+        "modify",
+        "test",
+        "explain",
+    ]
+
+    operation = None
+
+    for item in operations:
+        if item in command_lower:
+            operation = item
+            break
+
+    # ------------------------------------------------------
+    # DETECT FILE
+    # ------------------------------------------------------
+
+    import re
+    from pathlib import Path
+
+    file_match = re.search(
+        r'([^\s"\']+\.(?:py|js|ts|rs|kt|java|cpp|c|h|cs|go|sh))',
+        command_text,
+        re.IGNORECASE
+    )
+
+    file_path = None
+
+    if file_match:
+        candidate = Path(file_match.group(1))
+
+        if candidate.exists():
+            file_path = candidate
+        elif Path.cwd().joinpath(candidate).exists():
+            file_path = Path.cwd().joinpath(candidate)
+
+    # ------------------------------------------------------
+    # DETECT LANGUAGE
+    # ------------------------------------------------------
+
+    extension_languages = {
+        ".py": "python",
+        ".js": "javascript",
+        ".ts": "typescript",
+        ".rs": "rust",
+        ".kt": "kotlin",
+        ".java": "java",
+        ".cpp": "cpp",
+        ".c": "c",
+        ".h": "c",
+        ".cs": "csharp",
+        ".go": "go",
+        ".sh": "bash",
+    }
+
+    language = ""
+
+    if file_path:
+        language = extension_languages.get(
+            file_path.suffix.lower(),
+            ""
+        )
+
+    # Also detect explicit language names.
+    if not language:
+        language_aliases = {
+            "python": "python",
+            "python programming": "python",
+            "javascript": "javascript",
+            "javascript programming": "javascript",
+            "typescript": "typescript",
+            "rust": "rust",
+            "kotlin": "kotlin",
+            "java": "java",
+            "bash": "bash",
+            "c++": "cpp",
+            "c#": "csharp",
+            "go": "go",
+        }
+
+        for name, normalized in language_aliases.items():
+            if name in command_lower:
+                language = normalized
+                break
+
+    # ------------------------------------------------------
+    # REAL PYTHON ANALYSIS / DEBUGGING
+    # ------------------------------------------------------
+
+    if operation in {"analyze", "debug"} and file_path:
+
+        if language == "python":
+
+            import ast
+
+            result = {
+                "success": True,
+                "capability": "programming",
+                "language": "python",
+                "operation": operation,
+                "file": str(file_path),
+                "analyzed": operation == "analyze",
+                "debugged": operation == "debug",
+                "syntax_valid": False,
+                "functions": [],
+                "classes": [],
+                "imports": [],
+                "errors": [],
+            }
+
+            try:
+                source = file_path.read_text(
+                    encoding="utf-8"
+                )
+
+                tree = ast.parse(
+                    source,
+                    filename=str(file_path)
+                )
+
+                result["syntax_valid"] = True
+
+                result["functions"] = [
+                    node.name
+                    for node in ast.walk(tree)
+                    if isinstance(
+                        node,
+                        (ast.FunctionDef, ast.AsyncFunctionDef)
+                    )
+                ]
+
+                result["classes"] = [
+                    node.name
+                    for node in ast.walk(tree)
+                    if isinstance(
+                        node,
+                        ast.ClassDef
+                    )
+                ]
+
+                result["imports"] = []
+
+                for node in ast.walk(tree):
+
+                    if isinstance(node, ast.Import):
+
+                        result["imports"].extend(
+                            alias.name
+                            for alias in node.names
+                        )
+
+                    elif isinstance(node, ast.ImportFrom):
+
+                        if node.module:
+                            result["imports"].append(
+                                node.module
+                            )
+
+                if operation == "debug":
+                    result["debugged"] = True
+                    result["message"] = (
+                        "Python source parsed successfully; "
+                        "no syntax errors detected."
+                    )
+                else:
+                    result["message"] = (
+                        "Python source analyzed successfully."
+                    )
+
+            except SyntaxError as error:
+
+                result["syntax_valid"] = False
+                result["errors"] = [
+                    {
+                        "type": "SyntaxError",
+                        "message": str(error),
+                        "line": error.lineno,
+                        "offset": error.offset,
+                    }
+                ]
+
+                result["success"] = (
+                    operation == "debug"
+                )
+
+                if operation == "debug":
+                    result["debugged"] = True
+                    result["message"] = (
+                        "Python debugging found a syntax error."
+                    )
+                else:
+                    result["message"] = (
+                        "Python analysis found a syntax error."
+                    )
+
+            except Exception as error:
+
+                result["success"] = False
+                result["errors"] = [
+                    {
+                        "type": type(error).__name__,
+                        "message": str(error),
+                    }
+                ]
+
+            return result
+
+    # ------------------------------------------------------
+    # LEARNED CAPABILITY MATCHING
+    # ------------------------------------------------------
+
+    skill = best_for_task(command_text)
+
+    if not skill and language:
+
+        # File-extension detection already established the
+        # programming language, so find a compatible learned
+        # programming capability directly.
+        from brain.skill_registry import list_skills
+
+        for candidate in list_skills():
+
+            if not isinstance(candidate, dict):
+                continue
+
+            if str(
+                candidate.get("capability_type", "")
+            ).lower() != "programming":
+                continue
+
+            name = str(
+                candidate.get("name", "")
+            ).lower()
+
+            if language in name:
+                skill = candidate
+                break
+
+    if not skill:
+        return {
+            "success": False,
+            "capability": "programming",
+            "language": language,
+            "operation": operation,
+            "message": (
+                "No learned programming capability matched."
+            ),
+        }
+
+    capability_type = str(
+        skill.get("capability_type", "")
+    ).lower()
+
+    if capability_type != "programming":
+        return {
+            "success": False,
+            "capability": "programming",
+            "language": language,
+            "operation": operation,
+            "message": (
+                "Matched capability is not programming."
+            ),
+        }
+
+    # Normalize learned capability names.
+    language_aliases = {
+        "python programming": "python",
+        "python": "python",
+        "javascript programming": "javascript",
+        "javascript program": "javascript",
+        "javascript": "javascript",
+        "typescript programming": "typescript",
+        "typescript": "typescript",
+        "rust programming": "rust",
+        "rust": "rust",
+        "kotlin programming": "kotlin",
+        "kotlin": "kotlin",
+        "java programming": "java",
+        "java": "java",
+        "bash programming": "bash",
+        "bash": "bash",
+        "c++ programming": "cpp",
+        "c++": "cpp",
+        "c# programming": "csharp",
+        "c#": "csharp",
+        "go programming": "go",
+        "go": "go",
+    }
+
+    if not language:
+        language = language_aliases.get(
+            str(skill.get("name", "")).strip().lower(),
+            str(skill.get("name", "")).strip().lower()
+        )
+
+    # ------------------------------------------------------
+    # PROJECT-PRODUCING OPERATIONS
+    # ------------------------------------------------------
+
+    if operation in {
+        "write",
+        "create",
+        "build",
+        "test",
+    }:
+
+        project_request = (
+            f"{command_text}. "
+            f"Use {language} programming. "
+            f"Generate a complete working project."
+        )
+
+        try:
+
+            generated = reasoning.generate_project(
+                project_request
+            )
+
+            if isinstance(generated, dict):
+
+                generated["capability"] = "programming"
+                generated["language"] = language
+                generated["operation"] = operation
+
+                return generated
+
+            return {
+                "success": True,
+                "capability": "programming",
+                "language": language,
+                "operation": operation,
+                "result": generated,
+            }
+
+        except Exception as error:
+
+            return {
+                "success": False,
+                "capability": "programming",
+                "language": language,
+                "operation": operation,
+                "message": str(error),
+            }
+
+    # ------------------------------------------------------
+    # OTHER PROGRAMMING OPERATIONS
+    # ------------------------------------------------------
+
+    return {
+        "success": True,
+        "capability": "programming",
+        "language": language,
+        "operation": operation,
+        "command": command_text,
+        "abilities": skill.get("abilities", []),
+        "message": (
+            f"Programming operation '{operation}' "
+            f"selected for {language}."
+        ),
+    }
+
+
+# ============================================================
+# GENERIC FRAMEWORK CAPABILITY
+# ============================================================
+
+def learned_framework(command):
+    """
+    Execute a learned framework/library capability.
+    """
+
+    from brain.skill_registry import best_for_task
+
+    skill = best_for_task(command)
+
+    if not skill:
+        return {
+            "success": False,
+            "capability": "framework",
+            "technology": "",
+            "operation": None,
+            "message": "No learned framework capability matched."
+        }
+
+    capability_type = str(
+        skill.get("capability_type", "")
+    ).lower()
+
+    if capability_type != "framework":
+        return {
+            "success": False,
+            "capability": "framework",
+            "technology": str(skill.get("name", "")),
+            "operation": None,
+            "message": "Matched capability is not a framework."
+        }
+
+    technology = str(
+        skill.get("name", "")
+    ).strip()
+
+    command_text = str(command).lower()
+
+    operations = [
+        "build",
+        "create",
+        "use",
+        "configure",
+        "integrate",
+        "modify",
+        "debug",
+        "test",
+        "explain",
+    ]
+
+    operation = None
+
+    for item in operations:
+        if item in command_text:
+            operation = item
+            break
+
+    return {
+        "success": True,
+        "capability": "framework",
+        "technology": technology,
+        "operation": operation,
+        "command": str(command),
+        "abilities": skill.get(
+            "abilities",
+            []
+        ),
+        "message": (
+            f"Framework operation '{operation}' "
+            f"selected for {technology}."
+        ),
+    }
+
+
+# ============================================================
+# GENERIC KNOWLEDGE CAPABILITY
+# ============================================================
+
+def learned_knowledge(command):
+    """
+    Execute a generic learned-knowledge capability.
+    """
+
+    from brain.skill_registry import best_for_task
+
+    skill = best_for_task(command)
+
+    if not skill:
+        return {
+            "success": False,
+            "capability": "knowledge",
+            "topic": "",
+            "operation": None,
+            "message": "No learned knowledge capability matched."
+        }
+
+    topic = str(
+        skill.get("name", "")
+    ).strip()
+
+    command_text = str(command).lower()
+
+    operations = [
+        "explain",
+        "understand",
+        "answer",
+        "apply",
+        "analyze",
+        "use",
+    ]
+
+    operation = None
+
+    for item in operations:
+        if item in command_text:
+            operation = item
+            break
+
+    return {
+        "success": True,
+        "capability": "knowledge",
+        "topic": topic,
+        "operation": operation,
+        "command": str(command),
+        "abilities": skill.get(
+            "abilities",
+            []
+        ),
+        "message": (
+            f"Knowledge operation '{operation}' "
+            f"selected for {topic}."
+        ),
+    }
+
+
+# ============================================================
+# GENERIC HANDLER REGISTRATION
+# ============================================================
+
+PROGRAMMING_HANDLER = "learned.programming"
+FRAMEWORK_HANDLER = "learned.framework"
+KNOWLEDGE_HANDLER = "learned.knowledge"
+
+HANDLERS[PROGRAMMING_HANDLER] = learned_programming
+HANDLERS[FRAMEWORK_HANDLER] = learned_framework
+HANDLERS[KNOWLEDGE_HANDLER] = learned_knowledge
+
+
+# ============================================================
+# LANGUAGE HANDLER REGISTRY
+# ============================================================
+
+LANGUAGE_HANDLER = "learned.language"
+
+HANDLERS[LANGUAGE_HANDLER] = learned_language

@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Prompt Engineering",
+    "explanation": "Prompt engineering is the practice of writing clear and effective instructions for AI systems. Well-written prompts help AI produce more accurate, useful, and relevant responses.",
+    "code": "Explain Python to a beginner.",
+    "output": "The AI provides a beginner-friendly explanation of Python.",
+    "practice": "Write three prompts asking an AI to explain the same topic in different ways.",
+    "quiz": "What is prompt engineering?"
+  },
+  "2": {
+    "title": "Writing Clear Prompts",
+    "explanation": "Clear prompts include the task, the desired format, and any important details or constraints.",
+    "code": "Create a Python function that sorts a list and explain each line.",
+    "output": "The AI generates code with explanations.",
+    "practice": "Rewrite a vague prompt so it becomes more specific.",
+    "quiz": "Why are specific prompts usually better than vague ones?"
+  },
+  "3": {
+    "title": "Providing Context",
+    "explanation": "Giving context helps the AI understand your goal, audience, and requirements, leading to more relevant responses.",
+    "code": "You are a Python teacher. Explain loops to a complete beginner using simple examples.",
+    "output": "The AI tailors the explanation for beginners.",
+    "practice": "Write a prompt that includes the audience, goal, and output format.",
+    "quiz": "What is meant by context in a prompt?"
+  },
+  "4": {
+    "title": "Using Examples",
+    "explanation": "Including one or more examples in your prompt helps the AI understand the style or format you want. This is often called few-shot prompting.",
+    "code": "Example:\nInput: 2 + 2\nOutput: 4\n\nNow solve:\nInput: 5 + 7",
+    "output": "12",
+    "practice": "Create a prompt with two examples before asking the AI to solve a new problem.",
+    "quiz": "Why can examples improve AI responses?"
+  },
+  "5": {
+    "title": "Evaluating AI Responses",
+    "explanation": "Always review AI-generated answers for accuracy, completeness, and relevance. Revise your prompt if the answer does not meet your needs.",
+    "code": "Review the answer and identify any missing information.",
+    "output": "The response is checked and improved if necessary.",
+    "practice": "Ask the AI a question, then rewrite your prompt to get a better answer.",
+    "quiz": "Why is it important to evaluate AI responses?"
+  }
+}

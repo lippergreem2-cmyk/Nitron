@@ -1,0 +1,442 @@
+# ==========================================================
+# NITRON CODE AI v3.0
+# REAL AI CODE GENERATION
+# ==========================================================
+
+from developer.ai_code_generator import AICodeGenerator
+
+from developer.code_engine.generator import ProjectGenerator
+from developer.code_engine.fixer import CodeFixer
+
+from developer.code_engine.website_generator import WebsiteGenerator
+from developer.code_engine.webapp_generator import WebAppGenerator
+from developer.code_engine.fullstack_generator import FullStackGenerator
+from developer.code_engine.chatbot_generator import ChatbotGenerator
+from developer.code_engine.api_generator import APIGenerator
+from developer.code_engine.ai_generator import AIGenerator
+
+
+class CodeAI:
+
+    def __init__(self):
+
+        # ==================================================
+        # REAL AI GENERATOR
+        # ==================================================
+
+        self.ai_code = AICodeGenerator()
+
+        # ==================================================
+        # EXISTING GENERATORS
+        # ==================================================
+
+        self.generator = ProjectGenerator()
+
+        self.fixer = CodeFixer()
+
+        self.website = WebsiteGenerator()
+
+        self.webapp = WebAppGenerator()
+
+        self.fullstack = FullStackGenerator()
+
+        self.chatbot = ChatbotGenerator()
+
+        self.api = APIGenerator()
+
+        self.ai = AIGenerator()
+
+    # ======================================================
+    # MAIN PROCESSOR
+    # ======================================================
+
+    def process(self, command):
+
+        if not command:
+            return "Please tell me what you want to build."
+
+        command = command.strip()
+
+        if not command:
+            return "Please tell me what you want to build."
+
+        text = command.lower()
+
+        words = text.split()
+
+        # ==================================================
+        # HELP
+        # ==================================================
+
+        if text in (
+            "developer",
+            "code ai",
+            "builder",
+            "developer help"
+        ):
+
+            return self.help()
+
+        # ==================================================
+        # CHECK PROJECT
+        # ==================================================
+
+        if (
+            text.startswith("check project")
+            or text.startswith("test project")
+        ):
+
+            parts = command.split(
+                maxsplit=2
+            )
+
+            if len(parts) < 3:
+
+                return (
+                    "Please provide the project name."
+                )
+
+            name = parts[2].strip()
+
+            return self.fixer.scan(
+                "GeneratedProjects/" + name
+            )
+
+        # ==================================================
+        # EXPLICIT AI GENERATION
+        # ==================================================
+
+        if self.is_ai_generation_command(
+            text
+        ):
+
+            request = self.extract_generation_request(
+                command
+            )
+
+            if not request:
+
+                return (
+                    "Tell me what you want me "
+                    "to build."
+                )
+
+            return self.ai_code.generate_code(
+                request
+            )
+
+        # ==================================================
+        # FULLSTACK
+        # ==================================================
+
+        if (
+            "fullstack" in words
+            or "full-stack" in words
+        ):
+
+            name = self.get_name(
+                words,
+                command.split(),
+                "website",
+                "FullStackProject"
+            )
+
+            return self.fullstack.create(
+                name
+            )
+
+        # ==================================================
+        # WEBSITE
+        # ==================================================
+
+        if "website" in words:
+
+            name = self.get_name(
+                words,
+                command.split(),
+                "website",
+                "NitronWebsite"
+            )
+
+            return self.website.create(
+                name
+            )
+
+        # ==================================================
+        # WEB APP
+        # ==================================================
+
+        if (
+            "web" in words
+            and "app" in words
+        ):
+
+            name = self.get_name(
+                words,
+                command.split(),
+                "app",
+                "NitronWebApp"
+            )
+
+            return self.webapp.create(
+                name
+            )
+
+        # ==================================================
+        # CHATBOT
+        # ==================================================
+
+        if "chatbot" in words:
+
+            name = self.get_name(
+                words,
+                command.split(),
+                "chatbot",
+                "NitronChatbot"
+            )
+
+            return self.chatbot.create(
+                name
+            )
+
+        # ==================================================
+        # API
+        # ==================================================
+
+        if "api" in words:
+
+            name = self.get_name(
+                words,
+                command.split(),
+                "api",
+                "NitronAPI"
+            )
+
+            return self.api.create(
+                name
+            )
+
+        # ==================================================
+        # AI PROJECT
+        # ==================================================
+
+        if (
+            "ai" in words
+            and "create" in words
+        ):
+
+            name = self.get_name(
+                words,
+                command.split(),
+                "ai",
+                "NitronAI"
+            )
+
+            return self.ai.create(
+                name
+            )
+
+        # ==================================================
+        # FRAMEWORK INFORMATION
+        # ==================================================
+
+        if "react" in words:
+
+            return self.ai_code.generate_code(
+                command
+            )
+
+        if "flutter" in words:
+
+            return self.ai_code.generate_code(
+                command
+            )
+
+        if "django" in words:
+
+            return self.ai_code.generate_code(
+                command
+            )
+
+        if "fastapi" in words:
+
+            return self.ai_code.generate_code(
+                command
+            )
+
+        # ==================================================
+        # GENERAL BUILD REQUEST
+        # ==================================================
+
+        build_words = (
+            "build",
+            "make",
+            "develop",
+            "program",
+            "code",
+            "create"
+        )
+
+        if any(
+            word in words
+            for word in build_words
+        ):
+
+            return self.ai_code.generate_code(
+                command
+            )
+
+        # ==================================================
+        # UNKNOWN
+        # ==================================================
+
+        return (
+            "I don't know how to build that yet.\n"
+            "Say 'developer' to see my coding capabilities."
+        )
+
+    # ======================================================
+    # DETECT AI GENERATION
+    # ======================================================
+
+    def is_ai_generation_command(
+        self,
+        text
+    ):
+
+        triggers = (
+            "generate code",
+            "generate a program",
+            "generate an app",
+            "generate a website",
+            "write code",
+            "write a program",
+            "write an app",
+            "create a python",
+            "create a javascript",
+            "create a java",
+            "create a c++",
+            "create a calculator",
+            "build a python",
+            "build a javascript",
+            "build an app",
+            "build a program"
+        )
+
+        return any(
+            trigger in text
+            for trigger in triggers
+        )
+
+    # ======================================================
+    # EXTRACT REQUEST
+    # ======================================================
+
+    def extract_generation_request(
+        self,
+        command
+    ):
+
+        prefixes = (
+            "generate code",
+            "generate a program",
+            "generate an app",
+            "generate a website",
+            "write code",
+            "write a program",
+            "write an app"
+        )
+
+        lowered = command.lower()
+
+        for prefix in prefixes:
+
+            if lowered.startswith(prefix):
+
+                request = command[
+                    len(prefix):
+                ].strip()
+
+                return request or command
+
+        return command
+
+    # ======================================================
+    # PROJECT NAME
+    # ======================================================
+
+    def get_name(
+        self,
+        words,
+        original_words,
+        keyword,
+        default
+    ):
+
+        try:
+
+            index = words.index(
+                keyword
+            ) + 1
+
+            if index < len(
+                original_words
+            ):
+
+                return original_words[
+                    index
+                ]
+
+        except Exception:
+
+            pass
+
+        return default
+
+    # ======================================================
+    # HELP
+    # ======================================================
+
+    def help(self):
+
+        return """
+NITRON CODE AI v3.0
+
+REAL AI CODE GENERATION:
+
+  create a Python calculator
+  build a Python todo app
+  write a program that sorts files
+  create a JavaScript game
+  build a FastAPI backend
+  create a React dashboard
+  generate a chatbot
+
+SPECIALIZED BUILDERS:
+
+  create website MySite
+  create fullstack website StoreAI
+  create web app Dashboard
+  create chatbot TutorBot
+  create api ShopAPI
+  create ai VisionAI
+
+PROJECT:
+
+  check project ProjectName
+  test project ProjectName
+
+Nitron can now send general development
+requests to its AI code-generation engine.
+"""
+
+
+# ==========================================================
+# TEST
+# ==========================================================
+
+if __name__ == "__main__":
+
+    print(
+        CodeAI().help()
+    )

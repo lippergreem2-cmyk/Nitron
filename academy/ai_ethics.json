@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to AI Ethics",
+    "explanation": "AI Ethics is the study of building and using artificial intelligence responsibly. It focuses on fairness, safety, privacy, accountability, and the impact of AI on people and society.",
+    "code": "# Ethical AI starts with responsible design.",
+    "output": "Understanding the importance of ethical AI.",
+    "practice": "List five ways AI can positively impact society.",
+    "quiz": "What is AI Ethics?"
+  },
+  "2": {
+    "title": "Fairness and Bias",
+    "explanation": "AI systems should treat people fairly. If training data contains bias, the AI may produce unfair results. Developers should test and reduce bias whenever possible.",
+    "code": "dataset = remove_bias(dataset)",
+    "output": "The dataset is improved to reduce bias.",
+    "practice": "Think of a situation where biased data could produce unfair outcomes.",
+    "quiz": "Why is bias a concern in AI?"
+  },
+  "3": {
+    "title": "Privacy and Security",
+    "explanation": "AI systems should protect personal information, follow privacy laws, and use data only for appropriate purposes.",
+    "code": "encrypt(user_data)",
+    "output": "Sensitive information is protected.",
+    "practice": "List three ways to protect user data in an AI application.",
+    "quiz": "Why is privacy important in AI?"
+  },
+  "4": {
+    "title": "Transparency and Accountability",
+    "explanation": "Developers should be open about how AI systems work, what data they use, and who is responsible for their behavior and maintenance.",
+    "code": "log_decision(model_output)",
+    "output": "AI decisions are recorded for review.",
+    "practice": "Explain why documenting AI decisions can be helpful.",
+    "quiz": "What does accountability mean in AI?"
+  },
+  "5": {
+    "title": "Responsible AI Development",
+    "explanation": "Responsible AI includes testing systems carefully, monitoring performance, correcting errors, respecting human oversight, and continuously improving safety and reliability.",
+    "code": "# Test, monitor, improve.",
+    "output": "The AI system becomes more reliable over time.",
+    "practice": "Write five principles you would follow when building an AI assistant like Nitron.",
+    "quiz": "Name three principles of responsible AI development."
+  }
+}

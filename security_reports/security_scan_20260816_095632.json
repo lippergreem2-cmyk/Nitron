@@ -1,0 +1,45 @@
+{
+    "scanner": "Nitron Defensive Security Scanner",
+    "time": "2026-08-16T09:56:32",
+    "warning": "Findings are indicators for investigation, not proof that the device has been hacked.",
+    "checks": [
+        {
+            "name": "Processes",
+            "status": "checked",
+            "count": 11,
+            "details": [
+                "PID TTY          TIME CMD",
+                " 3128 pts/0    00:00:04 /data/data/com.termux/files/usr/bin/bash",
+                " 3163 ?        00:00:03 /data/data/com.termux/files/usr/bin/runsvdir",
+                " 3169 ?        00:00:00 runsv",
+                " 3170 ?        00:00:00 runsv",
+                " 3171 ?        00:00:00 svlogd",
+                " 3172 ?        00:00:00 svlogd",
+                " 7623 ?        00:00:00 /data/data/com.termux/files/usr/bin/dbus-daemon",
+                "14032 ?        00:00:00 /data/data/com.termux/files/usr/bin/dbus-daemon",
+                "17203 ?        00:00:00 /data/data/com.termux/files/usr/bin/dbus-daemon",
+                "29205 pts/0    00:00:00 python",
+                "29208 pts/0    00:00:00 ps"
+            ]
+        },
+        {
+            "name": "Network",
+            "status": "checked",
+            "details": [
+                "Netid  State      Recv-Q Send-Q Local Address:Port               Peer Address:Port"
+            ]
+        },
+        {
+            "name": "Startup files",
+            "status": "checked",
+            "files": [
+                "/data/data/com.termux/files/home/.bashrc"
+            ]
+        },
+        {
+            "name": "Executable files",
+            "status": "checked",
+            "files": []
+        }
+    ]
+}

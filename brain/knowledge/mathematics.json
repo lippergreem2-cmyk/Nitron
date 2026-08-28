@@ -1,0 +1,55 @@
+{
+  "domain": "Mathematics",
+  "description": "Knowledge about mathematical concepts, logic, calculations, and problem solving.",
+  "topics": [
+    {
+      "name": "Mathematical Foundations",
+      "knowledge": [
+        "Mathematics is the study of numbers, patterns, structures, and relationships.",
+        "Mathematical reasoning uses logic to solve problems and prove ideas.",
+        "Numbers can represent quantities, measurements, and information."
+      ]
+    },
+    {
+      "name": "Arithmetic",
+      "knowledge": [
+        "Arithmetic focuses on basic operations: addition, subtraction, multiplication, and division.",
+        "Fractions represent parts of a whole.",
+        "Percentages express values as parts of one hundred.",
+        "Ratios compare quantities."
+      ]
+    },
+    {
+      "name": "Algebra",
+      "knowledge": [
+        "Algebra uses symbols and variables to represent unknown values.",
+        "Equations describe relationships between values.",
+        "Functions describe how one quantity changes based on another."
+      ]
+    },
+    {
+      "name": "Geometry",
+      "knowledge": [
+        "Geometry studies shapes, sizes, angles, and spaces.",
+        "Lines, circles, triangles, and polygons are basic geometric objects.",
+        "Geometry is used in engineering, architecture, graphics, and design."
+      ]
+    },
+    {
+      "name": "Statistics and Probability",
+      "knowledge": [
+        "Statistics analyzes data and discovers patterns.",
+        "Probability measures the likelihood of events happening.",
+        "Data analysis helps make informed decisions."
+      ]
+    },
+    {
+      "name": "Advanced Mathematics",
+      "knowledge": [
+        "Calculus studies change, motion, and continuous processes.",
+        "Linear algebra studies vectors and matrices.",
+        "Mathematics supports computer science, physics, economics, and artificial intelligence."
+      ]
+    }
+  ]
+}

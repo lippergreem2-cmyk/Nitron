@@ -1,0 +1,55 @@
+{
+  "categories": {
+    "programming": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Python",
+      "Java",
+      "C++",
+      "C#",
+      "Go",
+      "Rust",
+      "TypeScript",
+      "PHP",
+      "Swift"
+    ],
+    "web": [
+      "React",
+      "Vue",
+      "Angular",
+      "Next.js",
+      "APIs"
+    ],
+    "databases": [
+      "SQL"
+    ],
+    "devops": [
+      "Git",
+      "Docker",
+      "Kubernetes"
+    ],
+    "ai": [
+      "AI Basics"
+    ],
+    "linux": [
+      "Linux"
+    ],
+    "blockchain": [
+      "Blockchain",
+      "Web3"
+    ],
+    "cybersecurity": [
+      "Networking",
+      "Ethical Hacking",
+      "Penetration Testing",
+      "Digital Forensics",
+      "Malware Analysis",
+      "Web Security",
+      "Cloud Security",
+      "Reverse Engineering",
+      "OSINT",
+      "Bug Bounty"
+    ]
+  }
+}

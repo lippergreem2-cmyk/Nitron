@@ -1,0 +1,494 @@
+# ==========================================================
+# NITRON AI PROVIDER SYSTEM v2.0
+# ==========================================================
+
+import json
+import os
+import urllib.request
+import urllib.error
+
+
+# ==========================================================
+# BASE PROVIDER
+# ==========================================================
+
+class AIProvider:
+
+    name = "unknown"
+
+    def available(self):
+        return False
+
+    def generate(self, prompt):
+        raise NotImplementedError(
+            "Provider must implement generate()."
+        )
+
+
+# ==========================================================
+# OPENAI PROVIDER
+# ==========================================================
+
+class OpenAIProvider(AIProvider):
+
+    name = "openai"
+
+    def __init__(self, model=None):
+
+        self.api_key = os.environ.get(
+            "OPENAI_API_KEY"
+        )
+
+        self.model = (
+            model
+            or os.environ.get(
+                "NITRON_AI_MODEL",
+                "gpt-5-mini"
+            )
+        )
+
+        self.url = (
+            "https://api.openai.com/v1/responses"
+        )
+
+    # ======================================================
+    # AVAILABLE
+    # ======================================================
+
+    def available(self):
+
+        return bool(
+            self.api_key
+        )
+
+    # ======================================================
+    # GENERATE
+    # ======================================================
+
+    def generate(
+        self,
+        prompt
+    ):
+
+        if not self.api_key:
+
+            raise RuntimeError(
+                "OPENAI_API_KEY is not configured."
+            )
+
+        payload = {
+            "model": self.model,
+            "input": prompt
+        }
+
+        data = json.dumps(
+            payload
+        ).encode("utf-8")
+
+        request = urllib.request.Request(
+
+            self.url,
+
+            data=data,
+
+            headers={
+                "Content-Type":
+                    "application/json",
+
+                "Authorization":
+                    f"Bearer {self.api_key}"
+            },
+
+            method="POST"
+        )
+
+        try:
+
+            with urllib.request.urlopen(
+                request,
+                timeout=120
+            ) as response:
+
+                raw = response.read()
+
+            result = json.loads(
+                raw.decode("utf-8")
+            )
+
+            return self._extract_text(
+                result
+            )
+
+        except urllib.error.HTTPError as error:
+
+            body = error.read().decode(
+                "utf-8",
+                errors="replace"
+            )
+
+            raise RuntimeError(
+                f"OpenAI API error "
+                f"{error.code}: {body}"
+            )
+
+        except urllib.error.URLError as error:
+
+            raise RuntimeError(
+                "Could not connect to OpenAI: "
+                f"{error}"
+            )
+
+    # ======================================================
+    # EXTRACT TEXT
+    # ======================================================
+
+    def _extract_text(
+        self,
+        result
+    ):
+
+        text = result.get(
+            "output_text"
+        )
+
+        if (
+            isinstance(text, str)
+            and text.strip()
+        ):
+
+            return text
+
+        output = result.get(
+            "output",
+            []
+        )
+
+        parts = []
+
+        for item in output:
+
+            if not isinstance(
+                item,
+                dict
+            ):
+                continue
+
+            content = item.get(
+                "content",
+                []
+            )
+
+            for block in content:
+
+                if not isinstance(
+                    block,
+                    dict
+                ):
+                    continue
+
+                if block.get(
+                    "type"
+                ) == "output_text":
+
+                    value = block.get(
+                        "text",
+                        ""
+                    )
+
+                    if value:
+
+                        parts.append(
+                            value
+                        )
+
+        text = "\n".join(
+            parts
+        ).strip()
+
+        if not text:
+
+            raise RuntimeError(
+                "OpenAI returned no text."
+            )
+
+        return text
+
+
+# ==========================================================
+# LOCAL PROVIDER
+# ==========================================================
+
+class LocalProvider(AIProvider):
+
+    name = "local"
+
+    def __init__(
+        self,
+        url=None,
+        model=None
+    ):
+
+        self.url = (
+            url
+            or os.environ.get(
+                "NITRON_LOCAL_AI_URL",
+                "http://127.0.0.1:11434"
+            )
+        )
+
+        self.model = (
+            model
+            or os.environ.get(
+                "NITRON_LOCAL_AI_MODEL",
+                "llama3.2"
+            )
+        )
+
+    # ======================================================
+    # CHECK LOCAL SERVER
+    # ======================================================
+
+    def available(self):
+
+        try:
+
+            request = urllib.request.Request(
+                self.url
+            )
+
+            with urllib.request.urlopen(
+                request,
+                timeout=3
+            ):
+
+                return True
+
+        except Exception:
+
+            return False
+
+    # ======================================================
+    # GENERATE
+    # ======================================================
+
+    def generate(
+        self,
+        prompt
+    ):
+
+        payload = {
+            "model": self.model,
+            "prompt": prompt,
+            "stream": False
+        }
+
+        data = json.dumps(
+            payload
+        ).encode("utf-8")
+
+        request = urllib.request.Request(
+
+            self.url + "/api/generate",
+
+            data=data,
+
+            headers={
+                "Content-Type":
+                    "application/json"
+            },
+
+            method="POST"
+        )
+
+        try:
+
+            with urllib.request.urlopen(
+                request,
+                timeout=300
+            ) as response:
+
+                raw = response.read()
+
+            result = json.loads(
+                raw.decode("utf-8")
+            )
+
+            text = result.get(
+                "response"
+            )
+
+            if not text:
+
+                raise RuntimeError(
+                    "Local AI returned no text."
+                )
+
+            return text
+
+        except urllib.error.URLError as error:
+
+            raise RuntimeError(
+                "Local AI is unavailable: "
+                f"{error}"
+            )
+
+
+# ==========================================================
+# PROVIDER MANAGER
+# ==========================================================
+
+class AIProviderManager:
+
+    def __init__(self):
+
+        self.openai = OpenAIProvider()
+
+        self.local = LocalProvider()
+
+    # ======================================================
+    # STATUS
+    # ======================================================
+
+    def status(self):
+
+        return {
+            "openai": self.openai.available(),
+            "local": self.local.available()
+        }
+
+    # ======================================================
+    # GET PROVIDER
+    # ======================================================
+
+    def get_provider(
+        self,
+        preferred=None
+    ):
+
+        preferred = (
+            preferred
+            or os.environ.get(
+                "NITRON_AI_PROVIDER",
+                "auto"
+            )
+        ).lower()
+
+        # Explicit OpenAI
+
+        if preferred == "openai":
+
+            if not self.openai.available():
+
+                raise RuntimeError(
+                    "OpenAI provider is not configured."
+                )
+
+            return self.openai
+
+        # Explicit local
+
+        if preferred == "local":
+
+            if not self.local.available():
+
+                raise RuntimeError(
+                    "Local AI provider is not available."
+                )
+
+            return self.local
+
+        # Automatic selection
+        #
+        # Prefer local first so Nitron can work
+        # without API credits when a local model
+        # is running.
+
+        if self.local.available():
+
+            return self.local
+
+        if self.openai.available():
+
+            return self.openai
+
+        raise RuntimeError(
+            "No AI provider is available.\n"
+            "Start a local AI server or configure "
+            "OPENAI_API_KEY."
+        )
+
+    # ======================================================
+    # GENERATE
+    # ======================================================
+
+    def generate(
+        self,
+        prompt,
+        preferred=None
+    ):
+
+        provider = self.get_provider(
+            preferred
+        )
+
+        return provider.generate(
+            prompt
+        )
+
+
+# ==========================================================
+# TEST
+# ==========================================================
+
+if __name__ == "__main__":
+
+    manager = AIProviderManager()
+
+    print()
+    print("=" * 60)
+    print("NITRON AI PROVIDER SYSTEM")
+    print("=" * 60)
+
+    print()
+    print("Status:")
+
+    for name, available in manager.status().items():
+
+        print(
+            f"  {name}: "
+            f"{'AVAILABLE' if available else 'OFFLINE'}"
+        )
+
+    print()
+
+    try:
+
+        provider = manager.get_provider()
+
+        print(
+            "Selected provider:",
+            provider.name
+        )
+
+        if hasattr(
+            provider,
+            "model"
+        ):
+
+            print(
+                "Model:",
+                provider.model
+            )
+
+    except Exception as error:
+
+        print(
+            "No provider available:"
+        )
+
+        print(
+            error
+        )
+
+    print()
+    print("=" * 60)

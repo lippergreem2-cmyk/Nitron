@@ -1,0 +1,794 @@
+"""
+Nitron Reasoning Engine
+"""
+
+import re
+
+from brain.memory import memory
+
+try:
+    from brain.knowledge_engine import knowledge
+except ImportError:
+    knowledge = None
+
+try:
+    from brain.learner import learner
+except ImportError:
+    learner = None
+
+try:
+    from brain.search_engine import search_engine
+except ImportError:
+    search_engine = None
+
+
+class ReasoningEngine:
+
+    def __init__(self):
+        self.name = "Nitron Reasoning Engine"
+
+    def analyze(self, command):
+        """
+        Analyze a command and classify its intent.
+        """
+
+        command = command.lower().strip()
+
+        categories = {
+
+            "academy": [
+                "teach",
+                "learn",
+                "lesson",
+                "academy",
+                "study"
+            ],
+
+            "developer": [
+                "build",
+                "create",
+                "generate",
+                "project",
+                "website",
+                "app",
+                "code",
+                "program"
+            ],
+
+            "trading": [
+                "trade",
+                "gold",
+                "forex",
+                "bitcoin",
+                "crypto",
+                "market"
+            ],
+
+            "weather": [
+                "weather",
+                "forecast"
+            ],
+
+            "music": [
+                "music",
+                "song",
+                "play"
+            ],
+
+            "system": [
+                "time",
+                "date"
+            ]
+        }
+
+        for category, words in categories.items():
+
+            if any(word in command for word in words):
+                return category
+
+        return "chat"
+
+    def explain(self, topic):
+        """
+        Search the built-in knowledge base.
+        """
+
+        if knowledge is None:
+            return "Knowledge engine is unavailable."
+
+        result = knowledge.get_category(topic)
+
+        if result:
+            return result
+
+        return f"I don't know enough about '{topic}'."
+
+    def search_learned(self, keyword):
+        """
+        Find genuinely relevant learned knowledge.
+
+        Matching priority:
+            1. Exact topic
+            2. Topic contains the requested subject
+            3. Title contains the requested subject
+            4. Summary/content contains the subject
+
+        Common question words are ignored.
+        Unrelated learned topics must not be returned.
+        """
+
+        if learner is None:
+            return {}
+
+        if not keyword:
+            return {}
+
+        text = str(keyword).lower().strip()
+
+        stop_words = {
+            "what", "what's", "whats",
+            "is", "are", "am",
+            "an", "a", "the",
+            "tell", "me", "about",
+            "explain", "describe",
+            "who", "how", "why",
+            "where", "when",
+            "can", "you", "please",
+            "do", "does", "did",
+            "this", "that", "it",
+            "to", "of", "for",
+            "in", "on", "and"
+        }
+
+        words = re.findall(
+            r"[a-zA-Z0-9_]+",
+            text
+        )
+
+        words = [
+            word
+            for word in words
+            if word not in stop_words
+            and len(word) >= 2
+        ]
+
+        if not words:
+            return {}
+
+        results = {}
+
+        for topic, data in learner.knowledge.items():
+
+            topic_text = str(topic).lower().strip()
+
+            if isinstance(data, dict):
+
+                title = str(
+                    data.get("title", "")
+                ).lower().strip()
+
+                summary = data.get(
+                    "summary",
+                    ""
+                )
+
+                if not isinstance(summary, str):
+
+                    old_content = data.get(
+                        "content",
+                        {}
+                    )
+
+                    if isinstance(old_content, dict):
+                        summary = old_content.get(
+                            "summary",
+                            ""
+                        )
+                    else:
+                        summary = str(old_content)
+
+                summary_text = str(summary).lower()
+
+            else:
+
+                title = ""
+                summary_text = str(data).lower()
+
+            score = 0
+
+            # --------------------------------------------------
+            # TOPIC MATCHING
+            # --------------------------------------------------
+
+            exact_topic = False
+            topic_match_count = 0
+
+            for word in words:
+
+                if word == topic_text:
+                    score += 100
+                    exact_topic = True
+
+                elif word in topic_text:
+                    score += 40
+                    topic_match_count += 1
+
+            # --------------------------------------------------
+            # TITLE MATCHING
+            # --------------------------------------------------
+
+            for word in words:
+
+                if word in title:
+                    score += 20
+
+            # --------------------------------------------------
+            # CONTENT MATCHING
+            # --------------------------------------------------
+
+            for word in words:
+
+                if word in summary_text:
+                    score += 3
+
+            # --------------------------------------------------
+            # RELEVANCE GATE
+            #
+            # A learned topic must actually match the requested
+            # subject. Content-only accidental matches are not
+            # enough.
+            # --------------------------------------------------
+
+            if not exact_topic and topic_match_count == 0:
+
+                title_match = any(
+                    word in title
+                    for word in words
+                )
+
+                if not title_match:
+                    continue
+
+            # --------------------------------------------------
+            # QUALITY BONUS
+            # --------------------------------------------------
+
+            if title and summary_text.strip():
+                score += 10
+
+            if score > 0:
+
+                results[topic] = {
+                    "score": score,
+                    "data": data
+                }
+
+        # Highest relevance first.
+
+        if not results:
+            return {}
+
+        ranked = sorted(
+            results.items(),
+            key=lambda item: item[1]["score"],
+            reverse=True
+        )
+
+        return dict(ranked)
+
+
+    def _normalize_learned(self, topic, data):
+        """
+        Convert learned knowledge into a clean answer.
+
+        Supports normal learned knowledge and structured image
+        knowledge without exposing raw OCR or sensitive text.
+        """
+
+        if not isinstance(data, dict):
+            return {
+                "message": str(data),
+                "learned": True,
+                "topic": topic,
+            }
+
+        title = str(data.get("title", "")).strip()
+        summary = str(data.get("summary", "")).strip()
+
+        # ------------------------------------------------------
+        # Older learner format
+        # ------------------------------------------------------
+
+        if not summary:
+            content = data.get("content", {})
+
+            if isinstance(content, dict):
+                summary = str(
+                    content.get("summary", "")
+                ).strip()
+
+                if not title:
+                    title = str(
+                        content.get("title", "")
+                    ).strip()
+
+            elif content:
+                summary = str(content).strip()
+
+        # ------------------------------------------------------
+        # Structured image knowledge
+        # ------------------------------------------------------
+
+        sections = data.get("sections", {})
+
+        if not isinstance(sections, dict):
+            sections = {}
+
+        image_metadata = sections.get(
+            "image_metadata",
+            {}
+        )
+
+        image_topics = sections.get(
+            "topics",
+            []
+        )
+
+        vision = sections.get(
+            "vision",
+            {}
+        )
+
+        research = sections.get(
+            "research",
+            {}
+        )
+
+        is_image = (
+            "image_metadata" in sections
+            or "topics" in sections
+            or (
+                isinstance(title, str)
+                and title.lower().startswith(
+                    "image analysis:"
+                )
+            )
+        )
+
+        if is_image:
+
+            parts = []
+
+            if summary:
+                parts.append(summary)
+
+            if image_topics:
+                topic_list = [
+                    str(item).strip()
+                    for item in image_topics
+                    if str(item).strip()
+                ]
+
+                if topic_list:
+                    parts.append(
+                        "Learned image topics: "
+                        + ", ".join(topic_list)
+                        + "."
+                    )
+
+            if isinstance(image_metadata, dict):
+
+                width = image_metadata.get("width")
+                height = image_metadata.get("height")
+                image_format = image_metadata.get("format")
+
+                if width and height:
+                    parts.append(
+                        f"Image dimensions: {width}x{height}."
+                    )
+
+                if image_format:
+                    parts.append(
+                        f"Image format: {image_format}."
+                    )
+
+            if isinstance(vision, dict):
+
+                if vision.get("success"):
+                    analysis = str(
+                        vision.get("analysis", "")
+                    ).strip()
+
+                    if analysis:
+                        parts.append(
+                            "Vision analysis: "
+                            + analysis[:1200]
+                        )
+
+                else:
+                    parts.append(
+                        "Detailed vision analysis was unavailable."
+                    )
+
+            if isinstance(research, dict):
+
+                research_results = research.get(
+                    "results",
+                    []
+                )
+
+                if isinstance(research_results, list):
+                    titles = []
+
+                    for item in research_results[:5]:
+
+                        if not isinstance(item, dict):
+                            continue
+
+                        title_text = str(
+                            item.get("title", "")
+                        ).strip()
+
+                        if title_text:
+                            titles.append(title_text)
+
+                    if titles:
+                        parts.append(
+                            "Related public research: "
+                            + "; ".join(titles)
+                            + "."
+                        )
+
+            if parts:
+                summary = " ".join(parts)
+
+        # ------------------------------------------------------
+        # Final fallback
+        # ------------------------------------------------------
+
+        if not summary:
+            summary = (
+                "I learned about "
+                + str(topic)
+                + "."
+            )
+
+        result = {
+            "message": summary,
+            "topic": topic,
+            "learned": True,
+        }
+
+        if title:
+            result["title"] = title
+
+        if data.get("source"):
+            result["source"] = data.get("source")
+
+        if is_image:
+            result["image_learned"] = True
+
+            if image_topics:
+                result["detected_topics"] = image_topics
+
+            if image_metadata:
+                result["image_metadata"] = image_metadata
+
+            if research:
+                result["research"] = research
+
+        return result
+
+    def answer(self, question):
+        """
+        Answer a question using this priority:
+
+        1. Relevant learned knowledge
+        2. Built-in knowledge
+        3. Automatic web learning
+        4. Internal search fallback
+        """
+
+        question = str(question).strip()
+
+        # ==================================================
+        # 1. LEARNED KNOWLEDGE
+        # ==================================================
+
+        learned = self.search_learned(question)
+
+        if learned:
+
+            topic = next(iter(learned))
+
+            return self._normalize_learned(
+                topic,
+                learned[topic]["data"]
+                if isinstance(learned[topic], dict)
+                and "data" in learned[topic]
+                else learned[topic]
+            )
+
+        # ==================================================
+        # 2. BUILT-IN KNOWLEDGE
+        # ==================================================
+
+        if knowledge:
+
+            try:
+
+                built_in = knowledge.get_category(
+                    question
+                )
+
+                if built_in:
+                    return built_in
+
+            except Exception:
+                pass
+
+        # ==================================================
+        # 3. AUTOMATIC WEB LEARNING
+        # ==================================================
+
+        try:
+
+            from brain.study import study_engine
+
+            import requests
+            import urllib.parse
+
+            # ----------------------------------------------
+            # Extract the actual subject from the question
+            # ----------------------------------------------
+
+            search_text = question.strip()
+
+            patterns = [
+                r"^what\s+is\s+(.+?)\??$",
+                r"^what\s+are\s+(.+?)\??$",
+                r"^who\s+is\s+(.+?)\??$",
+                r"^who\s+are\s+(.+?)\??$",
+                r"^tell\s+me\s+about\s+(.+?)\??$",
+                r"^explain\s+(.+?)\??$",
+                r"^describe\s+(.+?)\??$"
+            ]
+
+            for pattern in patterns:
+
+                match = re.match(
+                    pattern,
+                    search_text,
+                    re.IGNORECASE
+                )
+
+                if match:
+
+                    search_text = match.group(
+                        1
+                    ).strip()
+
+                    break
+
+            search_text = search_text.strip(" ?.!")
+
+            if not search_text:
+                return {
+                    "message":
+                        "I need a topic to learn about."
+                }
+
+            # ----------------------------------------------
+            # Search Wikipedia for the subject
+            # ----------------------------------------------
+
+            api_url = (
+                "https://en.wikipedia.org/w/api.php?"
+                + urllib.parse.urlencode({
+                    "action": "query",
+                    "format": "json",
+                    "list": "search",
+                    "srsearch": search_text,
+                    "srlimit": 1
+                })
+            )
+
+            response = requests.get(
+                api_url,
+                headers={
+                    "User-Agent": "Nitron/1.0"
+                },
+                timeout=10
+            )
+
+            response.raise_for_status()
+
+            data = response.json()
+
+            results = data.get(
+                "query",
+                {}
+            ).get(
+                "search",
+                []
+            )
+
+            if results:
+
+                title = results[0].get(
+                    "title",
+                    search_text
+                )
+
+                article_url = (
+                    "https://en.wikipedia.org/wiki/"
+                    + urllib.parse.quote(
+                        title.replace(" ", "_")
+                    )
+                )
+
+                print("=" * 50)
+                print("NITRON AUTOMATIC LEARNING")
+                print("=" * 50)
+                print(f"Topic : {search_text}")
+                print(f"Source: {article_url}")
+                print()
+
+                learned_result = study_engine.study(
+                    search_text,
+                    article_url
+                )
+
+                if learned_result.get(
+                    "status"
+                ) == "success":
+
+                    # ------------------------------------------
+                    # IMPORTANT:
+                    # Use the exact topic we just saved.
+                    # ------------------------------------------
+
+                    fresh = learner.recall(
+                        search_text
+                    )
+
+                    if fresh:
+
+                        return self._normalize_learned(
+                            search_text,
+                            fresh
+                        )
+
+                    # Fallback to the processed result.
+
+                    summary = learned_result.get(
+                        "summary",
+                        ""
+                    )
+
+                    if summary:
+
+                        return {
+                            "message": summary,
+                            "topic": search_text,
+                            "source": article_url,
+                            "learned": True
+                        }
+
+        except Exception as error:
+
+            try:
+
+                from brain.memory import log
+
+                log(
+                    f"Automatic web learning error: {error}",
+                    "warning"
+                )
+
+            except Exception:
+                pass
+
+        # ==================================================
+        # 4. INTERNAL SEARCH FALLBACK
+        # ==================================================
+
+        if search_engine:
+
+            try:
+
+                results = search_engine.search(
+                    question
+                )
+
+                if results:
+                    return results
+
+            except Exception:
+                pass
+
+        return {
+            "message":
+                "I haven't learned enough about that yet."
+        }
+
+
+    def think(self, question):
+        """
+        Alias for answer().
+        """
+
+        return self.answer(question)
+
+    def learn_topic(self, topic, url):
+        """
+        Learn from a website.
+        """
+
+        try:
+
+            from brain.study import study_engine
+
+            return study_engine.study(
+                topic,
+                url
+            )
+
+        except Exception as e:
+
+            return str(e)
+
+    def remember_fact(self, key, value):
+        """
+        Store a fact.
+        """
+
+        memory.remember(
+            key,
+            value
+        )
+
+        return "Fact remembered."
+
+    def recall_fact(self, key):
+        """
+        Recall a stored fact.
+        """
+
+        return memory.recall(
+            key,
+            "I don't remember that."
+        )
+
+    def compare(self, first, second):
+        """
+        Compare two values.
+        """
+
+        if first == second:
+            return "They are the same."
+
+        return "They are different."
+
+    def status(self):
+        """
+        Return Nitron brain status.
+        """
+
+        learned = 0
+
+        if learner:
+            learned = len(
+                learner.knowledge
+            )
+
+        return {
+            "name": self.name,
+            "knowledge_loaded": knowledge is not None,
+            "learning_enabled": learner is not None,
+            "search_enabled": search_engine is not None,
+            "learned_topics": learned
+        }
+
+
+reasoning = ReasoningEngine()

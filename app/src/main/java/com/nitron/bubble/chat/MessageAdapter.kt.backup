@@ -1,0 +1,125 @@
+package com.nitron.bubble.chat
+
+import android.net.Uri
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.nitron.bubble.R
+
+class MessageAdapter :
+    RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
+
+    private val messages = mutableListOf<Message>()
+
+    class MessageViewHolder(view: View) :
+        RecyclerView.ViewHolder(view) {
+
+        val messageText: TextView =
+            view.findViewById(R.id.messageText)
+
+        val messageImage: ImageView =
+            view.findViewById(R.id.messageImage)
+
+        val container: View =
+            view.findViewById(R.id.messageContainer)
+    }
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MessageViewHolder {
+
+        val view = LayoutInflater.from(parent.context)
+            .inflate(
+                R.layout.message_item,
+                parent,
+                false
+            )
+
+        return MessageViewHolder(view)
+    }
+
+    override fun onBindViewHolder(
+        holder: MessageViewHolder,
+        position: Int
+    ) {
+
+        val message = messages[position]
+
+        // TEXT
+        if (message.text.isBlank()) {
+
+            holder.messageText.visibility = View.GONE
+
+        } else {
+
+            holder.messageText.visibility = View.VISIBLE
+            holder.messageText.text = message.text
+
+            if (message.fromUser) {
+
+                holder.messageText.setBackgroundResource(
+                    R.drawable.user_message_bg
+                )
+
+            } else {
+
+                holder.messageText.setBackgroundResource(
+                    R.drawable.nitron_message_bg
+                )
+            }
+        }
+
+        // IMAGE
+        if (message.imageUri != null) {
+
+            holder.messageImage.visibility = View.VISIBLE
+
+            holder.messageImage.setImageURI(
+                Uri.parse(message.imageUri)
+            )
+
+        } else {
+
+            holder.messageImage.visibility = View.GONE
+        }
+
+        // USER / NITRON POSITION
+        val params =
+            holder.container.layoutParams
+                as ViewGroup.MarginLayoutParams
+
+        if (message.fromUser) {
+
+            params.marginStart = 50
+            params.marginEnd = 0
+
+        } else {
+
+            params.marginStart = 0
+            params.marginEnd = 50
+        }
+
+        holder.container.layoutParams = params
+    }
+
+    override fun getItemCount(): Int {
+        return messages.size
+    }
+
+    fun addMessage(message: Message) {
+
+        messages.add(message)
+
+        notifyItemInserted(
+            messages.size - 1
+        )
+    }
+
+    fun getMessages(): List<Message> {
+        return messages.toList()
+    }
+}

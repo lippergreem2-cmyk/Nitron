@@ -1,0 +1,5180 @@
+,
+"what is trading": {
+  "definition": "Trading is the buying and selling of financial assets to make a profit from price movements.",
+  "notes": [
+    "Trading can be done in Forex, Stocks, Crypto and Commodities.",
+    "A trader aims to buy low and sell high or sell high and buy back lower.",
+    "Trading involves risk and requires proper risk management."
+  ],
+  "practice_questions": [
+    "What is trading?",
+    "Name four financial markets."
+  ],
+  "answers": [
+    "Trading is buying and selling financial assets for profit.",
+    "Forex, Stocks, Crypto and Commodities."
+  ]
+},
+
+"financial markets": {
+  "definition": "Financial markets are places where financial assets are bought and sold.",
+  "notes": [
+    "Forex Market",
+    "Stock Market",
+    "Cryptocurrency Market",
+    "Commodity Market",
+    "Indices Market"
+  ],
+  "practice_questions": [
+    "What is a financial market?",
+    "Name five financial markets."
+  ],
+  "answers": [
+    "A place where financial assets are traded.",
+    "Forex, Stocks, Crypto, Commodities and Indices."
+  ]
+},
+
+"forex": {
+  "definition": "Forex is the global market where currencies are exchanged.",
+  "notes": [
+    "Forex stands for Foreign Exchange.",
+    "Currencies are traded in pairs.",
+    "It is the largest financial market in the world.",
+    "The market operates 24 hours a day from Monday to Friday."
+  ],
+  "practice_questions": [
+    "What does Forex mean?",
+    "How are currencies traded?"
+  ],
+  "answers": [
+    "Foreign Exchange.",
+    "They are traded in currency pairs."
+  ]
+},
+
+"currency pairs": {
+  "definition": "A currency pair compares the value of one currency against another.",
+  "notes": [
+    "EUR/USD means Euro versus US Dollar.",
+    "The first currency is called the base currency.",
+    "The second currency is called the quote currency.",
+    "If EUR/USD rises, the Euro is strengthening against the Dollar."
+  ],
+  "practice_questions": [
+    "What is the base currency?",
+    "What is the quote currency?"
+  ],
+  "answers": [
+    "The first currency in the pair.",
+    "The second currency in the pair."
+  ]
+},
+"bid and ask": {
+  "definition": "The bid is the price at which you can sell, while the ask is the price at which you can buy.",
+  "notes": [
+    "The bid price is always lower than the ask price.",
+    "The difference between them is called the spread.",
+    "Buy orders are executed at the ask price.",
+    "Sell orders are executed at the bid price."
+  ],
+  "practice_questions": [
+    "What is the bid price?",
+    "What is the ask price?"
+  ],
+  "answers": [
+    "The price at which you can sell.",
+    "The price at which you can buy."
+  ]
+},
+
+"spread": {
+  "definition": "The spread is the difference between the bid price and the ask price.",
+  "notes": [
+    "The spread is the broker's trading cost.",
+    "Lower spreads reduce trading costs.",
+    "Major currency pairs usually have smaller spreads."
+  ],
+  "practice_questions": [
+    "What is the spread?",
+    "Why is a low spread important?"
+  ],
+  "answers": [
+    "The difference between the bid and ask price.",
+    "It reduces trading costs."
+  ]
+},
+
+"pips": {
+  "definition": "A pip is the standard unit used to measure price movement in Forex.",
+  "notes": [
+    "Most currency pairs have one pip equal to 0.0001.",
+    "For Japanese Yen pairs, one pip is usually 0.01.",
+    "Profit and loss are measured in pips."
+  ],
+  "practice_questions": [
+    "What is a pip?",
+    "How many decimal places is one pip for most currency pairs?"
+  ],
+  "answers": [
+    "The standard unit of price movement in Forex.",
+    "Four decimal places (0.0001)."
+  ]
+},
+
+"lots": {
+  "definition": "A lot is the standard unit used to measure the size of a trade.",
+  "notes": [
+    "A standard lot is 100,000 units.",
+    "A mini lot is 10,000 units.",
+    "A micro lot is 1,000 units.",
+    "Larger lot sizes increase both profit and risk."
+  ],
+  "practice_questions": [
+    "What is a standard lot?",
+    "What is a micro lot?"
+  ],
+  "answers": [
+    "100,000 units.",
+    "1,000 units."
+  ]
+},
+"leverage": {
+  "definition": "Leverage allows a trader to control a larger position with a smaller amount of money.",
+  "notes": [
+    "Leverage increases both potential profits and potential losses.",
+    "A leverage of 1:100 means you can control $100 for every $1 in your account.",
+    "High leverage requires strict risk management.",
+    "Never rely on leverage without using a stop loss."
+  ],
+  "practice_questions": [
+    "What is leverage?",
+    "What does 1:100 leverage mean?"
+  ],
+  "answers": [
+    "Leverage allows traders to control larger positions with less capital.",
+    "You control $100 for every $1 of your own money."
+  ]
+},
+
+"margin": {
+  "definition": "Margin is the amount of money required to open and maintain a trading position.",
+  "notes": [
+    "Margin is not a trading fee.",
+    "Used margin is locked while a trade is open.",
+    "Free margin is available to open new trades.",
+    "Low margin can lead to a margin call."
+  ],
+  "practice_questions": [
+    "What is margin?",
+    "What is free margin?"
+  ],
+  "answers": [
+    "The money required to open a trade.",
+    "Money available to open additional trades."
+  ]
+},
+
+"stop loss": {
+  "definition": "A stop loss is an order that automatically closes a trade to limit losses.",
+  "notes": [
+    "Every trade should have a stop loss.",
+    "A stop loss protects trading capital.",
+    "It helps remove emotional decision making.",
+    "Stop losses should be placed at logical market levels."
+  ],
+  "practice_questions": [
+    "What is a stop loss?",
+    "Why should traders use stop losses?"
+  ],
+  "answers": [
+    "An order that limits losses by closing a trade automatically.",
+    "To protect capital and control risk."
+  ]
+},
+
+"take profit": {
+  "definition": "A take profit is an order that automatically closes a trade when a target profit is reached.",
+  "notes": [
+    "Take profit locks in gains automatically.",
+    "It prevents greed from affecting trading decisions.",
+    "Always use a realistic profit target.",
+    "Risk-to-reward should be considered before setting take profit."
+  ],
+  "practice_questions": [
+    "What is a take profit?",
+    "Why is take profit important?"
+  ],
+  "answers": [
+    "An order that closes a trade after reaching a target profit.",
+    "It secures profits automatically."
+  ]
+},
+"risk management": {
+  "definition": "Risk management is the process of protecting your trading capital by controlling losses.",
+  "notes": [
+    "Never risk more than 1% to 2% of your account on a single trade.",
+    "Always use a stop loss.",
+    "Avoid overtrading.",
+    "Protecting capital is more important than making quick profits."
+  ],
+  "practice_questions": [
+    "What is risk management?",
+    "How much should a beginner risk per trade?"
+  ],
+  "answers": [
+    "Managing losses to protect trading capital.",
+    "About 1% to 2% of the account balance."
+  ]
+},
+
+"risk reward ratio": {
+  "definition": "The risk-to-reward ratio compares the amount you risk to the amount you expect to gain.",
+  "notes": [
+    "A 1:2 ratio means risking $10 to make $20.",
+    "Higher reward than risk is generally preferred.",
+    "Many professional traders use at least a 1:2 ratio.",
+    "Good risk-to-reward helps profitability even with losing trades."
+  ],
+  "practice_questions": [
+    "What is a 1:2 risk-to-reward ratio?",
+    "Why is risk-to-reward important?"
+  ],
+  "answers": [
+    "Risk $1 to make $2.",
+    "It helps traders remain profitable over time."
+  ]
+},
+
+"position sizing": {
+  "definition": "Position sizing is choosing the correct trade size based on your account balance and risk.",
+  "notes": [
+    "Position size depends on account size.",
+    "It also depends on stop loss distance.",
+    "Larger positions increase both profit and risk.",
+    "Proper position sizing helps protect capital."
+  ],
+  "practice_questions": [
+    "What is position sizing?",
+    "What factors determine position size?"
+  ],
+  "answers": [
+    "Choosing the correct trade size.",
+    "Account balance, risk percentage and stop loss distance."
+  ]
+},
+
+"trading journal": {
+  "definition": "A trading journal is a record of all your trades and trading decisions.",
+  "notes": [
+    "Record every entry and exit.",
+    "Write why you entered the trade.",
+    "Record profits and losses.",
+    "Review your journal regularly to improve."
+  ],
+  "practice_questions": [
+    "What is a trading journal?",
+    "Why should traders keep a journal?"
+  ],
+  "answers": [
+    "A record of trading activity.",
+    "To learn from mistakes and improve performance."
+  ]
+},
+"candlesticks": {
+  "definition": "Candlesticks are graphical representations of price movement during a specific time period.",
+  "notes": [
+    "Each candlestick shows the open, high, low and close prices.",
+    "Candlesticks help traders understand market sentiment.",
+    "A green candle usually means price closed higher.",
+    "A red candle usually means price closed lower."
+  ],
+  "practice_questions": [
+    "What information does a candlestick show?",
+    "Why are candlesticks important?"
+  ],
+  "answers": [
+    "Open, High, Low and Close prices.",
+    "They help traders analyze price action."
+  ]
+},
+
+"bullish candles": {
+  "definition": "A bullish candle shows that buyers were stronger than sellers during the trading period.",
+  "notes": [
+    "The closing price is higher than the opening price.",
+    "Bullish candles suggest buying pressure.",
+    "Several bullish candles can indicate an uptrend.",
+    "Confirmation from other analysis is recommended."
+  ],
+  "practice_questions": [
+    "What is a bullish candle?",
+    "What does a bullish candle indicate?"
+  ],
+  "answers": [
+    "A candle that closes above its opening price.",
+    "Buying pressure."
+  ]
+},
+
+"bearish candles": {
+  "definition": "A bearish candle shows that sellers were stronger than buyers during the trading period.",
+  "notes": [
+    "The closing price is lower than the opening price.",
+    "Bearish candles suggest selling pressure.",
+    "Several bearish candles can indicate a downtrend.",
+    "Use other confirmations before entering trades."
+  ],
+  "practice_questions": [
+    "What is a bearish candle?",
+    "What does a bearish candle indicate?"
+  ],
+  "answers": [
+    "A candle that closes below its opening price.",
+    "Selling pressure."
+  ]
+},
+
+"doji": {
+  "definition": "A Doji is a candlestick where the opening and closing prices are nearly equal.",
+  "notes": [
+    "A Doji represents market indecision.",
+    "It can appear before a trend reversal.",
+    "Confirmation from the next candle is important.",
+    "A Doji alone is not a buy or sell signal."
+  ],
+  "practice_questions": [
+    "What is a Doji candle?",
+    "What does a Doji usually indicate?"
+  ],
+  "answers": [
+    "A candle with nearly equal opening and closing prices.",
+    "Market indecision."
+  ]
+},
+"hammer": {
+  "definition": "A Hammer is a bullish reversal candlestick that forms after a downtrend.",
+  "notes": [
+    "It has a small body near the top of the candle.",
+    "It has a long lower shadow that is at least twice the body.",
+    "It shows that buyers rejected lower prices.",
+    "Confirmation with the next bullish candle is recommended."
+  ],
+  "practice_questions": [
+    "What is a Hammer candlestick?",
+    "When does a Hammer usually appear?"
+  ],
+  "answers": [
+    "A bullish reversal candlestick with a long lower shadow.",
+    "After a downtrend."
+  ]
+},
+
+"shooting star": {
+  "definition": "A Shooting Star is a bearish reversal candlestick that forms after an uptrend.",
+  "notes": [
+    "It has a small body near the bottom.",
+    "It has a long upper shadow.",
+    "It shows buyers pushed price higher but sellers took control.",
+    "Confirmation with the next bearish candle is recommended."
+  ],
+  "practice_questions": [
+    "What is a Shooting Star?",
+    "What does it indicate?"
+  ],
+  "answers": [
+    "A bearish reversal candlestick.",
+    "Potential reversal from an uptrend."
+  ]
+},
+
+"bullish engulfing": {
+  "definition": "A Bullish Engulfing pattern is a two-candle reversal pattern showing buyers have gained control.",
+  "notes": [
+    "The first candle is bearish.",
+    "The second candle is bullish.",
+    "The second candle completely engulfs the first candle's body.",
+    "It often signals the beginning of an uptrend."
+  ],
+  "practice_questions": [
+    "How many candles form a Bullish Engulfing pattern?",
+    "What does it indicate?"
+  ],
+  "answers": [
+    "Two candles.",
+    "A possible bullish reversal."
+  ]
+},
+
+"bearish engulfing": {
+  "definition": "A Bearish Engulfing pattern is a two-candle reversal pattern showing sellers have gained control.",
+  "notes": [
+    "The first candle is bullish.",
+    "The second candle is bearish.",
+    "The second candle completely engulfs the first candle's body.",
+    "It often signals the beginning of a downtrend."
+  ],
+  "practice_questions": [
+    "How many candles form a Bearish Engulfing pattern?",
+    "What does it indicate?"
+  ],
+  "answers": [
+    "Two candles.",
+    "A possible bearish reversal."
+  ]
+},
+"morning star": {
+  "definition": "A Morning Star is a three-candle bullish reversal pattern that forms after a downtrend.",
+  "notes": [
+    "The first candle is bearish.",
+    "The second candle has a small body showing indecision.",
+    "The third candle is a strong bullish candle.",
+    "It signals that buyers are taking control of the market."
+  ],
+  "practice_questions": [
+    "How many candles form a Morning Star?",
+    "What does a Morning Star indicate?"
+  ],
+  "answers": [
+    "Three candles.",
+    "A potential bullish reversal."
+  ]
+},
+
+"evening star": {
+  "definition": "An Evening Star is a three-candle bearish reversal pattern that forms after an uptrend.",
+  "notes": [
+    "The first candle is bullish.",
+    "The second candle has a small body showing indecision.",
+    "The third candle is a strong bearish candle.",
+    "It signals that sellers are taking control of the market."
+  ],
+  "practice_questions": [
+    "How many candles form an Evening Star?",
+    "What does an Evening Star indicate?"
+  ],
+  "answers": [
+    "Three candles.",
+    "A potential bearish reversal."
+  ]
+},
+
+"inside bar": {
+  "definition": "An Inside Bar is a candlestick pattern where the entire candle is contained within the range of the previous candle.",
+  "notes": [
+    "It represents market consolidation.",
+    "It often appears before a breakout.",
+    "The previous candle is called the mother bar.",
+    "Traders wait for price to break above or below the mother bar."
+  ],
+  "practice_questions": [
+    "What is an Inside Bar?",
+    "What does an Inside Bar usually indicate?"
+  ],
+  "answers": [
+    "A candle completely inside the previous candle's range.",
+    "Market consolidation before a possible breakout."
+  ]
+},
+
+"outside bar": {
+  "definition": "An Outside Bar is a candlestick whose high is higher and low is lower than the previous candle.",
+  "notes": [
+    "It completely engulfs the previous candle's range.",
+    "It shows strong market momentum.",
+    "A bullish Outside Bar may signal buying pressure.",
+    "A bearish Outside Bar may signal selling pressure."
+  ],
+  "practice_questions": [
+    "What is an Outside Bar?",
+    "What does an Outside Bar show?"
+  ],
+  "answers": [
+    "A candle that completely engulfs the previous candle's range.",
+    "Strong market momentum."
+  ]
+},
+"uptrend": {
+  "definition": "An uptrend is a market condition where price makes higher highs and higher lows.",
+  "notes": [
+    "An uptrend shows buyers are in control.",
+    "Buying opportunities are usually preferred during an uptrend.",
+    "Trendlines can help identify an uptrend.",
+    "An uptrend continues until market structure changes."
+  ],
+  "practice_questions": [
+    "What is an uptrend?",
+    "Who controls the market during an uptrend?"
+  ],
+  "answers": [
+    "A market making higher highs and higher lows.",
+    "The buyers."
+  ]
+},
+
+"downtrend": {
+  "definition": "A downtrend is a market condition where price makes lower highs and lower lows.",
+  "notes": [
+    "A downtrend shows sellers are in control.",
+    "Selling opportunities are usually preferred during a downtrend.",
+    "Trendlines can help identify a downtrend.",
+    "A downtrend continues until market structure changes."
+  ],
+  "practice_questions": [
+    "What is a downtrend?",
+    "Who controls the market during a downtrend?"
+  ],
+  "answers": [
+    "A market making lower highs and lower lows.",
+    "The sellers."
+  ]
+},
+
+"sideways market": {
+  "definition": "A sideways market is a market where price moves within a horizontal range without a clear trend.",
+  "notes": [
+    "Price repeatedly moves between support and resistance.",
+    "Neither buyers nor sellers are in full control.",
+    "Breakouts often occur after long periods of consolidation.",
+    "Trend-following strategies work poorly in ranging markets."
+  ],
+  "practice_questions": [
+    "What is a sideways market?",
+    "Between which two levels does price usually move?"
+  ],
+  "answers": [
+    "A market moving without a clear trend.",
+    "Support and resistance."
+  ]
+},
+
+"higher highs and higher lows": {
+  "definition": "Higher highs and higher lows are the main characteristics of an uptrend.",
+  "notes": [
+    "Each new high is above the previous high.",
+    "Each new low is above the previous low.",
+    "This confirms buyer strength.",
+    "Traders use this structure to identify buying opportunities."
+  ],
+  "practice_questions": [
+    "What do higher highs indicate?",
+    "What market condition is formed by higher highs and higher lows?"
+  ],
+  "answers": [
+    "Strong buying pressure.",
+    "An uptrend."
+  ]
+},
+"lower highs and lower lows": {
+  "definition": "Lower highs and lower lows are the main characteristics of a downtrend.",
+  "notes": [
+    "Each new high is lower than the previous high.",
+    "Each new low is lower than the previous low.",
+    "This confirms seller strength.",
+    "Traders use this structure to identify selling opportunities."
+  ],
+  "practice_questions": [
+    "What do lower highs indicate?",
+    "What market condition is formed by lower highs and lower lows?"
+  ],
+  "answers": [
+    "Strong selling pressure.",
+    "A downtrend."
+  ]
+},
+
+"support": {
+  "definition": "Support is a price level where buying pressure is strong enough to stop or reverse a price decline.",
+  "notes": [
+    "Support acts like a floor beneath price.",
+    "Price often bounces upward from support.",
+    "If support breaks, it may become resistance.",
+    "Support is stronger when tested multiple times."
+  ],
+  "practice_questions": [
+    "What is support?",
+    "What can happen if support is broken?"
+  ],
+  "answers": [
+    "A price level where buyers prevent further price decline.",
+    "It may become resistance."
+  ]
+},
+
+"resistance": {
+  "definition": "Resistance is a price level where selling pressure is strong enough to stop or reverse a price rise.",
+  "notes": [
+    "Resistance acts like a ceiling above price.",
+    "Price often falls after reaching resistance.",
+    "If resistance breaks, it may become support.",
+    "Resistance becomes stronger after multiple tests."
+  ],
+  "practice_questions": [
+    "What is resistance?",
+    "What can happen if resistance is broken?"
+  ],
+  "answers": [
+    "A price level where sellers prevent further price rise.",
+    "It may become support."
+  ]
+},
+
+"breakout": {
+  "definition": "A breakout occurs when price moves strongly above resistance or below support.",
+  "notes": [
+    "Breakouts often signal the beginning of a new trend.",
+    "High trading volume makes breakouts more reliable.",
+    "Some breakouts fail and become false breakouts.",
+    "Many traders wait for confirmation before entering."
+  ],
+  "practice_questions": [
+    "What is a breakout?",
+    "What usually confirms a strong breakout?"
+  ],
+  "answers": [
+    "A strong move beyond support or resistance.",
+    "High trading volume and confirmation."
+  ]
+},
+"false breakout": {
+  "definition": "A false breakout occurs when price moves beyond support or resistance but quickly reverses back into the range.",
+  "notes": [
+    "False breakouts trap traders into entering too early.",
+    "They often occur during low-volume trading sessions.",
+    "Waiting for candle confirmation can reduce false entries.",
+    "Risk management is essential because false breakouts are common."
+  ],
+  "practice_questions": [
+    "What is a false breakout?",
+    "How can traders avoid false breakouts?"
+  ],
+  "answers": [
+    "A breakout that quickly reverses back into the trading range.",
+    "Wait for confirmation before entering a trade."
+  ]
+},
+
+"trendline": {
+  "definition": "A trendline is a straight line drawn to connect swing highs or swing lows to show the direction of the market.",
+  "notes": [
+    "An upward trendline connects higher lows.",
+    "A downward trendline connects lower highs.",
+    "Trendlines help identify support and resistance.",
+    "A broken trendline may signal a trend reversal."
+  ],
+  "practice_questions": [
+    "What is a trendline?",
+    "What does a broken trendline often indicate?"
+  ],
+  "answers": [
+    "A line showing the direction of the market trend.",
+    "A possible trend reversal."
+  ]
+},
+
+"channel": {
+  "definition": "A channel is formed by two parallel trendlines that contain price movement.",
+  "notes": [
+    "An ascending channel slopes upward.",
+    "A descending channel slopes downward.",
+    "A horizontal channel indicates a ranging market.",
+    "Channels help traders identify entry and exit points."
+  ],
+  "practice_questions": [
+    "What is a price channel?",
+    "Name three types of channels."
+  ],
+  "answers": [
+    "A price movement between two parallel trendlines.",
+    "Ascending, Descending and Horizontal channels."
+  ]
+},
+
+"break of structure": {
+  "definition": "A Break of Structure (BOS) occurs when price breaks an important swing high or swing low, confirming the continuation of a trend.",
+  "notes": [
+    "A bullish BOS breaks a previous swing high.",
+    "A bearish BOS breaks a previous swing low.",
+    "BOS is a key concept in Smart Money trading.",
+    "A confirmed BOS often signals trend continuation."
+  ],
+  "practice_questions": [
+    "What is a Break of Structure (BOS)?",
+    "What does a bullish BOS break?"
+  ],
+  "answers": [
+    "A break of an important swing high or swing low.",
+    "A previous swing high."
+  ]
+},
+"change of character": {
+  "definition": "A Change of Character (CHoCH) is an early sign that the market trend may be reversing.",
+  "notes": [
+    "It occurs when price breaks the previous market structure.",
+    "A bullish CHoCH may signal the start of an uptrend.",
+    "A bearish CHoCH may signal the start of a downtrend.",
+    "CHoCH often appears before a Break of Structure (BOS)."
+  ],
+  "practice_questions": [
+    "What is a Change of Character (CHoCH)?",
+    "What can a CHoCH indicate?"
+  ],
+  "answers": [
+    "An early change in market structure.",
+    "A possible trend reversal."
+  ]
+},
+
+"liquidity": {
+  "definition": "Liquidity is the collection of buy and sell orders resting in the market.",
+  "notes": [
+    "Liquidity is often found above highs and below lows.",
+    "Large institutions seek liquidity to fill large orders.",
+    "Retail traders often place stop losses in liquidity areas.",
+    "Understanding liquidity helps explain price movements."
+  ],
+  "practice_questions": [
+    "What is liquidity in trading?",
+    "Where is liquidity commonly found?"
+  ],
+  "answers": [
+    "Areas where many buy and sell orders exist.",
+    "Above highs and below lows."
+  ]
+},
+
+"liquidity sweep": {
+  "definition": "A liquidity sweep occurs when price briefly moves into a liquidity area before reversing direction.",
+  "notes": [
+    "It often triggers stop losses before reversing.",
+    "Institutions may use liquidity sweeps to enter large positions.",
+    "Liquidity sweeps are common near support and resistance.",
+    "Confirmation is important before entering a trade."
+  ],
+  "practice_questions": [
+    "What is a liquidity sweep?",
+    "Why do liquidity sweeps happen?"
+  ],
+  "answers": [
+    "A move that collects liquidity before reversing.",
+    "To trigger stop losses and fill large orders."
+  ]
+},
+
+"order block": {
+  "definition": "An Order Block is a price zone where large institutional buying or selling orders entered the market.",
+  "notes": [
+    "Bullish Order Blocks often act as support.",
+    "Bearish Order Blocks often act as resistance.",
+    "Price frequently revisits Order Blocks before continuing its trend.",
+    "Order Blocks are an important Smart Money Concept."
+  ],
+  "practice_questions": [
+    "What is an Order Block?",
+    "How are Order Blocks used?"
+  ],
+  "answers": [
+    "A zone where institutions placed large orders.",
+    "To identify potential support, resistance and trade entries."
+  ]
+},
+"fair value gap": {
+  "definition": "A Fair Value Gap (FVG) is an imbalance in price created when the market moves quickly, leaving an area with little or no trading activity.",
+  "notes": [
+    "Fair Value Gaps are created by strong momentum.",
+    "Price often returns to fill the gap before continuing.",
+    "Bullish FVGs are found during upward moves.",
+    "Bearish FVGs are found during downward moves."
+  ],
+  "practice_questions": [
+    "What is a Fair Value Gap (FVG)?",
+    "Why does price often return to an FVG?"
+  ],
+  "answers": [
+    "An imbalance left by a strong price movement.",
+    "To rebalance the market before continuing."
+  ]
+},
+
+"imbalance": {
+  "definition": "An imbalance occurs when buying or selling pressure is much stronger than the opposite side, causing rapid price movement.",
+  "notes": [
+    "Imbalances are caused by aggressive buying or selling.",
+    "They often create Fair Value Gaps.",
+    "Price may revisit imbalance areas.",
+    "Institutions use imbalances to identify trading opportunities."
+  ],
+  "practice_questions": [
+    "What is a market imbalance?",
+    "What commonly forms after an imbalance?"
+  ],
+  "answers": [
+    "Unequal buying and selling pressure.",
+    "A Fair Value Gap."
+  ]
+},
+
+"mitigation block": {
+  "definition": "A Mitigation Block is a price zone where institutions return to manage or reduce previous positions before continuing the trend.",
+  "notes": [
+    "Mitigation Blocks are common in Smart Money trading.",
+    "Price often reacts strongly at these zones.",
+    "They can provide high-probability trade entries.",
+    "Confirmation is recommended before entering."
+  ],
+  "practice_questions": [
+    "What is a Mitigation Block?",
+    "Why is it important?"
+  ],
+  "answers": [
+    "A zone where institutions manage previous positions.",
+    "It often provides strong trading opportunities."
+  ]
+},
+
+"breaker block": {
+  "definition": "A Breaker Block is a failed Order Block that later becomes a new support or resistance zone.",
+  "notes": [
+    "A bullish Breaker Block may become support.",
+    "A bearish Breaker Block may become resistance.",
+    "Breaker Blocks are used in Smart Money Concepts.",
+    "They often appear after a market structure shift."
+  ],
+  "practice_questions": [
+    "What is a Breaker Block?",
+    "What does a Breaker Block become after failing?"
+  ],
+  "answers": [
+    "A failed Order Block.",
+    "A new support or resistance level."
+  ]
+},
+"premium and discount": {
+  "definition": "Premium and Discount zones divide a price range into expensive and cheap areas using the 50% midpoint.",
+  "notes": [
+    "Premium is the area above the 50% level.",
+    "Discount is the area below the 50% level.",
+    "Professional traders prefer buying in discount zones.",
+    "Professional traders prefer selling in premium zones."
+  ],
+  "practice_questions": [
+    "What is a Premium zone?",
+    "What is a Discount zone?",
+    "Where do professional traders prefer buying?"
+  ],
+  "answers": [
+    "The area above the 50% midpoint.",
+    "The area below the 50% midpoint.",
+    "In the Discount zone."
+  ]
+},
+
+"supply and demand": {
+  "definition": "Supply and Demand are price zones where strong selling or buying previously entered the market.",
+  "notes": [
+    "Demand zones are areas where buyers dominate.",
+    "Supply zones are areas where sellers dominate.",
+    "Price often reacts when it revisits these zones.",
+    "Supply and Demand help identify high-probability entries."
+  ],
+  "practice_questions": [
+    "What is a Demand zone?",
+    "What is a Supply zone?"
+  ],
+  "answers": [
+    "An area where buyers are stronger than sellers.",
+    "An area where sellers are stronger than buyers."
+  ]
+},
+
+"accumulation": {
+  "definition": "Accumulation is the phase where institutions quietly buy assets before a major upward move.",
+  "notes": [
+    "Price usually moves sideways during accumulation.",
+    "Retail traders often think the market is weak.",
+    "Large investors build long positions during this phase.",
+    "Accumulation is often followed by an uptrend."
+  ],
+  "practice_questions": [
+    "What is accumulation?",
+    "What usually happens after accumulation?"
+  ],
+  "answers": [
+    "A phase where institutions quietly buy assets.",
+    "A bullish trend often begins."
+  ]
+},
+
+"distribution": {
+  "definition": "Distribution is the phase where institutions gradually sell assets before a major downward move.",
+  "notes": [
+    "Price often moves sideways during distribution.",
+    "Retail traders may continue buying.",
+    "Large investors reduce their positions.",
+    "Distribution is often followed by a downtrend."
+  ],
+  "practice_questions": [
+    "What is distribution?",
+    "What usually happens after distribution?"
+  ],
+  "answers": [
+    "A phase where institutions gradually sell assets.",
+    "A bearish trend often begins."
+  ]
+},
+"risk management": {
+  "definition": "Risk management is the process of protecting trading capital by controlling the amount of money risked on each trade.",
+  "notes": [
+    "Never risk more than 1% to 2% of your account on a single trade.",
+    "Always use a Stop Loss.",
+    "Avoid overtrading.",
+    "Good risk management is more important than having many winning trades."
+  ],
+  "practice_questions": [
+    "What is risk management?",
+    "Why is risk management important?"
+  ],
+  "answers": [
+    "Managing risk to protect trading capital.",
+    "It helps traders survive losses and remain profitable over time."
+  ]
+},
+
+"stop loss": {
+  "definition": "A Stop Loss is an order that automatically closes a trade when price reaches a predetermined loss level.",
+  "notes": [
+    "It limits losses on a trade.",
+    "Every trade should have a Stop Loss.",
+    "Stop Loss placement should be based on market structure.",
+    "Never move a Stop Loss further away to avoid taking a loss."
+  ],
+  "practice_questions": [
+    "What is a Stop Loss?",
+    "Why should every trade have a Stop Loss?"
+  ],
+  "answers": [
+    "An order that limits losses automatically.",
+    "To protect trading capital."
+  ]
+},
+
+"take profit": {
+  "definition": "A Take Profit is an order that automatically closes a trade when the target profit is reached.",
+  "notes": [
+    "It locks in profits automatically.",
+    "Take Profit should be placed at logical market levels.",
+    "Support and resistance are common Take Profit targets.",
+    "Planning exits is as important as planning entries."
+  ],
+  "practice_questions": [
+    "What is a Take Profit?",
+    "Why is a Take Profit useful?"
+  ],
+  "answers": [
+    "An order that closes a trade at a profit target.",
+    "It secures profits automatically."
+  ]
+},
+
+"risk reward ratio": {
+  "definition": "The Risk-to-Reward Ratio compares the amount risked on a trade to the expected profit.",
+  "notes": [
+    "A 1:2 ratio means risking 1 dollar to make 2 dollars.",
+    "Professional traders often aim for at least 1:2.",
+    "Higher Risk-to-Reward Ratios improve long-term profitability.",
+    "Even with a low win rate, a good Risk-to-Reward Ratio can be profitable."
+  ],
+  "practice_questions": [
+    "What is a Risk-to-Reward Ratio?",
+    "What does a 1:2 ratio mean?"
+  ],
+  "answers": [
+    "The comparison between risk and expected reward.",
+    "Risking 1 unit to make 2 units."
+  ]
+},
+"position sizing": {
+  "definition": "Position sizing is the process of determining how much of an asset to buy or sell based on account size and acceptable risk.",
+
+  "notes": [
+    "Proper position sizing protects trading capital.",
+    "Never risk more than 1% to 2% of your account on one trade.",
+    "Position size depends on account balance, stop loss distance and risk percentage.",
+    "Larger positions increase both profit potential and risk.",
+    "Smaller positions reduce risk and improve long-term survival.",
+    "Professional traders calculate position size before entering every trade."
+  ],
+
+  "lot_sizes": {
+    "standard_lot": "100,000 units of the base currency.",
+    "mini_lot": "10,000 units.",
+    "micro_lot": "1,000 units.",
+    "nano_lot": "100 units."
+  },
+
+  "pip_value": {
+    "standard_lot": "Approximately $10 per pip.",
+    "mini_lot": "Approximately $1 per pip.",
+    "micro_lot": "Approximately $0.10 per pip.",
+    "nano_lot": "Approximately $0.01 per pip."
+  },
+
+  "leverage": {
+    "definition": "Leverage allows traders to control large positions using a small amount of capital.",
+    "examples": [
+      "1:10 means $1 controls $10.",
+      "1:50 means $1 controls $50.",
+      "1:100 means $1 controls $100.",
+      "1:500 means $1 controls $500."
+    ],
+    "advantages": [
+      "Increases buying power.",
+      "Allows larger trades with less capital."
+    ],
+    "disadvantages": [
+      "Increases losses as well as profits.",
+      "Can quickly wipe out an account if misused."
+    ]
+  },
+
+  "margin": {
+    "definition": "Margin is the money required by a broker to open and maintain a leveraged trade.",
+    "types": [
+      "Used Margin",
+      "Free Margin",
+      "Margin Level"
+    ]
+  },
+
+  "balance": {
+    "definition": "Balance is the amount of money in the account excluding open trade profits or losses."
+  },
+
+  "equity": {
+    "definition": "Equity equals account balance plus or minus floating profit or loss."
+  },
+
+  "free_margin": {
+    "definition": "Free Margin is the amount available to open new trades."
+  },
+
+  "margin_level": {
+    "definition": "Margin Level = (Equity ÷ Used Margin) × 100.",
+    "notes": [
+      "Higher margin level means a healthier account.",
+      "Very low margin levels may cause a margin call."
+    ]
+  },
+
+  "drawdown": {
+    "definition": "Drawdown is the reduction in account value from its highest point.",
+    "notes": [
+      "Lower drawdown is safer.",
+      "Professional traders aim to keep drawdown below 10%.",
+      "Large drawdowns require much larger gains to recover."
+    ]
+  },
+
+  "account_types": {
+    "demo": "Uses virtual money for practice.",
+    "cent": "Balance is displayed in cents.",
+    "standard": "Normal live trading account.",
+    "ecn": "Provides direct market access with tighter spreads."
+  },
+
+  "worked_examples": [
+    {
+      "question": "A trader has $1,000 and risks 2% on one trade. How much can be lost?",
+      "solution": "2% of $1,000 = $20."
+    },
+    {
+      "question": "How much is one pip worth on a standard lot?",
+      "solution": "Approximately $10."
+    },
+    {
+      "question": "What is leverage 1:100?",
+      "solution": "$1 controls $100 worth of currency."
+    }
+  ],
+
+  "practice_questions": [
+    "What is position sizing?",
+    "Name the four lot sizes.",
+    "What is leverage?",
+    "What is margin?",
+    "What is free margin?",
+    "What is equity?",
+    "What is drawdown?",
+    "How much does one standard lot control?",
+    "What is a demo account?",
+    "Why is risk management important?"
+  ],
+
+  "answers": [
+    "Determining the correct trade size.",
+    "Standard, Mini, Micro and Nano.",
+    "Borrowed buying power.",
+    "Money required to open a trade.",
+    "Money available for new trades.",
+    "Balance plus floating profit or loss.",
+    "Reduction in account value.",
+    "100,000 units.",
+    "A practice account using virtual money.",
+    "It protects trading capital."
+  ]
+}"risk management": {
+    "definition": "Risk management is the process of protecting trading capital by controlling losses and managing position size.",
+
+    "notes": [
+        "Never risk more than 1% to 2% of your account on a single trade.",
+        "Always use a stop loss.",
+        "Always define your take profit before entering a trade.",
+        "Risk-to-reward ratio should be at least 1:2.",
+        "Avoid revenge trading after a loss.",
+        "Avoid overtrading.",
+        "Do not increase lot size after losing trades.",
+        "Protect profits by moving stop loss to break-even when appropriate.",
+        "Only trade high-probability setups.",
+        "Capital preservation is more important than making profits."
+    ],
+
+    "formulae": [
+        "Risk Amount = Account Balance × Risk Percentage",
+        "Risk-to-Reward Ratio = Reward ÷ Risk",
+        "Position Size = Risk Amount ÷ Stop Loss Distance"
+    ],
+
+    "worked_examples": [
+        {
+            "question": "An account has $1000 and the trader risks 2%. How much money can be lost?",
+            "solution": "$20."
+        },
+        {
+            "question": "A trade risks 20 pips and targets 40 pips. What is the risk-to-reward ratio?",
+            "solution": "1:2."
+        },
+        {
+            "question": "Why is a stop loss important?",
+            "solution": "It limits potential losses and protects trading capital."
+        },
+        {
+            "question": "Why should traders avoid overtrading?",
+            "solution": "Overtrading increases emotional decisions and unnecessary losses."
+        }
+    ],
+
+    "practice_questions": [
+        "Define risk management.",
+        "Why is stop loss important?",
+        "What is the recommended risk per trade?",
+        "What is a risk-to-reward ratio?",
+        "Why should traders avoid revenge trading?",
+        "Why should traders preserve capital?"
+    ],
+
+    "answers": [
+        "Risk management is protecting trading capital.",
+        "It limits losses.",
+        "1% to 2% of the account.",
+        "The ratio between expected reward and possible loss.",
+        "It leads to emotional decisions.",
+        "Without capital you cannot continue trading."
+    ]
+},,
+"candlestick patterns": {
+  "definition": "Candlestick patterns are formations created by one or more candles that help traders predict possible market continuation or reversal.",
+
+  "notes": [
+    "Candlestick patterns are used together with support and resistance.",
+    "A single candlestick should not be traded without confirmation.",
+    "Patterns are divided into bullish, bearish and continuation patterns.",
+    "Volume increases the reliability of candlestick patterns.",
+    "Higher timeframe patterns are generally stronger than lower timeframe patterns."
+  ],
+
+  "bullish_patterns": {
+    "Hammer": "Appears after a downtrend and signals a possible bullish reversal.",
+    "Bullish Engulfing": "A large bullish candle completely engulfs the previous bearish candle.",
+    "Morning Star": "Three-candle bullish reversal pattern.",
+    "Piercing Line": "Bullish candle closes above the midpoint of the previous bearish candle.",
+    "Three White Soldiers": "Three strong bullish candles indicating a strong uptrend.",
+    "Inverted Hammer": "Signals possible bullish reversal after a downtrend."
+  },
+
+  "bearish_patterns": {
+    "Shooting Star": "Appears after an uptrend and signals possible bearish reversal.",
+    "Bearish Engulfing": "A large bearish candle engulfs the previous bullish candle.",
+    "Evening Star": "Three-candle bearish reversal pattern.",
+    "Dark Cloud Cover": "Bearish candle closes below the midpoint of the previous bullish candle.",
+    "Three Black Crows": "Three strong bearish candles showing strong selling pressure.",
+    "Hanging Man": "Appears after an uptrend and warns of a possible reversal."
+  },
+
+  "continuation_patterns": {
+    "Doji": "Shows market indecision.",
+    "Spinning Top": "Buyers and sellers are balanced.",
+    "Rising Three Methods": "Bullish continuation pattern.",
+    "Falling Three Methods": "Bearish continuation pattern."
+  },
+
+  "confirmation_rules": [
+    "Always wait for the candle to close.",
+    "Use support and resistance for confirmation.",
+    "Confirm with trend direction.",
+    "Use indicators like RSI or Moving Averages for additional confirmation.",
+    "Avoid trading patterns during major news releases without caution."
+  ],
+
+  "worked_examples": [
+    {
+      "question": "What does a Bullish Engulfing pattern indicate?",
+      "solution": "A possible bullish reversal."
+    },
+    {
+      "question": "What does a Shooting Star indicate?",
+      "solution": "A possible bearish reversal."
+    },
+    {
+      "question": "What does a Doji show?",
+      "solution": "Market indecision."
+    },
+    {
+      "question": "What pattern consists of three strong bullish candles?",
+      "solution": "Three White Soldiers."
+    },
+    {
+      "question": "What pattern consists of three strong bearish candles?",
+      "solution": "Three Black Crows."
+    }
+  ],
+
+  "practice_questions": [
+    "What is a candlestick pattern?",
+    "Name three bullish candlestick patterns.",
+    "Name three bearish candlestick patterns.",
+    "What does a Doji indicate?",
+    "What is a Morning Star?",
+    "What is an Evening Star?",
+    "What does a Bullish Engulfing pattern mean?",
+    "What does a Bearish Engulfing pattern mean?",
+    "Why should traders wait for candle confirmation?",
+    "Why should candlestick patterns be combined with support and resistance?"
+  ],
+
+  "answers": [
+    "A pattern formed by one or more candles used to predict price movement.",
+    "Hammer, Bullish Engulfing, Morning Star.",
+    "Shooting Star, Bearish Engulfing, Evening Star.",
+    "Market indecision.",
+    "A bullish reversal pattern.",
+    "A bearish reversal pattern.",
+    "Possible upward reversal.",
+    "Possible downward reversal.",
+    "To reduce false signals.",
+    "Because confirmation improves trade accuracy."
+  ]
+},
+"technical indicators": {
+  "definition": "Technical indicators are mathematical calculations based on price, volume or market data used to analyze trends, momentum, volatility and possible entry or exit points.",
+
+  "notes": [
+    "Indicators should support price action, not replace it.",
+    "Never rely on a single indicator.",
+    "Combine indicators with support and resistance.",
+    "Different indicators work better in different market conditions.",
+    "Trend indicators work best in trending markets.",
+    "Oscillators work best in ranging markets."
+  ],
+
+  "trend_indicators": {
+    "Moving Average (MA)": "Shows the average price over a selected period.",
+    "Exponential Moving Average (EMA)": "Gives more weight to recent prices.",
+    "MACD": "Measures trend direction and momentum.",
+    "ADX": "Measures the strength of a trend.",
+    "Parabolic SAR": "Helps identify trend direction and possible reversals.",
+    "Ichimoku Cloud": "Provides trend, momentum and support/resistance in one indicator."
+  },
+
+  "momentum_indicators": {
+    "RSI": "Measures overbought and oversold conditions.",
+    "Stochastic Oscillator": "Compares closing price with recent price range.",
+    "CCI": "Measures deviation from average price.",
+    "Momentum Indicator": "Measures the speed of price movement."
+  },
+
+  "volatility_indicators": {
+    "Bollinger Bands": "Measures market volatility using upper and lower bands.",
+    "ATR": "Measures average market volatility.",
+    "Standard Deviation": "Shows how much price varies from the average."
+  },
+
+  "volume_indicators": {
+    "Volume": "Measures trading activity.",
+    "On Balance Volume (OBV)": "Uses volume to confirm trend direction.",
+    "Accumulation Distribution": "Measures buying and selling pressure.",
+    "Money Flow Index (MFI)": "Uses both price and volume."
+  },
+
+  "common_signals": [
+    "RSI above 70 suggests overbought conditions.",
+    "RSI below 30 suggests oversold conditions.",
+    "MACD bullish crossover suggests buying pressure.",
+    "MACD bearish crossover suggests selling pressure.",
+    "Price above the Moving Average indicates an uptrend.",
+    "Price below the Moving Average indicates a downtrend.",
+    "Bollinger Band squeeze often comes before a breakout.",
+    "ADX above 25 usually indicates a strong trend."
+  ],
+
+  "worked_examples": [
+    {
+      "question": "What does RSI above 70 indicate?",
+      "solution": "The market may be overbought."
+    },
+    {
+      "question": "What does RSI below 30 indicate?",
+      "solution": "The market may be oversold."
+    },
+    {
+      "question": "What does MACD measure?",
+      "solution": "Trend direction and momentum."
+    },
+    {
+      "question": "What does ATR measure?",
+      "solution": "Market volatility."
+    },
+    {
+      "question": "What does ADX measure?",
+      "solution": "Trend strength."
+    }
+  ],
+
+  "practice_questions": [
+    "What are technical indicators?",
+    "Name four trend indicators.",
+    "What does RSI measure?",
+    "What does MACD measure?",
+    "What does ATR measure?",
+    "What do Bollinger Bands measure?",
+    "When is the market considered overbought?",
+    "When is the market considered oversold?",
+    "What does ADX measure?",
+    "Why should indicators be combined with price action?"
+  ],
+
+  "answers": [
+    "Mathematical tools used to analyze markets.",
+    "Moving Average, EMA, MACD, ADX.",
+    "Overbought and oversold conditions.",
+    "Trend and momentum.",
+    "Volatility.",
+    "Volatility.",
+    "When RSI is above 70.",
+    "When RSI is below 30.",
+    "Trend strength.",
+    "To improve accuracy and reduce false signals."
+  ]
+},
+"chart patterns": {
+  "definition": "Chart patterns are recognizable formations created by price movement that help traders predict future market direction.",
+
+  "notes": [
+    "Chart patterns can signal trend continuation or reversal.",
+    "Volume confirmation increases the reliability of chart patterns.",
+    "Patterns work best on higher timeframes.",
+    "Always wait for a breakout confirmation before entering a trade.",
+    "False breakouts can occur, so use proper risk management.",
+    "Chart patterns should be combined with support, resistance and market structure."
+  ],
+
+  "reversal_patterns": {
+    "Head and Shoulders": "Signals a bearish reversal after an uptrend.",
+    "Inverse Head and Shoulders": "Signals a bullish reversal after a downtrend.",
+    "Double Top": "A bearish reversal pattern formed by two equal highs.",
+    "Double Bottom": "A bullish reversal pattern formed by two equal lows.",
+    "Triple Top": "Three equal highs indicating strong resistance.",
+    "Triple Bottom": "Three equal lows indicating strong support.",
+    "Rounding Top": "A slow bearish reversal pattern.",
+    "Rounding Bottom": "A slow bullish reversal pattern."
+  },
+
+  "continuation_patterns": {
+    "Bull Flag": "A brief pullback before the uptrend continues.",
+    "Bear Flag": "A brief rally before the downtrend continues.",
+    "Bull Pennant": "A small consolidation before continuation upward.",
+    "Bear Pennant": "A small consolidation before continuation downward.",
+    "Ascending Triangle": "Usually breaks upward.",
+    "Descending Triangle": "Usually breaks downward.",
+    "Symmetrical Triangle": "Can break in either direction.",
+    "Rectangle": "Price moves sideways until breakout."
+  },
+
+  "advanced_patterns": {
+    "Cup and Handle": "Strong bullish continuation pattern.",
+    "Diamond Top": "Bearish reversal pattern.",
+    "Diamond Bottom": "Bullish reversal pattern.",
+    "Rising Wedge": "Usually breaks downward.",
+    "Falling Wedge": "Usually breaks upward.",
+    "Broadening Formation": "Shows increasing volatility."
+  },
+
+  "breakout_confirmation": [
+    "Wait for candle close outside the pattern.",
+    "Look for increased volume.",
+    "Confirm using trend direction.",
+    "Avoid entering before confirmation.",
+    "Use stop loss outside the opposite side of the pattern."
+  ],
+
+  "worked_examples": [
+    {
+      "question": "What does a Head and Shoulders pattern indicate?",
+      "solution": "A possible bearish reversal."
+    },
+    {
+      "question": "What does a Double Bottom indicate?",
+      "solution": "A possible bullish reversal."
+    },
+    {
+      "question": "Which triangle usually breaks upward?",
+      "solution": "Ascending Triangle."
+    },
+    {
+      "question": "Which wedge usually breaks upward?",
+      "solution": "Falling Wedge."
+    },
+    {
+      "question": "What should confirm a breakout?",
+      "solution": "A candle close and preferably increased volume."
+    }
+  ],
+
+  "practice_questions": [
+    "What is a chart pattern?",
+    "Name four reversal patterns.",
+    "Name four continuation patterns.",
+    "What does a Head and Shoulders pattern indicate?",
+    "What does a Double Bottom indicate?",
+    "Which triangle is normally bullish?",
+    "Which triangle is normally bearish?",
+    "What is a Cup and Handle pattern?",
+    "Why should traders wait for breakout confirmation?",
+    "Why should chart patterns be combined with support and resistance?"
+  ],
+
+  "answers": [
+    "A price formation used to predict future market movement.",
+    "Head and Shoulders, Double Top, Triple Top, Rounding Top.",
+    "Bull Flag, Bear Flag, Ascending Triangle, Rectangle.",
+    "A bearish reversal.",
+    "A bullish reversal.",
+    "Ascending Triangle.",
+    "Descending Triangle.",
+    "A bullish continuation pattern.",
+    "To reduce false breakouts.",
+    "Because confirmation increases trading accuracy."
+  ]
+},
+"trading psychology and risk management": {
+    "definition": "Trading psychology is the ability to control emotions while making trading decisions. Risk management is the process of protecting trading capital from unnecessary losses.",
+
+    "notes": [
+        "Never risk money you cannot afford to lose.",
+        "Protecting capital is more important than making profit.",
+        "Every trade carries risk.",
+        "Losses are part of trading.",
+        "Do not revenge trade after losing.",
+        "Do not overtrade.",
+        "Trade only high probability setups.",
+        "Always use Stop Loss.",
+        "Always know your Risk to Reward ratio before entering.",
+        "Risk only a small percentage of your account on each trade.",
+        "Professional traders think in probabilities, not certainty.",
+        "Greed causes traders to hold winning trades too long.",
+        "Fear causes traders to close trades too early.",
+        "Patience is one of the greatest trading skills.",
+        "Discipline separates profitable traders from gamblers.",
+        "Follow your trading plan exactly.",
+        "Do not move Stop Loss because of emotions.",
+        "Accept losses calmly.",
+        "Confidence comes from following a tested strategy.",
+        "Consistency is more important than huge profits."
+    ],
+
+    "formulae": [
+        "Risk = Entry Price - Stop Loss",
+        "Reward = Take Profit - Entry Price",
+        "Risk Reward Ratio = Reward / Risk",
+        "Recommended Risk Per Trade = 1% - 2% of account balance"
+    ],
+
+    "worked_examples": [
+        {
+            "question": "A trader has $1000 and risks 1% per trade. How much is risked?",
+            "solution": "1% of $1000 = $10."
+        },
+        {
+            "question": "A trade risks 20 pips and targets 60 pips. What is the Risk Reward Ratio?",
+            "solution": "60 ÷ 20 = 3. Risk Reward = 1:3."
+        },
+        {
+            "question": "Why should traders avoid revenge trading?",
+            "solution": "It leads to emotional decisions and bigger losses."
+        },
+        {
+            "question": "Why is discipline important?",
+            "solution": "It ensures traders consistently follow their strategy."
+        }
+    ],
+
+    "practice_questions": [
+        "Define trading psychology.",
+        "What is risk management?",
+        "How much should beginners risk per trade?",
+        "Why is Stop Loss important?",
+        "Explain Risk Reward Ratio.",
+        "Why should traders avoid greed?",
+        "Why should traders avoid fear?",
+        "What is revenge trading?",
+        "Why is discipline important?",
+        "Why are losses unavoidable?"
+    ],
+
+    "answers": [
+        "Trading psychology is emotional control while trading.",
+        "Risk management protects trading capital.",
+        "1% to 2% per trade.",
+        "It limits losses.",
+        "It compares potential profit to possible loss.",
+        "Greed causes poor decisions.",
+        "Fear causes traders to exit early.",
+        "Revenge trading is trading emotionally after a loss.",
+        "Discipline ensures consistent execution.",
+        "Because no strategy wins 100% of the time."
+    ]
+},
+"risk management advanced": {
+    "definition": "Risk management is the process of protecting trading capital by controlling losses and maximizing long-term profitability.",
+
+    "notes": [
+        "Never risk more than 1%–2% of account balance on one trade.",
+        "Always calculate lot size before entering a trade.",
+        "High win rate without risk management still loses money.",
+        "Risk-to-Reward Ratio (RRR) compares possible loss to possible profit.",
+        "Professional traders think about risk first, profit second.",
+        "Protecting capital is more important than making quick money.",
+        "Never move a stop loss farther away because of hope.",
+        "Increase position size only after consistent profitability.",
+        "Do not revenge trade after losses.",
+        "Accept losses as part of trading."
+    ],
+
+    "formulae": [
+        "Risk = Entry Price - Stop Loss",
+        "Reward = Take Profit - Entry",
+        "Risk Reward Ratio = Reward ÷ Risk",
+        "Account Risk = Account Balance × Risk Percentage",
+        "Position Size = Account Risk ÷ Stop Loss Value"
+    ],
+
+    "worked_examples": [
+        {
+            "question": "You have $1000 and risk 2%. How much should you risk?",
+            "solution": "$20."
+        },
+        {
+            "question": "Risk is 25 pips and target is 75 pips. What is the RRR?",
+            "solution": "1:3."
+        },
+        {
+            "question": "Should a trader risk 20% on one trade?",
+            "solution": "No. That is extremely dangerous."
+        },
+        {
+            "question": "What comes first before entering a trade?",
+            "solution": "Calculate the risk and lot size."
+        }
+    ],
+
+    "practice_questions": [
+        "What is risk management?",
+        "What is a good risk percentage per trade?",
+        "Why is position sizing important?",
+        "Explain Risk-to-Reward Ratio.",
+        "Why should traders protect capital?"
+    ],
+
+    "answers": [
+        "Managing trading losses.",
+        "1% to 2%.",
+        "It controls losses.",
+        "Reward divided by Risk.",
+        "Without capital there is no trading."
+    ]
+},
+"advanced candlestick patterns": {
+    "definition": "Advanced candlestick patterns are combinations of one or more candles that help traders identify market reversals, continuations and indecision.",
+
+    "notes": [
+        "Always wait for candle close before making decisions.",
+        "Candlestick patterns work best with support and resistance.",
+        "Higher timeframe patterns are more reliable.",
+        "Volume confirmation increases pattern accuracy.",
+        "Never trade a candlestick pattern alone."
+    ],
+
+    "bullish_patterns": {
+        "Hammer": "Bullish reversal after a downtrend.",
+        "Inverted Hammer": "Possible bullish reversal.",
+        "Bullish Engulfing": "Large bullish candle engulfs previous bearish candle.",
+        "Piercing Line": "Bullish reversal.",
+        "Morning Star": "Three-candle bullish reversal.",
+        "Three White Soldiers": "Strong bullish continuation.",
+        "Bullish Harami": "Small bullish candle inside bearish candle.",
+        "Tweezer Bottom": "Bullish reversal at support.",
+        "Dragonfly Doji": "Possible bullish reversal.",
+        "Abandoned Baby Bullish": "Rare bullish reversal.",
+        "Three Inside Up": "Bullish reversal confirmation.",
+        "Three Outside Up": "Bullish continuation after engulfing.",
+        "Matching Low": "Support confirmation.",
+        "Kicking Bullish": "Strong buying pressure.",
+        "Concealing Baby Swallow": "Bullish reversal."
+    },
+
+    "bearish_patterns": {
+        "Shooting Star": "Bearish reversal after uptrend.",
+        "Hanging Man": "Possible bearish reversal.",
+        "Bearish Engulfing": "Large bearish candle engulfs bullish candle.",
+        "Dark Cloud Cover": "Bearish reversal.",
+        "Evening Star": "Three-candle bearish reversal.",
+        "Three Black Crows": "Strong bearish continuation.",
+        "Bearish Harami": "Small bearish candle inside bullish candle.",
+        "Tweezer Top": "Bearish reversal at resistance.",
+        "Gravestone Doji": "Possible bearish reversal.",
+        "Abandoned Baby Bearish": "Rare bearish reversal.",
+        "Three Inside Down": "Bearish reversal confirmation.",
+        "Three Outside Down": "Bearish continuation.",
+        "Matching High": "Resistance confirmation.",
+        "Kicking Bearish": "Strong selling pressure.",
+        "Advance Block": "Bullish trend weakening."
+    },
+
+    "neutral_patterns": {
+        "Doji": "Market indecision.",
+        "Long-legged Doji": "Extreme indecision.",
+        "Spinning Top": "Balance between buyers and sellers.",
+        "High Wave": "Very high uncertainty.",
+        "Rickshaw Man": "Strong indecision."
+    },
+
+    "confirmation_rules": [
+        "Wait for the next candle confirmation.",
+        "Check market trend.",
+        "Confirm with volume.",
+        "Confirm with RSI or MACD.",
+        "Trade only at important support or resistance."
+    ],
+
+    "worked_examples": [
+        {
+            "question": "What does a Hammer indicate?",
+            "solution": "Possible bullish reversal."
+        },
+        {
+            "question": "What does a Shooting Star indicate?",
+            "solution": "Possible bearish reversal."
+        },
+        {
+            "question": "What does a Doji indicate?",
+            "solution": "Market indecision."
+        },
+        {
+            "question": "What does Three White Soldiers indicate?",
+            "solution": "Strong bullish movement."
+        },
+        {
+            "question": "What does Three Black Crows indicate?",
+            "solution": "Strong bearish movement."
+        }
+    ],
+
+    "practice_questions": [
+        "What is a Hammer?",
+        "What is a Shooting Star?",
+        "What does a Doji mean?",
+        "Name five bullish candlestick patterns.",
+        "Name five bearish candlestick patterns.",
+        "What confirms a candlestick pattern?",
+        "Why should volume be considered?",
+        "Why should support and resistance be used?"
+    ],
+
+    "answers": [
+        "A bullish reversal pattern.",
+        "A bearish reversal pattern.",
+        "Market indecision.",
+        "Hammer, Morning Star, Bullish Engulfing, Piercing Line, Three White Soldiers.",
+        "Shooting Star, Evening Star, Bearish Engulfing, Dark Cloud Cover, Three Black Crows.",
+        "The next candle.",
+        "Volume increases reliability.",
+        "They improve trading accuracy."
+    ]
+},
+"market structure": {
+    "definition": "Market structure is the way price moves by creating highs and lows. It helps traders identify trends, reversals and possible trading opportunities.",
+
+    "notes": [
+        "An uptrend forms Higher Highs (HH) and Higher Lows (HL).",
+        "A downtrend forms Lower Highs (LH) and Lower Lows (LL).",
+        "A ranging market moves sideways between support and resistance.",
+        "Trend direction should always be identified before entering a trade.",
+        "Market structure is one of the most important concepts in technical analysis.",
+        "Professional traders trade with the trend whenever possible.",
+        "A break of market structure may indicate a trend reversal.",
+        "Higher timeframes provide stronger market structure than lower timeframes.",
+        "Always identify the current trend before using indicators."
+    ],
+
+    "structure_types": {
+        "Uptrend": "Series of Higher Highs and Higher Lows.",
+        "Downtrend": "Series of Lower Highs and Lower Lows.",
+        "Range": "Price moves sideways between support and resistance.",
+        "Break of Structure (BOS)": "Price breaks the previous swing high or swing low, confirming continuation.",
+        "Change of Character (CHoCH)": "The first sign that the trend may reverse."
+    },
+
+    "identification_rules": [
+        "HH + HL = Uptrend.",
+        "LH + LL = Downtrend.",
+        "Price failing to make a Higher High may signal weakness.",
+        "Price,
+"smart money concepts": {
+    "definition": "Smart Money Concepts (SMC) is a trading methodology that studies how banks, institutions and large financial firms move the market by creating liquidity and manipulating price before the real move begins.",
+
+    "notes": [
+        "Smart Money refers to banks, hedge funds and institutional traders.",
+        "Institutions require liquidity to fill large orders.",
+        "Price often moves toward liquidity before reversing.",
+        "Retail traders often become liquidity for institutions.",
+        "Always identify the overall market structure before applying SMC.",
+        "Higher timeframe analysis is more reliable than lower timeframes.",
+        "SMC should be combined with risk management and patience.",
+        "Confirmation is required before entering any trade."
+    ],
+
+    "concepts": {
+        "Order Block": "The last bullish or bearish candle before a strong institutional move.",
+        "Breaker Block": "A failed order block that later acts as support or resistance.",
+        "Mitigation Block": "An area institutions revisit to complete unfilled orders.",
+        "Fair Value Gap (FVG)": "A price imbalance created by aggressive buying or selling.",
+        "Liquidity": "Areas where many stop losses or pending orders exist.",
+        "Liquidity Grab": "A temporary move above highs or below lows to trigger stop losses.",
+        "Equal Highs": "Potential buy-side liquidity.",
+        "Equal Lows": "Potential sell-side liquidity.",
+        "Premium Zone": "Price trading above fair value where selling is preferred.",
+        "Discount Zone": "Price trading below fair value where buying is preferred.",
+        "Inducement": "A false move encouraging traders to enter before the real move.",
+        "Displacement": "A strong impulsive move showing institutional activity."
+    },
+
+    "trading_rules": [
+        "Trade with the higher timeframe trend.",
+        "Wait for Break of Structure (BOS).",
+        "Look for a Fair Value Gap after displacement.",
+        "Enter from an Order Block or Discount/Premium zone.",
+        "Place Stop Loss beyond the liquidity area.",
+        "Never chase price after displacement."
+    ],
+
+    "worked_examples": [
+        {
+            "question": "What is a Fair Value Gap?",
+            "solution": "A price imbalance created by aggressive buying or selling."
+        },
+        {
+            "question": "What is an Order Block?",
+            "solution": "The last candle before a strong institutional move."
+        },
+        {
+            "question": "Why do institutions seek liquidity?",
+            "solution": "To fill large buy or sell orders."
+        },
+        {
+            "question": "What are Equal Highs?",
+            "solution": "Areas of buy-side liquidity."
+        },
+        {
+            "question": "What is a Liquidity Grab?",
+            "solution": "A temporary move designed to trigger stop losses before reversing."
+        }
+    ],
+
+    "practice_questions": [
+        "Define Smart Money Concepts.",
+        "What is an Order Block?",
+        "What is a Fair Value Gap?",
+        "What is liquidity?",
+        "What is a liquidity grab?",
+        "What are Equal Highs?",
+        "What are Equal Lows?",
+        "What is Premium?",
+        "What is Discount?",
+        "Why do institutions need liquidity?"
+    ],
+
+    "answers": [
+        "A method,
+"supply and demand": {
+    "definition": "Supply and Demand trading identifies price zones where institutions placed large buy or sell orders, causing strong market movements.",
+
+    "notes": [
+        "Demand zones are areas where buyers strongly entered the market.",
+        "Supply zones are areas where sellers strongly entered the market.",
+        "Price often reacts when it returns to these zones.",
+        "Fresh zones are generally stronger than tested zones.",
+        "Higher timeframe zones are more reliable.",
+        "Combine supply and demand with market structure.",
+        "Do not trade every zone; wait for confirmation.",
+        "Volume and strong momentum help identify quality zones."
+    ],
+
+    "concepts": {
+        "Demand Zone": "An area where buying pressure exceeds selling pressure.",
+        "Supply Zone": "An area where selling pressure exceeds buying pressure.",
+        "Fresh Zone": "A zone that has never been revisited by price.",
+        "Tested Zone": "A zone that price has already revisited.",
+        "Flip Zone": "A former supply becomes demand or demand becomes supply.",
+        "Strong Departure": "A fast move away from a zone showing institutional activity.",
+        "Base": "The consolidation before a strong move."
+    },
+
+    "identification_rules": [
+        "Look for a strong impulsive move.",
+        "Identify the base before the move.",
+        "Mark the supply or demand zone.",
+        "Wait for price to return.",
+        "Look for bullish or bearish confirmation before entering.",
+        "Place Stop Loss beyond the zone."
+    ],
+
+    "worked_examples": [
+        {
+            "question": "What is a Demand Zone?",
+            "solution": "An area where buyers strongly entered the market."
+        },
+        {
+            "question": "What is a Supply Zone?",
+            "solution": "An area where sellers strongly entered the market."
+        },
+        {
+            "question": "Which zone is stronger: fresh or tested?",
+            "solution": "Fresh zones are usually stronger."
+        },
+        {
+            "question": "Why is a strong departure important?",
+            "solution": "It shows strong institutional buying or selling."
+        },
+        {
+            "question": "Where should Stop Loss be placed?",
+            "solution": "Beyond the supply or demand zone."
+        }
+    ],
+
+    "practice_questions": [
+        "Define Supply Zone.",
+        "Define Demand Zone.",
+        "What is a Fresh Zone?",
+        "What is a Tested Zone?",
+        "What is a Flip Zone?",
+        "Why is a strong departure important?",
+        "Where should Stop Loss be placed?",
+        "Why should traders wait for confirmation?"
+    ],
+
+    "answers": [
+        "An area where selling exceeds buying.",
+        "An area where buying exceeds selling.",
+        "A zone never revisited by price.",
+        "A zone already revisited.",
+        "A zone that changes from support to resistance or vice versa.",
+        "It confirms institutional activity.",
+        "Beyond the zone.",
+        "To avoid false entries."
+    ]
+},
+"ict concepts": {
+    "definition": "ICT (Inner Circle Trader) Concepts are institutional trading principles that explain how banks and market makers create liquidity, manipulate price, and execute large orders.",
+
+    "notes": [
+        "ICT focuses on institutional market behavior rather than retail indicators.",
+        "The market often seeks liquidity before making its true move.",
+        "Higher timeframe analysis should always come first.",
+        "Wait for confirmation before entering a trade.",
+        "Risk management is essential even when using ICT concepts.",
+        "Patience is more important than taking many trades.",
+        "ICT concepts work best when combined with market structure and Smart Money Concepts."
+    ],
+
+    "concepts": {
+        "Dealing Range": "The range between a significant swing high and swing low.",
+        "Optimal Trade Entry (OTE)": "An entry zone between the 62% and 79% Fibonacci retracement.",
+        "Judas Swing": "A false move at the beginning of a trading session designed to trap traders.",
+        "Power of Three (PO3)": "Accumulation, Manipulation and Distribution.",
+        "Kill Zones": "Specific trading sessions where institutional activity is highest.",
+        "Liquidity Sweep": "Price briefly moves beyond highs or lows to collect stop losses before reversing.",
+        "Market Maker,
+"ict professional methodology": {
+    "definition": "ICT (Inner Circle Trader) methodology is an institutional trading approach that studies how banks and market makers move price by seeking liquidity, creating imbalances and executing large orders.",
+
+    "notes": [
+        "Institutions move the market because they trade very large positions.",
+        "Price usually moves toward liquidity before making its real move.",
+        "Retail traders often lose because they trade against institutional flow.",
+        "Always analyse the higher timeframe first.",
+        "Follow market structure before looking for entries.",
+        "Wait for confirmation before entering any trade.",
+        "Never risk more than 1% to 2% per trade."
+    ],
+
+    "ict_concepts": {
+        "Dealing Range": "The distance between a significant swing high and swing low used to measure price movement.",
+        "Optimal Trade Entry (OTE)": "An institutional entry zone located between the 62% and 79% Fibonacci retracement.",
+        "Judas Swing": "A false move during the London or New York session designed to trap traders before the true move.",
+        "Power of Three (PO3)": "Three market phases: Accumulation, Manipulation and Distribution.",
+        "Kill Zones": {
+            "Asian": "Usually accumulation with lower volatility.",
+            "London": "High institutional activity and strong volatility.",
+            "New York": "Continuation or reversal with high volume.",
+            "London Close": "Possible profit-taking and reversals."
+        },
+        "Liquidity Sweep": "Price temporarily breaks previous highs or lows to trigger stop losses before reversing.",
+        "Buy-side Liquidity": "Stop losses above highs targeted by institutions.",
+        "Sell-side Liquidity": "Stop losses below lows targeted by institutions.",
+        "Order Block": "The final candle before a strong institutional move.",
+        "Breaker Block": "A failed Order Block that later becomes support or resistance.",
+        "Mitigation Block": "An area where institutions return to complete unfilled orders.",
+        "Fair Value Gap": "A price imbalance created by aggressive buying or selling.",
+        "Displacement": "A strong impulsive move showing institutional participation.",
+        "Premium": "Price trading above fair value where selling is preferred.",
+        "Discount": "Price trading below fair value where buying is preferred.",
+        "Market Maker Buy Model": "Accumulation → Liquidity Sweep → Expansion upward.",
+        "Market Maker Sell Model": "Distribution → Liquidity Sweep → Expansion downward."
+    },
+
+    "institutional_entry_rules": [
+        "Determine the higher timeframe trend.",
+        "Identify market structure.",
+        "Locate major liquidity pools.",
+        "Wait for liquidity sweep.",
+        "Confirm Break of Structure (BOS).",
+        "Look for Change of Character (CHoCH).",
+        "Identify Order Block or Fair Value Gap.",
+        "Enter from OTE, Order Block or Fair Value Gap.",
+        "Place Stop Loss beyond liquidity.",
+        "Target the next liquidity pool.",
+        "Never chase price after displacement.",
+        "Avoid entering before confirmation."
+    ],
+
+    "worked_examples": [
+        {
+            "question": "What is OTE?",
+            "solution": "An institutional entry zone between approximately the 62% and 79% Fibonacci retracement."
+        },
+        {
+            "question": "What is a Judas Swing?",
+            "solution": "A false move designed to trap traders before the true market direction."
+        },
+        {
+            "question": "What are the three stages of PO3?",
+            "solution": "Accumulation, Manipulation and Distribution."
+        },
+        {
+            "question": "Why does price perform a Liquidity Sweep?",
+            "solution": "To trigger stop losses and provide liquidity for institutional orders."
+        },
+        {
+            "question": "What is a Market Maker Buy Model?",
+            "solution": "Accumulation followed by a liquidity sweep before a strong bullish expansion."
+        }
+    ],
+
+    "practice_questions": [
+        "Define ICT methodology.",
+        "What is OTE?",
+        "What is a Judas Swing?",
+        "Explain PO3.",
+        "Name the four major Kill Zones.",
+        "What is a Liquidity Sweep?",
+        "What is Buy-side Liquidity?",
+        "What is Sell-side Liquidity?",
+        "What is an Order Block?",
+        "What is a Fair Value Gap?",
+        "What is Premium pricing?",
+        "What is Discount pricing?",
+        "Explain the Market Maker Buy Model.",
+        "Explain the Market Maker Sell Model.",
+        "List the institutional entry rules."
+    ],
+
+    "answers": [
+        "A trading methodology based on institutional market behaviour.",
+        "Optimal Trade Entry between approximately 62% and 79% Fibonacci retracement.",
+        "A false move before the true trend.",
+        "Accumulation, Manipulation and Distribution.",
+        "Asian, London, New York and London Close.",
+        "A move that collects liquidity before reversing.",
+        "Liquidity above previous highs.",
+        "Liquidity below previous lows.",
+        "The last candle before a strong institutional move.",
+        "A price imbalance left by aggressive buying or selling.",
+        "Price above fair value.",
+        "Price below fair value.",
+        "Accumulation → Liquidity Sweep → Bullish Expansion.",
+        "Distribution → Liquidity Sweep → Bearish Expansion.",
+        "Trend → Structure → Liquidity → BOS → CHoCH → Order Block/FVG → OTE Entry → Stop Loss → Liquidity Target."
+    ]
+},
+"dow theory": {
+    "definition": "Dow Theory explains how market trends form and continue using price action.",
+    "notes": [
+        "Markets move in trends.",
+        "There are primary, secondary and minor trends.",
+        "The trend remains until a clear reversal occurs.",
+        "Volume should confirm the trend.",
+        "Indices should confirm each other."
+    ],
+    "practice_questions": [
+        "What are the three trends?",
+        "When does a trend end?"
+    ],
+    "answers": [
+        "Primary, Secondary and Minor.",
+        "When a confirmed reversal occurs."
+    ]
+},
+"elliott wave theory": {
+    "definition": "Elliott Wave Theory states that markets move in repeating wave patterns driven by trader psychology.",
+    "notes": [
+        "Impulse waves move with the trend.",
+        "Corrective waves move against the trend.",
+        "A complete cycle has 5 impulse waves and 3 corrective waves.",
+        "Wave 3 is usually the strongest.",
+        "Wave counting improves with experience."
+    ],
+    "practice_questions": [
+        "How many waves form a full cycle?",
+        "Which wave is usually strongest?"
+    ],
+    "answers": [
+        "Eight waves.",
+        "Wave 3."
+    ]
+},
+"fibonacci trading": {
+    "definition": "Fibonacci retracement identifies possible support and resistance during pullbacks.",
+    "levels": {
+        "23.6%": "Weak retracement",
+        "38.2%": "Normal retracement",
+        "50%": "Psychological level",
+        "61.8%": "Golden Ratio",
+        "78.6%": "Deep retracement"
+    },
+    "practice_questions": [
+        "Which Fibonacci level is called the Golden Ratio?"
+    ],
+    "answers": [
+        "61.8%."
+    ]
+},
+"trading psychology": {
+    "definition": "Trading psychology is the ability to control emotions while trading.",
+    "notes": [
+        "Avoid fear.",
+        "Avoid greed.",
+        "Follow your trading plan.",
+        "Accept losses.",
+        "Stay disciplined.",
+        "Never revenge trade.",
+        "Be patient."
+    ],
+    "practice_questions": [
+        "Why is discipline important?"
+    ],
+    "answers": [
+        "It helps traders consistently follow their trading plan."
+    ]
+},
+"risk management": {
+    "definition": "Risk management protects trading capital by controlling losses.",
+    "rules": [
+        "Risk only 1% to 2% of your account per trade.",
+        "Always use a Stop Loss.",
+        "Use a Take Profit.",
+        "Maintain a positive Risk-to-Reward ratio.",
+        "Never over-leverage.",
+        "Diversify when appropriate."
+    ],
+    "practice_questions": [
+        "How much should be risked per trade?",
+        "Why is Stop Loss important?"
+    ],
+    "answers": [
+        "1% to 2% of account balance.",
+        "It limits potential losses."
+    ]
+},
+"volume analysis": {
+    "definition": "Volume measures the number of trades executed during a specific period and helps confirm the strength of price movement.",
+    "notes": [
+        "High volume confirms strong trends.",
+        "Low volume may indicate weak trends.",
+        "Increasing volume during breakouts increases reliability.",
+        "Falling volume during a trend may indicate exhaustion.",
+        "Volume should confirm price movement."
+    ],
+    "practice_questions": [
+        "Why is volume important?",
+        "What does high volume indicate?"
+    ],
+    "answers": [
+        "It confirms price movement.",
+        "Strong buying or selling activity."
+    ]
+},
+"support and resistance": {
+    "definition": "Support is a price level where buying pressure increases while resistance is where selling pressure increases.",
+    "notes": [
+        "Support acts as a price floor.",
+        "Resistance acts as a price ceiling.",
+        "Broken resistance often becomes support.",
+        "Broken support often becomes resistance.",
+        "Multiple touches strengthen a level."
+    ],
+    "practice_questions": [
+        "What is support?",
+        "What is resistance?"
+    ],
+    "answers": [
+        "A level where buyers enter.",
+        "A level where sellers enter."
+    ]
+},
+"trendlines": {
+    "definition": "Trendlines connect swing highs or swing lows to show the direction of the market.",
+    "notes": [
+        "Uptrend lines connect higher lows.",
+        "Downtrend lines connect lower highs.",
+        "A trendline break may indicate reversal.",
+        "Three or more touches strengthen a trendline.",
+        "Use trendlines with market structure."
+    ],
+    "practice_questions": [
+        "How is an uptrend line drawn?",
+        "What may a trendline break indicate?"
+    ],
+    "answers": [
+        "By connecting higher lows.",
+        "A possible trend reversal."
+    ]
+},
+"breakout trading": {
+    "definition": "Breakout trading involves entering when price moves beyond support or resistance with strong momentum.",
+    "notes": [
+        "Wait for candle confirmation.",
+        "High volume strengthens a breakout.",
+        "False breakouts are common.",
+        "Retests provide safer entries.",
+        "Always use Stop Loss."
+    ],
+    "practice_questions": [
+        "What confirms a breakout?",
+        "Why wait for a retest?"
+    ],
+    "answers": [
+        "Strong candle and volume.",
+        "To reduce false entries."
+    ]
+},
+"multi timeframe analysis": {
+    "definition": "Multi-Timeframe Analysis compares different chart timeframes to improve trading decisions.",
+    "notes": [
+        "Use the higher timeframe for trend direction.",
+        "Use the middle timeframe for setup.",
+        "Use the lower timeframe for entry.",
+        "Higher timeframe trends are stronger.",
+        "Trade in the direction of the higher timeframe."
+    ],
+    "practice_questions": [
+        "Why use multiple timeframes?",
+        "Which timeframe determines trend?"
+    ],
+    "answers": [
+        "To improve trade accuracy.",
+        "The higher timeframe."
+    ]
+},
+"volume analysis": {
+    "definition": "Volume measures the number of units traded during a given period and confirms the strength of price movements.",
+    "notes": [
+        "High volume confirms strong trends.",
+        "Low volume may indicate weak trends.",
+        "Breakouts with high volume are more reliable.",
+        "Declining volume can signal trend exhaustion.",
+        "Volume should confirm price direction."
+    ],
+    "practice_questions": [
+        "What is volume?",
+        "Why is volume important?"
+    ],
+    "answers": [
+        "The amount traded during a period.",
+        "It confirms price movement."
+    ]
+},
+
+"support and resistance": {
+    "definition": "Support is a price level where buying pressure increases, while resistance is where selling pressure increases.",
+    "notes": [
+        "Support acts as a floor.",
+        "Resistance acts as a ceiling.",
+        "Broken resistance may become support.",
+        "Broken support may become resistance.",
+        "Multiple touches strengthen a level."
+    ],
+    "practice_questions": [
+        "What is support?",
+        "What is resistance?"
+    ],
+    "answers": [
+        "A buying zone.",
+        "A selling zone."
+    ]
+},
+
+"trendlines": {
+    "definition": "Trendlines connect swing highs or lows to show market direction.",
+    "notes": [
+        "Uptrend lines connect higher lows.",
+        "Downtrend lines connect lower highs.",
+        "Trendline breaks may indicate reversals.",
+        "Three touches strengthen a trendline.",
+        "Use trendlines with market structure."
+    ],
+    "practice_questions": [
+        "How is an uptrend line drawn?",
+        "What can a trendline break indicate?"
+    ],
+    "answers": [
+        "By connecting higher lows.",
+        "A possible reversal."
+    ]
+},
+
+"breakout trading": {
+    "definition": "Breakout trading enters the market after price breaks support or resistance with strong momentum.",
+    "notes": [
+        "Wait for candle confirmation.",
+        "High volume strengthens a breakout.",
+        "False breakouts happen frequently.",
+        "Retests provide safer entries.",
+        "Always use Stop Loss."
+    ],
+    "practice_questions": [
+        "What confirms a breakout?",
+        "Why wait for a retest?"
+    ],
+    "answers": [
+        "Strong momentum and volume.",
+        "To avoid false breakouts."
+    ]
+},
+
+"multi timeframe analysis": {
+    "definition": "Multi-Timeframe Analysis uses several chart timeframes to improve trade decisions.",
+    "notes": [
+        "Higher timeframe determines trend.",
+        "Middle timeframe identifies setups.",
+        "Lower timeframe provides entries.",
+        "Trade with the higher timeframe trend.",
+        "Avoid trading against the major trend."
+    ],
+    "practice_questions": [
+        "Why use multiple timeframes?",
+        "Which timeframe determines trend?"
+    ],
+    "answers": [
+        "To improve accuracy.",
+        "The higher timeframe."
+    ]
+},
+"moving averages": {
+    "definition": "A Moving Average smooths price data to identify the direction of the trend.",
+    "notes": [
+        "Simple Moving Average (SMA) gives equal weight to all prices.",
+        "Exponential Moving Average (EMA) gives more weight to recent prices.",
+        "Price above the moving average usually indicates an uptrend.",
+        "Price below the moving average usually indicates a downtrend.",
+        "Common periods include 20, 50, 100 and 200."
+    ],
+    "practice_questions": [
+        "What is a Moving Average?",
+        "What is the difference between SMA and EMA?"
+    ],
+    "answers": [
+        "An indicator that smooths price data.",
+        "EMA reacts faster because it gives more weight to recent prices."
+    ]
+},
+
+"relative strength index": {
+    "definition": "The Relative Strength Index (RSI) measures the speed and strength of price movements.",
+    "notes": [
+        "RSI ranges from 0 to 100.",
+        "Above 70 usually indicates overbought conditions.",
+        "Below 30 usually indicates oversold conditions.",
+        "RSI divergence may signal reversals.",
+        "RSI should be used with trend analysis."
+    ],
+    "practice_questions": [
+        "What is the RSI range?",
+        "What does RSI above 70 mean?"
+    ],
+    "answers": [
+        "0 to 100.",
+        "The market may be overbought."
+    ]
+},
+
+"macd": {
+    "definition": "MACD is a momentum indicator that shows trend direction and momentum using moving averages.",
+    "notes": [
+        "MACD consists of the MACD line, Signal line and Histogram.",
+        "A bullish crossover occurs when the MACD line crosses above the Signal line.",
+        "A bearish crossover occurs when the MACD line crosses below the Signal line.",
+        "The histogram measures momentum strength.",
+        "MACD works best in trending markets."
+    ],
+    "practice_questions": [
+        "What are the three parts of MACD?",
+        "What is a bullish crossover?"
+    ],
+    "answers": [
+        "MACD Line, Signal Line and Histogram.",
+        "When the MACD line crosses above the Signal line."
+    ]
+},
+
+"bollinger bands": {
+    "definition": "Bollinger Bands measure market volatility using upper, middle and lower bands.",
+    "notes": [
+        "The middle band is usually a 20-period SMA.",
+        "The upper and lower bands expand during high volatility.",
+        "Bands contract during low volatility.",
+        "Price touching a band does not guarantee reversal.",
+        "Combine Bollinger Bands with other indicators."
+    ],
+    "practice_questions": [
+        "What do Bollinger Bands measure?",
+        "What happens when the bands contract?"
+    ],
+    "answers": [
+        "Market volatility.",
+        "Volatility is decreasing."
+    ]
+},
+
+"stochastic oscillator": {
+    "definition": "The Stochastic Oscillator compares the closing price to the recent trading range to identify momentum.",
+    "notes": [
+        "Values range from 0 to 100.",
+        "Above 80 is generally overbought.",
+        "Below 20 is generally oversold.",
+        "Crossovers generate trading signals.",
+        "Works well in ranging markets."
+    ],
+    "practice_questions": [
+        "What is the range of the Stochastic Oscillator?",
+        "What does a reading below 20 indicate?"
+    ],
+    "answers": [
+        "0 to 100.",
+        "The market may be oversold."
+    ]
+},
+"candlestick patterns": {
+    "definition": "Candlestick patterns help traders understand market sentiment and predict possible reversals or continuations.",
+    "notes": [
+        "Bullish Engulfing indicates possible upward reversal.",
+        "Bearish Engulfing indicates possible downward reversal.",
+        "Doji shows market indecision.",
+        "Hammer signals potential bullish reversal.",
+        "Shooting Star signals potential bearish reversal.",
+        "Morning Star is a bullish reversal pattern.",
+        "Evening Star is a bearish reversal pattern.",
+        "Confirmation from the next candle increases reliability."
+    ],
+    "practice_questions": [
+        "What is a Doji?",
+        "What does a Hammer indicate?"
+    ],
+    "answers": [
+        "Market indecision.",
+        "A possible bullish reversal."
+    ]
+},
+
+"chart patterns": {
+    "definition": "Chart patterns are formations created by price movement that help predict future direction.",
+    "notes": [
+        "Head and Shoulders signals bearish reversal.",
+        "Inverse Head and Shoulders signals bullish reversal.",
+        "Double Top is bearish.",
+        "Double Bottom is bullish.",
+        "Ascending Triangle is usually bullish.",
+        "Descending Triangle is usually bearish.",
+        "Symmetrical Triangle may break either direction.",
+        "Flags and Pennants are continuation patterns."
+    ],
+    "practice_questions": [
+        "What does a Double Bottom indicate?",
+        "What is a Flag pattern?"
+    ],
+    "answers": [
+        "Possible bullish reversal.",
+        "A continuation pattern."
+    ]
+},
+
+"market structure": {
+    "definition": "Market structure describes how price forms highs and lows to determine trend direction.",
+    "notes": [
+        "Higher Highs and Higher Lows indicate an uptrend.",
+        "Lower Highs and Lower Lows indicate a downtrend.",
+        "Equal Highs often contain buy-side liquidity.",
+        "Equal Lows often contain sell-side liquidity.",
+        "Break of Structure confirms trend continuation.",
+        "Change of Character may signal reversal."
+    ],
+    "practice_questions": [
+        "What confirms an uptrend?",
+        "What is Break of Structure?"
+    ],
+    "answers": [
+        "Higher Highs and Higher Lows.",
+        "A break beyond a significant swing point."
+    ]
+},
+
+"supply and demand": {
+    "definition": "Supply and Demand zones are areas where institutions place large buy or sell orders.",
+    "notes": [
+        "Demand zones are potential buying areas.",
+        "Supply zones are potential selling areas.",
+        "Fresh zones are stronger than tested zones.",
+        "Strong moves away from a zone indicate institutional activity.",
+        "Combine with market structure for better accuracy."
+    ],
+    "practice_questions": [
+        "What is a Demand zone?",
+        "What is a Supply zone?"
+    ],
+    "answers": [
+        "An area where buying pressure is strong.",
+        "An area where selling pressure is strong."
+    ]
+},
+
+"smart money concepts": {
+    "definition": "Smart Money Concepts study how institutions move price through liquidity, market structure and order flow.",
+    "notes": [
+        "Institutions seek liquidity before major moves.",
+        "Liquidity pools exist above highs and below lows.",
+        "Fair Value Gaps represent market imbalance.",
+        "Order Blocks mark institutional entries.",
+        "Break of Structure confirms continuation.",
+        "Change of Character signals possible reversal.",
+        "Always trade with higher timeframe direction."
+    ],
+    "practice_questions": [
+        "What is Smart Money?",
+        "What is a Fair Value Gap?"
+    ],
+    "answers": [
+        "Large institutional traders.",
+        "A price imbalance created by aggressive movement."
+    ]
+},
+"wyckoff method": {
+    "definition": "The Wyckoff Method explains how institutions accumulate and distribute positions before major market moves.",
+    "notes": [
+        "Accumulation occurs before an uptrend.",
+        "Distribution occurs before a downtrend.",
+        "Spring is a false breakout below support.",
+        "Upthrust is a false breakout above resistance.",
+        "Volume confirms institutional activity.",
+        "Wyckoff works well with Smart Money Concepts."
+    ],
+    "practice_questions": [
+        "What is accumulation?",
+        "What is a spring?"
+    ],
+    "answers": [
+        "Institutional buying before an uptrend.",
+        "A false breakout below support."
+    ]
+},
+
+"forex sessions": {
+    "definition": "The Forex market operates continuously through four major trading sessions.",
+    "notes": [
+        "Sydney opens the trading week.",
+        "Tokyo is also called the Asian Session.",
+        "London has the highest liquidity.",
+        "New York overlaps with London.",
+        "London-New York overlap has the highest volatility.",
+        "Different currency pairs perform better in different sessions."
+    ],
+    "practice_questions": [
+        "Which session has the highest liquidity?",
+        "Which overlap is most volatile?"
+    ],
+    "answers": [
+        "London Session.",
+        "London-New York overlap."
+    ]
+},
+
+"economic news trading": {
+    "definition": "Economic news releases can create large price movements in financial markets.",
+    "notes": [
+        "Non-Farm Payrolls (NFP) greatly affects USD.",
+        "Interest rate decisions move currencies.",
+        "CPI measures inflation.",
+        "GDP measures economic growth.",
+        "PMI measures business activity.",
+        "High-impact news increases volatility.",
+        "Avoid overleveraging during news releases."
+    ],
+    "practice_questions": [
+        "What does CPI measure?",
+        "What does GDP measure?"
+    ],
+    "answers": [
+        "Inflation.",
+        "Economic growth."
+    ]
+},
+
+"risk reward ratio": {
+    "definition": "Risk-to-Reward Ratio compares the amount risked to the expected profit.",
+    "notes": [
+        "1:2 means risking 1 unit to gain 2.",
+        "Professional traders usually seek at least 1:2.",
+        "Higher ratios improve long-term profitability.",
+        "Risk management is more important than win rate.",
+        "Always calculate the ratio before entering a trade."
+    ],
+    "practice_questions": [
+        "What does a 1:3 ratio mean?",
+        "Why is Risk-to-Reward important?"
+    ],
+    "answers": [
+        "Risk 1 unit to gain 3 units.",
+        "It improves long-term profitability."
+    ]
+},
+
+"trade management": {
+    "definition": "Trade management is the process of managing an open trade to maximize profit while minimizing risk.",
+    "notes": [
+        "Always use a Stop Loss.",
+        "Move Stop Loss to breakeven after sufficient profit.",
+        "Trail Stop Loss in strong trends.",
+        "Take partial profits at key levels.",
+        "Never move Stop Loss further away.",
+        "Follow your trading plan until exit."
+    ],
+    "practice_questions": [
+        "What is breakeven?",
+        "Why trail a Stop Loss?"
+    ],
+    "answers": [
+        "Moving Stop Loss to the entry price.",
+        "To protect profits while allowing the trade to continue."
+    ]
+},
+"liquidity concepts": {
+    "definition": "Liquidity is where many pending orders and stop losses are concentrated. Institutions seek liquidity to fill large orders.",
+    "notes": [
+        "Buy-side liquidity is above swing highs.",
+        "Sell-side liquidity is below swing lows.",
+        "Equal highs often contain buy-side liquidity.",
+        "Equal lows often contain sell-side liquidity.",
+        "Liquidity is usually swept before the real move.",
+        "Institutions require liquidity to execute large positions."
+    ],
+    "practice_questions": [
+        "Where is buy-side liquidity found?",
+        "Why do institutions seek liquidity?"
+    ],
+    "answers": [
+        "Above previous highs.",
+        "To fill large orders."
+    ]
+},
+
+"break of structure": {
+    "definition": "Break of Structure (BOS) occurs when price breaks a significant swing high or low, confirming trend continuation.",
+    "notes": [
+        "Bullish BOS confirms an uptrend.",
+        "Bearish BOS confirms a downtrend.",
+        "BOS usually follows a liquidity sweep.",
+        "Strong displacement strengthens BOS.",
+        "Use BOS with higher timeframe analysis."
+    ],
+    "practice_questions": [
+        "What does BOS confirm?",
+        "What usually comes before BOS?"
+    ],
+    "answers": [
+        "Trend continuation.",
+        "A liquidity sweep."
+    ]
+},
+
+"change of character": {
+    "definition": "Change of Character (CHoCH) is the first indication that market direction may be changing.",
+    "notes": [
+        "CHoCH often appears before BOS.",
+        "Bullish CHoCH may signal a new uptrend.",
+        "Bearish CHoCH may signal a new downtrend.",
+        "Use CHoCH with Order Blocks.",
+        "Confirmation improves reliability."
+    ],
+    "practice_questions": [
+        "What is CHoCH?",
+        "Does CHoCH guarantee a reversal?"
+    ],
+    "answers": [
+        "A possible trend reversal signal.",
+        "No, confirmation is required."
+    ]
+},
+
+"fair value gap": {
+    "definition": "A Fair Value Gap (FVG) is a price imbalance created by strong institutional buying or selling.",
+    "notes": [
+        "Price often returns to fill the gap.",
+        "Bullish FVG supports buying opportunities.",
+        "Bearish FVG supports selling opportunities.",
+        "FVG works well with market structure.",
+        "Displacement creates Fair Value Gaps."
+    ],
+    "practice_questions": [
+        "What creates a Fair Value Gap?",
+        "Why does price revisit FVGs?"
+    ],
+    "answers": [
+        "Strong displacement.",
+        "To rebalance market inefficiencies."
+    ]
+},
+
+"order blocks": {
+    "definition": "An Order Block is the last bullish or bearish candle before a strong institutional move.",
+    "notes": [
+        "Bullish Order Blocks support buying.",
+        "Bearish Order Blocks support selling.",
+        "Fresh Order Blocks are stronger.",
+        "Order Blocks work best after BOS or CHoCH.",
+        "Combine Order Blocks with liquidity and FVG."
+    ],
+    "practice_questions": [
+        "What is an Order Block?",
+        "When are Order Blocks most reliable?"
+    ],
+    "answers": [
+        "The final candle before a strong institutional move.",
+        "After market structure confirmation."
+    ]
+},
+"institutional order flow": {
+    "definition": "Institutional Order Flow studies how banks, hedge funds and large financial institutions execute orders that move the market.",
+    "notes": [
+        "Institutions cannot enter all positions at one price.",
+        "Large orders are executed in stages.",
+        "Order flow determines market direction.",
+        "Retail traders should trade with institutional flow.",
+        "Liquidity is required before institutions enter."
+    ],
+    "practice_questions": [
+        "Why do institutions use order flow?",
+        "Why is liquidity important?"
+    ],
+    "answers": [
+        "To execute large positions efficiently.",
+        "It allows large orders to be filled."
+    ]
+},
+
+"market profile": {
+    "definition": "Market Profile organizes price according to time and trading activity to identify fair value.",
+    "notes": [
+        "Value Area contains about 70% of trading activity.",
+        "Point of Control (POC) is the most traded price.",
+        "Price often returns to the Value Area.",
+        "Acceptance indicates balance.",
+        "Rejection indicates imbalance."
+    ],
+    "practice_questions": [
+        "What is the Point of Control?",
+        "What is the Value Area?"
+    ],
+    "answers": [
+        "The price with the highest trading activity.",
+        "The area containing about 70% of trading."
+    ]
+},
+
+"volatility": {
+    "definition": "Volatility measures how quickly and how far price moves within a period.",
+    "notes": [
+        "High volatility produces larger price swings.",
+        "Low volatility produces smaller price swings.",
+        "News events increase volatility.",
+        "ATR measures volatility.",
+        "Adjust position size according to volatility."
+    ],
+    "practice_questions": [
+        "What is volatility?",
+        "Which indicator measures volatility?"
+    ],
+    "answers": [
+        "The rate of price movement.",
+        "Average True Range (ATR)."
+    ]
+},
+
+"average true range": {
+    "definition": "Average True Range (ATR) measures market volatility without indicating trend direction.",
+    "notes": [
+        "ATR increases during volatile markets.",
+        "ATR decreases during quiet markets.",
+        "ATR helps determine Stop Loss distance.",
+        "ATR does not predict direction.",
+        "Combine ATR with trend analysis."
+    ],
+    "practice_questions": [
+        "What does ATR measure?",
+        "Does ATR predict market direction?"
+    ],
+    "answers": [
+        "Market volatility.",
+        "No."
+    ]
+},
+
+"currency correlation": {
+    "definition": "Currency correlation measures how two currency pairs move relative to each other.",
+    "notes": [
+        "Positive correlation means pairs move together.",
+        "Negative correlation means pairs move opposite each other.",
+        "EURUSD and GBPUSD often show positive correlation.",
+        "EURUSD and USDCHF often show negative correlation.",
+        "Correlation helps reduce unnecessary risk."
+    ],
+    "practice_questions": [
+        "What is positive correlation?",
+        "Why is correlation important?"
+    ],
+    "answers": [
+        "Two pairs move in the same direction.",
+        "It helps manage portfolio risk."
+    ]
+},
+"intermarket analysis": {
+    "definition": "Intermarket Analysis studies the relationship between different financial markets to improve trading decisions.",
+    "notes": [
+        "The US Dollar influences most Forex pairs.",
+        "Gold often moves opposite to the US Dollar.",
+        "Oil prices strongly affect the Canadian Dollar.",
+        "Stock indices reflect market sentiment.",
+        "Bond yields influence currency strength.",
+        "Always consider related markets before trading."
+    ],
+    "practice_questions": [
+        "Which currency is affected by oil prices?",
+        "How does Gold usually move relative to the US Dollar?"
+    ],
+    "answers": [
+        "The Canadian Dollar.",
+        "Gold often moves opposite to the US Dollar."
+    ]
+},
+
+"central bank policy": {
+    "definition": "Central banks control monetary policy through interest rates and other financial tools.",
+    "notes": [
+        "Higher interest rates usually strengthen a currency.",
+        "Lower interest rates usually weaken a currency.",
+        "Federal Reserve decisions affect the US Dollar.",
+        "ECB decisions affect the Euro.",
+        "Central bank speeches can create market volatility."
+    ],
+    "practice_questions": [
+        "What happens when interest rates increase?",
+        "Which bank controls the Euro?"
+    ],
+    "answers": [
+        "The currency usually strengthens.",
+        "The European Central Bank (ECB)."
+    ]
+},
+
+"position sizing": {
+    "definition": "Position sizing determines how much capital is allocated to a trade while controlling risk.",
+    "notes": [
+        "Risk a fixed percentage per trade.",
+        "Smaller Stop Loss allows larger position size.",
+        "Larger Stop Loss requires smaller position size.",
+        "Never overexpose your account.",
+        "Proper position sizing protects trading capital."
+    ],
+    "practice_questions": [
+        "Why is position sizing important?",
+        "What happens when Stop Loss increases?"
+    ],
+    "answers": [
+        "It controls trading risk.",
+        "Position size should decrease."
+    ]
+},
+
+"trading journal": {
+    "definition": "A trading journal records every trade for performance analysis and continuous improvement.",
+    "notes": [
+        "Record entry and exit prices.",
+        "Record Stop Loss and Take Profit.",
+        "Include screenshots of trades.",
+        "Write the reason for entering each trade.",
+        "Review mistakes regularly.",
+        "Track win rate and Risk-to-Reward."
+    ],
+    "practice_questions": [
+        "Why keep a trading journal?",
+        "What should every journal include?"
+    ],
+    "answers": [
+        "To improve trading performance.",
+        "Entry, exit, risk, result and trade reason."
+    ]
+},
+
+"professional trading plan": {
+    "definition": "A trading plan is a written set of rules that guides every trading decision.",
+    "notes": [
+        "Define market sessions to trade.",
+        "Specify entry conditions.",
+        "Specify exit conditions.",
+        "Define maximum daily risk.",
+        "Set weekly and monthly goals.",
+        "Never break your trading rules.",
+        "Review and improve the plan regularly."
+    ],
+    "practice_questions": [
+        "Why is a trading plan important?",
+        "What should a trading plan include?"
+    ],
+    "answers": [
+        "It removes emotional decisions.",
+        "Entry rules, exit rules, risk rules and trading goals."
+    ]
+},
+"trading sessions": {
+    "definition": "The Forex market operates through Sydney, Tokyo, London and New York sessions.",
+    "notes": [
+        "London has the highest liquidity.",
+        "London-New York overlap has the most volatility.",
+        "Asian session is usually slower.",
+        "Each session favors different currency pairs.",
+        "Trade when liquidity is high."
+    ],
+    "practice_questions": ["Which session is most volatile?"],
+    "answers": ["London-New York overlap."]
+},
+
+"currency strength": {
+    "definition": "Currency strength measures how strong one currency is compared to others.",
+    "notes": [
+        "Strong currencies outperform weak ones.",
+        "Trade strong against weak currencies.",
+        "Interest rates affect strength.",
+        "Economic news changes strength.",
+        "Currency meters estimate strength."
+    ],
+    "practice_questions": ["What creates currency strength?"],
+    "answers": ["Economic performance and monetary policy."]
+},
+
+"pivot points": {
+    "definition": "Pivot Points calculate potential support and resistance levels.",
+    "notes": [
+        "Used by professional traders.",
+        "Daily pivots are most common.",
+        "Price above pivot is bullish.",
+        "Price below pivot is bearish.",
+        "Works well with price action."
+    ],
+    "practice_questions": ["What is a Pivot Point?"],
+    "answers": ["A calculated support and resistance level."]
+},
+
+"false breakout": {
+    "definition": "A false breakout occurs when price breaks a level then quickly reverses.",
+    "notes": [
+        "Often used to collect liquidity.",
+        "Common near major support and resistance.",
+        "Wait for confirmation.",
+        "Volume helps identify fake breakouts.",
+        "Institutional traders create many fakeouts."
+    ],
+    "practice_questions": ["What is a false breakout?"],
+    "answers": ["A breakout that quickly fails."]
+},
+
+"stop loss": {
+    "definition": "A Stop Loss automatically closes a losing trade at a predefined level.",
+    "notes": [
+        "Limits losses.",
+        "Protects trading capital.",
+        "Should be placed logically.",
+        "Never remove Stop Loss.",
+        "Adjust according to volatility."
+    ],
+    "practice_questions": ["Why use Stop Loss?"],
+    "answers": ["To limit losses."]
+},
+
+"take profit": {
+    "definition": "Take Profit automatically closes a trade when the target is reached.",
+    "notes": [
+        "Locks in profits.",
+        "Should follow Risk-to-Reward rules.",
+        "Can be partial or full.",
+        "Use technical levels.",
+        "Avoid emotional exits."
+    ],
+    "practice_questions": ["Why use Take Profit?"],
+    "answers": ["To secure profits."]
+},
+
+"scalping": {
+    "definition": "Scalping is a short-term trading strategy aiming for small profits from many trades.",
+    "notes": [
+        "Requires fast execution.",
+        "Best during high liquidity.",
+        "Uses small Stop Losses.",
+        "Needs strict discipline.",
+        "Transaction costs matter."
+    ],
+    "practice_questions": ["What is scalping?"],
+    "answers": ["A strategy that captures small price movements."]
+},
+
+"day trading": {
+    "definition": "Day trading involves opening and closing trades within the same trading day.",
+    "notes": [
+        "No overnight positions.",
+        "Focuses on intraday volatility.",
+        "Requires discipline.",
+        "Uses technical analysis.",
+        "Avoid emotional decisions."
+    ],
+    "practice_questions": ["What is day trading?"],
+    "answers": ["Opening and closing trades within one day."]
+},
+
+"swing trading": {
+    "definition": "Swing trading holds positions for several days or weeks to capture larger price movements.",
+    "notes": [
+        "Uses higher timeframes.",
+        "Requires patience.",
+        "Combines technical and fundamental analysis.",
+        "Larger profit targets.",
+        "Smaller number of trades."
+    ],
+    "practice_questions": ["What is swing trading?"],
+    "answers": ["Holding trades for several days or weeks."]
+},
+
+"position trading": {
+    "definition": "Position trading is a long-term strategy based on major market trends.",
+    "notes": [
+        "Trades last weeks to months.",
+        "Relies on macroeconomic analysis.",
+        "Ignores small market fluctuations.",
+        "Requires patience.",
+        "Suitable for long-term investors."
+    ],
+    "practice_questions": ["What is position trading?"],
+    "answers": ["A long-term trend-following strategy."]
+},
+"trend continuation": {
+    "definition": "Trend continuation occurs when price resumes moving in the direction of the existing trend.",
+    "notes": [
+        "Continuation follows temporary pullbacks.",
+        "Higher highs confirm bullish continuation.",
+        "Lower lows confirm bearish continuation.",
+        "Volume should support continuation.",
+        "Trade with the trend."
+    ],
+    "practice_questions": ["What confirms trend continuation?"],
+    "answers": ["A Break of Structure in the trend direction."]
+},
+
+"trend reversal": {
+    "definition": "A trend reversal is a change from an uptrend to a downtrend or vice versa.",
+    "notes": [
+        "Often begins with CHoCH.",
+        "Supported by BOS.",
+        "Volume confirms reversals.",
+        "Watch key support and resistance.",
+        "Avoid entering too early."
+    ],
+    "practice_questions": ["What is a trend reversal?"],
+    "answers": ["A change in market direction."]
+},
+
+"market sentiment": {
+    "definition": "Market sentiment reflects the overall attitude of traders toward a financial market.",
+    "notes": [
+        "Bullish sentiment favors buying.",
+        "Bearish sentiment favors selling.",
+        "News influences sentiment.",
+        "Fear causes selling.",
+        "Greed causes buying."
+    ],
+    "practice_questions": ["What is bullish sentiment?"],
+    "answers": ["Positive expectations for price."]
+},
+
+"price action": {
+    "definition": "Price action is the study of raw price movement without relying heavily on indicators.",
+    "notes": [
+        "Uses candlesticks.",
+        "Uses market structure.",
+        "Uses support and resistance.",
+        "Identifies trends.",
+        "Identifies reversals."
+    ],
+    "practice_questions": ["What is price action?"],
+    "answers": ["Analysis using raw price movement."]
+},
+
+"momentum trading": {
+    "definition": "Momentum trading follows strong price movements expecting them to continue.",
+    "notes": [
+        "High momentum creates strong moves.",
+        "Volume confirms momentum.",
+        "Trade with the trend.",
+        "Avoid weak momentum.",
+        "Exit when momentum fades."
+    ],
+    "practice_questions": ["What confirms momentum?"],
+    "answers": ["Strong candles and volume."]
+},
+
+"retracement": {
+    "definition": "A retracement is a temporary move against the main trend.",
+    "notes": [
+        "Retracements are normal.",
+        "Often end at Fibonacci levels.",
+        "Not every retracement becomes a reversal.",
+        "Wait for confirmation.",
+        "Trade with the main trend."
+    ],
+    "practice_questions": ["What is a retracement?"],
+    "answers": ["A temporary move against the trend."]
+},
+
+"market imbalance": {
+    "definition": "Market imbalance occurs when aggressive buying or selling creates inefficient price movement.",
+    "notes": [
+        "Creates Fair Value Gaps.",
+        "Institutions often cause imbalance.",
+        "Price frequently returns to rebalance.",
+        "Useful for entries.",
+        "Combine with Order Blocks."
+    ],
+    "practice_questions": ["What creates market imbalance?"],
+    "answers": ["Aggressive institutional buying or selling."]
+},
+
+"liquidity grab": {
+    "definition": "A liquidity grab is a deliberate move into stop-loss areas before the true market direction begins.",
+    "notes": [
+        "Targets equal highs.",
+        "Targets equal lows.",
+        "Usually precedes reversals.",
+        "Common in Smart Money Concepts.",
+        "Requires confirmation."
+    ],
+    "practice_questions": ["What is a liquidity grab?"],
+    "answers": ["A move designed to trigger stop losses."]
+},
+
+"institutional candles": {
+    "definition": "Institutional candles are large displacement candles showing strong buying or selling pressure.",
+    "notes": [
+        "Usually create Fair Value Gaps.",
+        "Often break market structure.",
+        "Show institutional participation.",
+        "Lead to strong trends.",
+        "Useful for finding entries."
+    ],
+    "practice_questions": ["What do institutional candles indicate?"],
+    "answers": ["Strong institutional activity."]
+},
+
+"confluence": {
+    "definition": "Confluence is the combination of multiple trading factors supporting the same trade idea.",
+    "notes": [
+        "Market structure.",
+        "Liquidity.",
+        "Order Blocks.",
+        "Fair Value Gaps.",
+        "Support and Resistance.",
+        "Higher timeframe trend.",
+        "More confluence increases probability."
+    ],
+    "practice_questions": ["What is confluence?"],
+    "answers": ["Multiple confirmations supporting one trade."]
+},
+"market efficiency": {
+    "definition": "Market efficiency describes how quickly prices reflect all available information.",
+    "notes": [
+        "Efficient markets react quickly to news.",
+        "Price discounts known information.",
+        "Unexpected news creates volatility.",
+        "Institutions react faster than retail traders.",
+        "No market is perfectly efficient."
+    ],
+    "practice_questions": ["What is market efficiency?"],
+    "answers": ["The speed at which prices reflect information."]
+},
+
+"market manipulation": {
+    "definition": "Market manipulation is the deliberate movement of price to create liquidity before the intended move.",
+    "notes": [
+        "Often appears as false breakouts.",
+        "Stop hunts are common.",
+        "Liquidity grabs precede trends.",
+        "Institutions seek liquidity.",
+        "Trade after confirmation."
+    ],
+    "practice_questions": ["Why does market manipulation occur?"],
+    "answers": ["To obtain liquidity for large institutional orders."]
+},
+
+"premium and discount": {
+    "definition": "Premium and Discount divide a price range into expensive and cheap areas.",
+    "notes": [
+        "Premium is above equilibrium.",
+        "Discount is below equilibrium.",
+        "Institutions prefer buying in discount.",
+        "Institutions prefer selling in premium.",
+        "Use Fibonacci 50% as equilibrium."
+    ],
+    "practice_questions": ["Where do institutions prefer buying?"],
+    "answers": ["In the discount zone."]
+},
+
+"equilibrium": {
+    "definition": "Equilibrium is the midpoint of a trading range where price is considered fairly valued.",
+    "notes": [
+        "Usually the 50% level.",
+        "Separates premium from discount.",
+        "Useful in ICT trading.",
+        "Acts as a reference point.",
+        "Combine with liquidity."
+    ],
+    "practice_questions": ["What is equilibrium?"],
+    "answers": ["The midpoint of a price range."]
+},
+
+"displacement": {
+    "definition": "Displacement is a strong directional move showing institutional participation.",
+    "notes": [
+        "Creates Fair Value Gaps.",
+        "Breaks market structure.",
+        "Shows aggressive buying or selling.",
+        "Usually follows liquidity grabs.",
+        "Indicates strong momentum."
+    ],
+    "practice_questions": ["What creates Fair Value Gaps?"],
+    "answers": ["Strong displacement."]
+},
+
+"mitigation blocks": {
+    "definition": "A Mitigation Block is an area institutions revisit to complete or reduce positions.",
+    "notes": [
+        "Often follows Order Blocks.",
+        "Acts as support or resistance.",
+        "Institutions rebalance positions.",
+        "Works with market structure.",
+        "Provides entry opportunities."
+    ],
+    "practice_questions": ["What is a Mitigation Block?"],
+    "answers": ["An area where institutions rebalance orders."]
+},
+
+"breaker blocks": {
+    "definition": "A Breaker Block is a failed Order Block that changes its role after market structure shifts.",
+    "notes": [
+        "Bullish breakers become support.",
+        "Bearish breakers become resistance.",
+        "Appear after CHoCH.",
+        "Used in ICT trading.",
+        "Require confirmation."
+    ],
+    "practice_questions": ["When does a Breaker Block form?"],
+    "answers": ["After a failed Order Block and structure change."]
+},
+
+"optimal trade entry": {
+    "definition": "Optimal Trade Entry (OTE) uses Fibonacci retracement to find high-probability institutional entries.",
+    "notes": [
+        "Common zone is 62% to 79%.",
+        "Works with ICT concepts.",
+        "Requires trend confirmation.",
+        "Combine with liquidity.",
+        "Best after displacement."
+    ],
+    "practice_questions": ["What Fibonacci zone defines OTE?"],
+    "answers": ["Approximately 62% to 79% retracement."]
+},
+
+"judas swing": {
+    "definition": "A Judas Swing is an initial false move that traps traders before the true daily trend begins.",
+    "notes": [
+        "Often occurs before New York session.",
+        "Sweeps liquidity.",
+        "Creates false confidence.",
+        "Followed by displacement.",
+        "Common in ICT methodology."
+    ],
+    "practice_questions": ["What is the purpose of a Judas Swing?"],
+    "answers": ["To sweep liquidity before the real move."]
+},
+
+"power of three": {
+    "definition": "Power of Three (PO3) explains market movement through Accumulation, Manipulation and Distribution.",
+    "notes": [
+        "Accumulation builds positions.",
+        "Manipulation sweeps liquidity.",
+        "Distribution begins the true move.",
+        "Used in ICT methodology.",
+        "Improves market timing."
+    ],
+    "practice_questions": ["What are the three stages of PO3?"],
+    "answers": ["Accumulation, Manipulation and Distribution."]
+},
+"kill zones": {
+    "definition": "Kill Zones are periods of the trading day when institutional activity and market volatility are highest.",
+    "notes": [
+        "Asian Kill Zone prepares liquidity.",
+        "London Kill Zone often starts the main daily move.",
+        "New York Kill Zone creates major opportunities.",
+        "London-New York overlap has the highest liquidity.",
+        "ICT traders focus on Kill Zones for entries.",
+        "Avoid low-liquidity periods.",
+        "Most liquidity sweeps occur during Kill Zones."
+    ],
+    "practice_questions": [
+        "What is a Kill Zone?",
+        "Which Kill Zone has the highest liquidity?"
+    ],
+    "answers": [
+        "A period of high institutional trading activity.",
+        "The London-New York overlap."
+    ]
+},
+
+"market maker model": {
+    "definition": "The Market Maker Model describes how institutions manipulate price before moving it toward their intended target.",
+    "notes": [
+        "Market makers seek liquidity.",
+        "False breakouts trap retail traders.",
+        "Accumulation comes before expansion.",
+        "Distribution comes before decline.",
+        "Institutional traders buy where retail sells.",
+        "Institutional traders sell where retail buys."
+    ],
+    "practice_questions": [
+        "Why do market makers seek liquidity?",
+        "What usually comes before expansion?"
+    ],
+    "answers": [
+        "To fill large institutional orders.",
+        "Accumulation."
+    ]
+},
+
+"buy model": {
+    "definition": "The ICT Buy Model identifies institutional buying opportunities after liquidity has been taken.",
+    "notes": [
+        "Price sweeps sell-side liquidity.",
+        "Market forms a Change of Character.",
+        "A Bullish Order Block forms.",
+        "Price returns into a Fair Value Gap.",
+        "Optimal Trade Entry increases probability.",
+        "Target buy-side liquidity."
+    ],
+    "practice_questions": [
+        "What liquidity is swept first?",
+        "What is usually the target?"
+    ],
+    "answers": [
+        "Sell-side liquidity.",
+        "Buy-side liquidity."
+    ]
+},
+
+"sell model": {
+    "definition": "The ICT Sell Model identifies institutional selling opportunities after liquidity has been taken.",
+    "notes": [
+        "Price sweeps buy-side liquidity.",
+        "Market forms a bearish CHoCH.",
+        "A Bearish Order Block appears.",
+        "Price retraces into a Fair Value Gap.",
+        "Optimal Trade Entry improves entries.",
+        "Target sell-side liquidity."
+    ],
+    "practice_questions": [
+        "What liquidity is swept first?",
+        "What is the final target?"
+    ],
+    "answers": [
+        "Buy-side liquidity.",
+        "Sell-side liquidity."
+    ]
+},
+
+"institutional entry checklist": {
+    "definition": "An institutional entry checklist ensures every trade meets professional standards before execution.",
+    "notes": [
+        "Identify higher timeframe trend.",
+        "Locate liquidity pools.",
+        "Wait for liquidity sweep.",
+        "Confirm CHoCH or BOS.",
+        "Identify Order Block.",
+        "Confirm Fair Value Gap.",
+        "Enter within OTE zone.",
+        "Calculate Risk-to-Reward.",
+        "Place Stop Loss logically.",
+        "Manage the trade according to plan."
+    ],
+    "practice_questions": [
+        "What is the first step before entering a trade?",
+        "Why use an entry checklist?"
+    ],
+    "answers": [
+        "Identify the higher timeframe trend.",
+        "To increase consistency and reduce emotional decisions."
+    ]
+},
+"session highs and lows": {
+    "definition": "Session highs and lows are important liquidity levels created during trading sessions.",
+    "notes": ["Asian highs/lows attract liquidity.","London often sweeps Asian highs/lows.","New York may sweep London highs/lows.","Institutions target these levels.","Use with ICT models."],
+    "practice_questions":["Why are session highs important?"],
+    "answers":["They contain liquidity."]
+},
+
+"daily bias": {
+    "definition":"Daily bias predicts whether the market is likely to move bullish or bearish.",
+    "notes":["Use higher timeframe.","Check previous day's range.","Identify liquidity.","Trade with market structure.","Avoid guessing."],
+    "practice_questions":["How is daily bias determined?"],
+    "answers":["Using higher timeframe analysis."]
+},
+
+"weekly bias": {
+    "definition":"Weekly bias identifies the probable weekly market direction.",
+    "notes":["Analyze weekly chart.","Locate liquidity.","Use institutional levels.","Combine with daily bias.","Trade with trend."],
+    "practice_questions":["What chart determines weekly bias?"],
+    "answers":["The weekly timeframe."]
+},
+
+"monthly bias": {
+    "definition":"Monthly bias gives the long-term institutional direction.",
+    "notes":["Use monthly chart.","Identify major trends.","Locate premium and discount.","Watch major liquidity.","Combine with lower timeframes."],
+    "practice_questions":["Which timeframe gives monthly bias?"],
+    "answers":["Monthly chart."]
+},
+
+"opening range": {
+    "definition":"The opening range is the initial trading range after a market session opens.",
+    "notes":["Often defines direction.","Breakouts create opportunities.","Volume confirms moves.","Common in London and New York.","Avoid early fakeouts."],
+    "practice_questions":["What is the opening range?"],
+    "answers":["The first trading range after market open."]
+},
+
+"stop hunt": {
+    "definition":"A stop hunt occurs when price moves to trigger clustered stop losses.",
+    "notes":["Targets liquidity.","Often precedes reversal.","Common near equal highs/lows.","Institutions benefit from liquidity.","Wait for confirmation."],
+    "practice_questions":["Why do stop hunts occur?"],
+    "answers":["To collect liquidity."]
+},
+
+"equal highs": {
+    "definition":"Equal highs are swing highs at nearly the same price.",
+    "notes":["Contain buy-side liquidity.","Often swept before selling.","Useful in ICT.","Watch for reversals.","Combine with BOS."],
+    "practice_questions":["What do equal highs contain?"],
+    "answers":["Buy-side liquidity."]
+},
+
+"equal lows": {
+    "definition":"Equal lows are swing lows at nearly the same price.",
+    "notes":["Contain sell-side liquidity.","Often swept before buying.","Institutional target.","Good liquidity zones.","Combine with CHoCH."],
+    "practice_questions":["What do equal lows contain?"],
+    "answers":["Sell-side liquidity."]
+},
+
+"premium array": {
+    "definition":"Premium arrays are bearish institutional tools above equilibrium.",
+    "notes":["Include bearish order blocks.","Include bearish FVGs.","Best for selling.","Used in premium zone.","Follow higher timeframe."],
+    "practice_questions":["Where are premium arrays found?"],
+    "answers":["Above equilibrium."]
+},
+
+"discount array": {
+    "definition":"Discount arrays are bullish institutional tools below equilibrium.",
+    "notes":["Include bullish order blocks.","Include bullish FVGs.","Best for buying.","Used below equilibrium.","Trade with trend."],
+    "practice_questions":["Where are discount arrays found?"],
+    "answers":["Below equilibrium."]
+},
+
+"inducement": {
+    "definition":"Inducement is a price movement designed to encourage traders into poor positions.",
+    "notes":["Creates false confidence.","Leads to liquidity.","Common before reversals.","Used by institutions.","Requires patience."],
+    "practice_questions":["What is inducement?"],
+    "answers":["A move that attracts traders before reversal."]
+},
+
+"discretionary trading": {
+    "definition":"Discretionary trading relies on trader judgment rather than strict automation.",
+    "notes":["Requires experience.","Uses multiple confirmations.","Flexible.","Needs discipline.","Avoid emotional decisions."],
+    "practice_questions":["What is discretionary trading?"],
+    "answers":["Trading based on analysis and judgment."]
+},
+
+"mechanical trading": {
+    "definition":"Mechanical trading follows fixed rules without emotion.",
+    "notes":["Rule-based.","Easy to backtest.","Removes emotions.","Requires discipline.","Suitable for automation."],
+    "practice_questions":["What is mechanical trading?"],
+    "answers":["Trading using fixed rules."]
+},
+
+"trade confirmation": {
+    "definition":"Trade confirmation is evidence supporting a trading decision.",
+    "notes":["Use BOS.","Use CHoCH.","Use volume.","Use liquidity.","Use higher timeframe trend."],
+    "practice_questions":["Why wait for confirmation?"],
+    "answers":["To improve trade probability."]
+},
+
+"draw on liquidity": {
+    "definition":"Draw on Liquidity is the institutional target where price is expected to move.",
+    "notes":["Markets seek liquidity.","Identify external liquidity.","Use internal liquidity.","Trade toward liquidity.","Major highs and lows are targets."],
+    "practice_questions":["What is draw on liquidity?"],
+    "answers":["The expected liquidity target."]
+},
+
+"time and price": {
+    "definition":"Time and Price studies when and where institutional moves are likely to occur.",
+    "notes":["Time matters.","Price matters.","Kill Zones improve accuracy.","Sessions affect volatility.","Combine with ICT."],
+    "practice_questions":["Why is time important?"],
+    "answers":["Institutions trade at specific times."]
+},
+
+"high probability trade": {
+    "definition":"A high-probability trade has multiple confirmations supporting the setup.",
+    "notes":["Trend alignment.","Liquidity sweep.","Order Block.","Fair Value Gap.","Risk management."],
+    "practice_questions":["What creates a high-probability trade?"],
+    "answers":["Multiple confirmations."]
+},
+
+"advanced risk management": {
+    "definition":"Advanced risk management protects capital while maximizing long-term returns.",
+    "notes":["Risk fixed percentages.","Limit daily loss.","Limit weekly loss.","Protect profits.","Maintain discipline."],
+    "practice_questions":["Why is risk management important?"],
+    "answers":["It protects trading capital."]
+},
+
+"trading discipline": {
+    "definition":"Trading discipline is consistently following your trading plan.",
+    "notes":["Never chase trades.","Never revenge trade.","Respect Stop Loss.","Follow rules.","Review performance."],
+    "practice_questions":["What is trading discipline?"],
+    "answers":["Following your trading rules consistently."]
+},
+
+"professional trader mindset": {
+    "definition":"A professional trader focuses on consistency, discipline and risk management instead of quick profits.",
+    "notes":["Think long term.","Accept losses.","Stay patient.","Trust your strategy.","Keep learning."],
+    "practice_questions":["What is the goal of a professional trader?"],
+    "answers":["Consistent long-term profitability."]
+},
+"news impact trading": {
+    "definition": "News Impact Trading studies how major economic announcements affect market prices.",
+    "notes": [
+        "High-impact news creates volatility.",
+        "Interest rate decisions move currencies.",
+        "NFP strongly affects USD pairs.",
+        "CPI affects inflation expectations.",
+        "Avoid overleveraging during news."
+    ],
+    "practice_questions": ["Which news event strongly affects USD?"],
+    "answers": ["Non-Farm Payrolls (NFP)."]
+},
+
+"interest rates": {
+    "definition": "Interest rates are set by central banks and strongly influence currency values.",
+    "notes": [
+        "Higher rates strengthen currencies.",
+        "Lower rates weaken currencies.",
+        "Rate expectations affect markets.",
+        "Watch central bank meetings.",
+        "Interest rate differentials drive Forex."
+    ],
+    "practice_questions": ["How do higher interest rates affect a currency?"],
+    "answers": ["They usually strengthen it."]
+},
+
+"inflation": {
+    "definition": "Inflation measures the rate at which prices increase over time.",
+    "notes": [
+        "High inflation may lead to rate hikes.",
+        "CPI measures inflation.",
+        "Inflation affects currency strength.",
+        "Moderate inflation supports growth.",
+        "Markets react to inflation surprises."
+    ],
+    "practice_questions": ["Which report measures inflation?"],
+    "answers": ["Consumer Price Index (CPI)."]
+},
+
+"gross domestic product": {
+    "definition": "GDP measures the total value of goods and services produced in an economy.",
+    "notes": [
+        "Higher GDP indicates economic growth.",
+        "GDP influences currency value.",
+        "Strong GDP attracts investment.",
+        "Weak GDP may weaken a currency.",
+        "Released quarterly in most countries."
+    ],
+    "practice_questions": ["What does GDP measure?"],
+    "answers": ["Economic growth."]
+},
+
+"employment data": {
+    "definition": "Employment reports measure labour market strength.",
+    "notes": [
+        "NFP is the most important US employment report.",
+        "Higher employment strengthens economies.",
+        "Unemployment rate is closely watched.",
+        "Strong jobs data can strengthen currencies.",
+        "Markets react quickly to employment surprises."
+    ],
+    "practice_questions": ["What is the most important US employment report?"],
+    "answers": ["Non-Farm Payrolls."]
+},
+
+"consumer confidence": {
+    "definition": "Consumer confidence measures how optimistic consumers are about the economy.",
+    "notes": [
+        "High confidence supports spending.",
+        "Low confidence slows growth.",
+        "Markets monitor confidence surveys.",
+        "Consumer spending drives GDP.",
+        "Confidence affects currencies."
+    ],
+    "practice_questions": ["Why is consumer confidence important?"],
+    "answers": ["It influences consumer spending."]
+},
+
+"manufacturing pmi": {
+    "definition": "Manufacturing PMI measures business activity in the manufacturing sector.",
+    "notes": [
+        "Above 50 indicates expansion.",
+        "Below 50 indicates contraction.",
+        "PMI is an economic leading indicator.",
+        "Strong PMI supports currencies.",
+        "Released monthly."
+    ],
+    "practice_questions": ["What does PMI above 50 mean?"],
+    "answers": ["Manufacturing is expanding."]
+},
+
+"retail sales": {
+    "definition": "Retail Sales measure consumer spending on goods.",
+    "notes": [
+        "Strong sales support the economy.",
+        "Weak sales may slow growth.",
+        "Retail sales influence GDP.",
+        "Markets react to surprises.",
+        "Consumer spending drives economic activity."
+    ],
+    "practice_questions": ["Why are Retail Sales important?"],
+    "answers": ["They measure consumer spending."]
+},
+
+"trade balance": {
+    "definition": "Trade Balance measures exports minus imports.",
+    "notes": [
+        "A surplus supports the currency.",
+        "A deficit may weaken the currency.",
+        "Exports bring foreign income.",
+        "Imports increase foreign spending.",
+        "Trade balance affects economic strength."
+    ],
+    "practice_questions": ["What is a trade surplus?"],
+    "answers": ["Exports exceed imports."]
+},
+
+"bond yields": {
+    "definition": "Bond yields represent the return investors receive from government bonds.",
+    "notes": [
+        "Higher yields often strengthen currencies.",
+        "US Treasury yields affect USD.",
+        "Bond markets influence Forex.",
+        "Yield expectations move markets.",
+        "Watch 2-year and 10-year yields."
+    ],
+    "practice_questions": ["How do higher bond yields affect a currency?"],
+    "answers": ["They often strengthen it."]
+},
+
+"commodity currencies": {
+    "definition": "Commodity currencies are strongly influenced by commodity prices.",
+    "notes": [
+        "AUD is influenced by iron ore.",
+        "CAD is influenced by oil.",
+        "NZD is influenced by dairy exports.",
+        "Commodity prices affect these currencies.",
+        "Watch global demand."
+    ],
+    "practice_questions": ["Which currency is strongly linked to oil?"],
+    "answers": ["Canadian Dollar (CAD)."]
+},
+
+"safe haven assets": {
+    "definition": "Safe haven assets attract investors during uncertainty.",
+    "notes": [
+        "Gold is a safe haven.",
+        "Japanese Yen is a safe haven.",
+        "Swiss Franc is a safe haven.",
+        "Demand rises during crises.",
+        "Risk-off sentiment boosts safe havens."
+    ],
+    "practice_questions": ["Name two safe haven assets."],
+    "answers": ["Gold and Japanese Yen."]
+},
+
+"carry trade": {
+    "definition": "Carry trading earns interest by buying high-yield currencies and selling low-yield currencies.",
+    "notes": [
+        "Depends on interest rate differences.",
+        "Works in stable markets.",
+        "High volatility increases risk.",
+        "Popular among institutional traders.",
+        "Interest rate expectations matter."
+    ],
+    "practice_questions": ["What is a carry trade?"],
+    "answers": ["Buying high-interest currencies and selling low-interest currencies."]
+},
+
+"market cycles": {
+    "definition": "Markets move through repeating cycles of expansion and contraction.",
+    "notes": [
+        "Accumulation.",
+        "Markup.",
+        "Distribution.",
+        "Markdown.",
+        "Cycles repeat continuously."
+    ],
+    "practice_questions": ["Name the four market cycles."],
+    "answers": ["Accumulation, Markup, Distribution and Markdown."]
+},
+
+"volatility index": {
+    "definition": "The VIX measures expected stock market volatility.",
+    "notes": [
+        "High VIX indicates fear.",
+        "Low VIX indicates confidence.",
+        "Used for risk assessment.",
+        "Called the Fear Index.",
+        "Affects market sentiment."
+    ],
+    "practice_questions": ["What does a high VIX indicate?"],
+    "answers": ["High market fear."]
+},
+
+"algorithmic trading": {
+    "definition": "Algorithmic trading uses computer programs to execute trades automatically.",
+    "notes": [
+        "Removes emotion.",
+        "Executes trades quickly.",
+        "Uses predefined rules.",
+        "Popular among institutions.",
+        "Requires testing."
+    ],
+    "practice_questions": ["What is algorithmic trading?"],
+    "answers": ["Trading performed automatically by computer programs."]
+},
+
+"hedging": {
+    "definition": "Hedging reduces risk by opening offsetting positions.",
+    "notes": [
+        "Limits losses.",
+        "Common in professional trading.",
+        "Uses correlated assets.",
+        "Protects portfolios.",
+        "Does not eliminate all risk."
+    ],
+    "practice_questions": ["Why do traders hedge?"],
+    "answers": ["To reduce risk."]
+},
+
+"portfolio management": {
+    "definition": "Portfolio management allocates capital across investments to maximize returns while controlling risk.",
+    "notes": [
+        "Diversify investments.",
+        "Manage overall exposure.",
+        "Review performance regularly.",
+        "Balance risk and reward.",
+        "Avoid concentration risk."
+    ],
+    "practice_questions": ["Why diversify a portfolio?"],
+    "answers": ["To reduce overall risk."]
+},
+
+"capital preservation": {
+    "definition": "Capital preservation focuses on protecting trading capital before seeking profits.",
+    "notes": [
+        "Protect capital first.",
+        "Limit drawdowns.",
+        "Use proper risk management.",
+        "Avoid overtrading.",
+        "Consistency beats large gains."
+    ],
+    "practice_questions": ["What is the first goal of trading?"],
+    "answers": ["Protect trading capital."]
+},
+
+"professional performance review": {
+    "definition": "Professional traders regularly review their performance to improve consistency.",
+    "notes": [
+        "Review every trade.",
+        "Measure win rate.",
+        "Measure Risk-to-Reward.",
+        "Identify mistakes.",
+        "Continuously improve."
+    ],
+    "practice_questions": ["Why review trading performance?"],
+    "answers": ["To improve consistency and profitability."]
+},
+"risk percentage": {
+    "definition": "Risk percentage is the fixed portion of account equity risked on a single trade.",
+    "notes": [
+        "Professional traders usually risk 0.25% to 2% per trade.",
+        "Lower risk improves long-term survival.",
+        "Risk should remain consistent.",
+        "Never increase risk after losses.",
+        "Adjust position size instead of risk percentage."
+    ],
+    "practice_questions": [
+        "Why use fixed percentage risk?"
+    ],
+    "answers": [
+        "To protect trading capital and maintain consistency."
+    ]
+},
+
+"maximum drawdown": {
+    "definition": "Maximum drawdown is the largest decline from account peak to account low.",
+    "notes": [
+        "Small drawdowns are easier to recover.",
+        "Large drawdowns require larger percentage gains.",
+        "Risk management minimizes drawdown.",
+        "Professional traders monitor drawdown daily.",
+        "Capital preservation comes first."
+    ],
+    "practice_questions": [
+        "Why monitor drawdown?"
+    ],
+    "answers": [
+        "To protect long-term account growth."
+    ]
+},
+
+"expectancy": {
+    "definition": "Expectancy measures the average amount a trading strategy is expected to gain or lose per trade.",
+    "notes": [
+        "Positive expectancy leads to long-term profitability.",
+        "Depends on win rate and Risk-to-Reward.",
+        "Professional traders monitor expectancy.",
+        "Even low win rates can be profitable.",
+        "Expectancy is more important than a single trade."
+    ],
+    "practice_questions": [
+        "What does positive expectancy mean?"
+    ],
+    "answers": [
+        "The strategy is profitable over many trades."
+    ]
+},
+
+"win rate": {
+    "definition": "Win rate is the percentage of winning trades compared to total trades.",
+    "notes": [
+        "High win rate alone does not guarantee profitability.",
+        "Risk-to-Reward is equally important.",
+        "Professional traders focus on expectancy.",
+        "Consistency matters more than perfection.",
+        "Track win rate monthly."
+    ],
+    "practice_questions": [
+        "Does a high win rate guarantee profits?"
+    ],
+    "answers": [
+        "No. Risk-to-Reward must also be favorable."
+    ]
+},
+
+"loss recovery": {
+    "definition": "Loss recovery is the process of rebuilding trading capital after losses.",
+    "notes": [
+        "Do not increase lot size emotionally.",
+        "Follow the trading plan.",
+        "Reduce risk after losing streaks.",
+        "Focus on quality setups.",
+        "Recovery requires patience."
+    ],
+    "practice_questions": [
+        "How should losses be recovered?"
+    ],
+    "answers": [
+        "By following disciplined risk management."
+    ]
+},
+
+"psychology of fear": {
+    "definition": "Fear causes traders to hesitate, exit early or avoid valid setups.",
+    "notes": [
+        "Trust your trading plan.",
+        "Accept losses as business expenses.",
+        "Do not panic during drawdowns.",
+        "Confidence comes from backtesting.",
+        "Experience reduces fear."
+    ],
+    "practice_questions": [
+        "What causes fear in trading?"
+    ],
+    "answers": [
+        "Uncertainty and lack of confidence."
+    ]
+},
+
+"psychology of greed": {
+    "definition": "Greed causes traders to overtrade, overleverage and ignore risk.",
+    "notes": [
+        "Stick to your trading plan.",
+        "Do not chase missed trades.",
+        "Take profits according to plan.",
+        "Avoid unrealistic expectations.",
+        "Consistency beats greed."
+    ],
+    "practice_questions": [
+        "How can greed be controlled?"
+    ],
+    "answers": [
+        "By following fixed trading rules."
+    ]
+},
+
+"revenge trading": {
+    "definition": "Revenge trading is entering trades emotionally after losses to recover money quickly.",
+    "notes": [
+        "Often leads to larger losses.",
+        "Take breaks after losing trades.",
+        "Review mistakes objectively.",
+        "Never trade emotionally.",
+        "Discipline prevents revenge trading."
+    ],
+    "practice_questions": [
+        "Why is revenge trading dangerous?"
+    ],
+    "answers": [
+        "It leads to emotional and poor decisions."
+    ]
+},
+
+"overtrading": {
+    "definition": "Overtrading means taking too many unnecessary trades.",
+    "notes": [
+        "Quality is better than quantity.",
+        "Wait for high-probability setups.",
+        "Overtrading increases emotional stress.",
+        "Follow daily trade limits.",
+        "Professional traders skip poor setups."
+    ],
+    "practice_questions": [
+        "What causes overtrading?"
+    ],
+    "answers": [
+        "Impatience and emotional trading."
+    ]
+},
+
+"trading patience": {
+    "definition": "Patience allows traders to wait for high-quality opportunities instead of forcing trades.",
+    "notes": [
+        "Wait for confirmations.",
+        "Avoid impulsive entries.",
+        "Patience improves consistency.",
+        "The market always creates new opportunities.",
+        "Professional traders are selective."
+    ],
+    "practice_questions": [
+        "Why is patience important?"
+    ],
+    "answers": [
+        "It improves trade quality and consistency."
+    ]
+},
+
+"market context": {
+    "definition": "Market context is the overall environment in which price is moving.",
+    "notes": [
+        "Analyze higher timeframes first.",
+        "Identify trend direction.",
+        "Locate liquidity.",
+        "Recognize volatility.",
+        "Trade according to context."
+    ],
+    "practice_questions": [
+        "Why is market context important?"
+    ],
+    "answers": [
+        "It improves decision making."
+    ]
+},
+
+"trend strength": {
+    "definition": "Trend strength measures how powerful a market trend is.",
+    "notes": [
+        "Strong trends have momentum.",
+        "Weak trends often consolidate.",
+        "Volume supports strong trends.",
+        "Higher highs confirm bullish strength.",
+        "Lower lows confirm bearish strength."
+    ],
+    "practice_questions": [
+        "How is trend strength confirmed?"
+    ],
+    "answers": [
+        "By momentum and market structure."
+    ]
+},
+
+"market exhaustion": {
+    "definition": "Market exhaustion occurs when buyers or sellers begin losing momentum.",
+    "notes": [
+        "Volume often decreases.",
+        "Reversal patterns may appear.",
+        "Divergence can signal exhaustion.",
+        "Watch key support and resistance.",
+        "Confirmation is required."
+    ],
+    "practice_questions": [
+        "What is market exhaustion?"
+    ],
+    "answers": [
+        "A weakening of buying or selling pressure."
+    ]
+},
+
+"consolidation": {
+    "definition": "Consolidation is a period where price moves sideways before expansion.",
+    "notes": [
+        "Low volatility.",
+        "Builds liquidity.",
+        "Breakouts often follow.",
+        "Avoid random entries.",
+        "Wait for confirmation."
+    ],
+    "practice_questions": [
+        "What usually follows consolidation?"
+    ],
+    "answers": [
+        "A breakout or expansion."
+    ]
+},
+
+"expansion": {
+    "definition": "Expansion is a strong directional movement after consolidation.",
+    "notes": [
+        "High momentum.",
+        "Often follows liquidity sweeps.",
+        "Creates Fair Value Gaps.",
+        "Breaks market structure.",
+        "Professional traders follow expansion."
+    ],
+    "practice_questions": [
+        "What usually causes expansion?"
+    ],
+    "answers": [
+        "Institutional participation."
+    ]
+},
+
+"trading consistency": {
+    "definition": "Consistency is the ability to produce stable trading results over time.",
+    "notes": [
+        "Follow one strategy.",
+        "Control emotions.",
+        "Manage risk.",
+        "Keep a trading journal.",
+        "Review performance regularly."
+    ],
+    "practice_questions": [
+        "What creates consistency?"
+    ],
+    "answers": [
+        "Discipline and proper risk management."
+    ]
+},
+
+"professional habits": {
+    "definition": "Professional traders develop habits that improve long-term performance.",
+    "notes": [
+        "Prepare before trading.",
+        "Review news.",
+        "Analyze higher timeframes.",
+        "Record every trade.",
+        "Never stop learning."
+    ],
+    "practice_questions": [
+        "What is one professional trading habit?"
+    ],
+    "answers": [
+        "Keeping a detailed trading journal."
+    ]
+},
+
+"performance metrics": {
+    "definition": "Performance metrics evaluate trading results objectively.",
+    "notes": [
+        "Win rate.",
+        "Risk-to-Reward.",
+        "Expectancy.",
+        "Maximum drawdown.",
+        "Average monthly return."
+    ],
+    "practice_questions": [
+        "Name two trading performance metrics."
+    ],
+    "answers": [
+        "Win rate and Expectancy."
+    ]
+},
+
+"long term success": {
+    "definition": "Long-term success comes from discipline, consistency and continuous improvement.",
+    "notes": [
+        "Protect capital.",
+        "Follow your strategy.",
+        "Keep learning.",
+        "Accept losses.",
+        "Focus on probability."
+    ],
+    "practice_questions": [
+        "What creates long-term trading success?"
+    ],
+    "answers": [
+        "Discipline, consistency and risk management."
+    ]
+},
+
+"professional trading principles": {
+    "definition": "Professional trading principles are the core rules followed by consistently profitable traders.",
+    "notes": [
+        "Protect capital first.",
+        "Trade with the trend.",
+        "Never risk too much.",
+        "Wait for confirmation.",
+        "Manage emotions.",
+        "Review every trade.",
+        "Focus on probability, not certainty.",
+        "Keep improving your strategy."
+    ],
+    "practice_questions": [
+        "What is the first principle of professional trading?"
+    ],
+    "answers": [
+        "Protect trading capital."
+    ]
+},
+"moving average": {
+    "definition": "A Moving Average smooths price data to identify the direction of the trend.",
+    "notes": [
+        "50 EMA identifies medium-term trends.",
+        "200 EMA identifies long-term trends.",
+        "Price above MA is generally bullish.",
+        "Price below MA is generally bearish.",
+        "Use Moving Averages with price action."
+    ],
+    "practice_questions": ["What does a Moving Average show?"],
+    "answers": ["The overall market trend."]
+},
+
+"exponential moving average": {
+    "definition": "The Exponential Moving Average (EMA) gives more weight to recent prices.",
+    "notes": [
+        "EMA reacts faster than SMA.",
+        "Popular EMAs include 20, 50 and 200.",
+        "Useful in trending markets.",
+        "Acts as dynamic support and resistance.",
+        "Combine with market structure."
+    ],
+    "practice_questions": ["Why is EMA preferred by many traders?"],
+    "answers": ["It responds faster to price changes."]
+},
+
+"simple moving average": {
+    "definition": "The Simple Moving Average (SMA) calculates the average closing price over a period.",
+    "notes": [
+        "SMA is slower than EMA.",
+        "Useful for long-term analysis.",
+        "Filters market noise.",
+        "Common periods are 50 and 200.",
+        "Works well with trend analysis."
+    ],
+    "practice_questions": ["What is SMA?"],
+    "answers": ["The average price over a specified period."]
+},
+
+"relative strength index": {
+    "definition": "The Relative Strength Index (RSI) measures market momentum.",
+    "notes": [
+        "RSI above 70 suggests overbought.",
+        "RSI below 30 suggests oversold.",
+        "Use with price action.",
+        "Divergence improves signals.",
+        "Avoid using RSI alone."
+    ],
+    "practice_questions": ["What does RSI above 70 indicate?"],
+    "answers": ["Potential overbought conditions."]
+},
+
+"macd": {
+    "definition": "MACD measures trend strength and momentum using moving averages.",
+    "notes": [
+        "MACD crossover generates signals.",
+        "Histogram shows momentum.",
+        "Works best in trends.",
+        "Avoid ranging markets.",
+        "Combine with structure."
+    ],
+    "practice_questions": ["What does MACD measure?"],
+    "answers": ["Trend and momentum."]
+},
+
+"bollinger bands": {
+    "definition": "Bollinger Bands measure volatility using upper and lower bands around price.",
+    "notes": [
+        "Bands widen during volatility.",
+        "Bands contract during consolidation.",
+        "Price touching bands is not a signal alone.",
+        "Watch for squeezes.",
+        "Combine with trend analysis."
+    ],
+    "practice_questions": ["What happens when Bollinger Bands squeeze?"],
+    "answers": ["Volatility decreases before a possible breakout."]
+},
+
+"stochastic oscillator": {
+    "definition": "The Stochastic Oscillator compares the closing price with the recent trading range.",
+    "notes": [
+        "Above 80 indicates overbought.",
+        "Below 20 indicates oversold.",
+        "Useful in ranging markets.",
+        "Watch for crossovers.",
+        "Confirm with price action."
+    ],
+    "practice_questions": ["What does Stochastic below 20 indicate?"],
+    "answers": ["Potential oversold conditions."]
+},
+
+"average directional index": {
+    "definition": "ADX measures the strength of a trend without indicating direction.",
+    "notes": [
+        "ADX above 25 indicates a strong trend.",
+        "Low ADX indicates weak trends.",
+        "Use with trend-following systems.",
+        "Does not show bullish or bearish direction.",
+        "Combine with moving averages."
+    ],
+    "practice_questions": ["What does ADX measure?"],
+    "answers": ["Trend strength."]
+},
+
+"ichimoku cloud": {
+    "definition": "Ichimoku Cloud is a complete trading system for trend, support and resistance.",
+    "notes": [
+        "Cloud identifies trend.",
+        "Price above cloud is bullish.",
+        "Price below cloud is bearish.",
+        "Cloud acts as support or resistance.",
+        "Includes multiple indicators."
+    ],
+    "practice_questions": ["What does price above the cloud indicate?"],
+    "answers": ["A bullish trend."]
+},
+
+"volume analysis": {
+    "definition": "Volume analysis studies trading activity to confirm price movement.",
+    "notes": [
+        "High volume confirms trends.",
+        "Low volume weakens signals.",
+        "Breakouts need strong volume.",
+        "Volume reveals institutional activity.",
+        "Use with price action."
+    ],
+    "practice_questions": ["Why is volume important?"],
+    "answers": ["It confirms the strength of price movements."]
+},
+
+"volume spread analysis": {
+    "definition": "Volume Spread Analysis (VSA) studies the relationship between price spread and volume.",
+    "notes": [
+        "Identifies institutional activity.",
+        "Wide spreads indicate strength.",
+        "Narrow spreads may indicate weakness.",
+        "High volume reveals professional interest.",
+        "Works well with Wyckoff."
+    ],
+    "practice_questions": ["What does VSA analyze?"],
+    "answers": ["Price spread and trading volume."]
+},
+
+"support": {
+    "definition": "Support is a price level where buying pressure may stop price from falling.",
+    "notes": [
+        "Acts as a floor.",
+        "Can become resistance after breaking.",
+        "Higher timeframe support is stronger.",
+        "Volume confirms support.",
+        "Never rely on support alone."
+    ],
+    "practice_questions": ["What is support?"],
+    "answers": ["A level where buyers may enter the market."]
+},
+
+"resistance": {
+    "definition": "Resistance is a price level where selling pressure may stop price from rising.",
+    "notes": [
+        "Acts as a ceiling.",
+        "Can become support after breaking.",
+        "Higher timeframe resistance is stronger.",
+        "Volume confirms resistance.",
+        "Combine with market structure."
+    ],
+    "practice_questions": ["What is resistance?"],
+    "answers": ["A level where sellers may enter the market."]
+},
+
+"breakout trading": {
+    "definition": "Breakout trading enters when price moves beyond key support or resistance.",
+    "notes": [
+        "Volume should confirm breakout.",
+        "False breakouts are common.",
+        "Wait for confirmation.",
+        "Retests improve entries.",
+        "Trade with trend."
+    ],
+    "practice_questions": ["What confirms a breakout?"],
+    "answers": ["Strong volume and price confirmation."]
+},
+
+"pullback trading": {
+    "definition": "Pullback trading enters after a temporary retracement within a trend.",
+    "notes": [
+        "Trade with trend.",
+        "Wait for confirmation.",
+        "Use support and resistance.",
+        "Combine with moving averages.",
+        "Avoid chasing price."
+    ],
+    "practice_questions": ["What is a pullback?"],
+    "answers": ["A temporary move against the trend."]
+},
+
+"break even": {
+    "definition": "Break-even is the point where a trade neither gains nor loses money.",
+    "notes": [
+        "Move Stop Loss to entry.",
+        "Protects capital.",
+        "Reduces emotional pressure.",
+        "Do not move too early.",
+        "Follow trading plan."
+    ],
+    "practice_questions": ["What is break-even?"],
+    "answers": ["The trade entry price."]
+},
+
+"partial profit": {
+    "definition": "Partial profit means closing part of a position while leaving the rest open.",
+    "notes": [
+        "Locks in profits.",
+        "Reduces risk.",
+        "Allows larger targets.",
+        "Professional traders use it frequently.",
+        "Follow predefined rules."
+    ],
+    "practice_questions": ["Why take partial profits?"],
+    "answers": ["To secure profits while allowing further gains."]
+},
+
+"trailing stop": {
+    "definition": "A trailing stop automatically follows price to protect profits.",
+    "notes": [
+        "Moves only in profit direction.",
+        "Locks in gains.",
+        "Useful in trends.",
+        "Avoid tight trailing stops.",
+        "Combine with volatility."
+    ],
+    "practice_questions": ["What is a trailing stop?"],
+    "answers": ["A Stop Loss that follows profitable price movement."]
+},
+
+"risk of ruin": {
+    "definition": "Risk of Ruin is the probability of losing enough capital to stop trading.",
+    "notes": [
+        "High risk increases ruin probability.",
+        "Low risk improves survival.",
+        "Professional traders minimize risk.",
+        "Consistency reduces ruin.",
+        "Capital protection is essential."
+    ],
+    "practice_questions": ["How can Risk of Ruin be reduced?"],
+    "answers": ["By using proper risk management."]
+},
+
+"professional execution": {
+    "definition": "Professional execution means entering and exiting trades exactly according to the trading plan.",
+    "notes": [
+        "No emotional decisions.",
+        "Wait for confirmation.",
+        "Respect Stop Loss.",
+        "Respect Take Profit.",
+        "Review every trade."
+    ],
+    "practice_questions": ["What is professional execution?"],
+    "answers": ["Following the trading plan with discipline."]
+},
+"liquidity void": {
+    "definition": "A Liquidity Void is a price area where very little trading occurred because of rapid institutional movement.",
+    "notes": [
+        "Created by strong displacement.",
+        "Price often revisits the void.",
+        "Common around Fair Value Gaps.",
+        "Acts as a price magnet.",
+        "Useful for target projection."
+    ],
+    "practice_questions": ["What creates a Liquidity Void?"],
+    "answers": ["Strong institutional displacement."]
+},
+
+"internal liquidity": {
+    "definition": "Internal Liquidity consists of liquidity within the current trading range.",
+    "notes": [
+        "Includes equal highs.",
+        "Includes equal lows.",
+        "Often swept before expansion.",
+        "Used for market manipulation.",
+        "Smaller than external liquidity."
+    ],
+    "practice_questions": ["What is Internal Liquidity?"],
+    "answers": ["Liquidity inside the current trading range."]
+},
+
+"external liquidity": {
+    "definition": "External Liquidity is liquidity located outside the current trading range.",
+    "notes": [
+        "Usually previous highs.",
+        "Usually previous lows.",
+        "Main institutional targets.",
+        "Higher probability targets.",
+        "Often reached after BOS."
+    ],
+    "practice_questions": ["Where is External Liquidity found?"],
+    "answers": ["Outside the current trading range."]
+},
+
+"balanced price range": {
+    "definition": "A Balanced Price Range forms when two Fair Value Gaps overlap, creating equilibrium.",
+    "notes": [
+        "Price often reacts here.",
+        "Represents market balance.",
+        "Useful ICT concept.",
+        "Can provide entries.",
+        "Works with liquidity."
+    ],
+    "practice_questions": ["What forms a Balanced Price Range?"],
+    "answers": ["Two overlapping Fair Value Gaps."]
+},
+
+"dealing range": {
+    "definition": "A Dealing Range is the distance between a significant swing high and swing low.",
+    "notes": [
+        "Used to identify premium.",
+        "Used to identify discount.",
+        "Contains equilibrium.",
+        "Important in ICT.",
+        "Helps locate OTE."
+    ],
+    "practice_questions": ["What is a Dealing Range?"],
+    "answers": ["The range between major swing high and low."]
+},
+
+"optimal stop placement": {
+    "definition": "Professional Stop Loss placement protects trades while avoiding unnecessary stop hunts.",
+    "notes": [
+        "Place beyond liquidity.",
+        "Avoid obvious levels.",
+        "Consider ATR.",
+        "Protect capital.",
+        "Follow market structure."
+    ],
+    "practice_questions": ["Where should Stop Loss be placed?"],
+    "answers": ["Beyond logical market structure."]
+},
+
+"profit targets": {
+    "definition": "Profit targets define where a trade should be exited.",
+    "notes": [
+        "Target liquidity.",
+        "Target previous highs.",
+        "Target previous lows.",
+        "Use Risk-to-Reward.",
+        "Take partial profits when necessary."
+    ],
+    "practice_questions": ["What is the best profit target?"],
+    "answers": ["A major liquidity level."]
+},
+
+"high impact events": {
+    "definition": "High-impact events create significant market volatility.",
+    "notes": [
+        "Interest rate decisions.",
+        "NFP releases.",
+        "CPI releases.",
+        "GDP releases.",
+        "Central bank speeches."
+    ],
+    "practice_questions": ["Name one high-impact event."],
+    "answers": ["Interest rate decisions."]
+},
+
+"institutional manipulation": {
+    "definition": "Institutional manipulation is the movement of price to collect liquidity before the real move.",
+    "notes": [
+        "Uses stop hunts.",
+        "Uses false breakouts.",
+        "Targets retail traders.",
+        "Precedes expansion.",
+        "Common before major trends."
+    ],
+    "practice_questions": ["Why do institutions manipulate price?"],
+    "answers": ["To collect liquidity."]
+},
+
+"master trading framework": {
+    "definition": "The Master Trading Framework combines every institutional concept into one complete trading process.",
+    "notes": [
+        "Determine higher timeframe bias.",
+        "Identify external liquidity.",
+        "Wait for liquidity sweep.",
+        "Confirm CHoCH.",
+        "Confirm BOS.",
+        "Locate Order Block.",
+        "Locate Fair Value Gap.",
+        "Enter in OTE zone.",
+        "Calculate risk.",
+        "Target liquidity.",
+        "Manage trade professionally.",
+        "Journal every trade."
+    ],
+    "practice_questions": [
+        "What is the first step in the Master Trading Framework?"
+    ],
+    "answers": [
+        "Determine the higher timeframe bias."
+    ]
+},
+"daily open": {
+    "definition": "The Daily Open is the opening price of the current trading day and serves as an institutional reference level.",
+    "notes": [
+        "Price above Daily Open is generally bullish.",
+        "Price below Daily Open is generally bearish.",
+        "Institutions monitor the Daily Open.",
+        "Acts as dynamic support or resistance.",
+        "Use with market structure."
+    ],
+    "practice_questions": ["What does price above the Daily Open indicate?"],
+    "answers": ["Generally bullish conditions."]
+},
+
+"weekly open": {
+    "definition": "The Weekly Open is the opening price of the trading week.",
+    "notes": [
+        "Used for weekly bias.",
+        "Acts as institutional reference.",
+        "Supports higher timeframe analysis.",
+        "Watch reactions around it.",
+        "Combine with liquidity."
+    ],
+    "practice_questions": ["Why is the Weekly Open important?"],
+    "answers": ["It helps determine weekly market bias."]
+},
+
+"monthly open": {
+    "definition": "The Monthly Open is the opening price of the current month.",
+    "notes": [
+        "Important for long-term analysis.",
+        "Acts as institutional reference.",
+        "Supports macro trend analysis.",
+        "Useful for swing traders.",
+        "Monitor reactions around it."
+    ],
+    "practice_questions": ["Who mainly uses the Monthly Open?"],
+    "answers": ["Swing and position traders."]
+},
+
+"daily range": {
+    "definition": "The Daily Range is the difference between the day's highest and lowest price.",
+    "notes": [
+        "Measures volatility.",
+        "Helps estimate targets.",
+        "Useful for intraday traders.",
+        "Compare with ADR.",
+        "Avoid chasing extended moves."
+    ],
+    "practice_questions": ["What does the Daily Range measure?"],
+    "answers": ["Daily market volatility."]
+},
+
+"average daily range": {
+    "definition": "Average Daily Range (ADR) is the average number of pips a market moves each day.",
+    "notes": [
+        "Used to estimate targets.",
+        "Prevents overtrading.",
+        "Useful for intraday trading.",
+        "Helps identify exhausted moves.",
+        "Calculated over multiple days."
+    ],
+    "practice_questions": ["What is ADR used for?"],
+    "answers": ["Estimating expected daily movement."]
+},
+
+"premium discount matrix": {
+    "definition": "Premium Discount Matrix identifies expensive and cheap price zones.",
+    "notes": [
+        "Buy in discount.",
+        "Sell in premium.",
+        "Use equilibrium.",
+        "Combine with liquidity.",
+        "Supports ICT methodology."
+    ],
+    "practice_questions": ["Where should institutions prefer buying?"],
+    "answers": ["Discount zone."]
+},
+
+"entry confirmation": {
+    "definition": "Entry confirmation is the final evidence before opening a trade.",
+    "notes": [
+        "Wait for BOS.",
+        "Confirm CHoCH.",
+        "Check liquidity.",
+        "Verify FVG.",
+        "Respect higher timeframe."
+    ],
+    "practice_questions": ["Why wait for confirmation?"],
+    "answers": ["To increase trade probability."]
+},
+
+"exit strategy": {
+    "definition": "An exit strategy defines exactly when and how to close a trade.",
+    "notes": [
+        "Use Take Profit.",
+        "Trail Stop Loss.",
+        "Scale out profits.",
+        "Target liquidity.",
+        "Avoid emotional exits."
+    ],
+    "practice_questions": ["Why have an exit strategy?"],
+    "answers": ["To manage profits and risk consistently."]
+},
+
+"trade management": {
+    "definition": "Trade management controls an open trade after entry.",
+    "notes": [
+        "Move Stop Loss logically.",
+        "Secure partial profits.",
+        "Monitor market structure.",
+        "Protect gains.",
+        "Follow trading rules."
+    ],
+    "practice_questions": ["What is trade management?"],
+    "answers": ["Managing a trade after entry."]
+},
+
+"institutional trading system": {
+    "definition": "An Institutional Trading System combines market structure, liquidity, ICT concepts, risk management and psychology into one complete framework.",
+    "notes": [
+        "Determine higher timeframe trend.",
+        "Identify liquidity pools.",
+        "Locate premium and discount.",
+        "Wait for manipulation.",
+        "Confirm CHoCH.",
+        "Confirm BOS.",
+        "Identify Order Block.",
+        "Identify Fair Value Gap.",
+        "Enter using OTE.",
+        "Manage risk professionally.",
+        "Target institutional liquidity.",
+        "Journal every trade.",
+        "Review performance weekly.",
+        "Improve continuously."
+    ],
+    "practice_questions": [
+        "What is the purpose of an Institutional Trading System?"
+    ],
+    "answers": [
+        "To trade consistently using professional institutional principles."
+    ]
+},
+"wyckoff method": {
+    "definition": "The Wyckoff Method analyzes market cycles based on institutional buying and selling.",
+    "notes": [
+        "Developed by Richard D. Wyckoff.",
+        "Focuses on supply and demand.",
+        "Tracks smart money activity.",
+        "Uses accumulation and distribution.",
+        "Predicts future price movement."
+    ],
+    "practice_questions": ["Who developed the Wyckoff Method?"],
+    "answers": ["Richard D. Wyckoff."]
+},
+
+"accumulation": {
+    "definition": "Accumulation is the phase where institutions quietly buy before an uptrend.",
+    "notes": [
+        "Occurs after a downtrend.",
+        "Volume gradually increases.",
+        "Price trades in a range.",
+        "Smart money buys from weak hands.",
+        "Usually followed by markup."
+    ],
+    "practice_questions": ["What follows accumulation?"],
+    "answers": ["Markup."]
+},
+
+"distribution": {
+    "definition": "Distribution is the phase where institutions sell before a downtrend.",
+    "notes": [
+        "Occurs after an uptrend.",
+        "Price moves sideways.",
+        "Smart money sells to retail.",
+        "Often followed by markdown.",
+        "Volume becomes irregular."
+    ],
+    "practice_questions": ["What follows distribution?"],
+    "answers": ["Markdown."]
+},
+
+"spring": {
+    "definition": "A Spring is a false break below support that traps sellers before price reverses upward.",
+    "notes": [
+        "Sweeps sell-side liquidity.",
+        "Occurs in accumulation.",
+        "Confirms institutional buying.",
+        "Usually followed by rally.",
+        "Requires confirmation."
+    ],
+    "practice_questions": ["Where does a Spring occur?"],
+    "answers": ["During accumulation."]
+},
+
+"upthrust after distribution": {
+    "definition": "UTAD is a false breakout above resistance before a bearish reversal.",
+    "notes": [
+        "Sweeps buy-side liquidity.",
+        "Occurs during distribution.",
+        "Traps buyers.",
+        "Signals institutional selling.",
+        "Usually followed by markdown."
+    ],
+    "practice_questions": ["What does UTAD trap?"],
+    "answers": ["Buyers."]
+},
+
+"composite man": {
+    "definition": "The Composite Man represents institutional traders acting as one market participant.",
+    "notes": [
+        "Accumulates quietly.",
+        "Manipulates price.",
+        "Distributes at highs.",
+        "Creates false moves.",
+        "Controls market cycles."
+    ],
+    "practice_questions": ["Who is the Composite Man?"],
+    "answers": ["A representation of institutional traders."]
+},
+
+"cause and effect": {
+    "definition": "Cause and Effect states that accumulation or distribution creates future price movement.",
+    "notes": [
+        "Longer accumulation creates larger trends.",
+        "Distribution creates future decline.",
+        "Price reflects previous preparation.",
+        "Volume confirms cause.",
+        "Used in Wyckoff analysis."
+    ],
+    "practice_questions": ["What creates future trends?"],
+    "answers": ["Accumulation or distribution."]
+},
+
+"effort versus result": {
+    "definition": "Effort versus Result compares volume with price movement.",
+    "notes": [
+        "High volume with little movement signals weakness.",
+        "High volume with strong movement signals strength.",
+        "Used to detect manipulation.",
+        "Institutional activity affects effort.",
+        "Useful in Wyckoff."
+    ],
+    "practice_questions": ["What indicates weakness?"],
+    "answers": ["High volume with little price movement."]
+},
+
+"no demand": {
+    "definition": "No Demand is a weak bullish candle with low volume.",
+    "notes": [
+        "Signals lack of buyers.",
+        "Often appears before declines.",
+        "Used in VSA.",
+        "Requires confirmation.",
+        "Professional traders avoid buying."
+    ],
+    "practice_questions": ["What does No Demand indicate?"],
+    "answers": ["Weak buying interest."]
+},
+
+"no supply": {
+    "definition": "No Supply is a weak bearish candle with low selling volume.",
+    "notes": [
+        "Indicates sellers are exhausted.",
+        "Bullish signal.",
+        "Occurs during accumulation.",
+        "Requires confirmation.",
+        "Used in VSA."
+    ],
+    "practice_questions": ["What does No Supply indicate?"],
+    "answers": ["Weak selling pressure."]
+},
+
+"buying climax": {
+    "definition": "A Buying Climax is aggressive buying near the end of an uptrend.",
+    "notes": [
+        "Very high volume.",
+        "Large bullish candles.",
+        "Institutions distribute.",
+        "Often followed by reversal.",
+        "Signals exhaustion."
+    ],
+    "practice_questions": ["What follows a Buying Climax?"],
+    "answers": ["Potential reversal."]
+},
+
+"selling climax": {
+    "definition": "A Selling Climax is aggressive selling near the end of a downtrend.",
+    "notes": [
+        "Very high volume.",
+        "Large bearish candles.",
+        "Institutions accumulate.",
+        "Often followed by rally.",
+        "Signals exhaustion."
+    ],
+    "practice_questions": ["What follows a Selling Climax?"],
+    "answers": ["Potential rally."]
+},
+
+"automatic rally": {
+    "definition": "An Automatic Rally follows a Selling Climax as buyers temporarily dominate.",
+    "notes": [
+        "Occurs after panic selling.",
+        "Forms resistance.",
+        "Part of accumulation.",
+        "Institutional activity increases.",
+        "Useful in Wyckoff."
+    ],
+    "practice_questions": ["What follows a Selling Climax?"],
+    "answers": ["Automatic Rally."]
+},
+
+"secondary test": {
+    "definition": "A Secondary Test checks whether supply or demand has weakened.",
+    "notes": [
+        "Occurs after climax.",
+        "Lower volume is preferred.",
+        "Confirms accumulation.",
+        "Confirms distribution.",
+        "Provides trading opportunities."
+    ],
+    "practice_questions": ["What does a Secondary Test confirm?"],
+    "answers": ["Whether supply or demand has weakened."]
+},
+
+"last point of support": {
+    "definition": "LPS is the final buying opportunity before markup begins.",
+    "notes": [
+        "Occurs in accumulation.",
+        "Low-risk entry.",
+        "Supported by volume.",
+        "Institutional buying.",
+        "Precedes breakout."
+    ],
+    "practice_questions": ["What follows LPS?"],
+    "answers": ["Markup."]
+},
+
+"last point of supply": {
+    "definition": "LPSY is the final selling opportunity before markdown begins.",
+    "notes": [
+        "Occurs in distribution.",
+        "Low-risk short entry.",
+        "Institutional selling.",
+        "Precedes decline.",
+        "Supported by market structure."
+    ],
+    "practice_questions": ["What follows LPSY?"],
+    "answers": ["Markdown."]
+},
+
+"sign of strength": {
+    "definition": "SOS is a powerful bullish movement confirming institutional buying.",
+    "notes": [
+        "Strong volume.",
+        "Breaks resistance.",
+        "Confirms accumulation.",
+        "Begins markup.",
+        "Professional confirmation."
+    ],
+    "practice_questions": ["What does SOS confirm?"],
+    "answers": ["Institutional buying."]
+},
+
+"sign of weakness": {
+    "definition": "SOW is a powerful bearish movement confirming institutional selling.",
+    "notes": [
+        "Strong selling volume.",
+        "Breaks support.",
+        "Confirms distribution.",
+        "Begins markdown.",
+        "Professional confirmation."
+    ],
+    "practice_questions": ["What does SOW confirm?"],
+    "answers": ["Institutional selling."]
+},
+
+"reaccumulation": {
+    "definition": "Reaccumulation is a pause in an uptrend where institutions add positions.",
+    "notes": [
+        "Occurs during bullish trend.",
+        "Price consolidates.",
+        "Trend continues upward.",
+        "Higher probability continuation.",
+        "Volume confirms."
+    ],
+    "practice_questions": ["What follows reaccumulation?"],
+    "answers": ["Continuation of the uptrend."]
+},
+
+"redistribution": {
+    "definition": "Redistribution is a pause in a downtrend where institutions increase short positions.",
+    "notes": [
+        "Occurs during bearish trend.",
+        "Price consolidates.",
+        "Trend continues downward.",
+        "Institutional selling continues.",
+        "Volume confirms."
+    ],
+    "practice_questions": ["What follows redistribution?"],
+    "answers": ["Continuation of the downtrend."]
+},
+"elliott wave theory": {
+    "definition": "Elliott Wave Theory states that markets move in repeating waves driven by crowd psychology.",
+    "notes": [
+        "Five-wave impulse trend.",
+        "Three-wave corrective move.",
+        "Fractal market structure.",
+        "Works on all timeframes.",
+        "Combine with Fibonacci."
+    ],
+    "practice_questions": ["How many waves form an impulse trend?"],
+    "answers": ["Five waves."]
+},
+
+"dow theory": {
+    "definition": "Dow Theory is the foundation of modern technical analysis.",
+    "notes": [
+        "Markets move in trends.",
+        "Trends have three phases.",
+        "Volume confirms trends.",
+        "Indices confirm each other.",
+        "Trends continue until reversal."
+    ],
+    "practice_questions": ["What confirms a trend in Dow Theory?"],
+    "answers": ["Volume and price action."]
+},
+
+"gann theory": {
+    "definition": "Gann Theory uses price, time and geometry to forecast markets.",
+    "notes": [
+        "Time is as important as price.",
+        "Uses Gann Angles.",
+        "Uses market cycles.",
+        "Forecasts turning points.",
+        "Requires disciplined analysis."
+    ],
+    "practice_questions": ["What two factors are central in Gann Theory?"],
+    "answers": ["Price and time."]
+},
+
+"harmonic patterns": {
+    "definition": "Harmonic Patterns use Fibonacci ratios to identify reversals.",
+    "notes": [
+        "Gartley Pattern.",
+        "Bat Pattern.",
+        "Butterfly Pattern.",
+        "Crab Pattern.",
+        "Cypher Pattern."
+    ],
+    "practice_questions": ["What do harmonic patterns use?"],
+    "answers": ["Fibonacci ratios."]
+},
+
+"fibonacci extensions": {
+    "definition": "Fibonacci Extensions estimate future profit targets beyond the current trend.",
+    "notes": [
+        "127.2%.",
+        "161.8%.",
+        "200%.",
+        "261.8%.",
+        "Used for Take Profit."
+    ],
+    "practice_questions": ["What are Fibonacci Extensions used for?"],
+    "answers": ["Profit targets."]
+},
+
+"multi timeframe analysis": {
+    "definition": "Multi-Timeframe Analysis combines several chart timeframes for better decisions.",
+    "notes": [
+        "Monthly defines macro trend.",
+        "Weekly confirms direction.",
+        "Daily identifies setups.",
+        "4H refines bias.",
+        "15M and 5M execute entries."
+    ],
+    "practice_questions": ["Why use multiple timeframes?"],
+    "answers": ["To improve trading accuracy."]
+},
+
+"quantitative trading": {
+    "definition": "Quantitative Trading uses mathematics and statistics to develop trading strategies.",
+    "notes": [
+        "Data driven.",
+        "Objective decisions.",
+        "Backtesting required.",
+        "Popular with hedge funds.",
+        "Often automated."
+    ],
+    "practice_questions": ["What is Quantitative Trading based on?"],
+    "answers": ["Mathematics and statistics."]
+},
+
+"probability theory": {
+    "definition": "Probability Theory measures the likelihood of trading outcomes.",
+    "notes": [
+        "No trade is guaranteed.",
+        "Think in probabilities.",
+        "Positive expectancy matters.",
+        "Manage risk.",
+        "Avoid certainty bias."
+    ],
+    "practice_questions": ["Should traders think in certainty?"],
+    "answers": ["No, they should think in probabilities."]
+},
+
+"strategy backtesting": {
+    "definition": "Backtesting evaluates a trading strategy using historical market data.",
+    "notes": [
+        "Tests profitability.",
+        "Measures drawdown.",
+        "Calculates expectancy.",
+        "Improves confidence.",
+        "Should be extensive."
+    ],
+    "practice_questions": ["Why backtest a strategy?"],
+    "answers": ["To evaluate historical performance."]
+},
+
+"forward testing": {
+    "definition": "Forward Testing evaluates a strategy in live market conditions using a demo account.",
+    "notes": [
+        "Uses real-time prices.",
+        "Tests execution.",
+        "Confirms backtesting.",
+        "Builds confidence.",
+        "Reduces risk."
+    ],
+    "practice_questions": ["What follows backtesting?"],
+    "answers": ["Forward testing."]
+},
+
+"machine learning trading": {
+    "definition": "Machine Learning enables AI to recognize trading patterns from data.",
+    "notes": [
+        "Uses historical data.",
+        "Finds hidden relationships.",
+        "Can improve predictions.",
+        "Requires quality datasets.",
+        "Used by professional firms."
+    ],
+    "practice_questions": ["What does Machine Learning use?"],
+    "answers": ["Historical data."]
+},
+
+"ai trading": {
+    "definition": "AI Trading uses artificial intelligence to analyze markets and generate decisions.",
+    "notes": [
+        "Processes large datasets.",
+        "Detects patterns quickly.",
+        "Reduces emotional bias.",
+        "Can automate strategies.",
+        "Requires monitoring."
+    ],
+    "practice_questions": ["What is AI Trading?"],
+    "answers": ["Trading assisted by artificial intelligence."]
+},
+
+"strategy optimization": {
+    "definition": "Strategy Optimization improves trading systems without overfitting.",
+    "notes": [
+        "Adjust parameters carefully.",
+        "Avoid curve fitting.",
+        "Use out-of-sample testing.",
+        "Monitor consistency.",
+        "Optimize responsibly."
+    ],
+    "practice_questions": ["What should optimization avoid?"],
+    "answers": ["Overfitting."]
+},
+
+"professional portfolio management": {
+    "definition": "Professional Portfolio Management allocates capital efficiently across multiple assets.",
+    "notes": [
+        "Diversify positions.",
+        "Manage correlation.",
+        "Control overall risk.",
+        "Review allocations.",
+        "Protect capital."
+    ],
+    "practice_questions": ["Why diversify a portfolio?"],
+    "answers": ["To reduce overall risk."]
+},
+
+"capital allocation": {
+    "definition": "Capital Allocation determines how much money is assigned to each strategy or trade.",
+    "notes": [
+        "Prioritize high-quality setups.",
+        "Avoid overexposure.",
+        "Balance risk.",
+        "Review performance.",
+        "Adjust periodically."
+    ],
+    "practice_questions": ["What is capital allocation?"],
+    "answers": ["Assigning capital to trades or strategies."]
+},
+
+"trading business plan": {
+    "definition": "A Trading Business Plan treats trading as a professional business.",
+    "notes": [
+        "Set objectives.",
+        "Define risk rules.",
+        "Track expenses.",
+        "Review monthly.",
+        "Improve continuously."
+    ],
+    "practice_questions": ["Why have a trading business plan?"],
+    "answers": ["To trade professionally and consistently."]
+},
+
+"professional daily routine": {
+    "definition": "Professional traders follow a structured daily routine.",
+    "notes": [
+        "Review economic calendar.",
+        "Analyze higher timeframes.",
+        "Prepare watchlist.",
+        "Execute only planned trades.",
+        "Journal results."
+    ],
+    "practice_questions": ["What is the first task each trading day?"],
+    "answers": ["Review the economic calendar."]
+},
+
+"professional trader checklist": {
+    "definition": "A Professional Trader Checklist ensures every trade follows strict rules.",
+    "notes": [
+        "Trend confirmed.",
+        "Liquidity identified.",
+        "Entry confirmed.",
+        "Risk calculated.",
+        "News checked.",
+        "Stop Loss placed.",
+        "Take Profit planned.",
+        "Journal updated."
+    ],
+    "practice_questions": ["Why use a trading checklist?"],
+    "answers": ["To improve consistency and discipline."]
+},
+
+"master institutional framework": {
+    "definition": "The Master Institutional Framework combines ICT, Wyckoff, Dow Theory, Elliott Wave, Gann, quantitative analysis, psychology and risk management into one complete professional trading system.",
+    "notes": [
+        "Analyze macro trend.",
+        "Determine higher timeframe bias.",
+        "Locate liquidity.",
+        "Apply ICT concepts.",
+        "Confirm with Wyckoff.",
+        "Validate with volume.",
+        "Manage institutional risk.",
+        "Execute with discipline.",
+        "Review every trade.",
+        "Continuously improve."
+    ],
+    "practice_questions": ["What is the goal of the Master Institutional Framework?"],
+    "answers": ["Consistent professional trading using multiple institutional methodologies."]
+}

@@ -1,0 +1,75 @@
+try:
+    import MetaTrader5 as mt5
+except ImportError:
+    mt5 = None
+
+
+class MT5Trader:
+
+    def __init__(self):
+        self.connected = False
+
+    def connect(self):
+
+        if mt5 is None:
+            return False, "MetaTrader5 package is not installed."
+
+        if not mt5.initialize():
+            return False, "Failed to initialize MetaTrader 5."
+
+        self.connected = True
+        return True, "Connected successfully."
+
+    def disconnect(self):
+
+        if mt5 is not None:
+            mt5.shutdown()
+
+        self.connected = False
+
+    def account_info(self):
+
+        if not self.connected:
+            return None
+
+        info = mt5.account_info()
+
+        if info is None:
+            return None
+
+        return {
+            "login": info.login,
+            "server": info.server,
+            "balance": info.balance,
+            "equity": info.equity,
+            "margin": info.margin,
+            "profit": info.profit
+        }
+
+    def place_trade(self, trade):
+
+        if not self.connected:
+            return {
+                "success": False,
+                "message": "Not connected to MT5."
+            }
+
+        # Order execution will be implemented later.
+        return {
+            "success": True,
+            "message": "Trade received.",
+            "trade": trade
+        }
+
+
+if __name__ == "__main__":
+
+    trader = MT5Trader()
+
+    success, message = trader.connect()
+
+    print(message)
+
+    if success:
+        print(trader.account_info())
+        trader.disconnect()

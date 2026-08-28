@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Neural Networks",
+    "explanation": "A neural network is a machine learning model inspired by the human brain. It consists of interconnected neurons organized into layers that learn patterns from data.",
+    "code": "import tensorflow as tf\nmodel = tf.keras.Sequential()",
+    "output": "An empty neural network model is created.",
+    "practice": "Research how neural networks are used in image recognition.",
+    "quiz": "What is a neural network?"
+  },
+  "2": {
+    "title": "Input, Hidden and Output Layers",
+    "explanation": "A neural network has an input layer that receives data, one or more hidden layers that process it, and an output layer that produces predictions.",
+    "code": "model.add(tf.keras.layers.Dense(64, activation='relu'))",
+    "output": "A hidden layer is added to the model.",
+    "practice": "Draw a neural network with one input layer, two hidden layers, and one output layer.",
+    "quiz": "Which layer receives the input data?"
+  },
+  "3": {
+    "title": "Weights and Biases",
+    "explanation": "Weights determine the importance of each input, while biases help the model fit data more accurately.",
+    "code": "weight = 0.8\nbias = 0.2",
+    "output": "Example values for a weight and a bias.",
+    "practice": "Explain why weights change during training.",
+    "quiz": "What is the purpose of a bias?"
+  },
+  "4": {
+    "title": "Forward Propagation",
+    "explanation": "During forward propagation, data moves through the network from the input layer to the output layer to produce a prediction.",
+    "code": "prediction = model(data)",
+    "output": "The network produces a prediction.",
+    "practice": "Describe the steps of forward propagation.",
+    "quiz": "In which direction does data move during forward propagation?"
+  },
+  "5": {
+    "title": "Backpropagation",
+    "explanation": "Backpropagation calculates errors and updates the network's weights so that predictions become more accurate over time.",
+    "code": "optimizer.apply_gradients(zip(gradients, model.trainable_variables))",
+    "output": "The model updates its weights.",
+    "practice": "Research how gradient descent and backpropagation work together.",
+    "quiz": "Why is backpropagation important?"
+  }
+}

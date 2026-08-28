@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to SQL",
+    "explanation": "SQL (Structured Query Language) is the standard language used to create, manage, and query relational databases such as SQLite, MySQL, PostgreSQL, and Microsoft SQL Server.",
+    "code": "SELECT 'Hello, SQL!';",
+    "output": "Hello, SQL!",
+    "practice": "Install SQLite and run your first SQL query.",
+    "quiz": "What does SQL stand for?"
+  },
+  "2": {
+    "title": "Creating Tables",
+    "explanation": "Tables store related data in rows and columns. Each table has a name and one or more columns with defined data types.",
+    "code": "CREATE TABLE users (\n    id INTEGER PRIMARY KEY,\n    name TEXT,\n    email TEXT\n);",
+    "output": "A table named 'users' is created.",
+    "practice": "Create a table named products with id, name, and price columns.",
+    "quiz": "Which SQL statement creates a new table?"
+  },
+  "3": {
+    "title": "Inserting Data",
+    "explanation": "The INSERT statement adds new records to a table.",
+    "code": "INSERT INTO users (name, email)\nVALUES ('Alice', 'alice@example.com');",
+    "output": "One new row is added to the users table.",
+    "practice": "Insert three users into your users table.",
+    "quiz": "Which SQL command adds new records?"
+  },
+  "4": {
+    "title": "Selecting Data",
+    "explanation": "The SELECT statement retrieves data from one or more tables.",
+    "code": "SELECT * FROM users;",
+    "output": "Displays every row and column in the users table.",
+    "practice": "Display only the name column from the users table.",
+    "quiz": "Which SQL command retrieves data from a table?"
+  },
+  "5": {
+    "title": "Updating and Deleting Data",
+    "explanation": "UPDATE modifies existing records, while DELETE removes records from a table.",
+    "code": "UPDATE users SET name='Bob' WHERE id=1;\nDELETE FROM users WHERE id=2;",
+    "output": "One record is updated and another is deleted.",
+    "practice": "Change a user's email address, then delete another user.",
+    "quiz": "What is the difference between UPDATE and DELETE?"
+  }
+}

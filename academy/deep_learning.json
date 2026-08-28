@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Deep Learning",
+    "explanation": "Deep Learning is a branch of Machine Learning that uses neural networks with many layers to solve complex problems such as image recognition, speech recognition, and language understanding.",
+    "code": "import tensorflow as tf\nmodel = tf.keras.Sequential()",
+    "output": "A basic deep learning model is created.",
+    "practice": "Research three applications of deep learning.",
+    "quiz": "What is Deep Learning?"
+  },
+  "2": {
+    "title": "Artificial Neural Networks",
+    "explanation": "Neural networks are inspired by the human brain. They consist of interconnected nodes called neurons that process information.",
+    "code": "model.add(tf.keras.layers.Dense(32, activation='relu'))",
+    "output": "A dense neural network layer is added.",
+    "practice": "Draw a simple neural network with an input layer, one hidden layer, and an output layer.",
+    "quiz": "What are the basic parts of a neural network?"
+  },
+  "3": {
+    "title": "Activation Functions",
+    "explanation": "Activation functions determine how a neuron responds to input. Common functions include ReLU, Sigmoid, and Softmax.",
+    "code": "tf.keras.layers.Dense(64, activation='relu')",
+    "output": "A layer using the ReLU activation function.",
+    "practice": "Research the difference between ReLU and Sigmoid.",
+    "quiz": "Which activation function is commonly used in hidden layers?"
+  },
+  "4": {
+    "title": "Training a Neural Network",
+    "explanation": "Training adjusts the weights of the network using optimization algorithms such as Gradient Descent and the Adam optimizer.",
+    "code": "model.compile(optimizer='adam', loss='mse')",
+    "output": "The model is ready for training.",
+    "practice": "Learn what an optimizer does during training.",
+    "quiz": "What is the purpose of an optimizer?"
+  },
+  "5": {
+    "title": "Making Predictions",
+    "explanation": "Once trained, a neural network can make predictions on new data that it has not seen before.",
+    "code": "predictions = model.predict(data)",
+    "output": "The model returns predictions for the input data.",
+    "practice": "Predict values using a trained model.",
+    "quiz": "When can a neural network make predictions?"
+  }
+}

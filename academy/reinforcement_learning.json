@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Reinforcement Learning",
+    "explanation": "Reinforcement Learning (RL) is a type of machine learning where an agent learns by interacting with an environment and receiving rewards or penalties for its actions.",
+    "code": "state = environment.reset()",
+    "output": "The learning environment is initialized.",
+    "practice": "Think of a real-life activity that involves learning through trial and error.",
+    "quiz": "What is Reinforcement Learning?"
+  },
+  "2": {
+    "title": "Agent, Environment, and Actions",
+    "explanation": "The agent is the learner, the environment is the world it interacts with, and actions are the choices the agent makes.",
+    "code": "action = agent.choose_action(state)",
+    "output": "The agent selects its next action.",
+    "practice": "Identify the agent, environment, and actions in a simple game like chess.",
+    "quiz": "What is the role of the environment?"
+  },
+  "3": {
+    "title": "Rewards",
+    "explanation": "A reward is feedback that tells the agent whether its action was good or bad. The goal is to maximize the total reward over time.",
+    "code": "reward = 10",
+    "output": "The agent receives a positive reward.",
+    "practice": "Give three examples of positive and negative rewards.",
+    "quiz": "Why are rewards important in Reinforcement Learning?"
+  },
+  "4": {
+    "title": "Exploration vs Exploitation",
+    "explanation": "Exploration means trying new actions to discover better strategies. Exploitation means choosing the best-known action based on previous experience. Good RL balances both.",
+    "code": "if random.random() < epsilon:\n    action = random_action()\nelse:\n    action = best_action()",
+    "output": "The agent either explores or exploits.",
+    "practice": "Explain why always exploiting may prevent finding a better solution.",
+    "quiz": "What is the difference between exploration and exploitation?"
+  },
+  "5": {
+    "title": "Applications of Reinforcement Learning",
+    "explanation": "Reinforcement Learning is used in robotics, autonomous vehicles, game-playing AI, recommendation systems, and resource optimization.",
+    "code": "# RL applications include robotics and games.",
+    "output": "Examples of where Reinforcement Learning is used.",
+    "practice": "Research one real-world application of Reinforcement Learning.",
+    "quiz": "Name two applications of Reinforcement Learning."
+  }
+}

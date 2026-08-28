@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to DNS",
+    "explanation": "DNS (Domain Name System) translates human-readable domain names like google.com into IP addresses that computers use to communicate.",
+    "code": "nslookup google.com",
+    "output": "Displays the IP address associated with google.com.",
+    "practice": "Use nslookup to find the IP address of three different websites.",
+    "quiz": "What does DNS stand for?"
+  },
+  "2": {
+    "title": "How DNS Works",
+    "explanation": "When you enter a website address, your device queries a DNS server. The server returns the correct IP address so your browser can connect to the website.",
+    "code": "dig openai.com",
+    "output": "Shows detailed DNS records for the domain.",
+    "practice": "Run dig on a website and identify its IP address.",
+    "quiz": "What is the purpose of a DNS server?"
+  },
+  "3": {
+    "title": "Common DNS Records",
+    "explanation": "DNS stores different record types. A records map names to IPv4 addresses, AAAA records to IPv6, CNAME creates aliases, MX handles email, and TXT stores text information.",
+    "code": "dig google.com MX",
+    "output": "Displays the mail server records for the domain.",
+    "practice": "Look up the MX records for a popular website.",
+    "quiz": "Which DNS record is commonly used for email servers?"
+  },
+  "4": {
+    "title": "Public DNS Services",
+    "explanation": "Public DNS providers include Google DNS (8.8.8.8), Cloudflare DNS (1.1.1.1), and Quad9 (9.9.9.9). They can improve reliability and performance.",
+    "code": "ping 8.8.8.8",
+    "output": "Checks connectivity to Google's public DNS server.",
+    "practice": "Research one advantage of using a public DNS service.",
+    "quiz": "What is Google's public DNS IPv4 address?"
+  },
+  "5": {
+    "title": "DNS Security",
+    "explanation": "DNS can be protected using technologies such as DNSSEC, which helps verify that DNS responses have not been altered.",
+    "code": "dig +dnssec example.com",
+    "output": "Displays DNS information including DNSSEC data when available.",
+    "practice": "Research why DNSSEC is important.",
+    "quiz": "What problem does DNSSEC help prevent?"
+  }
+}

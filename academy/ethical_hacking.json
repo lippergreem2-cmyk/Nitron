@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Ethical Hacking",
+    "explanation": "Ethical hacking is the authorized testing of computer systems, networks, or applications to identify security weaknesses before malicious attackers can exploit them. It should only be performed with permission.",
+    "code": "# Ethical hacking begins with authorization.",
+    "output": "Understanding the purpose of ethical hacking.",
+    "practice": "Research the difference between ethical hacking and malicious hacking.",
+    "quiz": "What is ethical hacking?"
+  },
+  "2": {
+    "title": "Types of Hackers",
+    "explanation": "Common terms include white-hat hackers (authorized defenders), black-hat hackers (malicious attackers), and gray-hat hackers (who may act without permission but not always with malicious intent).",
+    "code": "# White Hat\n# Black Hat\n# Gray Hat",
+    "output": "Different hacker categories are identified.",
+    "practice": "Write one sentence describing each type of hacker.",
+    "quiz": "Which type of hacker works with authorization to improve security?"
+  },
+  "3": {
+    "title": "Ethical Hacking Process",
+    "explanation": "A typical security assessment includes planning, information gathering, identifying weaknesses, validating findings in an authorized environment, reporting results, and helping fix the issues.",
+    "code": "# Plan -> Gather Information -> Assess -> Report",
+    "output": "The assessment workflow is understood.",
+    "practice": "Describe why documenting findings is important.",
+    "quiz": "Why is reporting an important part of an authorized security assessment?"
+  },
+  "4": {
+    "title": "Security Principles",
+    "explanation": "Strong security relies on principles such as confidentiality, integrity, and availability (the CIA triad), along with secure authentication and least privilege.",
+    "code": "# Confidentiality\n# Integrity\n# Availability",
+    "output": "Core security principles are introduced.",
+    "practice": "Give one example of each CIA principle.",
+    "quiz": "What does the CIA triad stand for?"
+  },
+  "5": {
+    "title": "Learning Safely",
+    "explanation": "Practice cybersecurity skills only in environments designed for learning, such as your own lab, virtual machines, or Capture the Flag (CTF) platforms where you have permission.",
+    "code": "# Practice only in authorized environments.",
+    "output": "Safe and responsible learning practices.",
+    "practice": "List three safe places where you can legally practice cybersecurity.",
+    "quiz": "Why should you only test systems that you own or have permission to assess?"
+  }
+}

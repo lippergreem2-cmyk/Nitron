@@ -1,0 +1,62 @@
+{
+  "domain": "Medicine and Health",
+  "description": "Knowledge about the human body, health, diseases, prevention, treatments, and medical science.",
+  "topics": [
+    {
+      "name": "Medical Fundamentals",
+      "knowledge": [
+        "Medicine is the science of preventing, diagnosing, and treating health conditions.",
+        "Healthcare combines biology, chemistry, technology, and clinical knowledge.",
+        "The human body is made of interconnected systems that work together."
+      ]
+    },
+    {
+      "name": "Human Body",
+      "knowledge": [
+        "The human body contains systems such as the nervous, circulatory, respiratory, digestive, and immune systems.",
+        "Organs perform specialized functions necessary for life.",
+        "Cells are the basic structural and functional units of the body."
+      ]
+    },
+    {
+      "name": "Health and Prevention",
+      "knowledge": [
+        "Preventive healthcare focuses on reducing disease risks before problems occur.",
+        "Healthy habits include balanced nutrition, physical activity, sleep, and hygiene.",
+        "Regular medical checkups help detect some health problems early."
+      ]
+    },
+    {
+      "name": "Diseases and Conditions",
+      "knowledge": [
+        "Diseases can be caused by infections, genetics, environmental factors, or changes in body function.",
+        "Doctors diagnose conditions using symptoms, examinations, tests, and medical knowledge.",
+        "Treatment depends on the specific condition and individual needs."
+      ]
+    },
+    {
+      "name": "Medical Technology",
+      "knowledge": [
+        "Medical technology helps diagnose, monitor, and treat health conditions.",
+        "Imaging technologies allow doctors to view structures inside the body.",
+        "Artificial intelligence can assist healthcare professionals with data analysis and research."
+      ]
+    },
+    {
+      "name": "Human Biology",
+      "knowledge": [
+        "DNA carries genetic information that influences biological characteristics.",
+        "The immune system protects the body from harmful organisms.",
+        "The brain controls many functions including movement, learning, and communication."
+      ]
+    },
+    {
+      "name": "Healthcare Ethics",
+      "knowledge": [
+        "Medical decisions should respect safety, privacy, and human dignity.",
+        "Healthcare professionals follow ethical principles when caring for patients.",
+        "Medical information should be handled responsibly."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,356 @@
+"""
+Nitron Task Executor
+
+Routes decisions to approved handlers and returns a clean,
+predictable execution result.
+"""
+
+from brain.decision import decision
+from brain.memory import memory
+
+try:
+    from brain.conversation.manager import manager
+except Exception:
+    manager = None
+
+
+class Executor:
+
+    def __init__(self):
+        self.running = False
+
+    def _record_conversation(self, command, response):
+        if manager is None:
+            return
+
+        try:
+            manager.user_message(command)
+            manager.start_response(response)
+            manager.finish_response()
+        except Exception:
+            pass
+
+    def _clean_project_result(self, result):
+        """
+        Normalize a project generator result.
+
+        Keeps routing metadata separate from project data.
+        """
+
+        if not isinstance(result, dict):
+            return {
+                "success": True,
+                "result": result
+            }
+
+        if not result.get("generated"):
+            return {
+                "success": False,
+                "result": result
+            }
+
+        project = {
+            "name": result.get("name"),
+            "type": result.get("project_type"),
+            "language": result.get("language"),
+            "directory": result.get("directory"),
+            "files": result.get("files", []),
+            "written_files": result.get(
+                "written_files",
+                []
+            ),
+        }
+
+        return {
+            "success": True,
+            "generated": True,
+            "project": project
+        }
+
+    def execute(self, command):
+
+        self.running = True
+
+        try:
+            decision_result = decision.decide(command)
+
+            module = decision_result.get("module")
+            action = decision_result.get("action")
+
+            # ==================================================
+            # LEARNED CAPABILITY
+            # ==================================================
+
+            if (
+                module == "learned"
+                and action == "capability"
+            ):
+
+                skill = decision_result.get("skill")
+
+                if not isinstance(skill, str):
+                    skill = str(skill or "")
+
+                handlers = decision_result.get(
+                    "handlers",
+                    []
+                )
+
+                # --------------------------------------------------
+                # Execute the first approved handler.
+                # --------------------------------------------------
+
+                if handlers:
+
+                    from brain.skill_handlers import run_handler
+
+                    handler_name = handlers[0]
+
+                    raw_result = run_handler(
+                        handler_name,
+                        command
+                    )
+
+                    clean_result = self._clean_project_result(
+                        raw_result
+                    )
+
+                    response = {
+                        "module": module,
+                        "action": action,
+                        "skill": {
+                            "name": skill,
+                            "confidence": decision_result.get(
+                                "confidence",
+                                0
+                            ),
+                            "handlers": handlers,
+                        },
+                        **clean_result,
+                    }
+
+                    message = self._build_message(
+                        response
+                    )
+
+                    memory.remember(
+                        "last_command",
+                        command
+                    )
+
+                    memory.remember(
+                        "last_module",
+                        module
+                    )
+
+                    memory.remember(
+                        "last_action",
+                        action
+                    )
+
+                    memory.remember(
+                        "last_learned_capability",
+                        skill
+                    )
+
+                    memory.remember(
+                        "last_action_result",
+                        message
+                    )
+
+                    self._record_conversation(
+                        command,
+                        message
+                    )
+
+                    return response
+
+                # --------------------------------------------------
+                # Learned capability without executable handler.
+                # --------------------------------------------------
+
+                from brain.reasoning import reasoning
+
+                raw_result = reasoning.answer(command)
+
+                if isinstance(raw_result, dict):
+
+                    response = {
+                        "module": module,
+                        "action": action,
+                        "skill": {
+                            "name": skill,
+                            "confidence": decision_result.get(
+                                "confidence",
+                                0
+                            ),
+                            "handlers": [],
+                        },
+                        "result": raw_result,
+                    }
+
+                    message = raw_result.get(
+                        "message",
+                        str(raw_result)
+                    )
+
+                else:
+
+                    message = str(raw_result)
+
+                    response = {
+                        "module": module,
+                        "action": action,
+                        "skill": {
+                            "name": skill,
+                            "confidence": decision_result.get(
+                                "confidence",
+                                0
+                            ),
+                            "handlers": [],
+                        },
+                        "result": message,
+                    }
+
+                memory.remember(
+                    "last_command",
+                    command
+                )
+
+                memory.remember(
+                    "last_module",
+                    module
+                )
+
+                memory.remember(
+                    "last_action",
+                    action
+                )
+
+                memory.remember(
+                    "last_learned_capability",
+                    skill
+                )
+
+                memory.remember(
+                    "last_action_result",
+                    message
+                )
+
+                self._record_conversation(
+                    command,
+                    message
+                )
+
+                return response
+
+            # ==================================================
+            # EXISTING BUILT-IN ROUTING
+            # ==================================================
+
+            response = {
+                "module": module,
+                "action": action,
+                "result": {
+                    "message": (
+                        f"Executing {action} "
+                        f"using {module} module."
+                    )
+                }
+            }
+
+            message = response["result"]["message"]
+
+            memory.remember(
+                "last_command",
+                command
+            )
+
+            memory.remember(
+                "last_module",
+                module
+            )
+
+            memory.remember(
+                "last_action",
+                action
+            )
+
+            memory.remember(
+                "last_action_result",
+                message
+            )
+
+            self._record_conversation(
+                command,
+                message
+            )
+
+            return response
+
+        except Exception as error:
+
+            error_message = (
+                f"Execution failed: {error}"
+            )
+
+            memory.remember(
+                "last_action_result",
+                error_message
+            )
+
+            self._record_conversation(
+                command,
+                error_message
+            )
+
+            return {
+                "success": False,
+                "error": error_message
+            }
+
+        finally:
+            self.running = False
+
+    def _build_message(self, response):
+        """
+        Create a human-readable execution message.
+        """
+
+        if response.get("generated"):
+
+            project = response.get(
+                "project",
+                {}
+            )
+
+            return (
+                "Project generated successfully.\n\n"
+                f"Name: {project.get('name')}\n"
+                f"Type: {project.get('type')}\n"
+                f"Language: {project.get('language')}\n"
+                f"Directory: {project.get('directory')}"
+            )
+
+        result = response.get("result")
+
+        if isinstance(result, dict):
+            return str(
+                result.get(
+                    "message",
+                    result
+                )
+            )
+
+        return str(result)
+
+    def status(self):
+        return {
+            "running": self.running
+        }
+
+    def stop(self):
+        self.running = False
+
+
+executor = Executor()

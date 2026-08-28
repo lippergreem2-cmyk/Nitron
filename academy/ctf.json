@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Capture The Flag (CTF)",
+    "explanation": "Capture The Flag (CTF) competitions are educational cybersecurity events where participants solve security challenges in a safe and authorized environment. They help learners develop practical problem-solving skills.",
+    "code": "# Join a beginner-friendly CTF platform.",
+    "output": "Understanding the purpose of CTF competitions.",
+    "practice": "Research three beginner-friendly CTF platforms.",
+    "quiz": "What does CTF stand for?"
+  },
+  "2": {
+    "title": "Common CTF Categories",
+    "explanation": "CTF challenges are organized into categories such as Web Security, Cryptography, Reverse Engineering, Digital Forensics, Binary Exploitation, OSINT, and Programming.",
+    "code": "categories = ['Web', 'Crypto', 'Forensics', 'Reverse Engineering', 'OSINT']",
+    "output": "The main CTF challenge categories are listed.",
+    "practice": "Choose one category and explain what skills it develops.",
+    "quiz": "Name four common CTF categories."
+  },
+  "3": {
+    "title": "Working as a Team",
+    "explanation": "Many CTF events encourage teamwork. Team members share knowledge, divide tasks, document solutions, and learn from one another.",
+    "code": "team = ['Alice', 'Bob', 'Charlie']",
+    "output": "A team collaborates to solve challenges.",
+    "practice": "List three benefits of working in a CTF team.",
+    "quiz": "Why is teamwork valuable in CTF competitions?"
+  },
+  "4": {
+    "title": "Learning from Challenges",
+    "explanation": "The goal of a CTF is learning. After solving a challenge, review the official solution or write-up to understand the concepts and improve your skills.",
+    "code": "# Read the official write-up after completing a challenge.",
+    "output": "Knowledge is reinforced through review.",
+    "practice": "Write a short summary of what you learned after completing a challenge.",
+    "quiz": "Why should you review challenge write-ups?"
+  },
+  "5": {
+    "title": "CTF Ethics",
+    "explanation": "CTF skills should be used responsibly. Practice only in authorized environments, follow competition rules, respect other participants, and apply your knowledge ethically.",
+    "code": "# Use cybersecurity skills responsibly.",
+    "output": "Responsible participation in CTF competitions.",
+    "practice": "Write five ethical principles for participating in CTF events.",
+    "quiz": "Why is it important to use CTF skills responsibly?"
+  }
+}

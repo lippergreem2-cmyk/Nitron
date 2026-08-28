@@ -1,0 +1,126 @@
+{
+  "name": "Networking Knowledge",
+  "description": "Core knowledge for understanding computer networks, communication systems, and internet infrastructure.",
+
+  "topics": {
+
+    "network_fundamentals": {
+      "concepts": [
+        "network devices",
+        "data transmission",
+        "packets",
+        "ports",
+        "protocols",
+        "IP addresses"
+      ],
+      "skills": [
+        "understand network communication",
+        "analyze network problems",
+        "design basic networks"
+      ]
+    },
+
+    "tcp_ip": {
+      "description": "The foundation of internet communication.",
+      "layers": [
+        "application layer",
+        "transport layer",
+        "internet layer",
+        "network access layer"
+      ],
+      "protocols": [
+        "TCP",
+        "UDP",
+        "IP",
+        "ICMP",
+        "ARP"
+      ]
+    },
+
+    "ip_addressing": {
+      "knowledge": [
+        "IPv4",
+        "IPv6",
+        "subnetting",
+        "private addresses",
+        "public addresses",
+        "DHCP"
+      ]
+    },
+
+    "common_protocols": {
+      "HTTP": {
+        "purpose": "Communication between web browsers and servers."
+      },
+      "HTTPS": {
+        "purpose": "Encrypted web communication using TLS."
+      },
+      "DNS": {
+        "purpose": "Converts domain names into IP addresses."
+      },
+      "FTP": {
+        "purpose": "File transfer communication."
+      },
+      "SSH": {
+        "purpose": "Secure remote system access."
+      }
+    },
+
+    "network_devices": {
+      "router": "Connects different networks together.",
+      "switch": "Connects devices inside a local network.",
+      "firewall": "Controls allowed and blocked network traffic.",
+      "access_point": "Provides wireless network access.",
+      "server": "Provides services and resources to clients."
+    },
+
+    "wireless_networking": {
+      "knowledge": [
+        "Wi-Fi standards",
+        "wireless security",
+        "SSID",
+        "authentication",
+        "signal strength"
+      ]
+    },
+
+    "network_security": {
+      "concepts": [
+        "firewalls",
+        "encryption",
+        "authentication",
+        "monitoring",
+        "secure configuration"
+      ],
+      "skills": [
+        "identify security risks",
+        "understand defensive networking",
+        "protect network systems"
+      ]
+    },
+
+    "cloud_networking": {
+      "knowledge": [
+        "virtual networks",
+        "cloud servers",
+        "network isolation",
+        "secure connections"
+      ]
+    },
+
+    "troubleshooting": {
+      "process": [
+        "identify the problem",
+        "check configuration",
+        "test connectivity",
+        "analyze results",
+        "apply fixes"
+      ],
+      "tools": [
+        "ping",
+        "traceroute",
+        "network logs"
+      ]
+    }
+  }
+}

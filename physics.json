@@ -1,0 +1,1578 @@
+{
+  "introduction to physics": {
+    "definition": "Physics is the branch of science that studies matter, energy, motion and their interactions.",
+    "notes": [
+      "Physics explains natural phenomena.",
+      "Physics uses experiments and observations.",
+      "SI units are used in measurements."
+    ],
+    "formulae": [],
+    "si_units": {},
+    "worked_examples": [
+      {
+        "question": "Name two branches of Physics.",
+        "solution": "Mechanics and Optics."
+      }
+    ],
+    "practice_questions": [
+      "Define Physics.",
+      "State two applications of Physics."
+    ],
+    "answers": [
+      "Physics is the study of matter, energy and their interactions.",
+      "Engineering and medicine."
+    ]
+  },
+
+  "measurement i": {
+    "definition": "Measurement is the process of determining the magnitude of a physical quantity.",
+    "notes": [
+      "Length is measured in metres.",
+      "Mass is measured in kilograms.",
+      "Time is measured in seconds."
+    ],
+    "formulae": [],
+    "si_units": {
+      "Length": "metre (m)",
+      "Mass": "kilogram (kg)",
+      "Time": "second (s)"
+    },
+    "worked_examples": [],
+    "practice_questions": [
+      "State the SI unit of length."
+    ],
+    "answers": [
+      "metre (m)"
+    ]
+  },
+
+  "measurement ii": {
+    "definition": "Measurement II covers area, volume and density.",
+    "notes": [
+      "Area is measured in square metres.",
+      "Volume is measured in cubic metres.",
+      "Density is mass per unit volume."
+    ],
+    "formulae": [
+      "Area = Length × Width",
+      "Volume = Length × Width × Height",
+      "Density = Mass / Volume"
+    ],
+    "si_units": {
+      "Area": "m²",
+      "Volume": "m³",
+      "Density": "kg/m³"
+    },
+    "worked_examples": [
+      {
+        "question": "Find the density of a body of mass 20 kg and volume 5 m³.",
+        "solution": "Density = 20 ÷ 5 = 4 kg/m³."
+      }
+    ],
+    "practice_questions": [
+      "Define density."
+    ],
+    "answers": [
+      "Density is mass per unit volume."
+    ]
+  },
+
+  "force": {
+    "definition": "A force is a push or pull acting on an object.",
+    "notes": [
+      "Force changes motion.",
+      "The SI unit is Newton."
+    ],
+    "formulae": [
+      "F = ma"
+    ],
+    "si_units": {
+      "Force": "Newton (N)"
+    },
+    "worked_examples": [
+      {
+        "question": "A 5 kg object accelerates at 2 m/s².",
+        "solution": "F = 5 × 2 = 10 N."
+      }
+    ],
+    "practice_questions": [
+      "Define force."
+    ],
+    "answers": [
+      "A force is a push or pull acting on an object."
+    ]
+  },
+
+  "pressure": {
+    "definition": "Pressure is force per unit area.",
+    "notes": [
+      "Pressure increases when area decreases.",
+      "SI unit is Pascal."
+    ],
+    "formulae": [
+      "P = F / A"
+    ],
+    "si_units": {
+      "Pressure": "Pascal (Pa)"
+    },
+    "worked_examples": [
+      {
+        "question": "100 N acts on 5 m².",
+        "solution": "Pressure = 20 Pa."
+      }
+    ],
+    "practice_questions": [
+  "State the formula for pressure."
+],
+"answers": [
+  "P = F / A."
+]
+},
+"particulate nature of matter": {
+  "definition": "Matter is anything that occupies space and has mass. It is made up of tiny particles called atoms and molecules.",
+
+  "notes": [
+    "Matter exists in three states: solid, liquid and gas.",
+    "Particles are always in constant random motion.",
+    "Particles in solids are closely packed.",
+    "Particles in liquids can move past one another.",
+    "Particles in gases are far apart and move freely.",
+    "Diffusion is the movement of particles from a region of high concentration to a region of low concentration.",
+    "Brownian motion is evidence that particles are constantly moving.",
+    "Heating increases the kinetic energy of particles."
+  ],
+
+  "formulae": [],
+
+  "si_units": {},
+
+  "worked_examples": [
+    {
+      "question": "Why does the smell of perfume spread throughout a room?",
+      "solution": "Perfume particles diffuse through the air from a region of high concentration to a region of low concentration."
+    },
+    {
+      "question": "Why does sugar dissolve faster in hot water?",
+      "solution": "The particles move faster at higher temperatures, increasing the rate of diffusion."
+    }
+  ],
+
+  "practice_questions": [
+    "Define matter.",
+    "State the three states of matter.",
+    "Define diffusion.",
+    "Explain Brownian motion.",
+    "Why is diffusion faster in gases than in liquids?",
+    "State two differences between solids and gases.",
+    "Give two examples of diffusion.",
+    "Why do gases occupy the whole container?"
+  ],
+
+  "answers": [
+    "Matter is anything that occupies space and has mass.",
+    "Solid, liquid and gas.",
+    "Diffusion is the movement of particles from a region of high concentration to a region of low concentration.",
+    "Brownian motion is the random movement of tiny particles suspended in a fluid.",
+    "Because gas particles move faster and are further apart.",
+    "Solids have fixed shape and volume while gases have neither.",
+    "Perfume spreading and ink spreading in water.",
+    "Because gas particles move freely in all directions."
+  ]
+},
+"thermal expansion": {
+  "definition": "Thermal expansion is the increase in the length, area or volume of a substance when it is heated.",
+
+  "notes": [
+    "Most substances expand when heated and contract when cooled.",
+    "Expansion occurs because particles gain kinetic energy and move further apart.",
+    "Solids expand less than liquids, while gases expand the most.",
+    "Expansion can be linear, superficial (area) or cubical (volume).",
+    "Expansion joints are left on bridges and railway lines.",
+    "Electric power lines are left slightly loose to allow expansion.",
+    "Bimetallic strips are used in thermostats.",
+    "Thermometers work because liquids expand when heated.",
+    "Glass may crack if heated unevenly.",
+    "Thermal expansion has both advantages and disadvantages."
+  ],
+
+  "formulae": [],
+
+  "si_units": {},
+
+  "worked_examples": [
+    {
+      "question": "Why are gaps left between railway rails?",
+      "solution": "They allow the rails to expand during hot weather and prevent buckling."
+    },
+    {
+      "question": "Why do overhead electric cables sag more on hot days?",
+      "solution": "The cables expand when heated, increasing their length."
+    },
+    {
+      "question": "Why is a bimetallic strip used in an electric iron?",
+      "solution": "It bends when heated and automatically switches the iron on or off."
+    }
+  ],
+
+  "practice_questions": [
+    "Define thermal expansion.",
+    "State three applications of thermal expansion.",
+    "State two disadvantages of thermal expansion.",
+    "Why are expansion joints left on bridges?",
+    "Why do power lines sag during hot weather?",
+    "Explain how a bimetallic strip works.",
+    "State the three types of thermal expansion.",
+    "Why does glass crack when hot water is poured into it suddenly?",
+    "Name two instruments that use thermal expansion.",
+    "State one advantage and one disadvantage of thermal expansion."
+  ],
+
+  "answers": [
+    "Thermal expansion is the increase in size of a substance when heated.",
+    "Thermometers, bimetallic strips and expansion joints.",
+    "Buckling of railway lines and cracking of glass.",
+    "To allow the bridge to expand safely.",
+    "Because the wires expand when heated.",
+    "The two metals expand at different rates causing the strip to bend.",
+    "Linear, superficial and cubical expansion.",
+    "Uneven expansion creates stress which cracks the glass.",
+    "Thermometer and thermostat.",
+    "Advantage: Used in thermometers. Disadvantage: Can buckle railway lines."
+  ]
+},
+"heat transfer": {
+  "definition": "Heat transfer is the movement of heat energy from a region of higher temperature to a region of lower temperature.",
+
+  "notes": [
+    "Heat always flows from a hotter body to a colder body.",
+    "There are three methods of heat transfer: conduction, convection and radiation.",
+    "Conduction mainly occurs in solids.",
+    "Convection occurs in liquids and gases.",
+    "Radiation does not require a material medium.",
+    "Metals are good conductors of heat.",
+    "Wood, plastic and rubber are poor conductors (insulators).",
+    "Black dull surfaces are good absorbers and emitters of heat.",
+    "Shiny silver surfaces are poor absorbers but good reflectors of heat.",
+    "Vacuum flasks reduce heat transfer by conduction, convection and radiation."
+  ],
+
+  "formulae": [],
+
+  "si_units": {},
+
+  "worked_examples": [
+    {
+      "question": "Why are saucepan handles made of plastic?",
+      "solution": "Plastic is a poor conductor of heat, preventing heat from reaching the hand."
+    },
+    {
+      "question": "Why are cooking pots made of aluminium?",
+      "solution": "Aluminium is a good conductor of heat, allowing food to cook quickly."
+    },
+    {
+      "question": "Why is the inside of a vacuum flask silvered?",
+      "solution": "To reflect thermal radiation and reduce heat loss."
+    }
+  ],
+
+  "practice_questions": [
+    "Define heat transfer.",
+    "State the three methods of heat transfer.",
+    "Differentiate between conduction and convection.",
+    "Which method of heat transfer does not require a medium?",
+    "Why are metals good conductors of heat?",
+    "State two examples of poor conductors of heat.",
+    "Why are houses fitted with ventilators near the roof?",
+    "Explain how sea breeze is formed.",
+    "State three uses of conductors of heat.",
+    "Explain why black cooking pots are preferred."
+  ],
+
+  "answers": [
+    "Heat transfer is the movement of heat from a hotter body to a colder body.",
+    "Conduction, convection and radiation.",
+    "Conduction occurs without movement of the material while convection occurs through movement of fluids.",
+    "Radiation.",
+    "Because they contain free electrons that transfer heat quickly.",
+    "Wood and plastic.",
+    "To allow hot air to escape.",
+    "Sea breeze is formed by convection currents due to unequal heating of land and sea.",
+    "Cooking utensils, electric irons and soldering irons.",
+    "Because black surfaces absorb heat more efficiently."
+  ]
+},
+"temperature": {
+  "definition": "Temperature is the measure of the degree of hotness or coldness of a body.",
+
+  "notes": [
+    "Temperature determines the direction of heat flow.",
+    "Heat flows from a body at a higher temperature to one at a lower temperature.",
+    "Temperature is measured using a thermometer.",
+    "The SI unit of temperature is Kelvin (K).",
+    "The Celsius scale (°C) is commonly used.",
+    "The freezing point of pure water is 0°C.",
+    "The boiling point of pure water is 100°C at standard atmospheric pressure.",
+    "Normal human body temperature is approximately 37°C.",
+    "Clinical thermometers measure body temperature.",
+    "Laboratory thermometers measure temperatures in experiments."
+  ],
+
+  "formulae": [
+    "K = °C + 273",
+    "°C = K - 273"
+  ],
+
+  "si_units": {
+    "Temperature": "Kelvin (K)"
+  },
+
+  "worked_examples": [
+    {
+      "question": "Convert 25°C to Kelvin.",
+      "solution": "K = 25 + 273 = 298 K."
+    },
+    {
+      "question": "Convert 300 K to degrees Celsius.",
+      "solution": "°C = 300 − 273 = 27°C."
+    },
+    {
+      "question": "Convert 15°C to Kelvin.",
+      "solution": "K = 15 + 273 = 288 K."
+    }
+  ],
+
+  "practice_questions": [
+    "Define temperature.",
+    "State the SI unit of temperature.",
+    "Convert 20°C to Kelvin.",
+    "Convert 310 K to degrees Celsius.",
+    "State the freezing point of water.",
+    "State the boiling point of water.",
+    "Differentiate between heat and temperature.",
+    "State two types of thermometers.",
+    "What is the normal human body temperature?",
+    "State two uses of a laboratory thermometer."
+  ],
+
+  "answers": [
+    "Temperature is the measure of the degree of hotness or coldness of a body.",
+    "Kelvin (K).",
+    "293 K.",
+    "37°C.",
+    "0°C.",
+    "100°C.",
+    "Heat is energy while temperature measures hotness or coldness.",
+    "Clinical thermometer and laboratory thermometer.",
+    "37°C.",
+    "To measure temperatures during scientific experiments and laboratory investigations."
+  ]
+},
+"electrostatics i": {
+  "definition": "Electrostatics is the study of electric charges at rest.",
+
+  "notes": [
+    "There are two types of electric charges: positive and negative.",
+    "Like charges repel while unlike charges attract.",
+    "Electric charges are produced by friction.",
+    "Materials that easily gain or lose electrons become charged.",
+    "Conductors allow electric charges to flow easily.",
+    "Insulators do not allow electric charges to flow easily.",
+    "Charging can occur by friction, contact or induction.",
+    "Lightning is a natural example of static electricity.",
+    "Earthing removes excess electric charge safely.",
+    "Electroscopes are used to detect electric charges."
+  ],
+
+  "formulae": [],
+
+  "si_units": {
+    "Electric Charge": "Coulomb (C)"
+  },
+
+  "worked_examples": [
+    {
+      "question": "A plastic ruler is rubbed with dry hair. What happens?",
+      "solution": "The ruler becomes negatively charged due to friction."
+    },
+    {
+      "question": "Why is lightning dangerous?",
+      "solution": "It is a large discharge of static electricity carrying enormous energy."
+    },
+    {
+      "question": "Why are fuel tankers fitted with metal chains?",
+      "solution": "The chains earth the tanker and prevent sparks caused by static electricity."
+    }
+  ],
+
+  "practice_questions": [
+    "Define electrostatics.",
+    "State the two types of electric charge.",
+    "State the law of electric charges.",
+    "Explain charging by friction.",
+    "State three methods of charging.",
+    "Differentiate between conductors and insulators.",
+    "State three applications of electrostatics.",
+    "Explain how lightning occurs.",
+    "What is the function of an electroscope?",
+    "Why is earthing important?"
+  ],
+
+  "answers": [
+    "Electrostatics is the study of electric charges at rest.",
+    "Positive and negative charges.",
+    "Like charges repel while unlike charges attract.",
+    "Rubbing transfers electrons from one material to another.",
+    "Friction, contact and induction.",
+    "Conductors allow charges to move while insulators do not.",
+    "Photocopiers, spray painting and electrostatic precipitators.",
+    "Lightning occurs when accumulated charges discharge between clouds or between clouds and the Earth.",
+    "To detect the presence and type of electric charge.",
+    "It safely removes excess electric charge."
+  ]
+},
+"cells and simple circuits": {
+  "definition": "An electric cell is a source of electrical energy that converts chemical energy into electrical energy. A simple circuit is a complete path through which electric current flows.",
+
+  "notes": [
+    "A simple circuit consists of a cell, connecting wires, a switch and a load such as a bulb.",
+    "Current flows only in a closed circuit.",
+    "Conventional current flows from the positive terminal to the negative terminal.",
+    "Electrons flow from the negative terminal to the positive terminal.",
+    "Cells may be connected in series or parallel.",
+    "Dry cells are primary cells and cannot be recharged.",
+    "Accumulators are secondary cells and can be recharged.",
+    "A switch opens or closes a circuit.",
+    "Conductors allow current to pass while insulators do not.",
+    "Circuit diagrams use standard electrical symbols."
+  ],
+
+  "formulae": [
+    "V = IR"
+  ],
+
+  "si_units": {
+    "Current": "Ampere (A)",
+    "Voltage": "Volt (V)",
+    "Resistance": "Ohm (Ω)"
+  },
+
+  "worked_examples": [
+    {
+      "question": "Why does a bulb fail to light in an open circuit?",
+      "solution": "Because the circuit is incomplete and current cannot flow."
+    },
+    {
+      "question": "Name two components required to make a simple electric circuit.",
+      "solution": "A cell and connecting wires."
+    },
+    {
+      "question": "State the direction of conventional current.",
+      "solution": "From the positive terminal to the negative terminal."
+    }
+  ],
+
+  "practice_questions": [
+    "Define an electric cell.",
+    "Define a simple electric circuit.",
+    "Differentiate between an open circuit and a closed circuit.",
+    "State the function of a switch.",
+    "Name four components of a simple circuit.",
+    "Differentiate between primary and secondary cells.",
+    "State the SI unit of current.",
+    "State the SI unit of voltage.",
+    "Draw a simple electric circuit using standard symbols.",
+    "State Ohm's Law."
+  ],
+
+  "answers": [
+    "An electric cell converts chemical energy into electrical energy.",
+    "A simple circuit is a complete path through which current flows.",
+    "An open circuit is incomplete while a closed circuit is complete.",
+    "To open or close the circuit.",
+    "Cell, wires, switch and bulb.",
+    "Primary cells cannot be recharged while secondary cells can.",
+    "Ampere (A).",
+    "Volt (V).",
+    "A correct circuit diagram using standard symbols.",
+    "The current through a conductor is directly proportional to the potential difference across it provided the temperature remains constant."
+  ]
+},
+"current electricity": {
+  "definition": "Current electricity is the continuous flow of electric charges through a conductor in a closed circuit.",
+
+  "notes": [
+    "Electric current is the rate of flow of electric charge.",
+    "Current is measured using an ammeter connected in series.",
+    "Potential difference (voltage) is measured using a voltmeter connected in parallel.",
+    "Resistance is the opposition to the flow of electric current.",
+    "Ohm's Law states that current is directly proportional to voltage provided temperature remains constant.",
+    "Conductors have low resistance while insulators have very high resistance.",
+    "Resistance increases with the length of a conductor.",
+    "Resistance decreases when the cross-sectional area increases.",
+    "Electrical energy is converted into heat, light or mechanical energy.",
+    "A fuse protects electrical appliances from excessive current."
+  ],
+
+  "formulae": [
+    "I = Q / t",
+    "V = IR",
+    "R = V / I",
+    "P = VI",
+    "Electrical Energy = VIt"
+  ],
+
+  "si_units": {
+    "Current": "Ampere (A)",
+    "Voltage": "Volt (V)",
+    "Resistance": "Ohm (Ω)",
+    "Power": "Watt (W)",
+    "Charge": "Coulomb (C)"
+  },
+
+  "worked_examples": [
+    {
+      "question": "A charge of 20 C flows through a conductor in 4 s. Calculate the current.",
+      "solution": "I = Q/t = 20 ÷ 4 = 5 A."
+    },
+    {
+      "question": "A resistor has a resistance of 10 Ω and carries a current of 2 A. Find the voltage.",
+      "solution": "V = IR = 10 × 2 = 20 V."
+    },
+    {
+      "question": "A bulb uses 12 V and draws 3 A. Calculate the power.",
+      "solution": "P = VI = 12 × 3 = 36 W."
+    }
+  ],
+
+  "practice_questions": [
+    "Define electric current.",
+    "State the SI unit of current.",
+    "State Ohm's Law.",
+    "Differentiate between an ammeter and a voltmeter.",
+    "Define resistance.",
+    "Calculate the current when 30 C flows in 6 s.",
+    "A resistor of 5 Ω carries a current of 4 A. Find the voltage.",
+    "Calculate the power of a device operating at 240 V and 2 A.",
+    "State three factors affecting resistance.",
+    "Explain the function of a fuse."
+  ],
+
+  "answers": [
+    "Electric current is the rate of flow of electric charge.",
+    "Ampere (A).",
+    "Current is directly proportional to voltage provided temperature remains constant.",
+    "An ammeter measures current in series while a voltmeter measures voltage in parallel.",
+    "Resistance is the opposition to the flow of current.",
+    "5 A.",
+    "20 V.",
+    "480 W.",
+    "Length, cross-sectional area and temperature.",
+    "A fuse protects electrical circuits by melting when excessive current flows."
+  ]
+},
+"magnetism": {
+  "definition": "Magnetism is the property of certain materials to attract iron, nickel, cobalt and steel.",
+
+  "notes": [
+    "A magnet has two poles: North and South.",
+    "Like poles repel while unlike poles attract.",
+    "Magnetic materials include iron, nickel, cobalt and steel.",
+    "Non-magnetic materials include wood, plastic, glass and copper.",
+    "A freely suspended magnet points in the North-South direction.",
+    "Magnetic field lines run from the North pole to the South pole outside a magnet.",
+    "The magnetic field is strongest at the poles.",
+    "Magnets can be made by stroking, electrical method or induction.",
+    "Magnets can lose magnetism by heating, hammering or improper storage.",
+    "Magnets should be stored with soft iron keepers."
+  ],
+
+  "formulae": [],
+
+  "si_units": {},
+
+  "worked_examples": [
+    {
+      "question": "A freely suspended magnet is left to settle. In which direction will it point?",
+      "solution": "It points in the North-South direction."
+    },
+    {
+      "question": "Name two magnetic materials.",
+      "solution": "Iron and steel."
+    },
+    {
+      "question": "Why are keepers used when storing magnets?",
+      "solution": "They reduce loss of magnetism."
+    }
+  ],
+
+  "practice_questions": [
+    "Define magnetism.",
+    "State the two poles of a magnet.",
+    "State the law of magnetic poles.",
+    "Name four magnetic materials.",
+    "Name four non-magnetic materials.",
+    "Explain how magnets are made by stroking.",
+    "State three methods of demagnetising a magnet.",
+    "Why does a compass point North-South?",
+    "State two uses of magnets.",
+    "Why should magnets be stored with keepers?"
+  ],
+
+  "answers": [
+    "Magnetism is the property of attracting magnetic materials.",
+    "North pole and South pole.",
+    "Like poles repel while unlike poles attract.",
+    "Iron, steel, nickel and cobalt.",
+    "Wood, plastic, glass and copper.",
+    "A magnetic material is stroked repeatedly in one direction using a permanent magnet.",
+    "Heating, hammering and placing in an alternating magnetic field.",
+    "Because the Earth behaves like a giant magnet.",
+    "Electric motors and loudspeakers.",
+    "To reduce loss of magnetism."
+  ]
+},
+"floating and sinking": {
+  "definition": "Floating and sinking depend on the upthrust acting on a body and its weight.",
+
+  "notes": [
+    "Upthrust is the upward force exerted by a fluid on an immersed body.",
+    "A body floats if the upthrust is equal to or greater than its weight.",
+    "A body sinks if its weight is greater than the upthrust.",
+    "Archimedes' Principle states that a body wholly or partially immersed in a fluid experiences an upthrust equal to the weight of the fluid displaced.",
+    "Density determines whether an object floats or sinks.",
+    "Objects less dense than water float.",
+    "Objects denser than water sink.",
+    "Ships float because they displace a large volume of water.",
+    "Submarines control floating and sinking using ballast tanks.",
+    "Hydrometers are used to measure the relative density of liquids."
+  ],
+
+  "formulae": [
+    "Density = Mass / Volume",
+    "Upthrust = Weight of fluid displaced"
+  ],
+
+  "si_units": {
+    "Density": "kg/m³",
+    "Force": "Newton (N)",
+    "Volume": "m³"
+  },
+
+  "worked_examples": [
+    {
+      "question": "A wooden block is placed in water and floats. Why?",
+      "solution": "Its density is less than that of water, so the upthrust balances its weight."
+    },
+    {
+      "question": "Why does a stone sink in water?",
+      "solution": "Its density is greater than that of water, so its weight is greater than the upthrust."
+    },
+    {
+      "question": "State Archimedes' Principle.",
+      "solution": "A body immersed in a fluid experiences an upthrust equal to the weight of the fluid displaced."
+    }
+  ],
+
+  "practice_questions": [
+    "Define upthrust.",
+    "State Archimedes' Principle.",
+    "Differentiate between floating and sinking.",
+    "Why does a ship made of steel float?",
+    "State two applications of Archimedes' Principle.",
+    "What instrument is used to measure the relative density of liquids?",
+    "Why do submarines sink and rise?",
+    "State the formula for density.",
+    "A body has a mass of 12 kg and a volume of 3 m³. Calculate its density.",
+    "State two factors that determine whether an object floats."
+  ],
+
+  "answers": [
+    "Upthrust is the upward force exerted by a fluid on an immersed body.",
+    "A body immersed in a fluid experiences an upthrust equal to the weight of the displaced fluid.",
+    "A floating body has upthrust equal to its weight while a sinking body has weight greater than upthrust.",
+    "Because it displaces enough water to produce sufficient upthrust.",
+    "Hydrometers and ship design.",
+    "Hydrometer.",
+    "They fill or empty ballast tanks with water.",
+    "Density = Mass / Volume.",
+    "4 kg/m³.",
+    "Density of the object and the upthrust."
+  ]
+},
+"waves": {
+  "definition": "A wave is a disturbance that transfers energy from one point to another without transferring matter.",
+
+  "notes": [
+    "Waves transfer energy but not matter.",
+    "There are two main types of waves: transverse waves and longitudinal waves.",
+    "In transverse waves, particles vibrate at right angles to the direction of wave travel.",
+    "In longitudinal waves, particles vibrate parallel to the direction of wave travel.",
+    "Examples of transverse waves include light waves and water waves.",
+    "Examples of longitudinal waves include sound waves.",
+    "The highest point of a transverse wave is called a crest.",
+    "The lowest point of a transverse wave is called a trough.",
+    "Wavelength is the distance between two successive crests or troughs.",
+    "Frequency is the number of complete waves produced per second.",
+    "The period is the time taken to produce one complete wave.",
+    "Wave speed depends on the medium through which the wave travels."
+  ],
+
+  "formulae": [
+    "Wave Speed = Frequency × Wavelength",
+    "v = fλ",
+    "Frequency = 1 / Period",
+    "f = 1/T"
+  ],
+
+  "si_units": {
+    "Wave Speed": "m/s",
+    "Frequency": "Hertz (Hz)",
+    "Wavelength": "metre (m)",
+    "Period": "second (s)"
+  },
+
+  "worked_examples": [
+    {
+      "question": "A wave has a frequency of 20 Hz and a wavelength of 3 m. Calculate its speed.",
+      "solution": "v = fλ = 20 × 3 = 60 m/s."
+    },
+    {
+      "question": "A wave has a period of 0.2 s. Find its frequency.",
+      "solution": "f = 1/T = 1/0.2 = 5 Hz."
+    },
+    {
+      "question": "A wave travels at 40 m/s and has a frequency of 8 Hz. Find its wavelength.",
+      "solution": "λ = v/f = 40/8 = 5 m."
+    }
+  ],
+
+  "practice_questions": [
+    "Define a wave.",
+    "Differentiate between transverse and longitudinal waves.",
+    "Define wavelength.",
+    "Define frequency.",
+    "State the SI unit of frequency.",
+    "State the wave equation.",
+    "A wave has a frequency of 15 Hz and a wavelength of 4 m. Calculate its speed.",
+    "State three examples of transverse waves.",
+    "State two examples of longitudinal waves.",
+    "Define the period of a wave."
+  ],
+
+  "answers": [
+    "A wave is a disturbance that transfers energy without transferring matter.",
+    "Transverse waves vibrate at right angles while longitudinal waves vibrate parallel to the direction of travel.",
+    "The distance between two successive crests or troughs.",
+    "The number of complete waves produced per second.",
+    "Hertz (Hz).",
+    "v = fλ.",
+    "60 m/s.",
+    "Light waves, water waves and radio waves.",
+    "Sound waves and compression waves in springs.",
+    "The time taken for one complete wave."
+  ]
+},
+"sound waves": {
+  "definition": "Sound is a form of energy produced by vibrating bodies and transmitted through a material medium as longitudinal waves.",
+
+  "notes": [
+    "Sound requires a material medium to travel.",
+    "Sound cannot travel through a vacuum.",
+    "Sound waves are longitudinal waves.",
+    "The speed of sound is greatest in solids, lower in liquids and lowest in gases.",
+    "The speed of sound in air at room temperature is about 340 m/s.",
+    "The pitch of a sound depends on its frequency.",
+    "The loudness of a sound depends on its amplitude.",
+    "Echoes are produced when sound is reflected from a surface.",
+    "Reverberation is the persistence of sound due to repeated reflections.",
+    "Ultrasound has frequencies above 20,000 Hz.",
+    "The human ear hears frequencies between 20 Hz and 20,000 Hz."
+  ],
+
+  "formulae": [
+    "v = fλ",
+    "Distance = Speed × Time",
+    "Distance to reflecting surface = (Speed × Time) / 2"
+  ],
+
+  "si_units": {
+    "Frequency": "Hertz (Hz)",
+    "Speed": "m/s",
+    "Wavelength": "metre (m)"
+  },
+
+  "worked_examples": [
+    {
+      "question": "An echo is heard 2 seconds after shouting. Calculate the distance to the wall. (Speed of sound = 340 m/s)",
+      "solution": "Distance = (340 × 2) ÷ 2 = 340 m."
+    },
+    {
+      "question": "A sound wave has a frequency of 500 Hz and a wavelength of 0.68 m. Calculate its speed.",
+      "solution": "v = fλ = 500 × 0.68 = 340 m/s."
+    },
+    {
+      "question": "Why can astronauts not hear each other directly in space?",
+      "solution": "Because space is a vacuum and sound cannot travel through a vacuum."
+    }
+  ],
+
+  "practice_questions": [
+    "Define sound.",
+    "Why can't sound travel through a vacuum?",
+    "State two characteristics of sound waves.",
+    "Differentiate between pitch and loudness.",
+    "Define an echo.",
+    "Define reverberation.",
+    "State the audible frequency range of the human ear.",
+    "Calculate the distance of a cliff if an echo is heard after 4 seconds. (Speed of sound = 340 m/s)",
+    "State three applications of ultrasound.",
+    "State the wave equation."
+  ],
+
+  "answers": [
+    "Sound is a form of energy produced by vibrating bodies.",
+    "Because there are no particles to transmit vibrations.",
+    "They are longitudinal waves and require a material medium.",
+    "Pitch depends on frequency while loudness depends on amplitude.",
+    "An echo is a reflected sound.",
+    "Reverberation is the persistence of sound due to repeated reflections.",
+    "20 Hz to 20,000 Hz.",
+    "680 m.",
+    "Medical scanning, SONAR and crack detection in metals.",
+    "v = fλ."
+  ]
+},
+"magnetic effect of electric current": {
+  "definition": "The magnetic effect of electric current is the production of a magnetic field around a conductor carrying electric current.",
+
+  "notes": [
+    "A current-carrying conductor produces a magnetic field.",
+    "The direction of the magnetic field is determined using the right-hand grip rule.",
+    "The magnetic field around a straight conductor is circular.",
+    "The magnetic field inside a solenoid is uniform.",
+    "A solenoid behaves like a bar magnet.",
+    "An electromagnet is produced when current flows through a coil wound around a soft iron core.",
+    "The strength of an electromagnet depends on the current, the number of turns and the core material.",
+    "Soft iron is used because it is easily magnetised and demagnetised.",
+    "Electromagnets are stronger than permanent magnets.",
+    "Electromagnets are widely used in industry."
+  ],
+
+  "formulae": [],
+
+  "si_units": {
+    "Current": "Ampere (A)"
+  },
+
+  "worked_examples": [
+    {
+      "question": "What happens when current flows through a solenoid?",
+      "solution": "The solenoid produces a magnetic field and behaves like a bar magnet."
+    },
+    {
+      "question": "How can the strength of an electromagnet be increased?",
+      "solution": "Increase the current, increase the number of turns or use a soft iron core."
+    },
+    {
+      "question": "Why is soft iron used instead of steel in electromagnets?",
+      "solution": "Soft iron is easily magnetised and demagnetised."
+    }
+  ],
+
+  "practice_questions": [
+    "Define the magnetic effect of electric current.",
+    "State the right-hand grip rule.",
+    "Describe the magnetic field around a straight conductor.",
+    "What is a solenoid?",
+    "State three factors affecting the strength of an electromagnet.",
+    "Why is soft iron used in electromagnets?",
+    "State three applications of electromagnets.",
+    "Differentiate between an electromagnet and a permanent magnet.",
+    "Describe the magnetic field inside a solenoid.",
+    "State two advantages of electromagnets."
+  ],
+
+  "answers": [
+    "It is the production of a magnetic field by an electric current.",
+    "The thumb points in the direction of current while the fingers show the direction of the magnetic field.",
+    "The field consists of concentric circles around the conductor.",
+    "A coil of insulated wire wound in the shape of a cylinder.",
+    "Current, number of turns and the core material.",
+    "Because it is easily magnetised and demagnetised.",
+    "Electric bells, relays and scrapyard cranes.",
+    "An electromagnet requires electric current while a permanent magnet does not.",
+    "The magnetic field is strong and nearly uniform.",
+    "They can be switched on or off and their strength can be varied."
+  ]
+},
+"electromagnetic induction": {
+  "definition": "Electromagnetic induction is the production of an electromotive force (e.m.f.) in a conductor when there is a change in magnetic flux linking the conductor.",
+
+  "notes": [
+    "Electromagnetic induction was discovered by Michael Faraday.",
+    "An induced current flows only when there is relative motion between a magnet and a conductor.",
+    "No current is induced if there is no change in magnetic flux.",
+    "The direction of the induced current is determined using Fleming's Right-Hand Rule.",
+    "The magnitude of the induced e.m.f. increases with the speed of motion.",
+    "Increasing the number of turns of the coil increases the induced e.m.f.",
+    "Using a stronger magnet increases the induced e.m.f.",
+    "Generators work using electromagnetic induction.",
+    "Transformers also depend on electromagnetic induction.",
+    "Electromagnetic induction is the basis of electricity generation in power stations."
+  ],
+
+  "formulae": [],
+
+  "si_units": {
+    "Electromotive Force": "Volt (V)",
+    "Current": "Ampere (A)"
+  },
+
+  "worked_examples": [
+    {
+      "question": "A magnet is pushed into a coil connected to a galvanometer. What is observed?",
+      "solution": "The galvanometer deflects, showing that an induced current is produced."
+    },
+    {
+      "question": "State two ways of increasing the induced e.m.f.",
+      "solution": "Move the magnet faster and increase the number of turns of the coil."
+    },
+    {
+      "question": "Why is no current produced when the magnet is stationary inside the coil?",
+      "solution": "Because there is no change in magnetic flux."
+    }
+  ],
+
+  "practice_questions": [
+    "Define electromagnetic induction.",
+    "State Faraday's Law of electromagnetic induction.",
+    "State Fleming's Right-Hand Rule.",
+    "State three factors affecting induced e.m.f.",
+    "Explain why a current is induced when a magnet moves through a coil.",
+    "State two applications of electromagnetic induction.",
+    "Differentiate between a motor and a generator.",
+    "Why is no current induced when there is no relative motion?",
+    "Name the scientist who discovered electromagnetic induction.",
+    "State two sources of electricity that use electromagnetic induction."
+  ],
+
+  "answers": [
+    "Electromagnetic induction is the production of an e.m.f. due to changing magnetic flux.",
+    "An e.m.f. is induced whenever magnetic flux linking a conductor changes.",
+    "Thumb shows motion, first finger shows magnetic field and second finger shows induced current.",
+    "Speed of motion, strength of magnet and number of turns of the coil.",
+    "Because the magnetic flux linking the coil changes.",
+    "Generators and transformers.",
+    "A motor converts electrical energy into mechanical energy while a generator converts mechanical energy into electrical energy.",
+    "Because there is no change in magnetic flux.",
+    "Michael Faraday.",
+    "Hydroelectric power stations and wind turbines."
+  ]
+},
+"mains electricity": {
+  "definition": "Mains electricity is the electrical energy supplied to homes, schools and industries through the national power grid.",
+
+  "notes": [
+    "Mains electricity is alternating current (AC).",
+    "In Kenya, the mains supply is approximately 240 V and 50 Hz.",
+    "Alternating current changes direction continuously.",
+    "Direct current (DC) flows in one direction only.",
+    "The three wires in domestic wiring are the live wire, neutral wire and earth wire.",
+    "The live wire is usually brown, the neutral wire is blue and the earth wire is green/yellow.",
+    "A fuse protects electrical appliances by melting when excessive current flows.",
+    "A circuit breaker automatically disconnects the supply during overloads or short circuits.",
+    "The earth wire protects users from electric shock.",
+    "Electrical power is measured in watts (W) while electrical energy is measured in kilowatt-hours (kWh).",
+    "One kilowatt-hour is the energy used by a 1000 W appliance operating for one hour."
+  ],
+
+  "formulae": [
+    "P = VI",
+    "E = Pt",
+    "Electrical Energy (kWh) = Power (kW) × Time (h)"
+  ],
+
+  "si_units": {
+    "Voltage": "Volt (V)",
+    "Current": "Ampere (A)",
+    "Power": "Watt (W)",
+    "Energy": "Joule (J)"
+  },
+
+  "worked_examples": [
+    {
+      "question": "A 1000 W electric heater operates for 3 hours. Calculate the energy used in kWh.",
+      "solution": "Energy = 1 kW × 3 h = 3 kWh."
+    },
+    {
+      "question": "A bulb operates at 240 V and draws 0.5 A. Calculate its power.",
+      "solution": "P = VI = 240 × 0.5 = 120 W."
+    },
+    {
+      "question": "Why is the earth wire important?",
+      "solution": "It provides a safe path for fault current and prevents electric shock."
+    }
+  ],
+
+  "practice_questions": [
+    "Define mains electricity.",
+    "Differentiate between AC and DC.",
+    "State the three wires used in domestic wiring.",
+    "State the colour of the live wire.",
+    "State the function of a fuse.",
+    "State the function of the earth wire.",
+    "Calculate the power of an appliance operating at 240 V and 4 A.",
+    "A 2 kW heater is used for 5 hours. Calculate the energy consumed in kWh.",
+    "State the SI unit of power.",
+    "State two safety precautions when using electricity."
+  ],
+
+  "answers": [
+    "Mains electricity is the electrical energy supplied through the national grid.",
+    "AC changes direction while DC flows in one direction only.",
+    "Live wire, neutral wire and earth wire.",
+    "Brown.",
+    "It protects appliances by melting when excessive current flows.",
+    "It prevents electric shock by providing a path to earth.",
+    "960 W.",
+    "10 kWh.",
+    "Watt (W).",
+    "Do not handle appliances with wet hands; ensure proper earthing of appliances."
+  ]
+},
+"cathode rays": {
+  "definition": "Cathode rays are streams of fast-moving electrons emitted from the cathode in a discharge tube under low pressure and high voltage.",
+
+  "notes": [
+    "Cathode rays consist of electrons.",
+    "They travel in straight lines.",
+    "They cast sharp shadows when an object is placed in their path.",
+    "They cause certain materials to fluoresce.",
+    "They possess kinetic energy.",
+    "Cathode rays are deflected by electric fields.",
+    "Cathode rays are deflected by magnetic fields.",
+    "The amount of deflection depends on the strength of the electric or magnetic field.",
+    "Cathode rays produce X-rays when they strike a metal target at high speed.",
+    "Cathode ray tubes (CRTs) were used in old television sets and computer monitors."
+  ],
+
+  "formulae": [],
+
+  "si_units": {},
+
+  "worked_examples": [
+    {
+      "question": "How can you prove that cathode rays travel in straight lines?",
+      "solution": "They cast sharp shadows when an object is placed in their path."
+    },
+    {
+      "question": "What happens when cathode rays strike a fluorescent screen?",
+      "solution": "The screen glows because it fluoresces."
+    },
+    {
+      "question": "Why are cathode rays deflected by electric and magnetic fields?",
+      "solution": "Because they are negatively charged electrons."
+    }
+  ],
+
+  "practice_questions": [
+    "Define cathode rays.",
+    "State four properties of cathode rays.",
+    "What particles make up cathode rays?",
+    "Why are cathode rays deflected by electric fields?",
+    "State two uses of cathode ray tubes.",
+    "How are X-rays produced using cathode rays?",
+    "What colour charge do cathode rays carry?",
+    "State one experiment that proves cathode rays travel in straight lines.",
+    "Why do fluorescent screens glow when struck by cathode rays?",
+    "Differentiate between cathode rays and X-rays."
+  ],
+
+  "answers": [
+    "Cathode rays are streams of fast-moving electrons emitted from the cathode.",
+    "They travel in straight lines, possess kinetic energy, are deflected by electric fields and are deflected by magnetic fields.",
+    "Electrons.",
+    "Because electrons are negatively charged.",
+    "Television picture tubes and computer monitors.",
+    "When fast-moving cathode rays strike a metal target.",
+    "Negative charge.",
+    "The shadow experiment.",
+    "Because the screen fluoresces when struck by electrons.",
+    "Cathode rays are streams of electrons while X-rays are electromagnetic waves."
+  ]
+},
+"x-rays": {
+  "definition": "X-rays are high-energy electromagnetic waves with very short wavelengths and high penetrating power.",
+
+  "notes": [
+    "X-rays are invisible electromagnetic waves.",
+    "They travel at the speed of light.",
+    "They have very short wavelengths and high frequencies.",
+    "X-rays are produced when fast-moving electrons strike a metal target.",
+    "They are not deflected by electric or magnetic fields.",
+    "They penetrate soft tissues but are absorbed by dense materials such as bones.",
+    "Lead is used to absorb X-rays because it is very dense.",
+    "Overexposure to X-rays can damage living cells.",
+    "X-rays blacken photographic film.",
+    "X-rays ionise gases."
+  ],
+
+  "formulae": [],
+
+  "si_units": {},
+
+  "worked_examples": [
+    {
+      "question": "Why do doctors use X-rays to examine broken bones?",
+      "solution": "Bones absorb X-rays more than soft tissues, producing a clear image."
+    },
+    {
+      "question": "Why do radiographers wear lead aprons?",
+      "solution": "Lead absorbs X-rays and protects the body from harmful radiation."
+    },
+    {
+      "question": "State one property of X-rays that makes them useful in medicine.",
+      "solution": "They can penetrate soft tissues but are absorbed by bones."
+    }
+  ],
+
+  "practice_questions": [
+    "Define X-rays.",
+    "State five properties of X-rays.",
+    "How are X-rays produced?",
+    "Why are X-rays dangerous?",
+    "State four uses of X-rays.",
+    "Why is lead used as a shield against X-rays?",
+    "Differentiate between X-rays and cathode rays.",
+    "Can X-rays be deflected by electric fields? Explain.",
+    "State one advantage and one disadvantage of X-rays.",
+    "Why do bones appear white on an X-ray photograph?"
+  ],
+
+  "answers": [
+    "X-rays are high-energy electromagnetic waves with high penetrating power.",
+    "They are invisible, travel at the speed of light, penetrate matter, ionise gases and blacken photographic film.",
+    "They are produced when fast-moving electrons strike a metal target.",
+    "They can damage living cells and cause cancer after prolonged exposure.",
+    "Medical diagnosis, airport security, industrial inspection and cancer treatment.",
+    "Because lead absorbs X-rays effectively.",
+    "X-rays are electromagnetic waves while cathode rays are streams of electrons.",
+    "No. They have no electric charge.",
+    "Advantage: Used in medical diagnosis. Disadvantage: Can damage living tissue.",
+    "Because bones absorb more X-rays than surrounding soft tissues."
+  ]
+},
+"radioactivity": {
+  "definition": "Radioactivity is the spontaneous disintegration of unstable atomic nuclei accompanied by the emission of alpha, beta or gamma radiation.",
+
+  "notes": [
+    "Radioactivity was discovered by Henri Becquerel in 1896.",
+    "Marie and Pierre Curie discovered radioactive elements such as radium and polonium.",
+    "Radioactive decay is spontaneous and cannot be controlled.",
+    "There are three main types of radiation: alpha, beta and gamma.",
+    "Alpha particles have the highest ionising power but the lowest penetrating power.",
+    "Beta particles have moderate ionising and penetrating power.",
+    "Gamma rays have the greatest penetrating power but the lowest ionising power.",
+    "Radioactivity is measured using a Geiger-Müller (GM) tube and counter.",
+    "Half-life is the time taken for half of the radioactive nuclei to decay.",
+    "Radioactive materials must be handled carefully using lead shielding and remote handling equipment."
+  ],
+
+  "formulae": [
+    "Half-life = Time taken for half the radioactive nuclei to decay"
+  ],
+
+  "si_units": {
+    "Radioactivity": "Becquerel (Bq)"
+  },
+
+  "worked_examples": [
+    {
+      "question": "A radioactive substance has a half-life of 8 days. If the initial mass is 80 g, what mass remains after 16 days?",
+      "solution": "After one half-life: 40 g. After two half-lives: 20 g."
+    },
+    {
+      "question": "Which radiation can be stopped by paper?",
+      "solution": "Alpha radiation."
+    },
+    {
+      "question": "Which radiation has the highest penetrating power?",
+      "solution": "Gamma radiation."
+    }
+  ],
+
+  "practice_questions": [
+    "Define radioactivity.",
+    "Name the three types of radioactive emissions.",
+    "Differentiate between alpha, beta and gamma radiation.",
+    "Define half-life.",
+    "State three properties of alpha particles.",
+    "State three uses of radioactivity.",
+    "State three dangers of radioactivity.",
+    "Name the instrument used to detect radioactive radiation.",
+    "A radioactive substance has a half-life of 5 years. If the initial mass is 32 g, what mass remains after 15 years?",
+    "State four safety precautions when handling radioactive materials."
+  ],
+
+  "answers": [
+    "Radioactivity is the spontaneous disintegration of unstable nuclei accompanied by emission of radiation.",
+    "Alpha, beta and gamma.",
+    "Alpha has high ionising but low penetrating power; beta has moderate ionising and penetrating power; gamma has low ionising but high penetrating power.",
+    "The time taken for half of the radioactive nuclei to decay.",
+    "They are positively charged, highly ionising and weakly penetrating.",
+    "Cancer treatment, medical tracers and carbon dating.",
+    "Cancer, genetic mutations and radiation sickness.",
+    "Geiger-Müller counter.",
+    "4 g.",
+    "Use lead shielding, wear protective clothing, minimise exposure time and maximise distance from the source."
+  ]
+},
+"electronics": {
+  "definition": "Electronics is the branch of physics that deals with the control and movement of electrons in electronic devices and circuits.",
+
+  "notes": [
+    "Electronic devices control the flow of electrons.",
+    "Semiconductors include silicon and germanium.",
+    "A diode allows current to flow in only one direction.",
+    "A light emitting diode (LED) produces light when current flows through it.",
+    "A transistor is used as an amplifier or switch.",
+    "A resistor limits the flow of electric current.",
+    "A capacitor stores electrical charge temporarily.",
+    "An integrated circuit (IC) contains many electronic components on a single chip.",
+    "Electronic circuits are used in radios, televisions, computers and mobile phones.",
+    "Digital electronics uses binary numbers (0 and 1)."
+  ],
+
+  "formulae": [
+    "V = IR",
+    "P = VI"
+  ],
+
+  "si_units": {
+    "Voltage": "Volt (V)",
+    "Current": "Ampere (A)",
+    "Resistance": "Ohm (Ω)",
+    "Power": "Watt (W)"
+  },
+
+  "worked_examples": [
+    {
+      "question": "What is the function of a diode?",
+      "solution": "A diode allows current to flow in one direction only."
+    },
+    {
+      "question": "State one use of a transistor.",
+      "solution": "It is used as an amplifier or an electronic switch."
+    },
+    {
+      "question": "Why are LEDs preferred to filament bulbs?",
+      "solution": "They consume less power, last longer and produce less heat."
+    }
+  ],
+
+  "practice_questions": [
+    "Define electronics.",
+    "What is a semiconductor?",
+    "State two examples of semiconductors.",
+    "State the function of a diode.",
+    "State the function of a resistor.",
+    "State the function of a capacitor.",
+    "State two uses of a transistor.",
+    "What is an integrated circuit (IC)?",
+    "State four applications of electronics.",
+    "Differentiate between an LED and an ordinary bulb."
+  ],
+
+  "answers": [
+    "Electronics is the study of the control of electrons in electronic devices.",
+    "A semiconductor is a material whose conductivity lies between that of a conductor and an insulator.",
+    "Silicon and germanium.",
+    "It allows current to flow in one direction only.",
+    "It limits the flow of current.",
+    "It stores electric charge temporarily.",
+    "Amplifier and electronic switch.",
+    "A complete electronic circuit on a small silicon chip.",
+    "Computers, televisions, radios and mobile phones.",
+    "An LED uses less power and lasts longer than an ordinary bulb."
+  ]
+},
+"circular motion": {
+  "definition": "Circular motion is the motion of a body along a circular path about a fixed centre.",
+
+  "notes": [
+    "In uniform circular motion, speed remains constant but velocity changes continuously.",
+    "A force directed towards the centre of the circle keeps the body moving in a circular path.",
+    "This force is called centripetal force.",
+    "Centrifugal force is an apparent outward force observed in a rotating frame.",
+    "Examples of circular motion include satellites orbiting the Earth, a stone tied to a string and vehicle wheels.",
+    "Angular velocity is the rate of change of angular displacement.",
+    "One complete revolution is equal to 360° or 2π radians.",
+    "The period is the time taken to complete one revolution.",
+    "Frequency is the number of revolutions per second.",
+    "Banking roads reduces the risk of vehicles skidding while negotiating bends."
+  ],
+
+  "formulae": [
+    "v = 2πr/T",
+    "v = 2πrf",
+    "Fc = mv²/r",
+    "f = 1/T",
+    "ω = 2πf"
+  ],
+
+  "si_units": {
+    "Radius": "metre (m)",
+    "Velocity": "m/s",
+    "Force": "Newton (N)",
+    "Frequency": "Hertz (Hz)",
+    "Period": "second (s)",
+    "Angular Velocity": "rad/s"
+  },
+
+  "worked_examples": [
+    {
+      "question": "A stone of mass 2 kg moves in a circle of radius 5 m at 10 m/s. Find the centripetal force.",
+      "solution": "Fc = mv²/r = (2 × 10²) ÷ 5 = 40 N."
+    },
+    {
+      "question": "A wheel makes 4 revolutions every second. Find its frequency.",
+      "solution": "Frequency = 4 Hz."
+    },
+    {
+      "question": "A body completes one revolution in 0.5 s. Find its frequency.",
+      "solution": "f = 1/T = 1/0.5 = 2 Hz."
+    }
+  ],
+
+  "practice_questions": [
+    "Define circular motion.",
+    "Define centripetal force.",
+    "State the formula for centripetal force.",
+    "Differentiate between centripetal and centrifugal force.",
+    "State three examples of circular motion.",
+    "Define frequency.",
+    "Define period.",
+    "A body of mass 4 kg moves in a circle of radius 2 m at 6 m/s. Calculate the centripetal force.",
+    "State two advantages of banking roads.",
+    "State the SI unit of angular velocity."
+  ],
+
+  "answers": [
+    "Circular motion is motion along a circular path.",
+    "Centripetal force is the force directed towards the centre of a circular path.",
+    "Fc = mv²/r.",
+    "Centripetal force acts towards the centre while centrifugal force appears to act away from the centre.",
+    "Satellite motion, ceiling fan blades and a stone tied to a string.",
+    "Frequency is the number of revolutions per second.",
+    "The period is the time taken for one complete revolution.",
+    "72 N.",
+    "It reduces skidding and increases safety.",
+    "rad/s."
+  ]
+},
+"gravitation": {
+  "definition": "Gravitation is the force of attraction between any two masses in the universe.",
+
+  "notes": [
+    "Every object with mass attracts every other object.",
+    "Gravity is the force that pulls objects towards the centre of the Earth.",
+    "The acceleration due to gravity on Earth is approximately 9.8 m/s² (often taken as 10 m/s² in KCSE calculations).",
+    "Weight is the force with which the Earth attracts a body.",
+    "Mass is the amount of matter in a body and remains constant.",
+    "Weight changes depending on the value of gravity.",
+    "The universal law of gravitation was stated by Sir Isaac Newton.",
+    "Satellites remain in orbit because of gravitational attraction.",
+    "The Moon revolves around the Earth due to gravity.",
+    "Gravitational force decreases as the distance between two bodies increases."
+  ],
+
+  "formulae": [
+    "W = mg",
+    "F = Gm₁m₂/r²"
+  ],
+
+  "si_units": {
+    "Mass": "kilogram (kg)",
+    "Weight": "Newton (N)",
+    "Force": "Newton (N)",
+    "Acceleration due to gravity": "m/s²"
+  },
+
+  "worked_examples": [
+    {
+      "question": "Calculate the weight of a body of mass 12 kg. (g = 10 m/s²)",
+      "solution": "W = mg = 12 × 10 = 120 N."
+    },
+    {
+      "question": "A body weighs 250 N on Earth. Find its mass. (g = 10 m/s²)",
+      "solution": "Mass = Weight ÷ g = 250 ÷ 10 = 25 kg."
+    },
+    {
+      "question": "Why do astronauts appear weightless in orbit?",
+      "solution": "They are in continuous free fall around the Earth."
+    }
+  ],
+
+  "practice_questions": [
+    "Define gravitation.",
+    "Differentiate between mass and weight.",
+    "State Newton's Law of Universal Gravitation.",
+    "State the SI unit of weight.",
+    "State the SI unit of mass.",
+    "A body has a mass of 8 kg. Calculate its weight. (g = 10 m/s²)",
+    "A body weighs 180 N. Calculate its mass. (g = 10 m/s²)",
+    "Why does the Moon not fall onto the Earth?",
+    "State three effects of gravity.",
+    "State the value of acceleration due to gravity on Earth."
+  ],
+
+  "answers": [
+    "Gravitation is the force of attraction between masses.",
+    "Mass is the amount of matter while weight is the force due to gravity.",
+    "Every two bodies attract each other with a force proportional to the product of their masses and inversely proportional to the square of the distance between them.",
+    "Newton (N).",
+    "Kilogram (kg).",
+    "80 N.",
+    "18 kg.",
+    "Because it has sufficient tangential velocity to remain in orbit.",
+    "Objects fall to the ground, planets remain in orbit and tides occur.",
+    "Approximately 9.8 m/s² (or 10 m/s² for KCSE calculations)."
+  ]
+},
+"electrostatics ii": {
+  "definition": "Electrostatics II deals with electric fields, electric potential, capacitors and the applications of static electricity.",
+
+  "notes": [
+    "An electric field is the region around a charged body where another charge experiences a force.",
+    "Electric field lines originate from positive charges and terminate on negative charges.",
+    "Electric field lines never cross one another.",
+    "The strength of an electric field is greatest where the field lines are closest together.",
+    "Capacitors are devices used to store electric charge.",
+    "Capacitance is the ability of a capacitor to store charge.",
+    "The SI unit of capacitance is the Farad (F).",
+    "Lightning conductors protect buildings from lightning strikes.",
+    "Electrostatic precipitators remove dust particles from industrial gases.",
+    "Static electricity is used in spray painting and photocopiers."
+  ],
+
+  "formulae": [
+    "C = Q/V",
+    "Q = CV"
+  ],
+
+  "si_units": {
+    "Charge": "Coulomb (C)",
+    "Voltage": "Volt (V)",
+    "Capacitance": "Farad (F)"
+  },
+
+  "worked_examples": [
+    {
+      "question": "A capacitor stores 0.02 C of charge at a potential difference of 10 V. Calculate its capacitance.",
+      "solution": "C = Q/V = 0.02 ÷ 10 = 0.002 F."
+    },
+    {
+      "question": "A capacitor has a capacitance of 5 μF and is connected to a 12 V supply. Calculate the charge stored.",
+      "solution": "Q = CV = 5 × 10⁻⁶ × 12 = 6 × 10⁻⁵ C."
+    },
+    {
+      "question": "Why are lightning conductors fitted on tall buildings?",
+      "solution": "They safely conduct lightning charges to the ground."
+    }
+  ],
+
+  "practice_questions": [
+    "Define an electric field.",
+    "Define capacitance.",
+    "State the SI unit of capacitance.",
+    "State two applications of static electricity.",
+    "What is the function of a lightning conductor?",
+    "State the formula for capacitance.",
+    "A capacitor stores 0.06 C at 30 V. Calculate its capacitance.",
+    "Why do electric field lines never cross?",
+    "State three uses of capacitors.",
+    "Differentiate between an electric field and a magnetic field."
+  ],
+
+  "answers": [
+    "An electric field is the region around a charge where another charge experiences a force.",
+    "Capacitance is the ability of a capacitor to store electric charge.",
+    "Farad (F).",
+    "Photocopiers and spray painting.",
+    "It safely directs lightning into the ground.",
+    "C = Q/V.",
+    "0.002 F.",
+    "Because the field has only one direction at any point.",
+    "Power supplies, radios and camera flash units.",
+    "An electric field acts on electric charges while a magnetic field acts on moving charges and magnets."
+  ]
+},
+"electromagnetic spectrum": {
+  "definition": "The electromagnetic spectrum is the complete range of electromagnetic waves arranged according to wavelength or frequency.",
+
+  "notes": [
+    "Electromagnetic waves do not require a material medium.",
+    "They all travel through a vacuum at a speed of 3 × 10⁸ m/s.",
+    "They are transverse waves.",
+    "The electromagnetic spectrum consists of radio waves, microwaves, infrared rays, visible light, ultraviolet rays, X-rays and gamma rays.",
+    "Radio waves have the longest wavelength and lowest frequency.",
+    "Gamma rays have the shortest wavelength and highest frequency.",
+    "Visible light is the only part of the spectrum that can be detected by the human eye.",
+    "The colours of visible light are Red, Orange, Yellow, Green, Blue, Indigo and Violet (ROYGBIV).",
+    "The frequency of electromagnetic waves increases from radio waves to gamma rays.",
+    "The wavelength decreases from radio waves to gamma rays."
+  ],
+
+  "formulae": [
+    "v = fλ",
+    "c = fλ"
+  ],
+
+  "si_units": {
+    "Speed": "m/s",
+    "Frequency": "Hertz (Hz)",
+    "Wavelength": "metre (m)"
+  },
+
+  "worked_examples": [
+    {
+      "question": "An electromagnetic wave has a frequency of 100 MHz. Calculate its wavelength.",
+      "solution": "λ = c/f = (3 × 10⁸) ÷ (100 × 10⁶) = 3 m."
+    },
+    {
+      "question": "Which electromagnetic wave has the highest penetrating power?",
+      "solution": "Gamma rays."
+    },
+    {
+      "question": "State the colour with the longest wavelength in visible light.",
+      "solution": "Red."
+    }
+  ],
+
+  "practice_questions": [
+    "Define the electromagnetic spectrum.",
+    "State the seven regions of the electromagnetic spectrum in order.",
+    "Which electromagnetic wave has the longest wavelength?",
+    "Which electromagnetic wave has the highest frequency?",
+    "State three properties common to all electromagnetic waves.",
+    "State two uses of radio waves.",
+    "State two uses of microwaves.",
+    "State two uses of infrared radiation.",
+    "State two uses of ultraviolet radiation.",
+    "State two uses each of X-rays and gamma rays."
+  ],
+
+  "answers": [
+    "The electromagnetic spectrum is the complete range of electromagnetic waves.",
+    "Radio waves, Microwaves, Infrared, Visible light, Ultraviolet, X-rays, Gamma rays.",
+    "Radio waves.",
+    "Gamma rays.",
+    "They are transverse waves, travel at 3 × 10⁸ m/s in a vacuum and do not require a material medium.",
+    "Radio broadcasting and television communication.",
+    "Satellite communication and cooking in microwave ovens.",
+    "Remote controls and thermal imaging.",
+    "Sterilising equipment and detecting forged banknotes.",
+    "X-rays: medical imaging and airport security. Gamma rays: cancer treatment and sterilisation."
+    ]
+  }
+}

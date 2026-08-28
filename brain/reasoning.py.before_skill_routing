@@ -1,0 +1,2325 @@
+from pathlib import Path
+"""
+from pathlib import Path
+Nitron Reasoning Engine
+"""
+
+import re
+
+from brain.memory import memory
+
+try:
+    from brain.knowledge_engine import knowledge
+except ImportError:
+    knowledge = None
+
+try:
+    from brain.learner import learner
+except ImportError:
+    learner = None
+
+try:
+    from brain.search_engine import search_engine
+except ImportError:
+    search_engine = None
+
+
+class ReasoningEngine:
+
+    def __init__(self):
+        self.name = "Nitron Reasoning Engine"
+
+    def analyze(self, command):
+        """
+        Analyze a command and classify its intent.
+        """
+
+        command = command.lower().strip()
+
+        categories = {
+
+            "academy": [
+                "teach",
+                "learn",
+                "lesson",
+                "academy",
+                "study"
+            ],
+
+            "developer": [
+                "build",
+                "create",
+                "generate",
+                "project",
+                "website",
+                "app",
+                "code",
+                "program"
+            ],
+
+            "trading": [
+                "trade",
+                "gold",
+                "forex",
+                "bitcoin",
+                "crypto",
+                "market"
+            ],
+
+            "weather": [
+                "weather",
+                "forecast"
+            ],
+
+            "music": [
+                "music",
+                "song",
+                "play"
+            ],
+
+            "system": [
+                "time",
+                "date"
+            ]
+        }
+
+        for category, words in categories.items():
+
+            if any(word in command for word in words):
+                return category
+
+        return "chat"
+
+    def explain(self, topic):
+        """
+        Search the built-in knowledge base.
+        """
+
+        if knowledge is None:
+            return "Knowledge engine is unavailable."
+
+        result = knowledge.get_category(topic)
+
+        if result:
+            return result
+
+        return f"I don't know enough about '{topic}'."
+
+    def search_learned(self, keyword):
+        """
+        Find genuinely relevant learned knowledge.
+
+        Matching priority:
+            1. Exact topic
+            2. Topic contains the requested subject
+            3. Title contains the requested subject
+            4. Summary/content contains the subject
+
+        Common question words are ignored.
+        Unrelated learned topics must not be returned.
+        """
+
+        if learner is None:
+            return {}
+
+        if not keyword:
+            return {}
+
+        text = str(keyword).lower().strip()
+
+        stop_words = {
+            "what", "what's", "whats",
+            "is", "are", "am",
+            "an", "a", "the",
+            "tell", "me", "about",
+            "explain", "describe",
+            "who", "how", "why",
+            "where", "when",
+            "can", "you", "please",
+            "do", "does", "did",
+            "this", "that", "it",
+            "to", "of", "for",
+            "in", "on", "and"
+        }
+
+        words = re.findall(
+            r"[a-zA-Z0-9_]+",
+            text
+        )
+
+        words = [
+            word
+            for word in words
+            if word not in stop_words
+            and len(word) >= 2
+        ]
+
+        if not words:
+            return {}
+
+        results = {}
+
+        # --------------------------------------------------
+        # CAPABILITY INDEX
+        #
+        # Learned capabilities act as a routing signal.
+        # The capability registry does not replace learned
+        # knowledge; it helps us find the most relevant
+        # learned topic.
+        # --------------------------------------------------
+
+        capability_matches = []
+
+        try:
+
+            from brain.skill_registry import find_for_task
+
+            capability_matches = find_for_task(
+                text
+            )
+
+        except Exception:
+
+            capability_matches = []
+
+        capability_topics = {}
+
+        for capability in capability_matches:
+
+            if not isinstance(
+                capability,
+                dict
+            ):
+                continue
+
+            capability_name = str(
+                capability.get("name", "")
+            ).strip().lower()
+
+            if capability_name:
+
+                capability_topics[
+                    capability_name
+                ] = capability
+
+        for topic, data in learner.knowledge.items():
+
+            topic_text = str(topic).lower().strip()
+
+            if isinstance(data, dict):
+
+                title = str(
+                    data.get("title", "")
+                ).lower().strip()
+
+                summary = data.get(
+                    "summary",
+                    ""
+                )
+
+                if not isinstance(summary, str):
+
+                    old_content = data.get(
+                        "content",
+                        {}
+                    )
+
+                    if isinstance(old_content, dict):
+                        summary = old_content.get(
+                            "summary",
+                            ""
+                        )
+                    else:
+                        summary = str(old_content)
+
+                summary_text = str(summary).lower()
+
+            else:
+
+                title = ""
+                summary_text = str(data).lower()
+
+            score = 0
+
+            # --------------------------------------------------
+            # CAPABILITY MATCHING
+            #
+            # A registered capability is strong evidence that
+            # this learned topic is relevant to the request.
+            # --------------------------------------------------
+
+            capability = capability_topics.get(
+                topic_text
+            )
+
+            if capability:
+
+                confidence = float(
+                    capability.get(
+                        "confidence",
+                        0
+                    )
+                )
+
+                # A registered capability is strong evidence
+                # that this exact learned topic is relevant.
+                capability_words = re.findall(
+                    r"[a-zA-Z0-9_]+",
+                    topic_text
+                )
+
+                # Give capability matches a large base bonus.
+                score += 300
+
+                # Specific multi-word capabilities get a much
+                # stronger bonus than broad capabilities such
+                # as "python".
+                if len(capability_words) > 1:
+                    score += (
+                        (len(capability_words) - 1)
+                        * 500
+                    )
+
+                # Confidence still contributes to ranking.
+                score += int(
+                    60 * confidence
+                )
+
+            # --------------------------------------------------
+            # TOPIC MATCHING
+            # --------------------------------------------------
+
+            exact_topic = False
+            topic_match_count = 0
+
+            for word in words:
+
+                if word == topic_text:
+                    score += 100
+                    exact_topic = True
+
+                elif word in topic_text:
+                    score += 40
+                    topic_match_count += 1
+
+            # --------------------------------------------------
+            # TITLE MATCHING
+            # --------------------------------------------------
+
+            for word in words:
+
+                if word in title:
+                    score += 20
+
+            # --------------------------------------------------
+            # CONTENT MATCHING
+            # --------------------------------------------------
+
+            for word in words:
+
+                if word in summary_text:
+                    score += 3
+
+            # --------------------------------------------------
+            # RELEVANCE GATE
+            #
+            # A learned topic must actually match the requested
+            # subject. Content-only accidental matches are not
+            # enough.
+            # --------------------------------------------------
+
+            if not exact_topic and topic_match_count == 0:
+
+                title_match = any(
+                    word in title
+                    for word in words
+                )
+
+                if not title_match:
+                    continue
+
+            # --------------------------------------------------
+            # QUALITY BONUS
+            # --------------------------------------------------
+
+            if title and summary_text.strip():
+                score += 10
+
+            if score > 0:
+
+                results[topic] = {
+                    "score": score,
+                    "data": data
+                }
+
+        # Highest relevance first.
+
+        if not results:
+            return {}
+
+        ranked = sorted(
+            results.items(),
+            key=lambda item: item[1]["score"],
+            reverse=True
+        )
+
+        return dict(ranked)
+
+
+    def _normalize_learned(self, topic, data):
+        """
+        Convert learned knowledge into a clean answer.
+
+        Supports normal learned knowledge and structured image
+        knowledge without exposing raw OCR or sensitive text.
+        """
+
+        if not isinstance(data, dict):
+            return {
+                "message": str(data),
+                "learned": True,
+                "topic": topic,
+            }
+
+        title = str(data.get("title", "")).strip()
+        summary = str(data.get("summary", "")).strip()
+
+        # ------------------------------------------------------
+        # Older learner format
+        # ------------------------------------------------------
+
+        if not summary:
+            content = data.get("content", {})
+
+            if isinstance(content, dict):
+                summary = str(
+                    content.get("summary", "")
+                ).strip()
+
+                if not title:
+                    title = str(
+                        content.get("title", "")
+                    ).strip()
+
+            elif content:
+                summary = str(content).strip()
+
+        # ------------------------------------------------------
+        # Structured image knowledge
+        # ------------------------------------------------------
+
+        sections = data.get("sections", {})
+
+        if not isinstance(sections, dict):
+            sections = {}
+
+        image_metadata = sections.get(
+            "image_metadata",
+            {}
+        )
+
+        image_topics = sections.get(
+            "topics",
+            []
+        )
+
+        vision = sections.get(
+            "vision",
+            {}
+        )
+
+        research = sections.get(
+            "research",
+            {}
+        )
+
+        is_image = (
+            "image_metadata" in sections
+            or "topics" in sections
+            or (
+                isinstance(title, str)
+                and title.lower().startswith(
+                    "image analysis:"
+                )
+            )
+        )
+
+        if is_image:
+
+            parts = []
+
+            if summary:
+                parts.append(summary)
+
+            if image_topics:
+                topic_list = [
+                    str(item).strip()
+                    for item in image_topics
+                    if str(item).strip()
+                ]
+
+                if topic_list:
+                    parts.append(
+                        "Learned image topics: "
+                        + ", ".join(topic_list)
+                        + "."
+                    )
+
+            if isinstance(image_metadata, dict):
+
+                width = image_metadata.get("width")
+                height = image_metadata.get("height")
+                image_format = image_metadata.get("format")
+
+                if width and height:
+                    parts.append(
+                        f"Image dimensions: {width}x{height}."
+                    )
+
+                if image_format:
+                    parts.append(
+                        f"Image format: {image_format}."
+                    )
+
+            if isinstance(vision, dict):
+
+                if vision.get("success"):
+                    analysis = str(
+                        vision.get("analysis", "")
+                    ).strip()
+
+                    if analysis:
+                        parts.append(
+                            "Vision analysis: "
+                            + analysis[:1200]
+                        )
+
+                else:
+                    parts.append(
+                        "Detailed vision analysis was unavailable."
+                    )
+
+            if isinstance(research, dict):
+
+                research_results = research.get(
+                    "results",
+                    []
+                )
+
+                if isinstance(research_results, list):
+                    titles = []
+
+                    for item in research_results[:5]:
+
+                        if not isinstance(item, dict):
+                            continue
+
+                        title_text = str(
+                            item.get("title", "")
+                        ).strip()
+
+                        if title_text:
+                            titles.append(title_text)
+
+                    if titles:
+                        parts.append(
+                            "Related public research: "
+                            + "; ".join(titles)
+                            + "."
+                        )
+
+            if parts:
+                summary = " ".join(parts)
+
+        # ------------------------------------------------------
+        # Final fallback
+        # ------------------------------------------------------
+
+        if not summary:
+            summary = (
+                "I learned about "
+                + str(topic)
+                + "."
+            )
+
+        result = {
+            "message": summary,
+            "topic": topic,
+            "learned": True,
+        }
+
+        if title:
+            result["title"] = title
+
+        if data.get("source"):
+            result["source"] = data.get("source")
+
+        if is_image:
+            result["image_learned"] = True
+
+            if image_topics:
+                result["detected_topics"] = image_topics
+
+            if image_metadata:
+                result["image_metadata"] = image_metadata
+
+            if research:
+                result["research"] = research
+
+        return result
+
+    def _is_code_generation_request(self, question):
+        """
+        Detect programming and software-development requests.
+
+        These requests are handled before learned knowledge so that
+        documentation does not override a request to create something.
+        """
+        text = str(question).lower().strip()
+
+        phrases = (
+            "generate code",
+            "write code",
+            "create code",
+            "make code",
+            "give me code",
+            "show me code",
+            "provide code",
+            "write a program",
+            "create a program",
+            "make a program",
+            "build a program",
+            "program this",
+            "program it",
+            "write a script",
+            "create a script",
+            "make a script",
+            "build a script",
+            "create an app",
+            "create an application",
+            "build an app",
+            "build an application",
+            "make an app",
+            "make an application",
+            "develop an app",
+            "develop an application",
+            "create a website",
+            "create an website",
+            "build a website",
+            "build an website",
+            "make a website",
+            "develop a website",
+            "create a web app",
+            "create a web application",
+            "build a web app",
+            "build a web application",
+            "create an ai",
+            "build an ai",
+            "make an ai",
+            "create artificial intelligence",
+            "build artificial intelligence",
+            "python code",
+            "javascript code",
+            "java code",
+            "kotlin code",
+            "html code",
+            "css code",
+            "bash code",
+            "shell script",
+            "python program",
+            "javascript program",
+            "java program",
+            "kotlin program",
+            "calculator code",
+            "calculator program",
+            "coding project",
+            "software project",
+            "programming project",
+        )
+
+        if any(phrase in text for phrase in phrases):
+            return True
+
+        actions = (
+            "generate",
+            "write",
+            "create",
+            "build",
+            "make",
+            "develop",
+            "program",
+        )
+
+        objects = (
+            "code",
+            "program",
+            "script",
+            "app",
+            "application",
+            "website",
+            "web app",
+            "web application",
+            "ai",
+            "software",
+            "game",
+            "video game",
+            "pygame",
+            "termux",
+            "termux tool",
+            "termux script",
+            "cli",
+            "command line",
+        )
+
+        return (
+            any(word in text for word in actions)
+            and any(word in text for word in objects)
+        )
+
+    def _detect_project_type(self, question):
+        """Detect the type of software project requested."""
+
+        text = str(question).lower().strip()
+
+        if "website" in text:
+            return "website"
+
+        if "web app" in text or "web application" in text:
+            return "web_app"
+
+        if "android app" in text or "android application" in text:
+            return "android_app"
+
+        if "kotlin app" in text:
+            return "android_app"
+
+        if "api" in text:
+            return "api"
+
+        if "ai" in text or "artificial intelligence" in text:
+            return "ai_project"
+
+        if "calculator" in text:
+            return "calculator"
+
+        if "script" in text and "javascript" not in text:
+            return "script"
+
+        if (
+            "game" in text
+            or "video game" in text
+            or "pygame" in text
+        ):
+            return "game"
+
+        if (
+            "termux" in text
+            or "termux tool" in text
+            or "termux script" in text
+        ):
+            return "termux_tool"
+
+        if "desktop app" in text or "desktop application" in text:
+            return "desktop_app"
+
+        if "cli" in text or "command line" in text:
+            return "cli_tool"
+
+        if "program" in text:
+            return "program"
+
+        if "python" in text:
+            return "python_program"
+
+        return "software_project"
+
+    def _detect_language(self, question):
+        """Detect the requested programming language."""
+
+        text = str(question).lower().strip()
+
+        languages = (
+            ("python", "python"),
+            ("javascript", "javascript"),
+            ("typescript", "typescript"),
+            ("kotlin", "kotlin"),
+            ("java", "java"),
+            ("html", "html"),
+            ("css", "css"),
+            ("bash", "bash"),
+            ("shell", "bash"),
+            ("c++", "cpp"),
+            ("c#", "csharp"),
+            ("rust", "rust"),
+            ("go", "go"),
+        )
+
+        for keyword, language in languages:
+            if keyword in text:
+                return language
+
+        return None
+
+    def _extract_project_name(self, question):
+        """Extract a simple project name from a request."""
+
+        text = str(question).strip()
+
+        markers = (
+            " called ",
+            " named ",
+            " name ",
+        )
+
+        lower = text.lower()
+
+        for marker in markers:
+            position = lower.find(marker)
+
+            if position >= 0:
+                name = text[position + len(marker):].strip()
+
+                if name:
+                    return name.rstrip(".!?")
+
+        return "Nitron Project"
+
+    def _build_project_plan(self, question):
+        """Build a structured plan for a software project."""
+
+        project_type = self._detect_project_type(question)
+        language = self._detect_language(question)
+        name = self._extract_project_name(question)
+
+        # Sensible defaults when the user does not specify a language.
+        if language is None:
+            defaults = {
+                "website": "html",
+                "web_app": "javascript",
+                "android_app": "kotlin",
+                "calculator": "python",
+                "game": "python",
+                "termux_tool": "python",
+                "script": "python",
+                "cli_tool": "python",
+                "desktop_app": "python",
+                "ai_project": "python",
+                "api": "python",
+                "python_program": "python",
+            }
+
+            language = defaults.get(project_type, "python")
+
+        return {
+            "generated": True,
+            "project_type": project_type,
+            "language": language,
+            "name": name,
+            "files": [],
+        }
+
+    def _generate_project_files(self, plan):
+        """Generate starter files for a structured project."""
+
+        project_type = plan.get("project_type")
+        language = plan.get("language")
+        name = plan.get("name", "Nitron Project")
+
+        files = []
+
+        if project_type == "website":
+            files = [
+                {
+                    "path": "index.html",
+                    "content": f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{name}</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1>{name}</h1>
+        <p>Welcome to {name}.</p>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
+"""
+                },
+                {
+                    "path": "style.css",
+                    "content": """body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 40px;
+}
+
+main {
+    max-width: 900px;
+    margin: auto;
+}
+"""
+                },
+                {
+                    "path": "script.js",
+                    "content": f"""console.log("{name} loaded.");
+"""
+                },
+                {
+                    "path": "README.md",
+                    "content": f"""# {name}
+
+Website generated by Nitron.
+
+Open index.html in a web browser.
+"""
+                }
+            ]
+
+        elif project_type == "web_app":
+            files = [
+                {
+                    "path": "index.html",
+                    "content": f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{name}</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main id="app">
+        <h1>{name}</h1>
+        <p>Your web app is ready.</p>
+        <button id="actionButton">Click me</button>
+        <p id="output"></p>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
+"""
+                },
+                {
+                    "path": "style.css",
+                    "content": """body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 40px;
+}
+
+#app {
+    max-width: 900px;
+    margin: auto;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+"""
+                },
+                {
+                    "path": "script.js",
+                    "content": f"""const button = document.getElementById("actionButton");
+const output = document.getElementById("output");
+
+button.addEventListener("click", () => {{
+    output.textContent = "{name} is working!";
+}});
+"""
+                },
+                {
+                    "path": "README.md",
+                    "content": f"""# {name}
+
+Web application generated by Nitron.
+
+Open index.html in a web browser.
+"""
+                }
+            ]
+
+        elif project_type == "calculator":
+            files = [
+                {
+                    "path": "main.py",
+                    "content": f"""# {name}
+# Generated by Nitron
+
+def calculator():
+    print("{name}")
+    print("1. Add")
+    print("2. Subtract")
+    print("3. Multiply")
+    print("4. Divide")
+
+    first = float(input("First number: "))
+    operator = input("Operation (+, -, *, /): ")
+    second = float(input("Second number: "))
+
+    if operator == "+":
+        result = first + second
+    elif operator == "-":
+        result = first - second
+    elif operator == "*":
+        result = first * second
+    elif operator == "/":
+        if second == 0:
+            print("Cannot divide by zero.")
+            return
+        result = first / second
+    else:
+        print("Unknown operation.")
+        return
+
+    print("Result:", result)
+
+
+if __name__ == "__main__":
+    calculator()
+"""
+                },
+                {
+                    "path": "README.md",
+                    "content": f"""# {name}
+
+Python calculator generated by Nitron.
+
+Run:
+
+python main.py
+"""
+                }
+            ]
+
+        elif project_type == "game":
+            if language == "python":
+                files = [
+                    {
+                        "path": "main.py",
+                        "content": f"""# {name}
+# Python game generated by Nitron
+
+import random
+
+def play_game():
+    print("{name}")
+    print("Guess the number!")
+
+    target = random.randint(1, 10)
+
+    while True:
+        try:
+            guess = int(input("Choose a number from 1 to 10: "))
+        except ValueError:
+            print("Please enter a number.")
+            continue
+
+        if guess == target:
+            print("You win!")
+            break
+
+        if guess < target:
+            print("Too low.")
+        else:
+            print("Too high.")
+
+
+if __name__ == "__main__":
+    play_game()
+"""
+                    },
+                    {
+                        "path": "README.md",
+                        "content": f"""# {name}
+
+Python game generated by Nitron.
+
+Run:
+
+python main.py
+"""
+                    }
+                ]
+            else:
+                files = [
+                    {
+                        "path": "README.md",
+                        "content": f"""# {name}
+
+Game project generated by Nitron.
+
+Language: {language}
+"""
+                    }
+                ]
+
+        elif project_type == "termux_tool":
+            if language in ("bash", "shell"):
+                files = [
+                    {
+                        "path": "nitron_tool.sh",
+                        "content": f"""#!/data/data/com.termux/files/usr/bin/bash
+# {name}
+# Termux tool generated by Nitron
+
+echo "{name}"
+echo "Termux tool is running."
+"""
+                    },
+                    {
+                        "path": "README.md",
+                        "content": f"""# {name}
+
+Termux tool generated by Nitron.
+
+Run:
+
+chmod +x nitron_tool.sh
+./nitron_tool.sh
+"""
+                    }
+                ]
+            else:
+                files = [
+                    {
+                        "path": "main.py",
+                        "content": f"""#!/usr/bin/env python3
+# {name}
+# Termux tool generated by Nitron
+
+import os
+import platform
+
+def main():
+    print("{name}")
+    print("Termux tool is running.")
+    print("Python:", platform.python_version())
+    print("System:", platform.system())
+
+    home = os.path.expanduser("~")
+    print("Home:", home)
+
+
+if __name__ == "__main__":
+    main()
+"""
+                    },
+                    {
+                        "path": "README.md",
+                        "content": f"""# {name}
+
+Termux tool generated by Nitron.
+
+Run:
+
+python main.py
+"""
+                    }
+                ]
+
+        elif project_type == "program":
+            if language == "python":
+                files = [
+                    {
+                        "path": "main.py",
+                        "content": f"""# {name}
+# Generated by Nitron
+
+def main():
+    print("{name} is running.")
+
+
+if __name__ == "__main__":
+    main()
+"""
+                    },
+                    {
+                        "path": "README.md",
+                        "content": f"""# {name}
+
+Python program generated by Nitron.
+
+Run:
+
+python main.py
+"""
+                    }
+                ]
+
+            elif language == "javascript":
+                files = [
+                    {
+                        "path": "index.js",
+                        "content": f"""// {name}
+// Generated by Nitron
+
+function main() {{
+    console.log("{name} is running.");
+}}
+
+main();
+"""
+                    },
+                    {
+                        "path": "README.md",
+                        "content": f"""# {name}
+
+JavaScript program generated by Nitron.
+
+Run:
+
+node index.js
+"""
+                    }
+                ]
+
+            elif language == "kotlin":
+                files = [
+                    {
+                        "path": "Main.kt",
+                        "content": f"""// {name}
+// Generated by Nitron
+
+fun main() {{
+    println("{name} is running.")
+}}
+"""
+                    },
+                    {
+                        "path": "README.md",
+                        "content": f"""# {name}
+
+Kotlin program generated by Nitron.
+"""
+                    }
+                ]
+
+            elif language == "java":
+                files = [
+                    {
+                        "path": "Main.java",
+                        "content": f"""// {name}
+// Generated by Nitron
+
+public class Main {{
+    public static void main(String[] args) {{
+        System.out.println("{name} is running.");
+    }}
+}}
+"""
+                    },
+                    {
+                        "path": "README.md",
+                        "content": f"""# {name}
+
+Java program generated by Nitron.
+"""
+                    }
+                ]
+
+            elif language == "bash":
+                files = [
+                    {
+                        "path": "main.sh",
+                        "content": f"""#!/usr/bin/env bash
+# {name}
+# Generated by Nitron
+
+echo "{name} is running."
+"""
+                    },
+                    {
+                        "path": "README.md",
+                        "content": f"""# {name}
+
+Bash program generated by Nitron.
+
+Run:
+
+chmod +x main.sh
+./main.sh
+"""
+                    }
+                ]
+
+            else:
+                files = [
+                    {
+                        "path": "README.md",
+                        "content": f"""# {name}
+
+Program generated by Nitron.
+
+Language: {language}
+"""
+                    }
+                ]
+
+        elif language == "python":
+            files = [
+                {
+                    "path": "main.py",
+                    "content": f"""# {name}
+# Generated by Nitron
+
+def main():
+    print("{name} is running.")
+
+
+if __name__ == "__main__":
+    main()
+"""
+                },
+                {
+                    "path": "README.md",
+                    "content": f"""# {name}
+
+Python project generated by Nitron.
+
+Run:
+
+python main.py
+"""
+                }
+            ]
+
+        elif language == "javascript":
+            files = [
+                {
+                    "path": "index.js",
+                    "content": f"""// {name}
+// Generated by Nitron
+
+function main() {{
+    console.log("{name} is running.");
+}}
+
+main();
+"""
+                },
+                {
+                    "path": "README.md",
+                    "content": f"""# {name}
+
+JavaScript project generated by Nitron.
+
+Run:
+
+node index.js
+"""
+                }
+            ]
+
+        elif project_type == "android_app":
+            files = [
+                {
+                    "path": "MainActivity.kt",
+                    "content": f"""package com.example.nitron
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {{
+
+    override fun onCreate(savedInstanceState: Bundle?) {{
+        super.onCreate(savedInstanceState)
+    }}
+}}
+"""
+                },
+                {
+                    "path": "README.md",
+                    "content": f"""# {name}
+
+Android application generated by Nitron.
+
+Language: Kotlin
+"""
+                }
+            ]
+
+        else:
+            files = [
+                {
+                    "path": "README.md",
+                    "content": f"""# {name}
+
+Project generated by Nitron.
+
+Project type: {project_type}
+Language: {language}
+"""
+                }
+            ]
+
+        return files
+
+    def generate_project(self, question, output_dir=None):
+        """Generate a project and write all files to disk."""
+
+        question = str(question).strip()
+
+        plan = self._build_project_plan(question)
+        files = self._generate_project_files(plan)
+
+        if output_dir is None:
+            safe_name = plan.get("name", "Nitron Project")
+
+            safe_name = "".join(
+                character
+                if character.isalnum() or character in "._-"
+                else "_"
+                for character in safe_name
+            ).strip("_")
+
+            if not safe_name:
+                safe_name = "Nitron_Project"
+
+            base_dir = (
+                Path.home()
+                / "Nitron"
+                / "generated_projects"
+            )
+
+            output_dir = base_dir / safe_name
+
+            # Avoid overwriting an existing generated project.
+            counter = 2
+
+            while output_dir.exists():
+                output_dir = base_dir / f"{safe_name}_{counter}"
+                counter += 1
+
+        else:
+            output_dir = Path(output_dir)
+
+        output_dir.mkdir(
+            parents=True,
+            exist_ok=True
+        )
+
+        written_files = []
+
+        for item in files:
+            file_path = output_dir / item["path"]
+
+            file_path.parent.mkdir(
+                parents=True,
+                exist_ok=True
+            )
+
+            file_path.write_text(
+                item["content"],
+                encoding="utf-8"
+            )
+
+            written_files.append(str(file_path))
+
+        return {
+            "generated": True,
+            "project_type": plan.get("project_type"),
+            "language": plan.get("language"),
+            "name": plan.get("name"),
+            "directory": str(output_dir),
+            "files": files,
+            "written_files": written_files
+        }
+
+    def _generate_code(self, question):
+        """
+        Generate simple programming examples locally.
+        """
+
+        text = str(question).lower().strip()
+
+        if "calculator" in text and "python" in text:
+
+            calculator_code = '''def calculator():
+    print("Simple Calculator")
+    print("1. Add")
+    print("2. Subtract")
+    print("3. Multiply")
+    print("4. Divide")
+
+    first = float(input("Enter the first number: "))
+    operator = input("Enter an operation (+, -, *, /): ")
+    second = float(input("Enter the second number: "))
+
+    if operator == "+":
+        result = first + second
+
+    elif operator == "-":
+        result = first - second
+
+    elif operator == "*":
+        result = first * second
+
+    elif operator == "/":
+        if second == 0:
+            print("Cannot divide by zero.")
+            return
+
+        result = first / second
+
+    else:
+        print("Unknown operation.")
+        return
+
+    print("Result:", result)
+
+
+calculator()
+'''
+
+            return {
+                "message": (
+                    "Here is a simple Python calculator.\n\n"
+                    "```python\n"
+                    + calculator_code
+                    + "```"
+                ),
+                "topic": "python calculator",
+                "generated": True,
+                "language": "python"
+            }
+
+        if "python" in text:
+            return {
+                "message": (
+                    "I can generate Python code for that. "
+                    "Tell me what you want the program to do."
+                ),
+                "generated": True,
+                "language": "python"
+            }
+
+        return {
+            "message": (
+                "I can generate code for that. "
+                "Tell me the programming language and what you want the program to do."
+            ),
+            "generated": True
+        }
+
+
+    def answer(self, question):
+        """
+        Answer a question using this priority:
+
+        1. Relevant learned knowledge
+        2. Built-in knowledge
+        3. Automatic web learning
+        4. Internal search fallback
+        """
+
+        question = str(question).strip()
+
+        # ==================================================
+        # 0. CODE GENERATION
+        # ==================================================
+        # Handle programming requests before learned
+        # knowledge so documentation does not override
+        # the actual code-generation request.
+        # ==================================================
+
+        # ==================================================
+        # 0A. STRUCTURED PROJECT GENERATION
+        # ==================================================
+        # Only generate a project when the user explicitly
+        # asks Nitron to create/build/write software.
+        # ==================================================
+
+        if self._is_code_generation_request(question):
+
+            project_type = self._detect_project_type(question)
+
+            if project_type in (
+                "website",
+                "web_app",
+                "calculator",
+                "game",
+                "termux_tool",
+                "android_app",
+                "ai_project",
+                "python_program",
+                "program",
+                "script",
+                "api",
+                "cli_tool",
+                "desktop_app",
+                "software_project",
+            ):
+
+                try:
+
+                    project = self.generate_project(question)
+
+                    file_sections = []
+
+                    for item in project.get("files", []):
+
+                        path = str(
+                            item.get("path", "")
+                        )
+
+                        content = str(
+                            item.get("content", "")
+                        )
+
+                        file_sections.append(
+                            f"===== {path} =====\n{content}"
+                        )
+
+                    message = (
+                        "Project generated successfully.\n\n"
+                        "Name: "
+                        + str(project.get("name"))
+                        + "\n"
+                        "Type: "
+                        + str(project.get("project_type"))
+                        + "\n"
+                        "Language: "
+                        + str(project.get("language"))
+                        + "\n"
+                        "Directory: "
+                        + str(project.get("directory"))
+                        + "\n\n"
+                        + "\n\n".join(file_sections)
+                    )
+
+                    return {
+                        "message": message,
+                        "generated": True,
+                        "project": project,
+                    }
+
+                except Exception as exc:
+
+                    return {
+                        "message": (
+                            "I detected a project request, "
+                            "but project generation failed: "
+                            + str(exc)
+                        ),
+                        "generated": False,
+                        "error": str(exc),
+                    }
+
+            return self._generate_code(question)
+
+        # ==================================================
+        # 1. EXPLICIT CAPABILITY LEARNING
+        # ==================================================
+        # "learn X" means explicitly learn X and register it
+        # as a reusable Nitron capability.
+        # This must run BEFORE learned/built-in knowledge so
+        # existing answers cannot intercept the command.
+        # ==================================================
+
+        learn_match = re.match(
+            r"^learn\s+(?:about\s+)?(.+?)\??$",
+            question,
+            re.IGNORECASE
+        )
+
+        if learn_match:
+
+            learn_topic = learn_match.group(1).strip(
+                " ?.! "
+            )
+
+            if not learn_topic:
+
+                return {
+                    "message":
+                        "I need a topic to learn about."
+                }
+
+            try:
+
+                from brain.study import study_engine
+                import requests
+                import urllib.parse
+
+                # --------------------------------------------------
+                # Search Wikipedia for several candidates.
+                #
+                # Do not blindly accept the first result. Wikipedia
+                # often returns a broad parent topic for specialized
+                # subjects such as "Python decorators".
+                # --------------------------------------------------
+
+                api_url = (
+                    "https://en.wikipedia.org/w/api.php?"
+                    + urllib.parse.urlencode({
+                        "action": "query",
+                        "format": "json",
+                        "list": "search",
+                        "srsearch": learn_topic,
+                        "srlimit": 10,
+                        "utf8": 1
+                    })
+                )
+
+                response = requests.get(
+                    api_url,
+                    headers={
+                        "User-Agent": "Nitron/1.0"
+                    },
+                    timeout=10
+                )
+
+                response.raise_for_status()
+
+                data = response.json()
+
+                results = data.get(
+                    "query",
+                    {}
+                ).get(
+                    "search",
+                    []
+                )
+
+                if not results:
+
+                    return {
+                        "message":
+                            f"I could not find reliable information about {learn_topic}.",
+                        "learned": False,
+                        "topic": learn_topic
+                    }
+
+                # --------------------------------------------------
+                # Choose the most relevant article.
+                # Exact title matches receive the highest score.
+                # Multi-word title matches are preferred over broad
+                # parent articles.
+                # --------------------------------------------------
+
+                requested_words = set(
+                    re.findall(
+                        r"[a-zA-Z0-9_]+",
+                        learn_topic.lower()
+                    )
+                )
+
+                def wikipedia_score(result):
+
+                    title = str(
+                        result.get("title", "")
+                    ).strip()
+
+                    title_lower = title.lower()
+
+                    title_words = set(
+                        re.findall(
+                            r"[a-zA-Z0-9_]+",
+                            title_lower
+                        )
+                    )
+
+                    score = 0
+
+                    # Exact title match.
+                    if title_lower == learn_topic.lower():
+                        score += 1000
+
+                    # Exact phrase in title.
+                    if learn_topic.lower() in title_lower:
+                        score += 500
+
+                    # Number of requested words represented.
+                    score += (
+                        len(
+                            requested_words
+                            & title_words
+                        )
+                        * 100
+                    )
+
+                    # Prefer titles containing more specific words.
+                    score += min(
+                        len(title_words),
+                        10
+                    )
+
+                    return score
+
+                # --------------------------------------------------
+                # Prefer an article whose title actually represents
+                # the requested subject.
+                #
+                # Broad parent articles such as:
+                #   "Outline of the Python programming language"
+                #
+                # must not beat a specific article merely because
+                # they contain the word "Python".
+                # --------------------------------------------------
+
+                ranked_results = sorted(
+                    results,
+                    key=wikipedia_score,
+                    reverse=True
+                )
+
+                print(
+                    "Wikipedia candidates:"
+                )
+
+                for candidate in ranked_results:
+                    print(
+                        " -",
+                        candidate.get("title", ""),
+                        "| score:",
+                        wikipedia_score(candidate)
+                    )
+
+                # First prefer a title containing the complete
+                # requested phrase.
+                exact_phrase_result = None
+
+                requested_phrase = (
+                    learn_topic
+                    .strip()
+                    .lower()
+                )
+
+                for candidate in ranked_results:
+
+                    candidate_title = str(
+                        candidate.get(
+                            "title",
+                            ""
+                        )
+                    ).strip().lower()
+
+                    if requested_phrase in candidate_title:
+                        exact_phrase_result = candidate
+                        break
+
+                if exact_phrase_result is not None:
+
+                    best_result = exact_phrase_result
+
+                else:
+
+                    # Prefer the candidate with the greatest
+                    # proportion of requested words represented
+                    # in its title.
+                    def relevance_ratio(candidate):
+
+                        candidate_title = str(
+                            candidate.get(
+                                "title",
+                                ""
+                            )
+                        ).lower()
+
+                        candidate_words = set(
+                            re.findall(
+                                r"[a-zA-Z0-9_]+",
+                                candidate_title
+                            )
+                        )
+
+                        if not requested_words:
+                            return 0.0
+
+                        return (
+                            len(
+                                requested_words
+                                & candidate_words
+                            )
+                            / len(requested_words)
+                        )
+
+                    best_result = max(
+                        ranked_results,
+                        key=lambda candidate: (
+                            relevance_ratio(candidate),
+                            wikipedia_score(candidate)
+                        )
+                    )
+
+                print(
+                    "Selected:",
+                    best_result.get(
+                        "title",
+                        learn_topic
+                    )
+                )
+
+                title = best_result.get(
+                    "title",
+                    learn_topic
+                )
+
+                article_url = (
+                    "https://en.wikipedia.org/wiki/"
+                    + urllib.parse.quote(
+                        title.replace(" ", "_")
+                    )
+                )
+
+                print(
+                    "Wikipedia candidates:"
+                )
+
+                for candidate in sorted(
+                    results,
+                    key=wikipedia_score,
+                    reverse=True
+                )[:5]:
+
+                    print(
+                        " -",
+                        candidate.get("title"),
+                        "| score:",
+                        wikipedia_score(candidate)
+                    )
+
+                print(
+                    "Selected:",
+                    title
+                )
+
+                print("=" * 50)
+                print("NITRON EXPLICIT CAPABILITY LEARNING")
+                print("=" * 50)
+                print(f"Topic : {learn_topic}")
+                print(f"Source: {article_url}")
+                print()
+
+                learned_result = study_engine.study(
+                    learn_topic,
+                    article_url
+                )
+
+                if not isinstance(
+                    learned_result,
+                    dict
+                ):
+                    learned_result = {
+                        "status": "error",
+                        "summary": str(learned_result)
+                    }
+
+                if learned_result.get(
+                    "status"
+                ) != "success":
+
+                    return {
+                        "message": (
+                            "I found the topic, but learning failed: "
+                            + str(
+                                learned_result.get(
+                                    "summary",
+                                    "unknown error"
+                                )
+                            )
+                        ),
+                        "learned": False,
+                        "topic": learn_topic,
+                        "source": article_url
+                    }
+
+                # --------------------------------------------------
+                # Register the learned topic as a reusable capability.
+                # --------------------------------------------------
+
+                capability_result = None
+
+                try:
+
+                    from brain.learner import learn_and_register
+
+                    description = (
+                        learned_result.get(
+                            "summary",
+                            ""
+                        )
+                        or f"Learned knowledge about {learn_topic}."
+                    )
+
+                    capability_result = learn_and_register(
+                        topic=learn_topic,
+                        description=description,
+                        abilities=[
+                            f"understand {learn_topic}",
+                            f"work with {learn_topic}",
+                            f"answer questions about {learn_topic}"
+                        ],
+                        evidence=[
+                            article_url
+                        ]
+                    )
+
+                    print(
+                        f"[Capability] Registered: {learn_topic}"
+                    )
+
+                except Exception as capability_error:
+
+                    print(
+                        "[Capability] Registration warning: "
+                        f"{capability_error}"
+                    )
+
+                # --------------------------------------------------
+                # Return the freshly learned knowledge if available.
+                # --------------------------------------------------
+
+                fresh = learner.recall(
+                    learn_topic
+                ) if learner else None
+
+                if fresh:
+
+                    result = self._normalize_learned(
+                        learn_topic,
+                        fresh
+                    )
+
+                    result["learned"] = True
+                    result["capability_registered"] = (
+                        capability_result is not None
+                    )
+
+                    return result
+
+                summary = learned_result.get(
+                    "summary",
+                    ""
+                )
+
+                return {
+                    "message": summary
+                    or f"I learned about {learn_topic}.",
+                    "topic": learn_topic,
+                    "source": article_url,
+                    "learned": True,
+                    "capability_registered": (
+                        capability_result is not None
+                    )
+                }
+
+            except Exception as error:
+
+                return {
+                    "message": (
+                        "I could not complete learning for "
+                        f"{learn_topic}: {error}"
+                    ),
+                    "topic": learn_topic,
+                    "learned": False
+                }
+
+        # ==================================================
+        # 2. LEARNED KNOWLEDGE
+        # ==================================================
+
+        learned = self.search_learned(question)
+
+        if learned:
+
+            topic = next(iter(learned))
+
+            return self._normalize_learned(
+                topic,
+                learned[topic]["data"]
+                if isinstance(learned[topic], dict)
+                and "data" in learned[topic]
+                else learned[topic]
+            )
+
+        # ==================================================
+        # 2. BUILT-IN KNOWLEDGE
+        # ==================================================
+
+        if knowledge:
+
+            try:
+
+                built_in = knowledge.get_category(
+                    question
+                )
+
+                if built_in:
+                    return built_in
+
+            except Exception:
+                pass
+
+        # ==================================================
+        # 3. AUTOMATIC WEB LEARNING
+        # ==================================================
+
+        try:
+
+            from brain.study import study_engine
+
+            import requests
+            import urllib.parse
+
+            # ----------------------------------------------
+            # Extract the actual subject from the question
+            # ----------------------------------------------
+
+            search_text = question.strip()
+
+            patterns = [
+                r"^learn\s+about\s+(.+?)\??$",
+                r"^learn\s+(.+?)\??$",
+                r"^what\s+is\s+(.+?)\??$",
+                r"^what\s+are\s+(.+?)\??$",
+                r"^who\s+is\s+(.+?)\??$",
+                r"^who\s+are\s+(.+?)\??$",
+                r"^tell\s+me\s+about\s+(.+?)\??$",
+                r"^explain\s+(.+?)\??$",
+                r"^describe\s+(.+?)\??$"
+            ]
+
+            for pattern in patterns:
+
+                match = re.match(
+                    pattern,
+                    search_text,
+                    re.IGNORECASE
+                )
+
+                if match:
+
+                    search_text = match.group(
+                        1
+                    ).strip()
+
+                    break
+
+            search_text = search_text.strip(" ?.!")
+
+            if not search_text:
+                return {
+                    "message":
+                        "I need a topic to learn about."
+                }
+
+            # ----------------------------------------------
+            # Search Wikipedia for the subject
+            # ----------------------------------------------
+
+            api_url = (
+                "https://en.wikipedia.org/w/api.php?"
+                + urllib.parse.urlencode({
+                    "action": "query",
+                    "format": "json",
+                    "list": "search",
+                    "srsearch": search_text,
+                    "srlimit": 1
+                })
+            )
+
+            response = requests.get(
+                api_url,
+                headers={
+                    "User-Agent": "Nitron/1.0"
+                },
+                timeout=10
+            )
+
+            response.raise_for_status()
+
+            data = response.json()
+
+            results = data.get(
+                "query",
+                {}
+            ).get(
+                "search",
+                []
+            )
+
+            if results:
+
+                title = results[0].get(
+                    "title",
+                    search_text
+                )
+
+                article_url = (
+                    "https://en.wikipedia.org/wiki/"
+                    + urllib.parse.quote(
+                        title.replace(" ", "_")
+                    )
+                )
+
+                print("=" * 50)
+                print("NITRON AUTOMATIC LEARNING")
+                print("=" * 50)
+                print(f"Topic : {search_text}")
+                print(f"Source: {article_url}")
+                print()
+
+                learned_result = study_engine.study(
+                    search_text,
+                    article_url
+                )
+
+                if learned_result.get(
+                    "status"
+                ) == "success":
+
+                    # ------------------------------------------
+                    # IMPORTANT:
+                    # Use the exact topic we just saved.
+                    # ------------------------------------------
+
+                    fresh = learner.recall(
+                        search_text
+                    )
+
+                    if fresh:
+
+                        return self._normalize_learned(
+                            search_text,
+                            fresh
+                        )
+
+                    # Fallback to the processed result.
+
+                    summary = learned_result.get(
+                        "summary",
+                        ""
+                    )
+
+                    if summary:
+
+                        return {
+                            "message": summary,
+                            "topic": search_text,
+                            "source": article_url,
+                            "learned": True
+                        }
+
+        except Exception as error:
+
+            try:
+
+                from brain.memory import log
+
+                log(
+                    f"Automatic web learning error: {error}",
+                    "warning"
+                )
+
+            except Exception:
+                pass
+
+        # ==================================================
+        # 4. INTERNAL SEARCH FALLBACK
+        # ==================================================
+
+        if search_engine:
+
+            try:
+
+                results = search_engine.search(
+                    question
+                )
+
+                if results:
+                    return results
+
+            except Exception:
+                pass
+
+        return {
+            "message":
+                "I haven't learned enough about that yet."
+        }
+
+
+    def think(self, question):
+        """
+        Alias for answer().
+        """
+
+        return self.answer(question)
+
+    def learn_topic(self, topic, url):
+        """
+        Learn from a website.
+        """
+
+        try:
+
+            from brain.study import study_engine
+
+            return study_engine.study(
+                topic,
+                url
+            )
+
+        except Exception as e:
+
+            return str(e)
+
+    def remember_fact(self, key, value):
+        """
+        Store a fact.
+        """
+
+        memory.remember(
+            key,
+            value
+        )
+
+        return "Fact remembered."
+
+    def recall_fact(self, key):
+        """
+        Recall a stored fact.
+        """
+
+        return memory.recall(
+            key,
+            "I don't remember that."
+        )
+
+    def compare(self, first, second):
+        """
+        Compare two values.
+        """
+
+        if first == second:
+            return "They are the same."
+
+        return "They are different."
+
+    def status(self):
+        """
+        Return Nitron brain status.
+        """
+
+        learned = 0
+
+        if learner:
+            learned = len(
+                learner.knowledge
+            )
+
+        return {
+            "name": self.name,
+            "knowledge_loaded": knowledge is not None,
+            "learning_enabled": learner is not None,
+            "search_enabled": search_engine is not None,
+            "learned_topics": learned
+        }
+
+
+reasoning = ReasoningEngine()

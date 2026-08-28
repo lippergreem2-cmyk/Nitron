@@ -1,0 +1,67 @@
+{
+  "domain": "Finance",
+  "description": "Knowledge about money, markets, investing, trading, economics, and financial systems.",
+  "topics": [
+    {
+      "name": "Financial Fundamentals",
+      "knowledge": [
+        "Finance is the management of money, assets, investments, and financial decisions.",
+        "Income, expenses, savings, and investments are important parts of personal and business finance.",
+        "Financial decisions involve balancing risk, reward, and available resources."
+      ]
+    },
+    {
+      "name": "Markets",
+      "knowledge": [
+        "Financial markets allow people and organizations to buy and sell assets.",
+        "Stock markets involve ownership shares of companies.",
+        "Currency markets exchange one currency for another.",
+        "Commodity markets involve resources such as gold, oil, and agricultural products."
+      ]
+    },
+    {
+      "name": "Trading Concepts",
+      "knowledge": [
+        "Trading involves buying and selling assets based on market conditions.",
+        "Traders analyze price movements, volume, trends, and market information.",
+        "Risk management is essential for protecting capital.",
+        "A trading strategy defines rules for entering and exiting positions."
+      ]
+    },
+    {
+      "name": "Technical Analysis",
+      "knowledge": [
+        "Technical analysis studies historical price data to identify possible patterns.",
+        "Charts display price movement over time.",
+        "Indicators can help analyze trends, momentum, and volatility.",
+        "Technical analysis does not guarantee future results."
+      ]
+    },
+    {
+      "name": "Fundamental Analysis",
+      "knowledge": [
+        "Fundamental analysis evaluates the value of an asset using economic and company information.",
+        "Businesses can be analyzed using revenue, profit, growth, and financial reports.",
+        "Economic factors can influence markets."
+      ]
+    },
+    {
+      "name": "Risk Management",
+      "knowledge": [
+        "Risk management reduces the impact of unexpected losses.",
+        "Position sizing controls how much capital is exposed to a trade.",
+        "Diversification spreads risk across different assets.",
+        "Successful systems focus on consistency and discipline."
+      ]
+    },
+    {
+      "name": "Trading Technology",
+      "knowledge": [
+        "Trading platforms provide tools for analyzing and managing trades.",
+        "Algorithms can automate parts of trading processes.",
+        "Artificial intelligence can analyze large amounts of market data.",
+        "Automated systems require testing, monitoring, and responsible use."
+      ]
+    }
+  ]
+}

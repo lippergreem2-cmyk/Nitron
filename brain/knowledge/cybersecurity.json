@@ -1,0 +1,72 @@
+{
+  "domain": "Cybersecurity",
+  "description": "Core knowledge about protecting systems, networks, applications, and data from unauthorized access, attacks, and misuse.",
+  "topics": [
+    {
+      "name": "Cybersecurity Fundamentals",
+      "knowledge": [
+        "Cybersecurity is the practice of protecting computers, networks, applications, and data from digital threats.",
+        "The main goals of cybersecurity are confidentiality, integrity, and availability (CIA triad).",
+        "Authentication verifies identity, authorization controls permissions, and accounting tracks activity.",
+        "Security requires prevention, detection, response, and recovery."
+      ]
+    },
+    {
+      "name": "Common Cyber Threats",
+      "knowledge": [
+        "Malware is malicious software designed to damage, disrupt, or gain unauthorized access.",
+        "Viruses attach themselves to files and spread when executed.",
+        "Trojans disguise themselves as legitimate software.",
+        "Ransomware locks or encrypts data and demands payment.",
+        "Phishing uses fake messages or websites to trick users into revealing information.",
+        "Social engineering attacks target human behavior instead of only technical weaknesses."
+      ]
+    },
+    {
+      "name": "Network Security",
+      "knowledge": [
+        "Network security protects communication systems from unauthorized access and attacks.",
+        "Firewalls control network traffic based on security rules.",
+        "Encryption protects information while it is stored or transmitted.",
+        "VPNs create secure connections over untrusted networks.",
+        "Secure network design uses segmentation, monitoring, and access control."
+      ]
+    },
+    {
+      "name": "Application Security",
+      "knowledge": [
+        "Application security protects software from vulnerabilities.",
+        "Secure coding practices reduce bugs and security weaknesses.",
+        "Input validation prevents unsafe data from affecting applications.",
+        "Authentication systems should protect user accounts with strong security methods.",
+        "Regular updates and patches fix known vulnerabilities."
+      ]
+    },
+    {
+      "name": "Data Protection",
+      "knowledge": [
+        "Sensitive data should be protected using encryption and access controls.",
+        "Backups help recover information after failures or attacks.",
+        "The principle of least privilege gives users only the permissions they need.",
+        "Data privacy focuses on responsible collection, storage, and usage of information."
+      ]
+    },
+    {
+      "name": "Security Monitoring",
+      "knowledge": [
+        "Logs provide information about system activity and possible threats.",
+        "Intrusion detection systems monitor suspicious behavior.",
+        "Security operations analyze alerts and respond to incidents.",
+        "Continuous monitoring improves visibility and defense."
+      ]
+    },
+    {
+      "name": "Ethical Security",
+      "knowledge": [
+        "Security professionals test systems only with permission.",
+        "Responsible disclosure helps organizations fix vulnerabilities safely.",
+        "Cybersecurity should be used to protect people, systems, and information."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+    "logging": true,
+    "safe_mode": true,
+    "auto_reload": false,
+    "plugin_folder": "plugins",
+    "disabled_plugins": []
+}

@@ -1,0 +1,184 @@
+"""
+Nitron Decision Engine
+"""
+
+from brain.context import context
+from brain.memory import memory
+
+try:
+    from brain.skill_registry import best_for_task
+except Exception:
+    best_for_task = None
+
+
+class DecisionEngine:
+    """
+    Decides what Nitron should do.
+
+    Decision priority:
+        1. Explicit built-in system intents
+        2. Learned capabilities
+        3. General chat
+    """
+
+    def decide(self, command):
+        command = str(command).lower().strip()
+
+        context.update(command)
+
+        # --------------------------------------------------
+        # EXPLICIT LEARNING / TEACHING
+        # --------------------------------------------------
+
+        if any(word in command for word in [
+            "teach",
+            "lesson",
+            "academy",
+            "learn",
+            "study"
+        ]):
+            return {
+                "module": "academy",
+                "action": "teach"
+            }
+
+        # --------------------------------------------------
+        # BUILT-IN PROJECT / DEVELOPMENT REQUESTS
+        # --------------------------------------------------
+
+        if any(word in command for word in [
+            "create",
+            "build",
+            "generate",
+            "project"
+        ]):
+            # Keep the existing developer route available.
+            # The learned-capability layer can still be used
+            # by the reasoning engine for more specific tasks.
+            return {
+                "module": "developer",
+                "action": "build"
+            }
+
+        # --------------------------------------------------
+        # BUILT-IN TRADING
+        # --------------------------------------------------
+
+        if any(word in command for word in [
+            "trade",
+            "gold",
+            "forex",
+            "bitcoin",
+            "btc"
+        ]):
+            return {
+                "module": "trading",
+                "action": "analyze"
+            }
+
+        # --------------------------------------------------
+        # BUILT-IN WEATHER
+        # --------------------------------------------------
+
+        if any(word in command for word in [
+            "weather",
+            "temperature",
+            "forecast"
+        ]):
+            return {
+                "module": "weather",
+                "action": "forecast"
+            }
+
+        # --------------------------------------------------
+        # BUILT-IN MUSIC
+        # --------------------------------------------------
+
+        if any(word in command for word in [
+            "music",
+            "song",
+            "play"
+        ]):
+            return {
+                "module": "music",
+                "action": "play"
+            }
+
+        # --------------------------------------------------
+        # BUILT-IN TIME / DATE
+        # --------------------------------------------------
+
+        if any(word in command for word in [
+            "time",
+            "date"
+        ]):
+            return {
+                "module": "system",
+                "action": "clock"
+            }
+
+        # --------------------------------------------------
+        # LEARNED CAPABILITY ROUTING
+        # --------------------------------------------------
+
+        if best_for_task is not None:
+
+            try:
+                skill = best_for_task(command)
+
+                if skill:
+
+                    confidence = float(
+                        skill.get(
+                            "confidence",
+                            0
+                        )
+                    )
+
+                    if confidence >= 0.5:
+
+                        memory.remember(
+                            "last_learned_capability",
+                            skill.get(
+                                "name",
+                                ""
+                            )
+                        )
+
+                        return {
+                            "module": "learned",
+                            "action": "capability",
+                            "skill": skill.get(
+                                "name",
+                                ""
+                            ),
+                            "confidence": confidence,
+                            "abilities": skill.get(
+                                "abilities",
+                                []
+                            ),
+                            "handlers": skill.get(
+                                "handlers",
+                                []
+                            )
+                        }
+
+            except Exception:
+                pass
+
+        # --------------------------------------------------
+        # GENERAL CHAT
+        # --------------------------------------------------
+
+        memory.remember(
+            "last_command",
+            command
+        )
+
+        return {
+            "module": "chat",
+            "action": "respond"
+        }
+
+
+decision = DecisionEngine()

@@ -1,0 +1,49 @@
+{
+  "domain": "Software Engineering",
+  "description": "Knowledge about designing, building, testing, and maintaining software systems.",
+  "topics": [
+    {
+      "name": "Software Development",
+      "knowledge": [
+        "Software engineering is the process of creating reliable and maintainable software.",
+        "Software development includes planning, designing, coding, testing, deployment, and maintenance.",
+        "Good software should be scalable, secure, efficient, and easy to maintain."
+      ]
+    },
+    {
+      "name": "Programming Concepts",
+      "knowledge": [
+        "Programs are instructions that tell computers how to perform tasks.",
+        "Variables store information, functions organize logic, and algorithms solve problems.",
+        "Data structures organize data for efficient processing.",
+        "Object-oriented programming uses classes and objects to structure software."
+      ]
+    },
+    {
+      "name": "Software Architecture",
+      "knowledge": [
+        "Software architecture defines how software components interact.",
+        "Common architectures include monolithic, client-server, and microservices.",
+        "Good architecture improves scalability, reliability, and maintainability."
+      ]
+    },
+    {
+      "name": "Testing",
+      "knowledge": [
+        "Software testing verifies that applications work correctly.",
+        "Unit testing checks individual components.",
+        "Integration testing checks communication between components.",
+        "Automated testing improves software quality."
+      ]
+    },
+    {
+      "name": "Development Practices",
+      "knowledge": [
+        "Version control tracks changes in software projects.",
+        "Code reviews improve quality and help find problems early.",
+        "Documentation helps developers understand and maintain systems.",
+        "Continuous integration helps teams deliver updates safely."
+      ]
+    }
+  ]
+}

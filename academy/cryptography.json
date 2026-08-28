@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Cryptography",
+    "explanation": "Cryptography is the science of protecting information by converting it into a form that only authorized people can read. It is widely used to secure communication, passwords, and online transactions.",
+    "code": "# Encryption protects data.",
+    "output": "Sensitive information is protected from unauthorized access.",
+    "practice": "List five places where cryptography is used in everyday life.",
+    "quiz": "What is cryptography?"
+  },
+  "2": {
+    "title": "Encryption and Decryption",
+    "explanation": "Encryption converts readable information (plaintext) into unreadable data (ciphertext). Decryption converts the ciphertext back into its original form using the correct key.",
+    "code": "plaintext -> encryption -> ciphertext -> decryption -> plaintext",
+    "output": "The original message is recovered after decryption.",
+    "practice": "Explain the difference between encryption and decryption.",
+    "quiz": "What is ciphertext?"
+  },
+  "3": {
+    "title": "Symmetric and Asymmetric Encryption",
+    "explanation": "Symmetric encryption uses the same key for encryption and decryption. Asymmetric encryption uses a public key for encryption and a private key for decryption.",
+    "code": "Public Key\nPrivate Key",
+    "output": "The two encryption approaches are compared.",
+    "practice": "Research one example of a symmetric algorithm and one example of an asymmetric algorithm.",
+    "quiz": "Which type of encryption uses two different keys?"
+  },
+  "4": {
+    "title": "Hash Functions",
+    "explanation": "A hash function converts data into a fixed-length value called a hash. Hashes help verify data integrity and are commonly used to store passwords securely.",
+    "code": "hash(password)",
+    "output": "A fixed-length hash value is produced.",
+    "practice": "Research why passwords are usually stored as hashes instead of plain text.",
+    "quiz": "What is the purpose of a hash function?"
+  },
+  "5": {
+    "title": "Digital Signatures",
+    "explanation": "Digital signatures help verify the authenticity and integrity of digital documents and messages. They allow recipients to confirm that data has not been altered and that it came from the expected sender.",
+    "code": "sign(document, private_key)",
+    "output": "The document receives a digital signature.",
+    "practice": "Research one real-world use of digital signatures.",
+    "quiz": "Why are digital signatures important?"
+  }
+}

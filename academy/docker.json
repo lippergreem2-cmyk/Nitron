@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Docker",
+    "explanation": "Docker is a platform that packages applications and their dependencies into lightweight containers. Containers make applications portable and consistent across different environments.",
+    "code": "docker --version",
+    "output": "Displays the installed Docker version.",
+    "practice": "Install Docker and verify the installation using docker --version.",
+    "quiz": "What is a Docker container?"
+  },
+  "2": {
+    "title": "Docker Images",
+    "explanation": "A Docker image is a read-only template that contains everything needed to run an application, including code, libraries, and dependencies.",
+    "code": "docker images",
+    "output": "Lists all Docker images stored on your computer.",
+    "practice": "Download the hello-world image.",
+    "quiz": "What is the difference between an image and a container?"
+  },
+  "3": {
+    "title": "Running Containers",
+    "explanation": "Containers are running instances of Docker images. You create and start them with the docker run command.",
+    "code": "docker run hello-world",
+    "output": "Runs the Hello World container and prints a welcome message.",
+    "practice": "Run the hello-world container.",
+    "quiz": "Which command starts a new container?"
+  },
+  "4": {
+    "title": "Managing Containers",
+    "explanation": "Docker provides commands to list, stop, start, restart, and remove containers.",
+    "code": "docker ps\ndocker ps -a\ndocker stop <container_id>\ndocker rm <container_id>",
+    "output": "Displays running containers and manages them.",
+    "practice": "List all containers and stop one if it is running.",
+    "quiz": "Which command lists all containers, including stopped ones?"
+  },
+  "5": {
+    "title": "Dockerfile",
+    "explanation": "A Dockerfile is a text file containing instructions for building a Docker image.",
+    "code": "FROM python:3.13\nWORKDIR /app\nCOPY . .\nCMD [\"python\", \"app.py\"]",
+    "output": "Builds a Docker image for a Python application.",
+    "practice": "Create a simple Dockerfile for a Python script.",
+    "quiz": "What is the purpose of a Dockerfile?"
+  }
+}

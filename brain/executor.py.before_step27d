@@ -1,0 +1,754 @@
+"""
+Nitron Task Executor
+
+Routes decisions to approved handlers and returns a clean,
+predictable execution result.
+"""
+
+from brain.decision import decision
+from brain.memory import memory
+
+try:
+    from brain.conversation.manager import manager
+except Exception:
+    manager = None
+
+
+class Executor:
+
+    def __init__(self):
+        self.running = False
+
+    def _record_conversation(self, command, response):
+        if manager is None:
+            return
+
+        try:
+            manager.user_message(command)
+            manager.start_response(response)
+            manager.finish_response()
+        except Exception:
+            pass
+
+    def _clean_project_result(self, result):
+        """
+        Normalize a project generator result.
+
+        Keeps routing metadata separate from project data.
+        """
+
+        if not isinstance(result, dict):
+            return {
+                "success": True,
+                "result": result
+            }
+
+        if not result.get("generated"):
+            return {
+                "success": False,
+                "result": result
+            }
+
+        project = {
+            "name": result.get("name"),
+            "project_type": result.get("project_type"),
+            "language": result.get("language"),
+            "directory": result.get("directory"),
+            "files": result.get("files", []),
+            "written_files": result.get(
+                "written_files",
+                []
+            ),
+        }
+
+        cleaned = {
+            "success": True,
+            "generated": True,
+            "project": project
+        }
+
+        # Preserve learned-capability metadata returned by the
+        # programming/framework/other learned handlers.
+        passthrough_fields = [
+            "capability",
+            "capability_type",
+            "language",
+            "operation",
+            "technology",
+            "topic",
+            "message",
+            "speech_ready",
+            "speech_requested",
+            "speech_generated",
+        ]
+
+        for field in passthrough_fields:
+            if field in result and result.get(field) is not None:
+                cleaned[field] = result[field]
+
+        return cleaned
+
+    def execute(self, command):
+
+        self.running = True
+
+        try:
+            decision_result = decision.decide(command)
+
+            module = decision_result.get("module")
+            action = decision_result.get("action")
+
+            # ==================================================
+            # LEARNED CAPABILITY
+            # ==================================================
+
+            if (
+                module == "learned"
+                and action == "capability"
+            ):
+
+                skill = decision_result.get("skill")
+
+                if not isinstance(skill, str):
+                    skill = str(skill or "")
+
+                handlers = decision_result.get(
+                    "handlers",
+                    []
+                )
+
+                # --------------------------------------------------
+                # Execute the first approved handler.
+                # --------------------------------------------------
+
+                if handlers:
+
+                    from brain.skill_handlers import run_handler
+
+                    handler_name = handlers[0]
+
+                    raw_result = run_handler(
+                        handler_name,
+                        command
+                    )
+
+                else:
+
+                    # --------------------------------------------------
+                    # GENERIC LEARNED CAPABILITY FALLBACK
+                    # --------------------------------------------------
+                    # A learned skill may have abilities but no
+                    # specialized handler. Execute it through the
+                    # generic learned-capability engine.
+                    # --------------------------------------------------
+
+                    from brain.skill_handlers import (
+                        run_learned_capability
+                    )
+
+                    handler_name = "generic.learned"
+
+                    raw_result = run_learned_capability(
+                        command,
+                        skill=decision_result.get("skill")
+                    )
+
+                    handlers = [handler_name]
+
+                    # --------------------------------------------------
+                    # VERIFY GENERATED PROJECT
+                    # --------------------------------------------------
+
+                    verification = None
+
+                    if (
+                        isinstance(raw_result, dict)
+                        and raw_result.get("generated")
+                    ):
+                        try:
+                            from brain.project_verifier import verifier
+
+                            verification = verifier.verify(
+                                raw_result
+                            )
+
+                        except Exception as verification_error:
+                            verification = {
+                                "verified": False,
+                                "checks": [],
+                                "errors": [
+                                    f"Verifier error: {verification_error}"
+                                ]
+                            }
+
+                    clean_result = self._clean_project_result(
+                        raw_result
+                    )
+
+                    # Preserve learned-capability routing metadata.
+                    # Project generation itself does not know which
+                    # learned capability requested the operation.
+                    if isinstance(raw_result, dict):
+                        for field in (
+                            "capability",
+                            "language",
+                            "operation",
+                        ):
+                            value = raw_result.get(field)
+
+                            if value is not None:
+                                clean_result[field] = value
+
+                    # --------------------------------------------------
+                    # SELF-HEALING PROJECT PIPELINE
+                    # --------------------------------------------------
+
+                    repair_result = {
+                        "repaired": False,
+                        "changes": [],
+                        "errors": [],
+                        "attempts": 0,
+                    }
+
+                    testing = None
+
+                    MAX_REPAIR_ATTEMPTS = 2
+
+                    for repair_attempt in range(
+                        MAX_REPAIR_ATTEMPTS + 1
+                    ):
+
+                        # ==============================================
+                        # VERIFY
+                        # ==============================================
+
+                        if verification is not None:
+
+                            if verification.get("verified", False):
+                                break
+
+                            # ==========================================
+                            # REPAIR
+                            # ==========================================
+
+                            if (
+                                repair_attempt
+                                >= MAX_REPAIR_ATTEMPTS
+                            ):
+                                break
+
+                            try:
+
+                                from brain.project_repair import (
+                                    repair_engine
+                                )
+
+                                current_repair = (
+                                    repair_engine.repair(
+                                        raw_result,
+                                        verification
+                                    )
+                                )
+
+                                repair_result["attempts"] += 1
+
+                                if current_repair.get("repaired"):
+
+                                    repair_result["repaired"] = True
+
+                                repair_result["changes"].extend(
+                                    current_repair.get(
+                                        "changes",
+                                        []
+                                    )
+                                )
+
+                                repair_result["errors"].extend(
+                                    current_repair.get(
+                                        "errors",
+                                        []
+                                    )
+                                )
+
+                                # --------------------------------------
+                                # VERIFY AFTER REPAIR
+                                # --------------------------------------
+
+                                from brain.project_verifier import (
+                                    verifier
+                                )
+
+                                verification = verifier.verify(
+                                    raw_result
+                                )
+
+                                continue
+
+                            except Exception as repair_error:
+
+                                repair_result["errors"].append(
+                                    f"Repair error: {repair_error}"
+                                )
+
+                                break
+
+                        break
+
+                    # --------------------------------------------------
+                    # PROJECT TESTING
+                    # --------------------------------------------------
+
+                    if (
+                        verification is not None
+                        and verification.get("verified", False)
+                    ):
+
+                        try:
+
+                            from brain.project_tester import tester
+
+                            testing = tester.test(
+                                raw_result
+                            )
+
+                        except Exception as testing_error:
+
+                            testing = {
+                                "tested": False,
+                                "passed": False,
+                                "checks": [],
+                                "errors": [
+                                    f"Tester error: {testing_error}"
+                                ]
+                            }
+
+                    # --------------------------------------------------
+                    # TEST FAILURE → ONE FINAL REPAIR CYCLE
+                    # --------------------------------------------------
+
+                    if (
+                        testing is not None
+                        and testing.get("tested")
+                        and not testing.get("passed")
+                    ):
+
+                        if (
+                            repair_result["attempts"]
+                            < MAX_REPAIR_ATTEMPTS
+                        ):
+
+                            try:
+
+                                from brain.project_repair import (
+                                    repair_engine
+                                )
+
+                                repair_from_test = (
+                                    repair_engine.repair(
+                                        raw_result,
+                                        {
+                                            "verified": False,
+                                            "checks": testing.get(
+                                                "checks",
+                                                []
+                                            ),
+                                            "errors": testing.get(
+                                                "errors",
+                                                []
+                                            ),
+                                        }
+                                    )
+                                )
+
+                                repair_result["attempts"] += 1
+
+                                if repair_from_test.get(
+                                    "repaired"
+                                ):
+                                    repair_result["repaired"] = True
+
+                                repair_result["changes"].extend(
+                                    repair_from_test.get(
+                                        "changes",
+                                        []
+                                    )
+                                )
+
+                                repair_result["errors"].extend(
+                                    repair_from_test.get(
+                                        "errors",
+                                        []
+                                    )
+                                )
+
+                                # Re-verify.
+                                from brain.project_verifier import (
+                                    verifier
+                                )
+
+                                verification = verifier.verify(
+                                    raw_result
+                                )
+
+                                # Re-test after repair.
+                                if verification.get(
+                                    "verified",
+                                    False
+                                ):
+
+                                    from brain.project_tester import (
+                                        tester
+                                    )
+
+                                    testing = tester.test(
+                                        raw_result
+                                    )
+
+                            except Exception as repair_error:
+
+                                repair_result["errors"].append(
+                                    f"Test repair error: "
+                                    f"{repair_error}"
+                                )
+
+                    if verification is not None:
+                        clean_result["verification"] = verification
+
+                    if testing is not None:
+                        clean_result["testing"] = testing
+
+                    if (
+                        repair_result["attempts"] > 0
+                        or repair_result["changes"]
+                        or repair_result["errors"]
+                    ):
+                        clean_result["repair"] = repair_result
+
+                    # --------------------------------------------------
+                    # LEARNED CAPABILITY RESULT NORMALIZATION
+                    # --------------------------------------------------
+
+                    response = {
+                        "module": module,
+                        "action": action,
+                        "handler": handler_name,
+                        "skill": {
+                            "name": skill,
+                            "confidence": decision_result.get(
+                                "confidence",
+                                0
+                            ),
+                            "handlers": handlers,
+                        },
+                        **clean_result,
+                    }
+
+                    # A learned handler may return its actual result
+                    # inside "result". Promote useful capability metadata
+                    # generically so every learned capability can expose
+                    # its result without requiring a Japanese/language-only
+                    # special case.
+
+                    nested_result = response.get("result")
+
+                    if isinstance(nested_result, dict):
+
+                        # Always promote execution status.
+                        if "success" in nested_result:
+                            response["success"] = bool(
+                                nested_result.get("success")
+                            )
+
+                        # Promote all useful scalar/list capability fields.
+                        passthrough_fields = [
+                            "message",
+                            "success",
+                            "capability",
+                            "capability_type",
+                            "language",
+                            "operation",
+                            "action",
+                            "mode",
+                            "input",
+                            "output",
+                            "result",
+                            "file",
+                            "analyzed",
+                            "debugged",
+                            "syntax_valid",
+                            "functions",
+                            "classes",
+                            "imports",
+                            "speech_ready",
+                            "speech_requested",
+                            "speech_generated",
+                            "tested",
+                            "passed",
+                            "verified",
+                            "repaired",
+                            "confidence",
+                        ]
+
+                        for field in passthrough_fields:
+
+                            if field not in nested_result:
+                                continue
+
+                            value = nested_result.get(field)
+
+                            if value is None:
+                                continue
+
+                            response[field] = value
+
+                        # Preserve arbitrary structured data returned by
+                        # future learned handlers without losing it.
+                        if isinstance(
+                            nested_result.get("data"),
+                            dict
+                        ):
+                            response["data"] = nested_result["data"]
+
+                        if isinstance(
+                            nested_result.get("abilities"),
+                            list
+                        ):
+                            response["abilities"] = nested_result["abilities"]
+
+                        if isinstance(
+                            nested_result.get("checks"),
+                            list
+                        ):
+                            response["checks"] = nested_result["checks"]
+
+                        if isinstance(
+                            nested_result.get("errors"),
+                            list
+                        ):
+                            response["errors"] = nested_result["errors"]
+
+                    message = self._build_message(
+                        response
+                    )
+
+                    memory.remember(
+                        "last_command",
+                        command
+                    )
+
+                    memory.remember(
+                        "last_module",
+                        module
+                    )
+
+                    memory.remember(
+                        "last_action",
+                        action
+                    )
+
+                    memory.remember(
+                        "last_learned_capability",
+                        skill
+                    )
+
+                    memory.remember(
+                        "last_action_result",
+                        message
+                    )
+
+                    self._record_conversation(
+                        command,
+                        message
+                    )
+
+                    return response
+
+                # --------------------------------------------------
+                # Learned capability without executable handler.
+                # --------------------------------------------------
+
+                from brain.reasoning import reasoning
+
+                raw_result = reasoning.answer(command)
+
+                if isinstance(raw_result, dict):
+
+                    response = {
+                        "module": module,
+                        "action": action,
+                        "skill": {
+                            "name": skill,
+                            "confidence": decision_result.get(
+                                "confidence",
+                                0
+                            ),
+                            "handlers": [],
+                        },
+                        "result": raw_result,
+                    }
+
+                    message = raw_result.get(
+                        "message",
+                        str(raw_result)
+                    )
+
+                else:
+
+                    message = str(raw_result)
+
+                    response = {
+                        "module": module,
+                        "action": action,
+                        "skill": {
+                            "name": skill,
+                            "confidence": decision_result.get(
+                                "confidence",
+                                0
+                            ),
+                            "handlers": [],
+                        },
+                        "result": message,
+                    }
+
+                memory.remember(
+                    "last_command",
+                    command
+                )
+
+                memory.remember(
+                    "last_module",
+                    module
+                )
+
+                memory.remember(
+                    "last_action",
+                    action
+                )
+
+                memory.remember(
+                    "last_learned_capability",
+                    skill
+                )
+
+                memory.remember(
+                    "last_action_result",
+                    message
+                )
+
+                self._record_conversation(
+                    command,
+                    message
+                )
+
+                return response
+
+            # ==================================================
+            # EXISTING BUILT-IN ROUTING
+            # ==================================================
+
+            response = {
+                "module": module,
+                "action": action,
+                "result": {
+                    "message": (
+                        f"Executing {action} "
+                        f"using {module} module."
+                    )
+                }
+            }
+
+            message = response["result"]["message"]
+
+            memory.remember(
+                "last_command",
+                command
+            )
+
+            memory.remember(
+                "last_module",
+                module
+            )
+
+            memory.remember(
+                "last_action",
+                action
+            )
+
+            memory.remember(
+                "last_action_result",
+                message
+            )
+
+            self._record_conversation(
+                command,
+                message
+            )
+
+            return response
+
+        except Exception as error:
+
+            error_message = (
+                f"Execution failed: {error}"
+            )
+
+            memory.remember(
+                "last_action_result",
+                error_message
+            )
+
+            self._record_conversation(
+                command,
+                error_message
+            )
+
+            return {
+                "success": False,
+                "error": error_message
+            }
+
+        finally:
+            self.running = False
+
+    def _build_message(self, response):
+        """
+        Create a human-readable execution message.
+        """
+
+        if response.get("generated"):
+
+            project = response.get(
+                "project",
+                {}
+            )
+
+            return (
+                "Project generated successfully.\n\n"
+                f"Name: {project.get('name')}\n"
+                f"Type: {project.get('type')}\n"
+                f"Language: {project.get('language')}\n"
+                f"Directory: {project.get('directory')}"
+            )
+
+        result = response.get("result")
+
+        if isinstance(result, dict):
+            return str(
+                result.get(
+                    "message",
+                    result
+                )
+            )
+
+        return str(result)
+
+    def status(self):
+        return {
+            "running": self.running
+        }
+
+    def stop(self):
+        self.running = False
+
+
+executor = Executor()

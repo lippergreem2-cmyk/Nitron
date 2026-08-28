@@ -1,0 +1,165 @@
+"""
+Nitron Task Executor
+
+Executes decisions produced by the decision engine.
+
+Learned capabilities are delegated to the existing reasoning engine,
+which already knows how to apply learned capabilities to real tasks.
+"""
+
+from brain.decision import decision
+from brain.conversation import conversation
+from brain.memory import memory
+
+
+class Executor:
+
+    def __init__(self):
+        self.running = False
+
+    def execute(self, command):
+
+        self.running = True
+
+        try:
+            result = decision.decide(command)
+
+            module = result.get("module")
+            action = result.get("action")
+
+            # ==================================================
+            # LEARNED CAPABILITY
+            # ==================================================
+            #
+            # Do not merely report that the capability exists.
+            # Give the original request to the reasoning engine,
+            # which already contains Nitron's actual application
+            # logic.
+            #
+            # ==================================================
+
+            if (
+                module == "learned"
+                and action == "capability"
+            ):
+
+                from brain.reasoning import reasoning
+
+                response = reasoning.answer(command)
+
+                # reasoning.answer() may return a structured
+                # response rather than plain text.
+                if isinstance(response, dict):
+
+                    message = response.get(
+                        "message",
+                        response
+                    )
+
+                    # Keep the capability information available.
+                    response_skill = response.get(
+                        "skill"
+                    )
+
+                    skill_name = (
+                        response_skill.get("name")
+                        if isinstance(
+                            response_skill,
+                            dict
+                        )
+                        else result.get("skill")
+                    )
+
+                    if skill_name:
+                        memory.remember(
+                            "last_learned_capability",
+                            skill_name
+                        )
+
+                    memory.remember(
+                        "last_action_result",
+                        message
+                    )
+
+                    conversation.add(
+                        command,
+                        message
+                    )
+
+                    return response
+
+                # Plain-text reasoning result.
+                conversation.add(
+                    command,
+                    str(response)
+                )
+
+                memory.remember(
+                    "last_action_result",
+                    str(response)
+                )
+
+                return response
+
+            # ==================================================
+            # EXISTING BUILT-IN ROUTING
+            # ==================================================
+
+            response = (
+                f"Executing {action} "
+                f"using {module} module."
+            )
+
+            conversation.add(
+                command,
+                response
+            )
+
+            memory.remember(
+                "last_command",
+                command
+            )
+
+            memory.remember(
+                "last_module",
+                module
+            )
+
+            memory.remember(
+                "last_action",
+                action
+            )
+
+            return response
+
+        except Exception as error:
+
+            error_message = (
+                f"Execution failed: {error}"
+            )
+
+            conversation.add(
+                command,
+                error_message
+            )
+
+            memory.remember(
+                "last_action_result",
+                error_message
+            )
+
+            return error_message
+
+        finally:
+            self.running = False
+
+    def status(self):
+        return {
+            "running": self.running
+        }
+
+    def stop(self):
+        self.running = False
+
+
+executor = Executor()

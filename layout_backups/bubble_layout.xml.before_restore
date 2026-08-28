@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="140dp"
+    android:layout_height="140dp">
+
+    <View
+        android:id="@+id/bubbleGlow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/nitron_bubble_glow" />
+
+    <TextView
+        android:id="@+id/nitronBubble"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_gravity="center"
+        android:background="@drawable/nitron_bubble_bg"
+        android:gravity="center"
+        android:text="N"
+        android:textColor="#FF2D78"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <TextView
+        android:id="@+id/bubbleMenuIcon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="top|start"
+        android:gravity="center"
+        android:text="☰"
+        android:textColor="#FF2D78"
+        android:textSize="16sp"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <TextView
+        android:id="@+id/bubbleCloseIcon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="top|end"
+        android:gravity="center"
+        android:text="✕"
+        android:textColor="#FF2D78"
+        android:textSize="16sp"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <TextView
+        android:id="@+id/bubbleMicIcon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="bottom|start"
+        android:gravity="center"
+        android:text="🎤"
+        android:textColor="#FF2D78"
+        android:textSize="16sp"
+        android:clickable="true"
+        android:focusable="true" />
+
+</FrameLayout>

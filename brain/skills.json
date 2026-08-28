@@ -1,0 +1,602 @@
+{
+  "python": {
+    "name": "Python",
+    "description": "Python is a programming language used to write software.",
+    "abilities": [
+      "analyze Python",
+      "apply Python",
+      "build Python projects",
+      "build using Python",
+      "create using Python",
+      "debug Python",
+      "explain Python",
+      "modify Python",
+      "test Python",
+      "test Python code",
+      "understand Python",
+      "work with Python",
+      "write Python"
+    ],
+    "prerequisites": [],
+    "confidence": 1.0,
+    "evidence": [
+      "initial capability registration",
+      "Nitron learning system",
+      "successful project generation",
+      "project_type:python_program",
+      "language:python"
+    ],
+    "handlers": [
+      "learned.programming"
+    ],
+    "capability_type": "programming",
+    "input_schema": {},
+    "learned_at": "2026-08-20T15:42:15.666239",
+    "updated_at": "2026-08-23T07:27:17.838853"
+  },
+  "python decorators": {
+    "name": "Python decorators",
+    "description": "The following outline is provided as an overview of and topical guide to Python: Python is a general-purpose, interpreted, object-oriented, functional, multi-paradigm, and dynamically typed programming language known for its emphasis on code readability and broad standard library. Python was created by Guido van Rossum and first released in 1991. It emphasizes code readability and developer productivity. Object-oriented programming — built primarily around objects and classes. Functional programming — supports functions as first-class objects. Dynamically typed — type checking occurs at runtime.",
+    "abilities": [
+      "answer questions about Python decorators",
+      "understand Python decorators",
+      "work with Python decorators"
+    ],
+    "prerequisites": [],
+    "confidence": 0.7999999999999999,
+    "evidence": [
+      "https://en.wikipedia.org/wiki/Python_syntax_and_semantics",
+      "https://en.wikipedia.org/wiki/Outline_of_the_Python_programming_language"
+    ],
+    "handlers": [],
+    "learned_at": "2026-08-20T16:32:38.977299",
+    "updated_at": "2026-08-20T16:47:25.848906"
+  },
+  "c++": {
+    "name": "C++",
+    "description": "C++ programming language and software development",
+    "abilities": [
+      "analyze C++",
+      "answer questions about C++",
+      "apply C++",
+      "build using C++",
+      "create using C++",
+      "debug C++",
+      "explain C++",
+      "fix problems involving C++",
+      "modify C++",
+      "test C++",
+      "understand C++",
+      "use C++",
+      "work with C++",
+      "write C++"
+    ],
+    "prerequisites": [],
+    "confidence": 0.7,
+    "evidence": [
+      "Nitron learning system"
+    ],
+    "handlers": [
+      "learned.programming"
+    ],
+    "capability_type": "programming",
+    "input_schema": {},
+    "learned_at": "2026-08-20T16:59:39.985776",
+    "updated_at": "2026-08-23T18:06:04.844677"
+  },
+  "python game": {
+    "name": "Python game",
+    "description": "Generate runnable Python games.",
+    "abilities": [
+      "build Python games",
+      "create Python games",
+      "generate Python game projects"
+    ],
+    "prerequisites": [],
+    "confidence": 0.9999999999999999,
+    "evidence": [
+      "reasoning._generate_project_files: game/python",
+      "successful project generation",
+      "project_type:game",
+      "language:python"
+    ],
+    "handlers": [
+      "reasoning.generate_project"
+    ],
+    "capability_type": "knowledge",
+    "input_schema": {},
+    "learned_at": "2026-08-20T17:40:17.172189",
+    "updated_at": "2026-08-23T15:38:20.189935"
+  },
+  "termux tool": {
+    "name": "Termux tool",
+    "description": "Generate tools designed to run in Termux.",
+    "abilities": [
+      "build Termux tools",
+      "create Termux tools",
+      "generate Termux scripts"
+    ],
+    "prerequisites": [],
+    "confidence": 0.7,
+    "evidence": [
+      "reasoning._generate_project_files: termux_tool",
+      "successful project generation",
+      "project_type:termux_tool",
+      "language:python"
+    ],
+    "handlers": [
+      "reasoning.generate_project"
+    ],
+    "capability_type": "knowledge",
+    "input_schema": {},
+    "learned_at": "2026-08-20T17:40:17.179910",
+    "updated_at": "2026-08-23T12:27:56.217554"
+  },
+  "website generation": {
+    "name": "Website generation",
+    "description": "Generate complete starter websites.",
+    "abilities": [
+      "build websites",
+      "create websites",
+      "generate HTML CSS JavaScript websites"
+    ],
+    "prerequisites": [],
+    "confidence": 0.7,
+    "evidence": [
+      "reasoning._generate_project_files: website",
+      "successful project generation",
+      "project_type:website",
+      "language:html"
+    ],
+    "handlers": [
+      "reasoning.generate_project"
+    ],
+    "learned_at": "2026-08-20T17:40:17.181506",
+    "updated_at": "2026-08-20T18:48:26.387443"
+  },
+  "web application generation": {
+    "name": "Web application generation",
+    "description": "Generate starter web applications.",
+    "abilities": [
+      "build web apps",
+      "create web applications",
+      "generate web apps"
+    ],
+    "prerequisites": [],
+    "confidence": 0.6,
+    "evidence": [
+      "reasoning._generate_project_files: web_app"
+    ],
+    "handlers": [
+      "reasoning.generate_project"
+    ],
+    "learned_at": "2026-08-20T17:40:17.183074",
+    "updated_at": "2026-08-20T18:48:26.394033"
+  },
+  "javascript program": {
+    "name": "JavaScript program",
+    "description": "Generate runnable JavaScript programs.",
+    "abilities": [
+      "build JavaScript programs",
+      "create JavaScript programs",
+      "analyze JavaScript programming",
+      "build using JavaScript programming",
+      "create using JavaScript programming",
+      "debug JavaScript programming",
+      "explain JavaScript programming",
+      "modify JavaScript programming",
+      "test JavaScript programming",
+      "understand JavaScript programming",
+      "write JavaScript programming"
+    ],
+    "prerequisites": [],
+    "confidence": 0.6,
+    "evidence": [
+      "reasoning._generate_project_files: program/javascript"
+    ],
+    "handlers": [
+      "learned.programming"
+    ],
+    "learned_at": "2026-08-20T17:40:17.184578",
+    "updated_at": "2026-08-20T18:48:26.399525",
+    "capability_type": "programming",
+    "input_schema": {}
+  },
+  "python program": {
+    "name": "Python program",
+    "description": "Generate runnable Python programs.",
+    "abilities": [
+      "build Python programs",
+      "create Python programs"
+    ],
+    "prerequisites": [],
+    "confidence": 0.6,
+    "evidence": [
+      "reasoning._generate_project_files: program/python"
+    ],
+    "handlers": [
+      "reasoning.generate_project"
+    ],
+    "learned_at": "2026-08-20T17:40:17.186116",
+    "updated_at": "2026-08-20T18:48:26.404253"
+  },
+  "kotlin program": {
+    "name": "Kotlin program",
+    "description": "Generate Kotlin programs.",
+    "abilities": [
+      "build Kotlin programs",
+      "create Kotlin programs"
+    ],
+    "prerequisites": [],
+    "confidence": 0.6,
+    "evidence": [
+      "reasoning._generate_project_files: program/kotlin"
+    ],
+    "handlers": [
+      "reasoning.generate_project"
+    ],
+    "learned_at": "2026-08-20T17:40:17.187706",
+    "updated_at": "2026-08-20T18:48:26.407954"
+  },
+  "java program": {
+    "name": "Java program",
+    "description": "Generate runnable Java programs.",
+    "abilities": [
+      "build Java programs",
+      "create Java programs"
+    ],
+    "prerequisites": [],
+    "confidence": 0.6,
+    "evidence": [
+      "reasoning._generate_project_files: program/java"
+    ],
+    "handlers": [
+      "reasoning.generate_project"
+    ],
+    "learned_at": "2026-08-20T17:40:17.189358",
+    "updated_at": "2026-08-20T18:48:26.411490"
+  },
+  "bash program": {
+    "name": "Bash program",
+    "description": "Generate runnable Bash programs.",
+    "abilities": [
+      "build Bash programs",
+      "create Bash programs"
+    ],
+    "prerequisites": [],
+    "confidence": 0.6,
+    "evidence": [
+      "reasoning._generate_project_files: program/bash"
+    ],
+    "handlers": [
+      "reasoning.generate_project"
+    ],
+    "learned_at": "2026-08-20T17:40:17.191284",
+    "updated_at": "2026-08-20T18:48:26.414955"
+  },
+  "android app generation": {
+    "name": "Android app generation",
+    "description": "Generate starter Android applications using Kotlin.",
+    "abilities": [
+      "build Android apps",
+      "create Android apps",
+      "generate Kotlin Android applications"
+    ],
+    "prerequisites": [],
+    "confidence": 0.7,
+    "evidence": [
+      "reasoning._generate_project_files: android_app",
+      "successful project generation",
+      "project_type:android_app",
+      "language:kotlin"
+    ],
+    "handlers": [
+      "reasoning.generate_project"
+    ],
+    "learned_at": "2026-08-20T17:40:17.193278",
+    "updated_at": "2026-08-20T18:48:26.417973"
+  },
+  "ai project generation": {
+    "name": "AI project generation",
+    "description": "Generate starter AI projects.",
+    "abilities": [
+      "build AI projects",
+      "create AI projects"
+    ],
+    "prerequisites": [],
+    "confidence": 0.6,
+    "evidence": [
+      "reasoning._generate_project_files: ai_project"
+    ],
+    "handlers": [
+      "reasoning.generate_project"
+    ],
+    "learned_at": "2026-08-20T17:40:17.195445",
+    "updated_at": "2026-08-20T18:48:26.420868"
+  },
+  "calculator generation": {
+    "name": "Calculator generation",
+    "description": "Generate calculator projects.",
+    "abilities": [
+      "build calculator programs",
+      "create calculators"
+    ],
+    "prerequisites": [],
+    "confidence": 0.6,
+    "evidence": [
+      "reasoning._generate_project_files: calculator"
+    ],
+    "handlers": [
+      "reasoning.generate_project"
+    ],
+    "learned_at": "2026-08-20T17:40:17.197703",
+    "updated_at": "2026-08-20T18:48:26.423728"
+  },
+  "spanish": {
+    "name": "Spanish",
+    "description": "Spanish is a human language.",
+    "abilities": [
+      "analyze Spanish",
+      "answer questions about Spanish",
+      "apply Spanish",
+      "build using Spanish",
+      "create using Spanish",
+      "debug Spanish",
+      "explain Spanish",
+      "fix problems involving Spanish",
+      "modify Spanish",
+      "understand Spanish",
+      "use Spanish",
+      "work with Spanish"
+    ],
+    "prerequisites": [],
+    "confidence": 0.7,
+    "evidence": [
+      "Nitron learning system"
+    ],
+    "handlers": [
+      "learned.language"
+    ],
+    "capability_type": "language",
+    "input_schema": {},
+    "learned_at": "2026-08-21T10:00:23.465793",
+    "updated_at": "2026-08-21T10:01:51.826651"
+  },
+  "japanese": {
+    "name": "Japanese",
+    "description": "Japanese is a human language used for communication.",
+    "abilities": [
+      "analyze Japanese",
+      "answer in Japanese",
+      "answer questions about Japanese",
+      "apply Japanese",
+      "build using Japanese",
+      "converse in Japanese",
+      "create using Japanese",
+      "debug Japanese",
+      "explain Japanese",
+      "fix problems involving Japanese",
+      "generate Japanese speech",
+      "modify Japanese",
+      "read Japanese",
+      "speak Japanese",
+      "translate Japanese",
+      "understand Japanese",
+      "use Japanese",
+      "work with Japanese",
+      "write Japanese"
+    ],
+    "prerequisites": [],
+    "confidence": 0.7999999999999999,
+    "evidence": [
+      "Nitron learning system"
+    ],
+    "handlers": [
+      "learned.language"
+    ],
+    "capability_type": "language",
+    "input_schema": {},
+    "learned_at": "2026-08-21T10:04:34.865185",
+    "updated_at": "2026-08-23T07:27:17.824298"
+  },
+  "python programming": {
+    "name": "Python programming",
+    "description": "Python is a programming language. Nitron can use Python to write, modify, debug, test, and build Python programs.",
+    "abilities": [
+      "analyze Python programming",
+      "answer questions about Python programming",
+      "apply Python programming",
+      "build using Python programming",
+      "converse in Python programming",
+      "create using Python programming",
+      "debug Python programming",
+      "explain Python programming",
+      "fix problems involving Python programming",
+      "generate Python programming speech",
+      "modify Python programming",
+      "read Python programming",
+      "speak Python programming",
+      "test Python programming",
+      "translate Python programming",
+      "understand Python programming",
+      "use Python programming",
+      "work with Python programming",
+      "write Python programming"
+    ],
+    "prerequisites": [],
+    "confidence": 0.7999999999999999,
+    "evidence": [
+      "Nitron learning system",
+      "successful project generation",
+      "project_type:program",
+      "language:python"
+    ],
+    "handlers": [
+      "learned.programming"
+    ],
+    "capability_type": "programming",
+    "input_schema": {},
+    "learned_at": "2026-08-21T10:12:59.326704",
+    "updated_at": "2026-08-21T12:49:34.593985"
+  },
+  "french": {
+    "name": "French",
+    "description": "French is a human language used for communication.",
+    "abilities": [
+      "answer in French",
+      "converse in French",
+      "read French",
+      "speak French",
+      "translate French",
+      "understand French",
+      "write French"
+    ],
+    "prerequisites": [],
+    "confidence": 0.6,
+    "evidence": [
+      "Nitron learning system"
+    ],
+    "handlers": [
+      "learned.language"
+    ],
+    "capability_type": "language",
+    "input_schema": {},
+    "learned_at": "2026-08-21T10:15:03.236173",
+    "updated_at": "2026-08-21T10:15:03.236203"
+  },
+  "rust programming": {
+    "name": "Rust programming",
+    "description": "Rust is a programming language used to write software and programs.",
+    "abilities": [
+      "analyze Rust programming",
+      "build using Rust programming",
+      "create using Rust programming",
+      "debug Rust programming",
+      "explain Rust programming",
+      "modify Rust programming",
+      "test Rust programming",
+      "understand Rust programming",
+      "write Rust programming"
+    ],
+    "prerequisites": [],
+    "confidence": 0.6,
+    "evidence": [
+      "Nitron learning system"
+    ],
+    "handlers": [
+      "learned.programming"
+    ],
+    "capability_type": "programming",
+    "input_schema": {},
+    "learned_at": "2026-08-21T10:15:03.249135",
+    "updated_at": "2026-08-21T10:15:03.249161"
+  },
+  "fastapi": {
+    "name": "FastAPI",
+    "description": "FastAPI is a Python web framework for building APIs.",
+    "abilities": [
+      "build with FastAPI",
+      "configure FastAPI",
+      "debug FastAPI",
+      "explain FastAPI",
+      "integrate FastAPI",
+      "modify FastAPI",
+      "test FastAPI",
+      "understand FastAPI",
+      "use FastAPI"
+    ],
+    "prerequisites": [],
+    "confidence": 0.7,
+    "evidence": [
+      "Nitron learning system"
+    ],
+    "handlers": [
+      "learned.framework"
+    ],
+    "capability_type": "framework",
+    "input_schema": {},
+    "learned_at": "2026-08-21T10:15:03.260086",
+    "updated_at": "2026-08-23T07:27:17.854482"
+  },
+  "astronomy": {
+    "name": "astronomy",
+    "description": "Astronomy is the study of stars, planets, galaxies and the universe.",
+    "abilities": [
+      "analyze astronomy",
+      "answer questions about astronomy",
+      "apply astronomy",
+      "explain astronomy",
+      "understand astronomy",
+      "work with astronomy"
+    ],
+    "prerequisites": [],
+    "confidence": 0.6,
+    "evidence": [
+      "Nitron learning system"
+    ],
+    "handlers": [
+      "learned.knowledge"
+    ],
+    "capability_type": "knowledge",
+    "input_schema": {},
+    "learned_at": "2026-08-23T07:27:17.794560",
+    "updated_at": "2026-08-23T07:27:17.794607"
+  },
+  "chess": {
+    "name": "chess",
+    "description": "Chess is a strategy board game involving tactics, planning and analysis.",
+    "abilities": [
+      "analyze chess",
+      "answer questions about chess",
+      "apply chess",
+      "explain chess",
+      "understand chess",
+      "work with chess"
+    ],
+    "prerequisites": [],
+    "confidence": 0.6,
+    "evidence": [
+      "Nitron learning system"
+    ],
+    "handlers": [
+      "learned.knowledge"
+    ],
+    "capability_type": "knowledge",
+    "input_schema": {},
+    "learned_at": "2026-08-23T07:27:17.809294",
+    "updated_at": "2026-08-23T07:27:17.809330"
+  },
+  "black holes": {
+    "name": "black holes",
+    "description": "An image of the core region of Messier 87, a supermassive black hole, processed from an array of eight radio telescopes known as the EHT with colours indicating brightness temperature Simulated view of a nonspinning, uncharged black hole in front of the Large Magellanic Cloud. The gravitational lensing effect produces two enlarged but distorted views of the Cloud. Across the top, the Milky Way disk appears distorted into an arc. A black hole is an astronomical body so compact that its gravity prevents anything, including light, from escaping. Albert Einstein 's theory of general relativity, which describes gravitation as the curvature of spacetime, predicts that any sufficiently compact mass will form a black hole. The boundary of no escape is called the event horizon.",
+    "abilities": [
+      "analyze black holes",
+      "answer questions about black holes",
+      "apply black holes",
+      "build with black holes",
+      "configure black holes",
+      "debug black holes",
+      "explain black holes",
+      "integrate black holes",
+      "modify black holes",
+      "test black holes",
+      "understand black holes",
+      "use black holes",
+      "work with black holes"
+    ],
+    "prerequisites": [],
+    "confidence": 0.7,
+    "evidence": [
+      "https://en.wikipedia.org/wiki/List_of_most_massive_black_holes",
+      "https://en.wikipedia.org/wiki/Black_hole"
+    ],
+    "handlers": [
+      "learned.knowledge",
+      "learned.framework"
+    ],
+    "capability_type": "framework",
+    "input_schema": {},
+    "learned_at": "2026-08-23T07:40:33.625670",
+    "updated_at": "2026-08-23T08:27:42.439992"
+  }
+}

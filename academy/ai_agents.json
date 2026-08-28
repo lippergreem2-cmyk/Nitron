@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to AI Agents",
+    "explanation": "An AI agent is a software system that can observe its environment, make decisions, and perform actions to achieve goals. Modern AI agents often use Large Language Models together with tools, memory, and planning.",
+    "code": "goal = 'Answer user questions'\nagent.run(goal)",
+    "output": "The AI agent begins working toward its goal.",
+    "practice": "List three examples of AI agents you use or know about.",
+    "quiz": "What is an AI agent?"
+  },
+  "2": {
+    "title": "Perception and Input",
+    "explanation": "AI agents receive information from users, files, sensors, cameras, APIs, or other software before deciding what to do.",
+    "code": "user_input = 'Teach me Python'",
+    "output": "The agent receives a request from the user.",
+    "practice": "List five different types of input an AI agent could receive.",
+    "quiz": "What does perception mean for an AI agent?"
+  },
+  "3": {
+    "title": "Planning and Decision Making",
+    "explanation": "An AI agent breaks a goal into smaller tasks, chooses the best sequence of actions, and adjusts if new information becomes available.",
+    "code": "plan = ['Understand request', 'Find lesson', 'Explain topic']",
+    "output": "The agent creates a step-by-step plan.",
+    "practice": "Write a simple plan for building a calculator app.",
+    "quiz": "Why is planning useful for AI agents?"
+  },
+  "4": {
+    "title": "Memory and Learning",
+    "explanation": "AI agents can use memory to remember previous conversations, user preferences, and completed tasks. They may also update their knowledge base as new information is added.",
+    "code": "memory.save('favorite_language', 'Python')",
+    "output": "The preference is stored for future use.",
+    "practice": "Think of three types of information an assistant should remember with the user's permission.",
+    "quiz": "Why is memory useful for an AI agent?"
+  },
+  "5": {
+    "title": "Tools and Automation",
+    "explanation": "AI agents become more capable when they can use tools such as web browsers, databases, calendars, code interpreters, and file systems to complete tasks.",
+    "code": "agent.use_tool('search')",
+    "output": "The agent retrieves information using a tool.",
+    "practice": "List five tools that would make Nitron more useful.",
+    "quiz": "Why do AI agents use external tools?"
+  }
+}

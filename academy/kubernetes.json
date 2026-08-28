@@ -1,0 +1,42 @@
+{
+  "1": {
+    "title": "Introduction to Kubernetes",
+    "explanation": "Kubernetes (K8s) is an open-source platform for deploying, managing, and scaling containerized applications. It automates many tasks involved in running containers across multiple machines.",
+    "code": "kubectl version --client",
+    "output": "Displays the installed kubectl client version.",
+    "practice": "Install kubectl and check its version.",
+    "quiz": "What is Kubernetes used for?"
+  },
+  "2": {
+    "title": "Kubernetes Cluster",
+    "explanation": "A Kubernetes cluster consists of a control plane that manages the cluster and worker nodes that run your applications.",
+    "code": "kubectl cluster-info",
+    "output": "Displays information about the Kubernetes cluster.",
+    "practice": "Connect to a cluster and view its information.",
+    "quiz": "What are the two main parts of a Kubernetes cluster?"
+  },
+  "3": {
+    "title": "Pods",
+    "explanation": "A Pod is the smallest deployable unit in Kubernetes. A Pod usually contains one container, but it can contain multiple containers that work together.",
+    "code": "kubectl get pods",
+    "output": "Lists all Pods in the current namespace.",
+    "practice": "View the Pods running in your cluster.",
+    "quiz": "What is a Pod?"
+  },
+  "4": {
+    "title": "Deployments",
+    "explanation": "Deployments manage Pods by ensuring the desired number of replicas are running and by supporting rolling updates.",
+    "code": "kubectl create deployment nginx --image=nginx",
+    "output": "Creates a Deployment running the Nginx web server.",
+    "practice": "Create a Deployment and verify that its Pod is running.",
+    "quiz": "Why are Deployments useful?"
+  },
+  "5": {
+    "title": "Services",
+    "explanation": "A Service provides a stable network endpoint for accessing one or more Pods. It enables communication inside and outside the cluster.",
+    "code": "kubectl expose deployment nginx --port=80 --type=ClusterIP",
+    "output": "Creates a Service that exposes the Nginx Deployment.",
+    "practice": "Create a Service for a Deployment and describe it using kubectl.",
+    "quiz": "What problem does a Kubernetes Service solve?"
+  }
+}

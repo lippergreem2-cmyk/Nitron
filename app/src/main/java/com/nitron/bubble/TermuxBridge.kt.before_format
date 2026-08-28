@@ -1,0 +1,166 @@
+package com.nitron.bubble
+
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
+import java.net.HttpURLConnection
+import java.net.URL
+import kotlin.concurrent.thread
+
+object TermuxBridge {
+
+    private const val SERVER_URL =
+        "http://127.0.0.1:8000/command"
+
+    private const val IMAGE_SERVER_URL =
+        "http://127.0.0.1:8000/learn-image"
+
+    fun send(
+        message: String,
+        callback: (String) -> Unit
+    ) {
+        thread {
+            try {
+                val url = URL(SERVER_URL)
+
+                val connection =
+                    url.openConnection() as HttpURLConnection
+
+                connection.requestMethod = "POST"
+                connection.doOutput = true
+                connection.connectTimeout = 5000
+                connection.readTimeout = 10000
+
+                connection.setRequestProperty(
+                    "Content-Type",
+                    "application/json; charset=UTF-8"
+                )
+
+                val json = JSONObject()
+                    .put("message", message)
+
+                OutputStreamWriter(
+                    connection.outputStream,
+                    Charsets.UTF_8
+                ).use { writer ->
+                    writer.write(json.toString())
+                    writer.flush()
+                }
+
+                val inputStream =
+                    if (connection.responseCode in 200..299) {
+                        connection.inputStream
+                    } else {
+                        connection.errorStream
+                    }
+
+                val reply = BufferedReader(
+                    InputStreamReader(
+                        inputStream,
+                        Charsets.UTF_8
+                    )
+                ).use {
+                    it.readText()
+                }
+
+                val cleanReply = try {
+                    val responseJson = JSONObject(reply)
+
+                    if (responseJson.has("response")) {
+                        responseJson.getString("response")
+                    } else {
+                        reply
+                    }
+                } catch (_: Exception) {
+                    reply
+                }
+
+                callback(cleanReply)
+                connection.disconnect()
+
+            } catch (e: Exception) {
+                callback(
+                    "Nitron is offline.\n\n${e.message}"
+                )
+            }
+        }
+    }
+
+    fun sendImage(
+        base64Image: String,
+        filename: String,
+        callback: (String) -> Unit
+    ) {
+        thread {
+            try {
+                val url = URL(IMAGE_SERVER_URL)
+
+                val connection =
+                    url.openConnection() as HttpURLConnection
+
+                connection.requestMethod = "POST"
+                connection.doOutput = true
+                connection.connectTimeout = 10000
+                connection.readTimeout = 30000
+
+                connection.setRequestProperty(
+                    "Content-Type",
+                    "application/json; charset=UTF-8"
+                )
+
+                val json = JSONObject()
+                    .put("image", base64Image)
+                    .put("filename", filename)
+                    .put(
+                        "note",
+                        "Image selected from Nitron Android app"
+                    )
+
+                OutputStreamWriter(
+                    connection.outputStream,
+                    Charsets.UTF_8
+                ).use { writer ->
+                    writer.write(json.toString())
+                    writer.flush()
+                }
+
+                val inputStream =
+                    if (connection.responseCode in 200..299) {
+                        connection.inputStream
+                    } else {
+                        connection.errorStream
+                    }
+
+                val reply = BufferedReader(
+                    InputStreamReader(
+                        inputStream,
+                        Charsets.UTF_8
+                    )
+                ).use {
+                    it.readText()
+                }
+
+                val response = try {
+                    val responseJson = JSONObject(reply)
+
+                    if (responseJson.has("response")) {
+                        responseJson.getString("response")
+                    } else {
+                        reply
+                    }
+                } catch (_: Exception) {
+                    reply
+                }
+
+                callback(response)
+                connection.disconnect()
+
+            } catch (e: Exception) {
+                callback(
+                    "Could not send picture to Nitron.\n\n${e.message}"
+                )
+            }
+        }
+    }
+}

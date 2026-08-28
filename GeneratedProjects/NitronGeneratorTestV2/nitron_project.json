@@ -1,0 +1,9 @@
+{
+    "name": "NitronGeneratorTestV2",
+    "description": "Testing Nitron's real AI code generator.",
+    "files": [
+        "README.md",
+        "main.py",
+        "utils/helper.py"
+    ]
+}

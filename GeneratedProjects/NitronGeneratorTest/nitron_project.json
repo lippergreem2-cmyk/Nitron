@@ -1,0 +1,10 @@
+{
+    "name": "NitronGeneratorTest",
+    "description": "",
+    "files": [
+        "README.md",
+        "main.py",
+        "nitron_project.json",
+        "utils/helper.py"
+    ]
+}

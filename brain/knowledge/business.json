@@ -1,0 +1,56 @@
+{
+  "domain": "Business",
+  "description": "Knowledge about companies, markets, entrepreneurship, finance, and business operations.",
+  "topics": [
+    {
+      "name": "Business Fundamentals",
+      "knowledge": [
+        "A business creates value by providing products or services to customers.",
+        "Businesses usually focus on revenue, costs, profit, growth, and customer satisfaction.",
+        "A company needs strategy, operations, marketing, and financial management."
+      ]
+    },
+    {
+      "name": "Entrepreneurship",
+      "knowledge": [
+        "Entrepreneurship involves creating and developing new business ideas.",
+        "Entrepreneurs identify problems, create solutions, and build organizations.",
+        "Successful businesses require planning, innovation, and adaptation."
+      ]
+    },
+    {
+      "name": "Marketing",
+      "knowledge": [
+        "Marketing connects businesses with customers.",
+        "Branding builds recognition and trust.",
+        "Digital marketing uses online platforms to reach audiences.",
+        "Customer research helps businesses understand demand."
+      ]
+    },
+    {
+      "name": "Finance",
+      "knowledge": [
+        "Finance manages money, investments, expenses, and profits.",
+        "Revenue is money earned from sales.",
+        "Costs are resources spent to operate a business.",
+        "Profit is revenue remaining after expenses."
+      ]
+    },
+    {
+      "name": "Business Strategy",
+      "knowledge": [
+        "Strategy defines how a company achieves its goals.",
+        "Competitive advantage helps a business stand out from competitors.",
+        "Businesses analyze markets, customers, and competitors before making decisions."
+      ]
+    },
+    {
+      "name": "E-commerce",
+      "knowledge": [
+        "E-commerce allows businesses to sell products and services online.",
+        "Online stores require product management, payments, security, and customer support.",
+        "Successful e-commerce depends on trust, user experience, and reliable delivery."
+      ]
+    }
+  ]
+}
