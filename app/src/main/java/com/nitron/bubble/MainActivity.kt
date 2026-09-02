@@ -1,4 +1,7 @@
 package com.nitron.bubble
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 
 import android.Manifest
 import android.content.Intent
@@ -18,6 +21,7 @@ import android.os.Looper
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -35,6 +39,13 @@ import java.io.ByteArrayOutputStream
 import java.util.Locale
 import android.util.Base64
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,6 +55,114 @@ class MainActivity : AppCompatActivity() {
 
     private var speechRecognizer: SpeechRecognizer? = null
     private var isRecordingVoice = false
+
+    // =========================================================
+    // GOOGLE SIGN-IN
+    // =========================================================
+
+    private val googleSignInLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+
+            val task =
+                GoogleSignIn.getSignedInAccountFromIntent(result.data)
+
+            try {
+
+                val account = task.getResult(ApiException::class.java)
+                val idToken = account?.idToken
+
+                if (idToken != null) {
+                    firebaseAuthWithGoogle(idToken)
+                } else {
+                    addMessage(
+                        Message(
+                            "Google sign-in failed: no ID token returned.",
+                            false
+                        )
+                    )
+                }
+
+            } catch (e: ApiException) {
+
+                addMessage(
+                    Message(
+                        "Google sign-in failed: ${e.statusCode}",
+                        false
+                    )
+                )
+            }
+        }
+
+    private fun signInWithGoogle() {
+        googleSignInLauncher.launch(googleSignInClient.signInIntent)
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+
+        firebaseAuth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+
+                if (task.isSuccessful) {
+
+                    updateSignInButtonText()
+                    updateWelcomeGreeting()
+
+                } else {
+
+                    addMessage(
+                        Message(
+                            "Firebase sign-in failed: ${task.exception?.message}",
+                            false
+                        )
+                    )
+                }
+            }
+    }
+
+    private fun updateSignInButtonText() {
+
+        if (!::signInButtonView.isInitialized) return
+
+        val user = firebaseAuth.currentUser
+
+        signInButtonView.text = if (user != null) {
+            "👤  Signed in as ${user.displayName ?: user.email ?: "Google"}"
+        } else {
+            "👤  Sign in with Google"
+        }
+    }
+
+    private fun updateWelcomeGreeting() {
+
+        if (!::welcomeText.isInitialized) return
+
+        val user = firebaseAuth.currentUser
+
+        if (user == null) {
+            welcomeText.text = "How can I help?"
+            return
+        }
+
+        val firstName = (user.displayName ?: user.email ?: "there")
+            .trim()
+            .split(" ")
+            .firstOrNull()
+            ?: "there"
+
+        val hour = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)
+
+        val greeting = when {
+            hour < 12 -> "Good morning"
+            hour < 17 -> "Good afternoon"
+            else -> "Good evening"
+        }
+
+        welcomeText.text = "$greeting $firstName, how may I help you?"
+    }
 
     private val microphonePermission =
         registerForActivityResult(
@@ -607,6 +726,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var messageList: RecyclerView
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var chatManager: ChatManager
+    private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var signInButtonView: TextView
+    private lateinit var sideMenu: LinearLayout
+    private val recentSessionViews = mutableListOf<View>()
 
 
     // IMPORTANT:
@@ -640,14 +764,39 @@ class MainActivity : AppCompatActivity() {
             R.layout.activity_main
         )
 
+        // =====================================================
+        // ADMOB TEST BANNER
+        // =====================================================
+
+        MobileAds.initialize(this)
+
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        val googleSignInOptions =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("288294300264-qcb76rdmkc56knip3jq8h0f658sgft6m.apps.googleusercontent.com")
+                .requestEmail()
+                .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
+
+        val adView = findViewById<AdView>(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
+
         drawerLayout =
             findViewById(R.id.drawerLayout)
+
+        sideMenu =
+            findViewById(R.id.sideMenu)
 
         messageInput =
             findViewById(R.id.messageInput)
 
         welcomeText =
             findViewById(R.id.welcomeText)
+
+        updateWelcomeGreeting()
 
         messageList =
             findViewById(R.id.messageList)
@@ -662,6 +811,7 @@ class MainActivity : AppCompatActivity() {
             messageAdapter
 
         com.nitron.bubble.chat.ChatHistoryStore.init(this)
+        com.nitron.bubble.chat.ChatSessionStore.init(this)
 
         for (
             pastMessage
@@ -748,11 +898,6 @@ class MainActivity : AppCompatActivity() {
         val voiceModeButton =
             findViewById<ImageButton>(
                 R.id.voiceModeButton
-            )
-
-        val locationButton =
-            findViewById<TextView>(
-                R.id.locationButton
             )
 
         sendButton.visibility =
@@ -847,47 +992,6 @@ class MainActivity : AppCompatActivity() {
                 stopVoiceInput()
             } else {
                 requestMicrophonePermission()
-            }
-        }
-
-
-        // =====================================================
-        // MY LOCATION
-        // =====================================================
-
-        locationButton.setOnClickListener {
-
-            requestLocation()
-        }
-
-
-        // =====================================================
-        // START BUBBLE
-        // =====================================================
-
-        findViewById<TextView>(
-            R.id.realStartBubble
-        ).setOnClickListener {
-
-            if (!Settings.canDrawOverlays(this)) {
-
-                startActivity(
-                    Intent(
-                        Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                        Uri.parse(
-                            "package:$packageName"
-                        )
-                    )
-                )
-
-            } else {
-
-                startService(
-                    Intent(
-                        this,
-                        BubbleService::class.java
-                    )
-                )
             }
         }
 
@@ -1060,17 +1164,7 @@ class MainActivity : AppCompatActivity() {
             R.id.recentButton
         ).setOnClickListener {
 
-            drawerLayout.closeDrawers()
-
-            welcomeText.text =
-                "Recent"
-
-            welcomeText.visibility =
-                View.VISIBLE
-
-            Handler(Looper.getMainLooper()).postDelayed({
-                welcomeText.visibility = View.GONE
-            }, 2000)
+            toggleRecentChats()
         }
 
 
@@ -1090,6 +1184,37 @@ class MainActivity : AppCompatActivity() {
                     SettingsActivity::class.java
                 )
             )
+        }
+
+
+        // =====================================================
+        // SIGN IN WITH GOOGLE
+        // =====================================================
+
+        signInButtonView = findViewById(R.id.signInButton)
+
+        updateSignInButtonText()
+
+        signInButtonView.setOnClickListener {
+
+            drawerLayout.closeDrawers()
+
+            if (firebaseAuth.currentUser == null) {
+                signInWithGoogle()
+            } else {
+
+                firebaseAuth.signOut()
+                googleSignInClient.signOut()
+                updateSignInButtonText()
+                updateWelcomeGreeting()
+
+                addMessage(
+                    Message(
+                        "Signed out.",
+                        false
+                    )
+                )
+            }
         }
 
 
@@ -1133,17 +1258,99 @@ class MainActivity : AppCompatActivity() {
     // KEYBOARD / WINDOW INSETS
     // =========================================================
 
+    private fun toggleRecentChats() {
+
+        if (recentSessionViews.isNotEmpty()) {
+            for (v in recentSessionViews) {
+                sideMenu.removeView(v)
+            }
+            recentSessionViews.clear()
+            return
+        }
+
+        val sessions = com.nitron.bubble.chat.ChatSessionStore.getSessions()
+        val recentIndex = sideMenu.indexOfChild(findViewById(R.id.recentButton))
+
+        if (sessions.isEmpty()) {
+            val emptyView = TextView(this).apply {
+                text = "    No saved chats yet"
+                textSize = 14f
+                alpha = 0.6f
+                setPadding(24, 24, 12, 24)
+            }
+            sideMenu.addView(emptyView, recentIndex + 1)
+            recentSessionViews.add(emptyView)
+            return
+        }
+
+        var insertAt = recentIndex + 1
+
+        for (session in sessions) {
+
+            val sessionView = TextView(this).apply {
+                text = "    ${session.title}"
+                textSize = 14f
+                setPadding(24, 24, 12, 24)
+                isClickable = true
+                isFocusable = true
+            }
+
+            sessionView.setOnClickListener {
+                loadSession(session.id)
+            }
+
+            sideMenu.addView(sessionView, insertAt)
+            recentSessionViews.add(sessionView)
+            insertAt++
+        }
+    }
+
+    private fun loadSession(id: String) {
+
+        if (firebaseAuth.currentUser != null) {
+            com.nitron.bubble.chat.ChatSessionStore.archiveCurrentChat(this)
+        }
+
+        val messages = com.nitron.bubble.chat.ChatSessionStore.loadSession(this, id)
+
+        messageAdapter.clearMessages()
+
+        if (messages != null) {
+
+            for (m in messages) {
+                messageAdapter.addMessage(m)
+            }
+
+            welcomeText.visibility = View.GONE
+
+        } else {
+
+            updateWelcomeGreeting()
+            welcomeText.visibility = View.VISIBLE
+        }
+
+        for (v in recentSessionViews) {
+            sideMenu.removeView(v)
+        }
+        recentSessionViews.clear()
+
+        drawerLayout.closeDrawers()
+    }
+
     private fun performNewChat() {
 
         stopVoiceInput()
         messageInput.setText("")
 
+        if (firebaseAuth.currentUser != null) {
+            com.nitron.bubble.chat.ChatSessionStore.archiveCurrentChat(this)
+        }
+
         messageAdapter.clearMessages()
 
         com.nitron.bubble.chat.ChatHistoryStore.clear()
 
-        welcomeText.text =
-            "How can I help?"
+        updateWelcomeGreeting()
 
         welcomeText.visibility =
             View.VISIBLE

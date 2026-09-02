@@ -32,6 +32,12 @@ object ChatHistoryStore {
         save()
     }
 
+    fun replaceAll(newMessages: List<Message>) {
+        messages.clear()
+        messages.addAll(newMessages)
+        save()
+    }
+
     private fun load() {
         try {
             if (!storageFile.exists()) return

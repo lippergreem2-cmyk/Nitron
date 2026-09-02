@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.drawerlayout.widget.DrawerLayout
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
@@ -128,6 +129,14 @@
             android:paddingBottom="4dp"
             android:background="@color/nitron_background">
 
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                ads:adSize="BANNER"
+                ads:adUnitId="ca-app-pub-3940256099942544/9214589741" />
+
             <LinearLayout
                 android:id="@+id/messageComposer"
                 android:layout_width="match_parent"
@@ -241,7 +250,7 @@
             android:layout_height="50dp"
             android:gravity="center_vertical"
             android:paddingStart="12dp"
-            android:text="New Chat"
+            android:text="💬  New Chat"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -281,45 +290,20 @@
             android:text="Recent"
             android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/searchButton"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:paddingStart="12dp"
-            android:text="Search"
-            android:textSize="16sp" />
-
-        <!-- ================================================= -->
-        <!-- CYBERNET X -->
-        <!-- ================================================= -->
-
-        <TextView
-            android:id="@+id/cybernetXButton"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:paddingStart="12dp"
-            android:text="⚡ Cybernet X"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <!-- ================================================= -->
-
-        <TextView
-            android:id="@+id/locationButton"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:paddingStart="12dp"
-            android:text="📍  My Location"
-            android:textSize="16sp" />
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="18dp"
             android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:id="@+id/signInButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:paddingStart="12dp"
+            android:text="👤  Sign in with Google"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/settingsButton"
@@ -337,15 +321,6 @@
             android:gravity="center_vertical"
             android:paddingStart="12dp"
             android:text="Text color"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/realStartBubble"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:paddingStart="12dp"
-            android:text="Start Bubble"
             android:textSize="16sp" />
 
     </LinearLayout>

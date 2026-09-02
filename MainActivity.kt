@@ -10,6 +10,13 @@ import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.util.Base64
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import android.view.View
 import android.view.WindowInsets
 import android.widget.EditText
@@ -40,12 +47,103 @@ class MainActivity : AppCompatActivity() {
     private var speechRecognizer: SpeechRecognizer? = null
     private var isRecordingVoice = false
 
+    // =========================================================
+    // GOOGLE SIGN-IN
+    // =========================================================
+
+    private val googleSignInLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+
+            val task =
+                GoogleSignIn.getSignedInAccountFromIntent(result.data)
+
+            try {
+
+                val account = task.getResult(ApiException::class.java)
+                val idToken = account?.idToken
+
+                if (idToken != null) {
+                    firebaseAuthWithGoogle(idToken)
+                } else {
+                    addMessage(
+                        Message(
+                            "Google sign-in failed: no ID token returned.",
+                            false
+                        )
+                    )
+                }
+
+            } catch (e: ApiException) {
+
+                addMessage(
+                    Message(
+                        "Google sign-in failed: ${e.statusCode}",
+                        false
+                    )
+                )
+            }
+        }
+
+    private fun signInWithGoogle() {
+        googleSignInLauncher.launch(googleSignInClient.signInIntent)
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+
+        firebaseAuth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+
+                if (task.isSuccessful) {
+
+                    val user = firebaseAuth.currentUser
+
+                    addMessage(
+                        Message(
+                            "Signed in as ${user?.displayName ?: user?.email ?: "Google account"}.",
+                            false
+                        )
+                    )
+
+                    updateSignInButtonText()
+
+                } else {
+
+                    addMessage(
+                        Message(
+                            "Firebase sign-in failed: ${task.exception?.message}",
+                            false
+                        )
+                    )
+                }
+            }
+    }
+
+    private fun updateSignInButtonText() {
+
+        if (!::signInButtonView.isInitialized) return
+
+        val user = firebaseAuth.currentUser
+
+        signInButtonView.text = if (user != null) {
+            "👤  Signed in as ${user.displayName ?: user.email ?: "Google"}"
+        } else {
+            "👤  Sign in with Google"
+        }
+    }
+
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var messageInput: EditText
     private lateinit var welcomeText: TextView
     private lateinit var messageList: RecyclerView
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var chatManager: ChatManager
+    private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var signInButtonView: TextView
 
     // =========================================================
     // MICROPHONE PERMISSION

@@ -8,6 +8,11 @@ predictable execution result.
 from brain.decision import decision
 from brain.memory import memory
 
+def _green_code(text):
+    """Format generated source code green for terminal output."""
+    return "\033[92m" + str(text) + "\033[0m"
+
+
 try:
     from brain.conversation.manager import manager
 except Exception:
@@ -64,6 +69,17 @@ class Executor:
                 "written_files",
                 []
             ),
+            "code_display": [
+                {
+                    "path": str(item.get("path", "")),
+                    "content": str(item.get("content", "")),
+                    "color": "green",
+                }
+                for item in result.get("files", [])
+                if isinstance(item, dict)
+                and item.get("path")
+                and isinstance(item.get("content", ""), str)
+            ],
         }
 
         cleaned = {
@@ -718,22 +734,37 @@ class Executor:
     def _build_message(self, response):
         """
         Create a human-readable execution message.
+        Generated source code is displayed in green.
         """
 
         if response.get("generated"):
 
-            project = response.get(
-                "project",
-                {}
-            )
+            project = response.get("project", {})
 
-            return (
+            message = (
                 "Project generated successfully.\n\n"
                 f"Name: {project.get('name')}\n"
-                f"Type: {project.get('type')}\n"
+                f"Type: {project.get('project_type')}\n"
                 f"Language: {project.get('language')}\n"
                 f"Directory: {project.get('directory')}"
             )
+
+            code_display = project.get("code_display", [])
+
+            if code_display:
+                message += "\n\nGenerated code:\n"
+
+                for item in code_display:
+                    path = item.get("path", "unknown")
+                    content = item.get("content", "")
+
+                    message += (
+                        f"\n--- {path} ---\n"
+                        + _green_code(content)
+                        + "\n"
+                    )
+
+            return message
 
         result = response.get("result")
 

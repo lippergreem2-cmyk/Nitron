@@ -335,7 +335,8 @@ class LocalProvider(AIProvider):
         payload = {
             "model": self.model,
             "prompt": prompt,
-            "stream": False
+            "stream": False,
+            "format": "json"
         }
 
         data = json.dumps(
@@ -401,6 +402,226 @@ class LocalProvider(AIProvider):
 
 
 # ==========================================================
+# POLLINATIONS PROVIDER (free, no API key required)
+# ==========================================================
+
+class PollinationsProvider(AIProvider):
+
+    name = "pollinations"
+
+    def __init__(self, model=None):
+
+        self.model = (
+            model
+            or os.environ.get(
+                "NITRON_POLLINATIONS_MODEL",
+                "openai"
+            )
+        )
+
+        self.url = "https://text.pollinations.ai"
+
+    def available(self):
+
+        try:
+
+            request = urllib.request.Request(
+                self.url,
+                headers={"User-Agent": "Nitron"}
+            )
+
+            with urllib.request.urlopen(
+                request,
+                timeout=5
+            ) as response:
+
+                return response.status == 200
+
+        except Exception:
+
+            return False
+
+    def generate(self, prompt):
+
+        import urllib.parse
+
+        encoded_prompt = urllib.parse.quote(prompt)
+
+        url = (
+            f"{self.url}/{encoded_prompt}"
+            f"?model={self.model}"
+        )
+
+        request = urllib.request.Request(
+            url,
+            headers={"User-Agent": "Nitron"}
+        )
+
+        try:
+
+            with urllib.request.urlopen(
+                request,
+                timeout=90
+            ) as response:
+
+                raw = response.read()
+
+            text = raw.decode(
+                "utf-8",
+                errors="replace"
+            ).strip()
+
+            if not text:
+
+                raise RuntimeError(
+                    "Pollinations returned no text."
+                )
+
+            return text
+
+        except urllib.error.HTTPError as error:
+
+            body = error.read().decode(
+                "utf-8",
+                errors="replace"
+            )
+
+            raise RuntimeError(
+                f"Pollinations API error "
+                f"{error.code}: {body}"
+            )
+
+        except urllib.error.URLError as error:
+
+            raise RuntimeError(
+                "Could not connect to Pollinations: "
+                f"{error}"
+            )
+
+
+# ==========================================================
+# GROQ PROVIDER (free tier, requires GROQ_API_KEY)
+# ==========================================================
+
+class GroqProvider(AIProvider):
+
+    name = "groq"
+
+    def __init__(self, model=None):
+
+        self.api_key = os.environ.get(
+            "GROQ_API_KEY"
+        )
+
+        self.model = (
+            model
+            or os.environ.get(
+                "NITRON_GROQ_MODEL",
+                "openai/gpt-oss-120b"
+            )
+        )
+
+        self.url = (
+            "https://api.groq.com/openai/v1/chat/completions"
+        )
+
+    def available(self):
+
+        return bool(
+            self.api_key
+        )
+
+    def generate(self, prompt):
+
+        if not self.available():
+
+            raise RuntimeError(
+                "GROQ_API_KEY is not configured."
+            )
+
+        payload = {
+            "model": self.model,
+            "messages": [
+                {"role": "user", "content": prompt}
+            ]
+        }
+
+        data = json.dumps(
+            payload
+        ).encode("utf-8")
+
+        request = urllib.request.Request(
+            self.url,
+            data=data,
+            headers={
+                "Content-Type":
+                    "application/json",
+
+                "Authorization":
+                    f"Bearer {self.api_key}",
+
+                "User-Agent":
+                    "Mozilla/5.0 (Linux; Android 13) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/120.0.0.0 Mobile Safari/537.36"
+            },
+            method="POST"
+        )
+
+        try:
+
+            with urllib.request.urlopen(
+                request,
+                timeout=90
+            ) as response:
+
+                raw = response.read()
+
+            result = json.loads(
+                raw.decode("utf-8")
+            )
+
+            choices = result.get("choices", [])
+
+            if not choices:
+
+                raise RuntimeError(
+                    "Groq returned no choices."
+                )
+
+            text = choices[0].get(
+                "message", {}
+            ).get("content", "")
+
+            if not isinstance(text, str) or not text.strip():
+
+                raise RuntimeError(
+                    "Groq returned no text."
+                )
+
+            return text.strip()
+
+        except urllib.error.HTTPError as error:
+
+            body = error.read().decode(
+                "utf-8",
+                errors="replace"
+            )
+
+            raise RuntimeError(
+                f"Groq API error "
+                f"{error.code}: {body}"
+            )
+
+        except urllib.error.URLError as error:
+
+            raise RuntimeError(
+                "Could not connect to Groq: "
+                f"{error}"
+            )
+
+
+# ==========================================================
 # PROVIDER MANAGER
 # ==========================================================
 
@@ -412,6 +633,10 @@ class AIProviderManager:
 
         self.local = LocalProvider()
 
+        self.pollinations = PollinationsProvider()
+
+        self.groq = GroqProvider()
+
     # ======================================================
     # STATUS
     # ======================================================
@@ -420,7 +645,9 @@ class AIProviderManager:
 
         return {
             "local": self.local.available(),
-            "openai": self.openai.available()
+            "openai": self.openai.available(),
+            "pollinations": self.pollinations.available(),
+            "groq": self.groq.available()
         }
 
     # ======================================================
@@ -444,6 +671,18 @@ class AIProviderManager:
                     self.openai.available(),
                 "model":
                     self.openai.model
+            },
+
+            "pollinations": {
+                "available":
+                    self.pollinations.available()
+            },
+
+            "groq": {
+                "available":
+                    self.groq.available(),
+                "model":
+                    self.groq.model
             }
         }
 
@@ -500,6 +739,34 @@ class AIProviderManager:
             return self.openai
 
         # --------------------------------------------------
+        # EXPLICIT POLLINATIONS
+        # --------------------------------------------------
+
+        if preferred == "pollinations":
+
+            if not self.pollinations.available():
+
+                raise RuntimeError(
+                    "Pollinations is not reachable right now."
+                )
+
+            return self.pollinations
+
+        # --------------------------------------------------
+        # EXPLICIT GROQ
+        # --------------------------------------------------
+
+        if preferred == "groq":
+
+            if not self.groq.available():
+
+                raise RuntimeError(
+                    "GROQ_API_KEY is not configured."
+                )
+
+            return self.groq
+
+        # --------------------------------------------------
         # AUTOMATIC
         # --------------------------------------------------
         #
@@ -515,13 +782,22 @@ class AIProviderManager:
 
                 return self.local
 
+        if self.groq.available():
+
+            return self.groq
+
+        if self.pollinations.available():
+
+            return self.pollinations
+
         if self.openai.available():
 
             return self.openai
 
         raise RuntimeError(
             "No AI provider is available.\n"
-            "Start Ollama or configure OPENAI_API_KEY."
+            "Start Ollama, configure GROQ_API_KEY, wait for "
+            "Pollinations to be reachable, or configure OPENAI_API_KEY."
         )
 
     # ======================================================

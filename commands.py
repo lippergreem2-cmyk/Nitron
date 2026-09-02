@@ -142,7 +142,7 @@ def ask_brain(message):
             if "message" in result:
                 return str(result["message"])
 
-            return str(result)
+            return format_project_result(result)
 
         return str(result)
 
@@ -1418,6 +1418,51 @@ This project was generated automatically by Nitron.
 # MASTER PROJECT BUILDER
 # ==========================================================
 
+def format_project_result(result):
+    if not isinstance(result, dict):
+        return str(result)
+
+    if not result.get("generated") and not result.get("success"):
+        return str(result)
+
+    name = result.get("name", "Nitron Project")
+    project_type = result.get("project_type", "project")
+    language = result.get("language", "") or ""
+    directory = result.get("directory", "")
+    files = result.get("files", [])
+    provider_generated = result.get("provider_generated")
+    provider_error = result.get("provider_error")
+
+    lines = [f"Here's your {project_type}: {name}", ""]
+
+    if isinstance(files, list):
+        for file_entry in files:
+            if not isinstance(file_entry, dict):
+                continue
+
+            file_path = file_entry.get("path", "file")
+            file_content = str(file_entry.get("content", ""))
+
+            lines.append(file_path)
+            lines.append(f"```{language}")
+            lines.append(file_content.rstrip("\n"))
+            lines.append("```")
+            lines.append("")
+
+    if directory:
+        lines.append(f"Saved to: {directory}")
+
+    if provider_generated is False and provider_error:
+        lines.append("")
+        lines.append(
+            "Note: AI generation hit an issue ("
+            + str(provider_error)
+            + "), so this is a basic fallback template."
+        )
+
+    return "\n".join(lines).strip()
+
+
 def build_project(request):
     request = str(request).strip()
 
@@ -1457,7 +1502,7 @@ def build_project(request):
                         )
 
             elif brain_result:
-                return str(brain_result)
+                return format_project_result(brain_result)
 
         except Exception as error:
             log(
@@ -1478,7 +1523,7 @@ def build_project(request):
     )
 
     if result:
-        return str(result)
+        return format_project_result(result)
 
     return local_fallback_project(
         request,
@@ -1565,6 +1610,15 @@ def generate_code(command):
     except Exception as error:
         log(f"Code generation error: {error}", "error")
         return "Code generation failed."
+
+
+# ==========================================================
+# GENERATED CODE DISPLAY
+# ==========================================================
+
+def _green_code(text):
+    """Return generated source formatted green for terminal output."""
+    return "\033[92m" + str(text) + "\033[0m"
 
 
 # ==========================================================

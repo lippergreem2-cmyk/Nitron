@@ -143,6 +143,40 @@
             android:text="Clear conversation"
             android:textSize="16sp"/>
 
+        <!-- TOOLS -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="18dp"
+            android:paddingBottom="8dp"
+            android:text="🛠  Tools"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/myLocationSetting"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:gravity="center_vertical"
+            android:paddingStart="28dp"
+            android:text="📍  My Location"
+            android:textSize="16sp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:id="@+id/startBubbleSetting"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:gravity="center_vertical"
+            android:paddingStart="28dp"
+            android:text="🫧  Start Bubble"
+            android:textSize="16sp"
+            android:clickable="true"
+            android:focusable="true"/>
+
     </LinearLayout>
 
 </ScrollView>

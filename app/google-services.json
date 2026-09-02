@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "288294300264",
+    "project_id": "nitron-e1519",
+    "storage_bucket": "nitron-e1519.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288294300264:android:2685299a7a62f473c4e9dd",
+        "android_client_info": {
+          "package_name": "com.nitron.bubble"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288294300264-eofr0op800o0rnhk4jnlv116ojv2h8o0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nitron.bubble",
+            "certificate_hash": "c9f7ea15c8ebcbc4743d4f345221058f692a8c9e"
+          }
+        },
+        {
+          "client_id": "288294300264-qcb76rdmkc56knip3jq8h0f658sgft6m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA06rG-oVgD_t9pNRn4JhANf3pTLL--bII"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288294300264-qcb76rdmkc56knip3jq8h0f658sgft6m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

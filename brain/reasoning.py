@@ -2,8 +2,19 @@ from pathlib import Path
 """\nfrom pathlib import Path\nNitron Reasoning Engine\n"""
 
 import re
+import json
 
 from brain.memory import memory
+
+try:
+    from developer.ai_provider import AIProviderManager
+except ImportError:
+    AIProviderManager = None
+
+try:
+    from developer.ai_provider import AIProviderManager
+except ImportError:
+    AIProviderManager = None
 
 try:
     from brain.knowledge_engine import knowledge
@@ -19,6 +30,15 @@ try:
     from brain.search_engine import search_engine
 except ImportError:
     search_engine = None
+
+
+GREEN = "\033[92m"
+RESET = "\033[0m"
+
+
+def green_code(text):
+    """Display generated source code in green in supported terminals."""
+    return GREEN + str(text) + RESET
 
 
 class ReasoningEngine:
@@ -105,12 +125,9 @@ class ReasoningEngine:
         return f"I don't know enough about '{topic}'."
 
     def search_learned(self, keyword):
-        """\n        Find genuinely relevant learned knowledge.\n\n        Matching priority:\n            1. Exact topic\n            2. Topic contains the requested subject\n            3. Title contains the requested subject\n            4. Summary/content contains the subject\n\n        Common question words are ignored.\n        Unrelated learned topics must not be returned.\n        """
+        """Find the most specific relevant learned knowledge."""
 
-        if learner is None:
-            return {}
-
-        if not keyword:
+        if learner is None or not keyword:
             return {}
 
         text = str(keyword).lower().strip()
@@ -127,7 +144,8 @@ class ReasoningEngine:
             "do", "does", "did",
             "this", "that", "it",
             "to", "of", "for",
-            "in", "on", "and"
+            "in", "on", "and",
+            "work", "works", "working"
         }
 
         words = re.findall(
@@ -136,8 +154,7 @@ class ReasoningEngine:
         )
 
         words = [
-            word
-            for word in words
+            word for word in words
             if word not in stop_words
             and len(word) >= 2
         ]
@@ -149,53 +166,45 @@ class ReasoningEngine:
 
         # --------------------------------------------------
         # CAPABILITY INDEX
-        #
-        # Learned capabilities act as a routing signal.
-        # The capability registry does not replace learned
-        # knowledge; it helps us find the most relevant
-        # learned topic.
         # --------------------------------------------------
 
         capability_matches = []
 
         try:
-
             from brain.skill_registry import find_for_task
-
-            capability_matches = find_for_task(
-                text
-            )
-
+            capability_matches = find_for_task(text)
         except Exception:
-
             capability_matches = []
 
         capability_topics = {}
 
         for capability in capability_matches:
-
-            if not isinstance(
-                capability,
-                dict
-            ):
+            if not isinstance(capability, dict):
                 continue
 
-            capability_name = str(
+            name = str(
                 capability.get("name", "")
             ).strip().lower()
 
-            if capability_name:
+            if name:
+                capability_topics[name] = capability
 
-                capability_topics[
-                    capability_name
-                ] = capability
+        # --------------------------------------------------
+        # LEARNED KNOWLEDGE SCORING
+        #
+        # Specific subjects beat broad subjects.
+        #
+        # Example:
+        #   "python decorators"
+        #       beats
+        #   "python programming"
+        # --------------------------------------------------
 
         for topic, data in learner.knowledge.items():
 
             topic_text = str(topic).lower().strip()
 
             if isinstance(data, dict):
-
                 title = str(
                     data.get("title", "")
                 ).lower().strip()
@@ -206,7 +215,6 @@ class ReasoningEngine:
                 )
 
                 if not isinstance(summary, str):
-
                     old_content = data.get(
                         "content",
                         {}
@@ -223,101 +231,31 @@ class ReasoningEngine:
                 summary_text = str(summary).lower()
 
             else:
-
                 title = ""
                 summary_text = str(data).lower()
 
             score = 0
 
             # --------------------------------------------------
-            # CAPABILITY MATCHING
-            #
-            # A registered capability is strong evidence that
-            # this learned topic is relevant to the request.
+            # MATCH TOPIC WORDS
             # --------------------------------------------------
 
-            capability = capability_topics.get(
+            topic_words = re.findall(
+                r"[a-zA-Z0-9_]+",
                 topic_text
             )
 
-            if capability:
+            matched_topic_words = [
+                word for word in words
+                if word in topic_words
+            ]
 
-                confidence = float(
-                    capability.get(
-                        "confidence",
-                        0
-                    )
-                )
+            topic_match_count = len(
+                matched_topic_words
+            )
 
-                # A registered capability is strong evidence
-                # that this exact learned topic is relevant.
-                capability_words = re.findall(
-                    r"[a-zA-Z0-9_]+",
-                    topic_text
-                )
-
-                # Give capability matches a large base bonus.
-                score += 300
-
-                # Specific multi-word capabilities get a much
-                # stronger bonus than broad capabilities such
-                # as "python".
-                if len(capability_words) > 1:
-                    score += (
-                        (len(capability_words) - 1)
-                        * 500
-                    )
-
-                # Confidence still contributes to ranking.
-                score += int(
-                    60 * confidence
-                )
-
-            # --------------------------------------------------
-            # TOPIC MATCHING
-            # --------------------------------------------------
-
-            exact_topic = False
-            topic_match_count = 0
-
-            for word in words:
-
-                if word == topic_text:
-                    score += 100
-                    exact_topic = True
-
-                elif word in topic_text:
-                    score += 40
-                    topic_match_count += 1
-
-            # --------------------------------------------------
-            # TITLE MATCHING
-            # --------------------------------------------------
-
-            for word in words:
-
-                if word in title:
-                    score += 20
-
-            # --------------------------------------------------
-            # CONTENT MATCHING
-            # --------------------------------------------------
-
-            for word in words:
-
-                if word in summary_text:
-                    score += 3
-
-            # --------------------------------------------------
-            # RELEVANCE GATE
-            #
-            # A learned topic must actually match the requested
-            # subject. Content-only accidental matches are not
-            # enough.
-            # --------------------------------------------------
-
-            if not exact_topic and topic_match_count == 0:
-
+            # No subject match -> reject.
+            if topic_match_count == 0:
                 title_match = any(
                     word in title
                     for word in words
@@ -327,6 +265,105 @@ class ReasoningEngine:
                     continue
 
             # --------------------------------------------------
+            # SPECIFICITY BONUS
+            #
+            # Matching a rare/specific subject should dominate
+            # matching a broad parent subject.
+            # --------------------------------------------------
+
+            for word in matched_topic_words:
+                score += 80
+
+            if topic_match_count:
+                score += topic_match_count * 120
+
+            # If multiple query words match the topic, reward
+            # the topic heavily.
+            if topic_match_count >= 2:
+                score += topic_match_count * 250
+
+            # Exact multi-word topic match.
+            normalized_topic = " ".join(topic_words)
+            normalized_query = " ".join(words)
+
+            if normalized_topic == normalized_query:
+                score += 1000
+
+            # The learned topic is contained in the question.
+            if (
+                normalized_topic
+                and normalized_topic in text
+            ):
+                score += 700
+
+            # --------------------------------------------------
+            # TITLE MATCHING
+            # --------------------------------------------------
+
+            title_matches = sum(
+                1
+                for word in words
+                if word in title
+            )
+
+            score += title_matches * 60
+
+            if (
+                title
+                and normalized_topic
+                and normalized_topic in title
+            ):
+                score += 250
+
+            # --------------------------------------------------
+            # CONTENT MATCHING
+            # --------------------------------------------------
+
+            content_matches = sum(
+                1
+                for word in words
+                if word in summary_text
+            )
+
+            score += content_matches * 3
+
+            # --------------------------------------------------
+            # CAPABILITY MATCHING
+            #
+            # Capability bonuses must NOT allow a broad topic
+            # such as "python" to defeat a more specific topic
+            # such as "python decorators".
+            # --------------------------------------------------
+
+            capability = capability_topics.get(
+                topic_text
+            )
+
+            if capability:
+                confidence = float(
+                    capability.get(
+                        "confidence",
+                        0
+                    )
+                )
+
+                capability_words = re.findall(
+                    r"[a-zA-Z0-9_]+",
+                    topic_text
+                )
+
+                score += 100
+
+                if len(capability_words) > 1:
+                    score += (
+                        len(capability_words) * 100
+                    )
+
+                score += int(
+                    50 * confidence
+                )
+
+            # --------------------------------------------------
             # QUALITY BONUS
             # --------------------------------------------------
 
@@ -334,13 +371,10 @@ class ReasoningEngine:
                 score += 10
 
             if score > 0:
-
                 results[topic] = {
                     "score": score,
                     "data": data
                 }
-
-        # Highest relevance first.
 
         if not results:
             return {}
@@ -352,7 +386,6 @@ class ReasoningEngine:
         )
 
         return dict(ranked)
-
 
     def _normalize_learned(self, topic, data):
         """\n        Convert learned knowledge into a clean answer.\n\n        Supports normal learned knowledge and structured image\n        knowledge without exposing raw OCR or sensitive text.\n        """
@@ -552,9 +585,11 @@ class ReasoningEngine:
         return result
 
     def _is_code_generation_request(self, question):
-        """\n        Detect programming and software-development requests.\n\n        These requests are handled before learned knowledge so that\n        documentation does not override a request to create something.\n        """
+        """Detect actual programming/software creation requests."""
+
         text = str(question).lower().strip()
 
+        # Strong explicit code-generation phrases.
         phrases = (
             "generate code",
             "write code",
@@ -567,8 +602,6 @@ class ReasoningEngine:
             "create a program",
             "make a program",
             "build a program",
-            "program this",
-            "program it",
             "write a script",
             "create a script",
             "make a script",
@@ -582,34 +615,16 @@ class ReasoningEngine:
             "develop an app",
             "develop an application",
             "create a website",
-            "create an website",
             "build a website",
-            "build an website",
             "make a website",
             "develop a website",
             "create a web app",
-            "create a web application",
             "build a web app",
-            "build a web application",
             "create an ai",
             "build an ai",
             "make an ai",
             "create artificial intelligence",
             "build artificial intelligence",
-            "python code",
-            "javascript code",
-            "java code",
-            "kotlin code",
-            "html code",
-            "css code",
-            "bash code",
-            "shell script",
-            "python program",
-            "javascript program",
-            "java program",
-            "kotlin program",
-            "calculator code",
-            "calculator program",
             "coding project",
             "software project",
             "programming project",
@@ -618,6 +633,7 @@ class ReasoningEngine:
         if any(phrase in text for phrase in phrases):
             return True
 
+        # Programming actions.
         actions = (
             "generate",
             "write",
@@ -628,6 +644,7 @@ class ReasoningEngine:
             "program",
         )
 
+        # Things that can actually be created/programmed.
         objects = (
             "code",
             "program",
@@ -642,17 +659,101 @@ class ReasoningEngine:
             "game",
             "video game",
             "pygame",
+            "calculator",
+            "tool",
+            "cli",
+            "command line",
             "termux",
             "termux tool",
             "termux script",
-            "cli",
-            "command line",
+            "python",
+            "javascript",
+            "java",
+            "kotlin",
+            "html",
+            "css",
         )
 
-        return (
-            any(word in text for word in actions)
-            and any(word in text for word in objects)
+        has_action = any(
+            word in text.split()
+            for word in actions
         )
+
+        has_object = any(
+            word in text
+            for word in objects
+        )
+
+        if has_action and has_object:
+            # Prevent explanation/knowledge questions from being
+            # classified as code generation.
+            explanation_starters = (
+                "how",
+                "what",
+                "why",
+                "when",
+                "where",
+                "who",
+                "which",
+                "explain",
+                "describe",
+                "tell me about",
+                "can you explain",
+                "could you explain",
+            )
+
+            if text.startswith(explanation_starters):
+                return False
+
+            return True
+
+        return False
+
+    def _extract_code_task(self, question):
+        """Extract the actual programming task from a code-generation request.
+
+        This deliberately does NOT restrict Nitron to a fixed list of games,
+        apps, tools, or project types. The user's requested task becomes the
+        generation target.
+        """
+
+        text = str(question).strip()
+
+        # Remove common request prefixes while preserving the actual task.
+        patterns = (
+            r"^\s*generate\s+(?:a\s+|an\s+)?(?:piece\s+of\s+)?code\s+(?:for|to)\s+",
+            r"^\s*generate\s+(?:a\s+|an\s+)?(?:program|script|application|app|software)\s+(?:for|to)\s+",
+            r"^\s*write\s+(?:a\s+|an\s+)?(?:piece\s+of\s+)?code\s+(?:for|to)\s+",
+            r"^\s*write\s+(?:a\s+|an\s+)?(?:program|script|application|app|software)\s+(?:for|to)\s+",
+            r"^\s*create\s+(?:a\s+|an\s+)?(?:piece\s+of\s+)?code\s+(?:for|to)\s+",
+            r"^\s*create\s+(?:a\s+|an\s+)?(?:program|script|application|app|software)\s+(?:for|to)\s+",
+            r"^\s*make\s+(?:a\s+|an\s+)?(?:piece\s+of\s+)?code\s+(?:for|to)\s+",
+            r"^\s*make\s+(?:a\s+|an\s+)?(?:program|script|application|app|software)\s+(?:for|to)\s+",
+            r"^\s*build\s+(?:a\s+|an\s+)?(?:piece\s+of\s+)?code\s+(?:for|to)\s+",
+            r"^\s*build\s+(?:a\s+|an\s+)?(?:program|script|application|app|software)\s+(?:for|to)\s+",
+        )
+
+        import re
+
+        task = text
+
+        for pattern in patterns:
+            cleaned = re.sub(
+                pattern,
+                "",
+                task,
+                count=1,
+                flags=re.IGNORECASE
+            )
+
+            if cleaned != task:
+                task = cleaned.strip()
+                break
+
+        # Also remove a trailing question mark.
+        task = task.rstrip(" ?.!")
+
+        return task if task else text
 
     def _detect_project_type(self, question):
         """Detect the type of software project requested."""
@@ -798,6 +899,7 @@ class ReasoningEngine:
         project_type = self._detect_project_type(question)
         language = self._detect_language(question)
         name = self._extract_project_name(question)
+        code_task = self._extract_code_task(question)
 
         # Sensible defaults when the user does not specify a language.
         if language is None:
@@ -823,7 +925,212 @@ class ReasoningEngine:
             "project_type": project_type,
             "language": language,
             "name": name,
+            "task": code_task,
             "files": [],
+        }
+
+    def _generate_universal_code(self, plan):
+        """Generate source code based on the user's actual requested task.
+
+        The task is intentionally free-form. Nitron should not require a
+        hard-coded capability for every possible thing the user wants to
+        program.
+        """
+
+        task = str(plan.get("task", "")).strip()
+        language = str(plan.get("language", "python")).lower()
+        name = str(plan.get("name", "Nitron Project"))
+
+        if not task:
+            task = name
+
+        # This is the generation specification passed through the
+        # project pipeline. The actual model/code engine can use this
+        # information to produce task-specific source code.
+        return {
+            "task": task,
+            "language": language,
+            "name": name,
+            "project_type": plan.get("project_type", "software_project"),
+            "instruction": (
+                "Generate complete, functional source code for this task: "
+                + task
+                + ". Do not replace the requested task with a generic "
+                  "example or unrelated template. Use the requested "
+                  "programming language and include the necessary source "
+                  "files."
+            ),
+        }
+
+
+    def _universal_source_request(self, plan):
+        """Build a language-aware request for arbitrary code generation."""
+
+        task = str(plan.get("task", "")).strip()
+        language = str(plan.get("language", "python")).strip().lower()
+        name = str(plan.get("name", "Nitron Project")).strip()
+
+        if not task:
+            task = name
+
+        return {
+            "task": task,
+            "language": language,
+            "name": name,
+            "project_type": plan.get(
+                "project_type",
+                "software_project"
+            ),
+            "requirements": [
+                "Generate actual source code for the requested task.",
+                "Do not replace the task with a generic example.",
+                "Preserve the user's requested functionality.",
+                "Use the requested programming language.",
+                "Include required imports.",
+                "Include supporting functions and classes.",
+                "Include an entry point when appropriate.",
+                "Create multiple source files when necessary.",
+                "Never return README-only output for a code request.",
+            ],
+        }
+
+    def _universal_fallback_source(self, plan):
+        """Create a valid source file when no AI generator is available."""
+
+        request = self._universal_source_request(plan)
+
+        task = request["task"]
+        language = request["language"]
+        name = request["name"]
+
+        def quote(value):
+            return '"' + (
+                str(value)
+                .replace("\\", "\\\\")
+                .replace('"', '\\"')
+            ) + '"'
+
+        task_q = quote(task)
+        name_q = quote(name)
+
+        if language == "python":
+            filename = "main.py"
+            source = (
+                "# Generated by Nitron.\n"
+                "# Requested task: " + task + "\n\n"
+                "def main():\n"
+                "    print(" + name_q + ")\n"
+                "    print(" + task_q + ")\n"
+                "    print('Implement the requested functionality here.')\n\n"
+                "if __name__ == '__main__':\n"
+                "    main()\n"
+            )
+
+        elif language in ("javascript", "js"):
+            filename = "index.js"
+            source = (
+                "// Generated by Nitron.\n"
+                "// Requested task: " + task + "\n\n"
+                "function main() {\n"
+                "    console.log(" + name_q + ");\n"
+                "    console.log(" + task_q + ");\n"
+                "}\n\n"
+                "main();\n"
+            )
+
+        elif language == "typescript":
+            filename = "main.ts"
+            source = (
+                "// Generated by Nitron.\n"
+                "// Requested task: " + task + "\n\n"
+                "function main(): void {\n"
+                "    console.log(" + name_q + ");\n"
+                "    console.log(" + task_q + ");\n"
+                "}\n\n"
+                "main();\n"
+            )
+
+        elif language == "java":
+            filename = "Main.java"
+            source = (
+                "// Generated by Nitron.\n"
+                "// Requested task: " + task + "\n\n"
+                "public class Main {\n"
+                "    public static void main(String[] args) {\n"
+                "        System.out.println(" + name_q + ");\n"
+                "        System.out.println(" + task_q + ");\n"
+                "    }\n"
+                "}\n"
+            )
+
+        elif language == "kotlin":
+            filename = "Main.kt"
+            source = (
+                "// Generated by Nitron.\n"
+                "// Requested task: " + task + "\n\n"
+                "fun main() {\n"
+                "    println(" + name_q + ")\n"
+                "    println(" + task_q + ")\n"
+                "}\n"
+            )
+
+        elif language in ("cpp", "c++"):
+            filename = "main.cpp"
+            source = (
+                "// Generated by Nitron.\n"
+                "// Requested task: " + task + "\n\n"
+                "#include <iostream>\n\n"
+                "int main() {\n"
+                "    std::cout << " + name_q + " << std::endl;\n"
+                "    std::cout << " + task_q + " << std::endl;\n"
+                "    return 0;\n"
+                "}\n"
+            )
+
+        elif language == "rust":
+            filename = "main.rs"
+            source = (
+                "// Generated by Nitron.\n"
+                "// Requested task: " + task + "\n\n"
+                "fn main() {\n"
+                "    println!(" + task_q + ");\n"
+                "}\n"
+            )
+
+        elif language == "go":
+            filename = "main.go"
+            source = (
+                "package main\n\n"
+                "import \"fmt\"\n\n"
+                "func main() {\n"
+                "    fmt.Println(" + name_q + ")\n"
+                "    fmt.Println(" + task_q + ")\n"
+                "}\n"
+            )
+
+        elif language in ("bash", "shell"):
+            filename = "main.sh"
+            source = (
+                "#!/usr/bin/env bash\n"
+                "# Generated by Nitron.\n"
+                "# Requested task: " + task + "\n\n"
+                "echo " + name_q + "\n"
+                "echo " + task_q + "\n"
+            )
+
+        else:
+            filename = "main.txt"
+            source = (
+                "Generated by Nitron.\n"
+                "Language: " + language + "\n"
+                "Requested task: " + task + "\n"
+            )
+
+        return {
+            "request": request,
+            "filename": filename,
+            "source": source,
+            "fallback": True,
         }
 
     def _generate_project_files(self, plan):
@@ -1141,16 +1448,249 @@ class ReasoningEngine:
 
         return files
 
+    def _has_code_placeholders(self, files):
+        """Return True when generated source contains obvious placeholders."""
+
+        placeholder_patterns = (
+            "your code here",
+            "implement the requested functionality here",
+            "implement file organization logic here",
+            "todo",
+            "not implemented",
+            "add your code here",
+            "implementation goes here",
+        )
+
+        for item in files:
+            if not isinstance(item, dict):
+                continue
+
+            path = str(item.get("path", "")).lower()
+            content = str(item.get("content", "")).lower()
+
+            # Ignore documentation when checking source completeness.
+            if path.endswith((".md", ".txt")):
+                continue
+
+            if any(pattern in content for pattern in placeholder_patterns):
+                return True
+
+        return False
+
+
+    def _generate_with_ai_provider(self, plan):
+        """Generate real project source using Nitron's AI provider."""
+
+        if AIProviderManager is None:
+            raise RuntimeError(
+                "AI provider system is unavailable."
+            )
+
+        task = str(plan.get("task", "")).strip()
+        language = str(plan.get("language", "python")).strip().lower()
+        name = str(plan.get("name", "Nitron Project")).strip()
+        project_type = str(
+            plan.get("project_type", "software_project")
+        ).strip()
+
+        prompt = f"""
+You are Nitron's professional code-generation engine.
+
+Generate a complete, functional project.
+
+Project name:
+{name}
+
+Programming language:
+{language}
+
+Project type:
+{project_type}
+
+Exact user request:
+{task}
+
+Requirements:
+- Implement the actual requested functionality completely.
+- Do not replace the task with a generic example.
+- Do not generate placeholder functions or TODO-only implementations.
+- Do not write messages such as "Implement the requested functionality here".
+- Every important function required by the user's request must contain real implementation logic.
+- Use the requested programming language.
+- Produce runnable, internally consistent source code.
+- Include imports and supporting functions/classes.
+- Create multiple files when they are genuinely needed.
+- Make all generated files work together as one project.
+- Keep the implementation focused on the exact user request.
+- Do not return README-only output.
+- Keep paths relative to the project root.
+- Return the files using the exact delimiter format below.
+- Do not use Markdown code fences.
+- Do not return JSON.
+
+Output format (repeat this block for every file, exactly as shown,
+with no extra text before, between, or after the blocks):
+<<<FILE path="relative/path/to/file">>>
+complete file contents, written exactly as-is, no escaping needed
+<<<END>>>
+""".strip()
+
+        manager = AIProviderManager()
+
+        response = manager.generate(prompt)
+
+        if not isinstance(response, str) or not response.strip():
+            raise RuntimeError(
+                "AI provider returned empty code."
+            )
+
+        text = response.strip()
+
+        # Remove accidental Markdown fences if the provider adds them.
+        if text.startswith("```"):
+            lines = text.splitlines()
+
+            if lines and lines[0].startswith("```"):
+                lines = lines[1:]
+
+            if lines and lines[-1].strip() == "```":
+                lines = lines[:-1]
+
+            text = "\n".join(lines).strip()
+
+        # Parse the delimiter-based file format instead of JSON.
+        # LLMs frequently produce invalid JSON when embedding large
+        # multi-line source code as an escaped JSON string value, so
+        # a plain delimiter format is far more reliable for real code.
+        file_pattern = re.compile(
+            r'<<<FILE path="([^"]+)">>>\n(.*?)(?=\n<<<END>>>)\n<<<END>>>',
+            re.DOTALL,
+        )
+
+        matches = file_pattern.findall(text)
+
+        files = [
+            {"path": path, "content": content}
+            for path, content in matches
+        ]
+
+        if not files:
+            raise RuntimeError(
+                "AI provider returned no project files."
+            )
+
+        cleaned_files = []
+
+        for item in files:
+            if not isinstance(item, dict):
+                continue
+
+            path = str(item.get("path", "")).strip()
+            content = item.get("content", "")
+
+            if not path:
+                continue
+
+            if not isinstance(content, str):
+                content = str(content)
+
+            # Prevent absolute paths and path traversal.
+            normalized = Path(path)
+
+            if normalized.is_absolute() or ".." in normalized.parts:
+                continue
+
+            cleaned_files.append({
+                "path": str(normalized),
+                "content": content,
+            })
+
+        if not cleaned_files:
+            raise RuntimeError(
+                "AI provider returned no valid project files."
+            )
+
+        # Reject incomplete AI-generated source instead of accepting
+        # placeholder implementations.
+        if self._has_code_placeholders(cleaned_files):
+            raise RuntimeError(
+                "AI provider returned incomplete code containing placeholders."
+            )
+
+        return {
+            "provider_generated": True,
+            "task": task,
+            "language": language,
+            "name": name,
+            "project_type": project_type,
+            "files": cleaned_files,
+        }
+
     def generate_project(self, question, output_dir=None):
-        """Generate a project and write all files to disk."""
+        """Generate a project using the real AI source-generation engine."""
 
         question = str(question).strip()
-
         plan = self._build_project_plan(question)
-        files = self._generate_project_files(plan)
+
+        # ------------------------------------------------------------
+        # REAL AI CODE GENERATION
+        # ------------------------------------------------------------
+
+        provider_error = None
+
+        try:
+            generated = self._generate_with_ai_provider(plan)
+            files = generated["files"]
+
+        except Exception as exc:
+            provider_error = str(exc)
+
+            # --------------------------------------------------------
+            # SAFE LOCAL FALLBACK
+            # --------------------------------------------------------
+            # If no AI provider is available, keep the universal
+            # fallback instead of crashing the project generator.
+
+            fallback = self._universal_fallback_source(plan)
+
+            files = [
+                {
+                    "path": fallback["filename"],
+                    "content": fallback["source"],
+                }
+            ]
+
+        # ------------------------------------------------------------
+        # README
+        # ------------------------------------------------------------
+
+        readme = (
+            f"# {plan.get('name', 'Nitron Project')}\n\n"
+            f"Generated by Nitron.\n\n"
+            f"Language: {plan.get('language', 'python')}\n\n"
+            f"Requested task: {plan.get('task', question)}\n"
+        )
+
+        if provider_error:
+            readme += (
+                "\nAI provider generation was unavailable.\n"
+                f"Fallback reason: {provider_error}\n"
+            )
+
+        files.append({
+            "path": "README.md",
+            "content": readme,
+        })
+
+        # ------------------------------------------------------------
+        # OUTPUT DIRECTORY
+        # ------------------------------------------------------------
 
         if output_dir is None:
-            safe_name = plan.get("name", "Nitron Project")
+            safe_name = plan.get(
+                "name",
+                "Nitron Project"
+            )
 
             safe_name = "".join(
                 character
@@ -1170,11 +1710,13 @@ class ReasoningEngine:
 
             output_dir = base_dir / safe_name
 
-            # Avoid overwriting an existing generated project.
             counter = 2
 
             while output_dir.exists():
-                output_dir = base_dir / f"{safe_name}_{counter}"
+                output_dir = (
+                    base_dir
+                    / f"{safe_name}_{counter}"
+                )
                 counter += 1
 
         else:
@@ -1185,10 +1727,25 @@ class ReasoningEngine:
             exist_ok=True
         )
 
+        # ------------------------------------------------------------
+        # WRITE FILES
+        # ------------------------------------------------------------
+
         written_files = []
 
         for item in files:
-            file_path = output_dir / item["path"]
+            relative_path = Path(
+                str(item["path"])
+            )
+
+            # Never allow generated code to escape the project folder.
+            if (
+                relative_path.is_absolute()
+                or ".." in relative_path.parts
+            ):
+                continue
+
+            file_path = output_dir / relative_path
 
             file_path.parent.mkdir(
                 parents=True,
@@ -1196,21 +1753,26 @@ class ReasoningEngine:
             )
 
             file_path.write_text(
-                item["content"],
+                str(item.get("content", "")),
                 encoding="utf-8"
             )
 
-            written_files.append(str(file_path))
+            written_files.append(
+                str(file_path)
+            )
 
         return {
-            "success": True,
-            "generated": True,
+            "success": bool(written_files),
+            "generated": bool(written_files),
             "project_type": plan.get("project_type"),
             "language": plan.get("language"),
             "name": plan.get("name"),
+            "task": plan.get("task"),
             "directory": str(output_dir),
             "files": files,
-            "written_files": written_files
+            "written_files": written_files,
+            "provider_generated": provider_error is None,
+            "provider_error": provider_error,
         }
 
     def _generate_code(self, question):
@@ -1405,6 +1967,35 @@ calculator()
         )
 
         # ==================================================
+        # DIRECT PROJECT / CODE GENERATION ROUTING
+        # ==================================================
+        # Explicit creation requests go straight to the project
+        # generator. This prevents learned sub-skills such as
+        # "Python game" from being incorrectly treated as a
+        # programming capability by learned_programming().
+        # ==================================================
+
+        if (
+            programming_action
+            and not explicit_learn_command
+            and not knowledge_question
+            and not explicit_explanation
+        ):
+            try:
+                generated = self.generate_project(question)
+
+                if generated is not None:
+                    return generated
+
+            except Exception as exc:
+                return {
+                    "success": False,
+                    "capability": "project_generation",
+                    "operation": "create",
+                    "message": str(exc),
+                }
+
+        # ==================================================
         # LEARNED CAPABILITY EXECUTION
         # ==================================================
         # Never allow a programming capability to intercept a
@@ -1416,13 +2007,89 @@ calculator()
 
             learned_skill = None
 
+            # ==================================================
+            # DIRECT PROGRAMMING ROUTING
+            # ==================================================
+            # Explicit code-generation requests must go to the
+            # programming capability before general knowledge
+            # skills get a chance to intercept them.
+            # ==================================================
+
             if (
                 not explicit_learn_command
                 and not knowledge_question
                 and not explicit_explanation
                 and programming_action
             ):
-                learned_skill = best_for_task(question)
+                from brain.skill_registry import get_skill
+
+                programming_candidates = (
+                    "Python programming",
+                    "Python",
+                )
+
+                # Prefer the registered programming capability.
+                for candidate in programming_candidates:
+                    try:
+                        candidate_skill = get_skill(candidate)
+                    except Exception:
+                        candidate_skill = None
+
+                    if candidate_skill:
+                        capability_type = str(
+                            candidate_skill.get(
+                                "capability_type",
+                                ""
+                            )
+                        ).lower()
+
+                        handlers = candidate_skill.get(
+                            "handlers",
+                            []
+                        )
+
+                        if (
+                            capability_type == "programming"
+                            or "learned.programming" in handlers
+                        ):
+                            learned_skill = candidate_skill
+                            break
+
+                # If no explicit Python capability exists, fall
+                # back to normal capability matching.
+                if learned_skill is None:
+                    learned_skill = best_for_task(question)
+
+                # A learned sub-capability such as "Python game"
+                # can outrank the real programming capability.
+                # For explicit code-generation requests, verify that
+                # the selected skill is actually programming.
+                if learned_skill is not None:
+                    selected_type = str(
+                        learned_skill.get(
+                            "capability_type",
+                            ""
+                        )
+                    ).strip().lower()
+
+                    selected_handlers = learned_skill.get(
+                        "handlers",
+                        []
+                    )
+
+                    if (
+                        selected_type != "programming"
+                        and "learned.programming" not in selected_handlers
+                    ):
+                        try:
+                            python_skill = get_skill(
+                                "Python programming"
+                            )
+                        except Exception:
+                            python_skill = None
+
+                        if python_skill:
+                            learned_skill = python_skill
 
             if learned_skill:
                 learned_handlers = learned_skill.get(
@@ -1436,6 +2103,34 @@ calculator()
                         ""
                     )
                 ).lower()
+
+                # ==================================================
+                # PROJECT / CODE GENERATION ROUTING
+                # ==================================================
+                # Generation skills such as:
+                #   Python game
+                #   Website generation
+                #   Android app generation
+                #   Python program
+                #
+                # use the project's real generation engine.
+                # They are not necessarily programming capabilities,
+                # so they must NOT be sent to learned_programming().
+                # ==================================================
+
+                if (
+                    programming_action
+                    and "reasoning.generate_project" in learned_handlers
+                ):
+                    try:
+                        return self.generate_project(question)
+                    except Exception as exc:
+                        return {
+                            "success": False,
+                            "capability": "project_generation",
+                            "operation": "create",
+                            "message": str(exc),
+                        }
 
                 if (
                     learned_handlers
@@ -1480,11 +2175,46 @@ calculator()
             pass
 
         # ==================================================
-        # 0B. CODE GENERATION
+        # 0B. UNIVERSAL CODE GENERATION
         # ==================================================
-        # Explicit programming requests go through the normal
-        # project/code generation pipeline.
+        # Every explicit programming/code request is routed to
+        # Nitron's universal code generator.
+        #
+        # This intentionally does NOT depend on:
+        #   - a learned programming capability
+        #   - a project type
+        #   - a specific language
+        #   - a predefined game/app template
+        #
+        # The requested task is preserved in the generation spec.
         # ==================================================
+
+        if programming_action:
+            try:
+                plan = self._build_project_plan(question)
+                spec = self._generate_universal_code(plan)
+
+                return {
+                    "success": True,
+                    "generated": True,
+                    "capability": "universal_code_generation",
+                    "operation": "create",
+                    "project_type": plan.get("project_type"),
+                    "language": spec.get("language"),
+                    "task": spec.get("task"),
+                    "name": plan.get("name"),
+                    "code_spec": spec,
+                }
+
+            except Exception as exc:
+                return {
+                    "success": False,
+                    "generated": False,
+                    "capability": "universal_code_generation",
+                    "operation": "create",
+                    "message": str(exc),
+                }
+
 
         # ==================================================
         # 1. EXPLICIT CAPABILITY LEARNING
