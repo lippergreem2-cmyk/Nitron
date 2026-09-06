@@ -6,8 +6,7 @@ import json
 HOST = "127.0.0.1"
 PORT = 8000
 
-from commands import execute as legacy_execute
-from plugin_manager import plugin_manager
+from commands import execute
 from image_learning import learn_image
 
 
@@ -197,9 +196,7 @@ class NitronHandler(BaseHTTPRequestHandler):
 
             print(f"Nitron input: {command}")
 
-            response = plugin_manager.execute(command)
-            if response is None:
-                response = legacy_execute(command)
+            response = execute(command)
 
             if response is None:
                 response = "I'm here."

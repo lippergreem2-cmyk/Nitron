@@ -29,28 +29,72 @@ object ChatSessionStore {
         return sessions.sortedByDescending { it.timestamp }
     }
 
-    fun archiveCurrentChat(context: Context) {
+    private val fillerPhrases = listOf(
+        "good morning", "good afternoon", "good evening", "good night",
+        "how are you", "how is it going", "hows it going",
+        "hello there", "hi there",
+        "hello", "hi", "hey", "yo",
+        "please", "thanks", "thank you", "okay", "ok", "sure"
+    )
+
+    private fun stripFiller(text: String): String {
+        var cleaned = text.trim().lowercase()
+        for (phrase in fillerPhrases) {
+            cleaned = cleaned.replace(Regex("\\b" + Regex.escape(phrase) + "\\b"), " ")
+        }
+        cleaned = cleaned.replace(Regex("[,.!?]"), " ")
+        cleaned = cleaned.replace(Regex("\\s+"), " ").trim()
+        return cleaned
+    }
+
+    private fun generateTitle(messages: List<Message>): String {
+
+        val userMessages = messages.filter { it.fromUser }.map { it.text }
+
+        for (msg in userMessages) {
+
+            val cleaned = stripFiller(msg)
+
+            if (cleaned.isNotBlank()) {
+                return cleaned
+                    .split(" ")
+                    .filter { it.isNotBlank() }
+                    .take(6)
+                    .joinToString(" ") { word ->
+                        word.replaceFirstChar { c -> c.uppercase() }
+                    }
+                    .take(40)
+            }
+        }
+
+        return "New chat"
+    }
+
+    fun archiveCurrentChat(context: Context): String? {
         val current = ChatHistoryStore.getAll()
-        if (current.isEmpty()) return
+        if (current.isEmpty()) return null
 
-        val firstUserMessage = current.firstOrNull { it.fromUser }?.text ?: current.first().text
+        val title = generateTitle(current)
 
-        val title = firstUserMessage
-            .trim()
-            .split(Regex("\\s+"))
-            .take(6)
-            .joinToString(" ")
-            .take(40)
-            .ifBlank { "New chat" }
+        val id = System.currentTimeMillis().toString()
 
         val session = ChatSession(
-            id = System.currentTimeMillis().toString(),
+            id = id,
             title = title,
             timestamp = System.currentTimeMillis(),
             messages = current
         )
 
         sessions.add(0, session)
+        save()
+
+        return id
+    }
+
+    fun renameSession(id: String, newTitle: String) {
+        val index = sessions.indexOfFirst { it.id == id }
+        if (index == -1) return
+        sessions[index] = sessions[index].copy(title = newTitle)
         save()
     }
 

@@ -14,8 +14,6 @@ import android.provider.Settings
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
-import android.speech.tts.TextToSpeech
-import android.speech.tts.UtteranceProgressListener
 import android.view.View
 import android.view.WindowInsets
 import android.os.Handler
@@ -111,9 +109,6 @@ class MainActivity : AppCompatActivity() {
 
     private var speechRecognizer: SpeechRecognizer? = null
     private var isRecordingVoice = false
-    private lateinit var tts: TextToSpeech
-    private var ttsReady = false
-    private var isNitronSpeaking = false
 
     // =========================================================
     // GOOGLE SIGN-IN
@@ -448,42 +443,9 @@ class MainActivity : AppCompatActivity() {
                 )
             }
 
-        interruptNitron()
-
         isRecordingVoice = true
 
         speechRecognizer?.startListening(intent)
-    }
-
-    private fun speakReply(text: String) {
-
-        if (text.isBlank()) return
-
-        if (!ttsReady) {
-            window.decorView.postDelayed(
-                { speakReply(text) },
-                300
-            )
-            return
-        }
-
-        isNitronSpeaking = true
-
-        tts.speak(
-            text,
-            TextToSpeech.QUEUE_FLUSH,
-            null,
-            "nitron_reply"
-        )
-    }
-
-    private fun interruptNitron() {
-
-        if (::tts.isInitialized) {
-            tts.stop()
-        }
-
-        isNitronSpeaking = false
     }
 
     private fun stopVoiceInput() {
@@ -1062,41 +1024,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(
             R.layout.activity_main
-
         )
-
-        // // =====================================================
-        // NITRON TEXT-TO-SPEECH
-        // =====================================================
-        tts = TextToSpeech(this) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                val result = tts.setLanguage(Locale.getDefault())
-                ttsReady = result != TextToSpeech.LANG_MISSING_DATA &&
-                        result != TextToSpeech.LANG_NOT_SUPPORTED
-
-                tts.setOnUtteranceProgressListener(
-                    object : UtteranceProgressListener() {
-                        override fun onStart(utteranceId: String?) {
-                            runOnUiThread {
-                                isNitronSpeaking = true
-                            }
-                        }
-
-                        override fun onDone(utteranceId: String?) {
-                            runOnUiThread {
-                                isNitronSpeaking = false
-                            }
-                        }
-
-                        override fun onError(utteranceId: String?) {
-                            runOnUiThread {
-                                isNitronSpeaking = false
-                            }
-                        }
-                    }
-                )
-            }
-        }
 
         // =====================================================
         // ADMOB TEST BANNER
@@ -1187,7 +1115,6 @@ class MainActivity : AppCompatActivity() {
                                 imageUri = imageUrl
                             )
                         )
-
 
                         messageList.smoothScrollToPosition(
                             messageAdapter.itemCount - 1
@@ -1833,11 +1760,6 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
 
         stopVoiceInput()
-
-        if (::tts.isInitialized) {
-            tts.stop()
-            tts.shutdown()
-        }
 
         super.onDestroy()
     }

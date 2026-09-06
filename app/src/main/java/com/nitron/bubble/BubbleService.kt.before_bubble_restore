@@ -22,13 +22,6 @@ class BubbleService : Service() {
         @JvmStatic
         var isRunning: Boolean = false
             private set
-
-        private var instance: BubbleService? = null
-
-        @JvmStatic
-        fun restoreBubbleAtBottom() {
-            instance?.restoreBubbleAtBottomInternal()
-        }
     }
 
     private lateinit var windowManager: WindowManager
@@ -55,7 +48,6 @@ class BubbleService : Service() {
         }
 
         isRunning = true
-        instance = this
 
         windowManager =
             getSystemService(WINDOW_SERVICE) as WindowManager
@@ -231,57 +223,6 @@ class BubbleService : Service() {
         glowView.alpha = 1.0f
     }
 
-    private fun restoreBubbleAtBottomInternal() {
-
-        if (!::bubbleView.isInitialized) {
-            return
-        }
-
-        try {
-            val metrics = resources.displayMetrics
-
-            val screenWidth = metrics.widthPixels
-            val screenHeight = metrics.heightPixels
-
-            params.x =
-                ((screenWidth - bubbleView.width) / 2)
-                    .coerceAtLeast(0)
-
-            params.y =
-                (screenHeight - bubbleView.height - 120)
-                    .coerceAtLeast(0)
-
-            bubbleView.visibility = View.VISIBLE
-            bubbleView.alpha = 1.0f
-            bubbleView.scaleX = 1.0f
-            bubbleView.scaleY = 1.0f
-
-            try {
-                windowManager.updateViewLayout(
-                    bubbleView,
-                    params
-                )
-            } catch (_: Exception) {
-                // The overlay may have been removed. Re-add it.
-                try {
-                    windowManager.addView(
-                        bubbleView,
-                        params
-                    )
-                } catch (_: Exception) {
-                }
-            }
-
-            bubbleView.visibility = View.VISIBLE
-            bubbleView.alpha = 1.0f
-            bubbleView.scaleX = 1.0f
-            bubbleView.scaleY = 1.0f
-            bubbleView.bringToFront()
-
-        } catch (_: Exception) {
-        }
-    }
-
     private fun openChat() {
 
         try {
@@ -402,7 +343,6 @@ class BubbleService : Service() {
 
     override fun onDestroy() {
 
-        instance = null
         isRunning = false
 
         if (::bubbleView.isInitialized) {

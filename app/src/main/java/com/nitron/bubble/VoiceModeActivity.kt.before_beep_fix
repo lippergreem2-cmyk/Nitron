@@ -185,12 +185,6 @@ class VoiceModeActivity : AppCompatActivity() {
             finish()
         }
 
-        findViewById<TextView>(R.id.voiceSettingsIcon).setOnClickListener {
-            startActivity(
-                Intent(this, SettingsActivity::class.java)
-            )
-        }
-
         findViewById<TextView>(R.id.voiceMenuIcon).setOnClickListener {
 
             val panel =
@@ -305,6 +299,8 @@ class VoiceModeActivity : AppCompatActivity() {
 
         var lastX = 0f
         var lastY = 0f
+        var downX = 0f
+        var downY = 0f
 
         orb.setOnTouchListener { view, event ->
 
@@ -313,6 +309,8 @@ class VoiceModeActivity : AppCompatActivity() {
                 MotionEvent.ACTION_DOWN -> {
                     lastX = event.rawX
                     lastY = event.rawY
+                    downX = event.rawX
+                    downY = event.rawY
                     true
                 }
 
@@ -338,6 +336,22 @@ class VoiceModeActivity : AppCompatActivity() {
                 }
 
                 MotionEvent.ACTION_UP -> {
+
+                    val totalX =
+                        event.rawX - downX
+
+                    val totalY =
+                        event.rawY - downY
+
+                    // Swipe DOWN = collapse voice interface
+                    if (
+                        totalY > 120f &&
+                        kotlin.math.abs(totalY) >
+                        kotlin.math.abs(totalX) * 1.3f
+                    ) {
+                        collapseVoiceMode()
+                    }
+
                     true
                 }
 
@@ -346,36 +360,9 @@ class VoiceModeActivity : AppCompatActivity() {
         }
     }
 
-    private var swipeStartX = 0f
-    private var swipeStartY = 0f
-
-    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        when (event.actionMasked) {
-            MotionEvent.ACTION_DOWN -> {
-                swipeStartX = event.rawX
-                swipeStartY = event.rawY
-            }
-
-            MotionEvent.ACTION_UP -> {
-                val dx = event.rawX - swipeStartX
-                val dy = event.rawY - swipeStartY
-
-                if (
-                    dy > 120f &&
-                    kotlin.math.abs(dy) > kotlin.math.abs(dx) * 1.2f
-                ) {
-                    collapseVoiceMode()
-                    return true
-                }
-            }
-        }
-
-        return super.dispatchTouchEvent(event)
-    }
-
     private fun collapseVoiceMode() {
 
-        // The next tap on the small floating bubble
+        // Tell the floating bubble that the next tap
         // should open the normal chat.
         getSharedPreferences(
             "nitron_voice_state",
@@ -391,8 +378,6 @@ class VoiceModeActivity : AppCompatActivity() {
         voiceModeActive = false
         userStopped = true
 
-        handler.removeCallbacksAndMessages(null)
-
         try {
             speechRecognizer.cancel()
         } catch (_: Exception) {
@@ -405,16 +390,8 @@ class VoiceModeActivity : AppCompatActivity() {
 
         isListening = false
         isNitronSpeaking = false
-        recognizerStarting = false
 
-        // Ask the existing floating-bubble service
-        // to restore the small bubble at the bottom.
-        try {
-            BubbleService.restoreBubbleAtBottom()
-        } catch (_: Exception) {
-        }
-
-        // Close the large voice interface.
+        // Small collapse animation.
         findViewById<View>(
             R.id.voiceOrbContainer
         ).animate()
@@ -504,13 +481,13 @@ class VoiceModeActivity : AppCompatActivity() {
                      * never hammer SpeechRecognizer with
                      * immediate restarts.
                      */
-                    // Do NOT automatically start another
-                    // recognition session here.
-                    //
-                    // Repeated SpeechRecognizer sessions cause
-                    // Android's microphone "beep" to repeat.
-                    // Listening will be started again when the
-                    // user activates the microphone/talk control.
+                    if (
+                        voiceModeActive &&
+                        !userStopped &&
+                        !isFinishing
+                    ) {
+                        scheduleListening(1000)
+                    }
                 }
 
                 override fun onResults(
@@ -769,26 +746,12 @@ class VoiceModeActivity : AppCompatActivity() {
             recognizerStarting = false
         }
 
-        val result = tts.speak(
+        tts.speak(
             text,
             TextToSpeech.QUEUE_FLUSH,
             null,
             "nitron_reply"
         )
-
-        if (result == TextToSpeech.ERROR) {
-            isNitronSpeaking = false
-            android.util.Log.e(
-                "NITRON_TTS",
-                "TTS speak() returned ERROR"
-            )
-            scheduleListening(1200)
-        } else {
-            android.util.Log.d(
-                "NITRON_TTS",
-                "TTS speak() accepted reply"
-            )
-        }
     }
 
     private fun interruptNitron() {

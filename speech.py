@@ -99,7 +99,8 @@ def speak(text):
             [
 
                 "termux-tts-speak",
-
+                "-r", "1.08",
+                "-p", "0.85",
                 str(text)
 
             ]

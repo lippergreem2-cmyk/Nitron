@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nitron.bubble.chat.Message
 import com.nitron.bubble.chat.MessageAdapter
+import com.nitron.bubble.chat.ChatHistoryStore
 
 class ChatActivity : AppCompatActivity() {
 
@@ -46,6 +47,18 @@ class ChatActivity : AppCompatActivity() {
             LinearLayoutManager(this)
 
         recyclerView.adapter = adapter
+
+        // Load the existing Nitron conversation
+        ChatHistoryStore.init(this)
+        ChatHistoryStore.getAll().forEach { message ->
+            adapter.addMessage(message)
+        }
+
+        if (adapter.itemCount > 0) {
+            recyclerView.scrollToPosition(
+                adapter.itemCount - 1
+            )
+        }
 
         sendButton.setOnClickListener {
 

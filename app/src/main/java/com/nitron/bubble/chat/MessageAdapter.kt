@@ -9,6 +9,9 @@ import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.text.SpannableStringBuilder
+import android.text.style.BackgroundColorSpan
+import android.text.style.TypefaceSpan
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -301,6 +304,64 @@ class MessageAdapter :
     }
 
     // ============================================================
+    // MIXED CONTENT (plain text + inline code spans)
+    // ============================================================
+
+    private fun buildMixedContent(text: String): CharSequence {
+
+        if (!text.contains("```")) {
+            return text
+        }
+
+        val builder = SpannableStringBuilder()
+
+        val regex = Regex("""```[A-Za-z0-9_+#.-]*\n?([\s\S]*?)```""")
+
+        var lastEnd = 0
+
+        for (match in regex.findAll(text)) {
+
+            if (match.range.first > lastEnd) {
+                builder.append(text.substring(lastEnd, match.range.first))
+            }
+
+            val codeBody = match.groupValues[1].trim()
+            val start = builder.length
+
+            builder.append(codeBody)
+
+            val end = builder.length
+
+            builder.setSpan(
+                ForegroundColorSpan(Color.rgb(80, 220, 120)),
+                start, end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+
+            builder.setSpan(
+                TypefaceSpan("monospace"),
+                start, end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+
+            builder.setSpan(
+                BackgroundColorSpan(Color.rgb(28, 28, 28)),
+                start, end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+
+            lastEnd = match.range.last + 1
+        }
+
+        if (lastEnd < text.length) {
+            builder.append(text.substring(lastEnd))
+        }
+
+        return builder
+    }
+
+
+    // ============================================================
     // VIEW CREATION
     // ============================================================
 
@@ -333,7 +394,7 @@ class MessageAdapter :
 
         val isCode =
             !message.fromUser &&
-            isLikelyCode(message.text)
+            hasFencedCode(message.text)
 
         // --------------------------------------------------------
         // TEXT
@@ -367,59 +428,13 @@ class MessageAdapter :
                 holder.messageText.typeface =
                     Typeface.DEFAULT
 
-            } else if (isCode) {
-
-                // ------------------------------------------------
-                // CODE MESSAGE
-                // ------------------------------------------------
-
-                holder.messageText.setBackgroundResource(
-                    R.drawable.nitron_code_bg
-                )
-
-                holder.messageText.typeface =
-                    Typeface.MONOSPACE
-
-                holder.messageText.setTextColor(
-                    Color.rgb(230, 230, 230)
-                )
-
-                holder.messageText.setPadding(
-                    14,
-                    10,
-                    14,
-                    10
-                )
-
-                val language =
-                    extractCodeLanguage(message.text)
-
-                val cleanedCode =
-                    message.text
-                        .replace(
-                            Regex("""```[A-Za-z0-9_+#.-]*"""),
-                            ""
-                        )
-                        .replace(
-                            "```",
-                            ""
-                        )
-                        .trim()
-
-                val colored =
-                    colorCode(cleanedCode)
-
-                holder.messageText.text =
-                    colored
-
             } else {
 
                 // ------------------------------------------------
-                // NORMAL NITRON MESSAGE
+                // NITRON MESSAGE
+                // Code spans (fenced with ```) are highlighted
+                // inline; everything else stays plain text.
                 // ------------------------------------------------
-
-                holder.messageText.text =
-                    message.text
 
                 holder.messageText.setBackgroundResource(
                     R.drawable.nitron_message_bg
@@ -440,6 +455,9 @@ class MessageAdapter :
                     10,
                     5
                 )
+
+                holder.messageText.text =
+                    buildMixedContent(message.text)
             }
         }
 

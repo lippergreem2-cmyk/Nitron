@@ -17,8 +17,15 @@ import androidx.core.content.ContextCompat
 import com.nitron.bubble.BubbleService
 import com.nitron.bubble.GpsLocator
 import java.util.Locale
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 
 class SettingsActivity : AppCompatActivity() {
+
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     private val locationPermission =
         registerForActivityResult(
@@ -144,6 +151,16 @@ class SettingsActivity : AppCompatActivity() {
         applySavedTheme()
         setContentView(R.layout.settings)
 
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        val googleSignInOptions =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("288294300264-qcb76rdmkc56knip3jq8h0f658sgft6m.apps.googleusercontent.com")
+                .requestEmail()
+                .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
+
         findViewById<TextView>(R.id.settingsBack).setOnClickListener {
             finish()
         }
@@ -175,6 +192,18 @@ class SettingsActivity : AppCompatActivity() {
             } else {
                 startService(Intent(this, BubbleService::class.java))
             }
+        }
+
+        findViewById<TextView>(R.id.signOutSetting).setOnClickListener {
+
+            firebaseAuth.signOut()
+            googleSignInClient.signOut()
+
+            AlertDialog.Builder(this)
+                .setTitle("Signed out")
+                .setMessage("You have been signed out of Nitron.")
+                .setPositiveButton("OK") { _, _ -> finish() }
+                .show()
         }
     }
 
