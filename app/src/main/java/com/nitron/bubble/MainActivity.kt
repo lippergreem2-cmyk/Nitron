@@ -1,7 +1,4 @@
 package com.nitron.bubble
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
 
 import android.Manifest
 import android.content.Intent
@@ -1102,8 +1099,6 @@ class MainActivity : AppCompatActivity() {
         // ADMOB TEST BANNER
         // =====================================================
 
-        MobileAds.initialize(this)
-
         firebaseAuth = FirebaseAuth.getInstance()
 
         val googleSignInOptions =
@@ -1113,10 +1108,6 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
-
-        val adView = findViewById<AdView>(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        adView.loadAd(adRequest)
 
         drawerLayout =
             findViewById(R.id.drawerLayout)
