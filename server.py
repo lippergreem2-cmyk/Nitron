@@ -8,6 +8,18 @@ conversation_histories = {}
 MAX_HISTORY_MESSAGES = 10  # last 5 exchanges
 
 
+BLOCKED_PATTERNS = [
+    "nude", "naked", "nsfw", "porn", "sex pic", "sexual image",
+    "how to make a bomb", "how to make meth", "synthesize drugs",
+    "how to hack someone", "how to kill", "child porn", "csam",
+]
+
+
+def is_blocked(message):
+    lowered = message.lower()
+    return any(p in lowered for p in BLOCKED_PATTERNS)
+
+
 def flatten_reply(reply):
     """Convert a dict-shaped reply (e.g. a lesson object) into clean text."""
     if isinstance(reply, str):
@@ -54,6 +66,9 @@ def chat():
     if not message:
         return jsonify({"error": "No message provided"}), 400
 
+    if is_blocked(message):
+        return jsonify({"reply": "I can't help with that request."})
+
     try:
         reply = ai_brain.chat(message, history=[])
         return jsonify({"reply": reply})
@@ -70,6 +85,12 @@ def command():
 
     if not message:
         return jsonify({"response": "I didn't catch a message."}), 400
+
+    if is_blocked(message):
+        return jsonify({
+            "response": "I can't help with that request.",
+            "user_id": user_id
+        })
 
     key = user_id if user_id else "default"
     history = conversation_histories.get(key, [])

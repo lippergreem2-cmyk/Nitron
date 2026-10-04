@@ -165,7 +165,22 @@ def _call(messages, max_tokens=1500):
     return data["choices"][0]["message"]["content"]
 
 
+BLOCKED_PATTERNS = [
+    "nude", "naked", "nsfw", "porn", "sex pic", "sexual image",
+    "how to make a bomb", "how to make meth", "synthesize drugs",
+    "how to hack someone", "how to kill", "child porn", "csam",
+]
+
+
+def is_blocked(message):
+    lowered = message.lower()
+    return any(p in lowered for p in BLOCKED_PATTERNS)
+
+
 def chat(message: str, history: list = None) -> str:
+    if is_blocked(message):
+        return "I can't help with that request."
+
     """
     General conversation with Nitron.
     history: optional list of {"role": "user"/"assistant", "content": "..."}
