@@ -90,6 +90,16 @@ def think(command):
 
         return "Please enter a command."
 
+    if text in ("start guide", "guide me", "let's build something", "teach me"):
+        import ai_brain
+        ai_brain.set_mode("guide")
+        return "Guide mode on. Tell me what you want to build."
+
+    if text in ("end guide", "stop guide", "guide off"):
+        import ai_brain
+        ai_brain.set_mode("normal")
+        return "Guide mode off."
+
 
 
     # ==================================================
@@ -388,7 +398,11 @@ help
 
 
     # ==================================================
-    # DEFAULT
+    # DEFAULT -> AI BRAIN (Groq) + GUIDE MODE
     # ==================================================
 
-    return "I am still learning that command."
+    try:
+        import ai_brain
+        return ai_brain.chat(command)
+    except Exception as e:
+        return f"AI brain error: {e}"

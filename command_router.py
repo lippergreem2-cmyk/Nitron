@@ -3,6 +3,7 @@ Nitron Command Router
 """
 
 from nitron_core import nitron
+import ai_brain
 
 
 class CommandRouter:
@@ -102,7 +103,25 @@ class CommandRouter:
 
             return nitron.generate_code(prompt)
 
-        return "Sorry Boss, I don't understand that command."
+        # ----------------------------
+        # GUIDE MODE
+        # ----------------------------
+        if command in ("start guide", "guide me", "let's build something", "teach me"):
+            ai_brain.set_mode("guide")
+            ai_brain.new_project()
+            return ai_brain.chat(
+                "The user just asked to start a guided build session. "
+                "Ask them what they want to build and their experience level."
+            )
+
+        if command in ("end guide", "stop guide", "guide off"):
+            ai_brain.set_mode("normal")
+            return "Guide mode off, Boss."
+
+        # ----------------------------
+        # FALLBACK -- real AI reply instead of a canned error
+        # ----------------------------
+        return ai_brain.chat(command)
 
 
 router = CommandRouter()

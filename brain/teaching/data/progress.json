@@ -1,0 +1,57 @@
+{
+  "python": {
+    "lesson": 1,
+    "mastery": 0,
+    "completed": [],
+    "notes": [
+      {
+        "lesson": 1,
+        "title": "Introduction to Python",
+        "notes": [
+          "Python is a general-purpose programming language.",
+          "Programs are written as instructions for the computer.",
+          "Variables allow us to store values.",
+          "Functions allow us to reuse instructions."
+        ]
+      }
+    ]
+  },
+  "continue python": {
+    "lesson": 1,
+    "mastery": 0,
+    "completed": [],
+    "notes": []
+  },
+  "mathematics": {
+    "lesson": 1,
+    "mastery": 0,
+    "completed": [],
+    "notes": [
+      {
+        "lesson": 1,
+        "title": "Introduction to Mathematics",
+        "notes": [
+          "Mathematics studies numbers, quantities, patterns and relationships.",
+          "Arithmetic includes addition, subtraction, multiplication and division.",
+          "Equations use mathematical symbols to describe relationships."
+        ]
+      }
+    ]
+  },
+  "physics": {
+    "lesson": 1,
+    "mastery": 0,
+    "completed": [],
+    "notes": [
+      {
+        "lesson": 1,
+        "title": "Introduction to Physics",
+        "notes": [
+          "Physics studies matter, energy, motion and forces.",
+          "Measurements are used to describe physical quantities.",
+          "Forces can change the motion of objects."
+        ]
+      }
+    ]
+  }
+}

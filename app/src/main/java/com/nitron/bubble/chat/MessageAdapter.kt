@@ -23,6 +23,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.nitron.bubble.FullTextActivity
+import com.nitron.bubble.FullImageActivity
 import com.nitron.bubble.R
 import java.net.HttpURLConnection
 import java.net.URL
@@ -569,6 +570,19 @@ class MessageAdapter :
 
             holder.messageImage.tag =
                 message.imageUri
+
+            holder.messageImage.setOnClickListener {
+                val fullImageIntent =
+                    Intent(
+                        holder.itemView.context,
+                        FullImageActivity::class.java
+                    )
+                fullImageIntent.putExtra(
+                    "image_uri",
+                    message.imageUri
+                )
+                holder.itemView.context.startActivity(fullImageIntent)
+            }
 
             if (
                 message.imageUri.startsWith(

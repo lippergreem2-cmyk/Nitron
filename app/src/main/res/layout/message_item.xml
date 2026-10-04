@@ -64,14 +64,13 @@
 
         </LinearLayout>
 
-        <ImageView
+        <com.nitron.bubble.NitronImageView
             android:id="@+id/messageImage"
             android:layout_width="220dp"
             android:layout_height="165dp"
             android:layout_marginTop="2dp"
-            android:scaleType="centerCrop"
             android:visibility="gone"
-            android:contentDescription="Message image"/>
+            android:contentDescription="Interactive Nitron image"/>
 
     </LinearLayout>
 

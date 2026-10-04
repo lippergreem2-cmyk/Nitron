@@ -818,6 +818,167 @@ class AIProviderManager:
             prompt
         )
 
+    # ======================================================
+    # SAFE GENERATION / AUTOMATIC FAILOVER
+    # ======================================================
+
+    def safe_generate(
+        self,
+        prompt,
+        preferred=None
+    ):
+        """
+        Generate text without allowing an external AI failure
+        to crash Nitron.
+
+        Explicit provider:
+            Use only the requested provider.
+
+        Automatic mode:
+            local -> groq -> pollinations -> openai
+
+        If one provider fails during generation, Nitron
+        automatically tries the next available provider.
+        """
+
+        # --------------------------------------------------
+        # EXPLICIT PROVIDER
+        # --------------------------------------------------
+
+        if preferred:
+            try:
+                provider = self.get_provider(preferred)
+
+                result = provider.generate(prompt)
+
+                if (
+                    isinstance(result, str)
+                    and result.strip()
+                ):
+                    return result.strip()
+
+                print(
+                    f"[AI] Provider '{provider.name}' "
+                    "returned no usable text."
+                )
+
+            except Exception as error:
+                print(
+                    f"[AI] Explicit provider '{preferred}' failed:",
+                    error
+                )
+
+            return None
+
+        # --------------------------------------------------
+        # AUTOMATIC FAILOVER
+        # --------------------------------------------------
+
+        providers = [
+            self.local,
+            self.groq,
+            self.pollinations,
+            self.openai
+        ]
+
+        for provider in providers:
+
+            # ----------------------------------------------
+            # Check provider availability
+            # ----------------------------------------------
+
+            try:
+
+                if not provider.available():
+                    print(
+                        f"[AI] {provider.name}: unavailable"
+                    )
+                    continue
+
+            except Exception as error:
+
+                print(
+                    f"[AI] {provider.name}: health check failed:",
+                    error
+                )
+                continue
+
+            # ----------------------------------------------
+            # Local model must also exist
+            # ----------------------------------------------
+
+            if provider is self.local:
+
+                try:
+
+                    if not self.local.model_available():
+
+                        print(
+                            f"[AI] Local model unavailable: "
+                            f"{self.local.model}"
+                        )
+
+                        continue
+
+                except Exception as error:
+
+                    print(
+                        "[AI] Local model check failed:",
+                        error
+                    )
+
+                    continue
+
+            # ----------------------------------------------
+            # Attempt generation
+            # ----------------------------------------------
+
+            print(
+                f"[AI] Trying provider: {provider.name}"
+            )
+
+            try:
+
+                result = provider.generate(prompt)
+
+                if (
+                    isinstance(result, str)
+                    and result.strip()
+                ):
+
+                    print(
+                        f"[AI] Provider succeeded: "
+                        f"{provider.name}"
+                    )
+
+                    return result.strip()
+
+                print(
+                    f"[AI] Provider '{provider.name}' "
+                    "returned no usable text."
+                )
+
+            except Exception as error:
+
+                print(
+                    f"[AI] Provider '{provider.name}' "
+                    f"failed: {error}"
+                )
+
+                # Continue to the next provider.
+                continue
+
+        # --------------------------------------------------
+        # EVERYTHING FAILED
+        # --------------------------------------------------
+
+        print(
+            "[AI] All external AI providers failed."
+        )
+
+        return None
+
+
 
 # ==========================================================
 # TEST

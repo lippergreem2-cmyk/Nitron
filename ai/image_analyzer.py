@@ -152,6 +152,79 @@ def extract_openai_text(result):
     return "\n".join(parts).strip()
 
 
+def analyze_image_only(image_base64, filename="image.jpg", question=""):
+    """
+    Analyze an image temporarily.
+    The image is never stored in Nitron's learning memory.
+    """
+
+    if not image_base64:
+        raise ValueError("No image data received.")
+
+    if "," in image_base64:
+        image_base64 = image_base64.split(",", 1)[1]
+
+    try:
+        image_data = base64.b64decode(image_base64, validate=True)
+    except Exception as e:
+        raise ValueError(f"Invalid Base64 image data: {e}")
+
+    if not image_data:
+        raise ValueError("Decoded image is empty.")
+
+    suffix = os.path.splitext(filename)[1].lower()
+    if suffix not in (".jpg", ".jpeg", ".png", ".webp", ".gif", ".bmp"):
+        suffix = ".jpg"
+
+    import tempfile
+
+    temp_path = None
+
+    try:
+        with tempfile.NamedTemporaryFile(
+            suffix=suffix,
+            delete=False,
+        ) as temp_file:
+            temp_file.write(image_data)
+            temp_path = temp_file.name
+
+        if question.strip():
+            note = (
+                "The user is asking this question about the image:\n"
+                + question.strip()
+                + "\n\nAnswer the question using only information "
+                  "supported by the image."
+            )
+        else:
+            note = (
+                "No typed question was provided. First inspect the image "
+                "for any visible question, problem, worksheet, or prompt. "
+                "If one is present, answer it using the information in "
+                "the image. Otherwise, describe what is visibly shown."
+            )
+
+        result = analyze_with_openai(
+            temp_path,
+            note=note,
+        )
+
+        if result.get("success"):
+            return {
+                "success": True,
+                "analysis": result.get("analysis", "").strip(),
+                "model": result.get("model", ""),
+            }
+
+        return result
+
+    finally:
+        if temp_path:
+            try:
+                os.remove(temp_path)
+            except OSError:
+                pass
+
+
 def analyze_with_openai(
     image_path,
     note="",

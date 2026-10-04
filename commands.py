@@ -2186,6 +2186,29 @@ def learning_command(command):
 
                 return "I couldn't teach that physics topic."
 
+    # ======================================================
+    # UNIVERSAL TEACHER (any subject not covered above)
+    # ======================================================
+
+    if command.startswith("teach me "):
+
+        topic = command[len("teach me "):].strip()
+
+        if topic:
+            try:
+                import ai_brain
+                prompt = (
+                    f"Teach me about {topic}. Act as a patient tutor. "
+                    "Give a short, clear lesson (under 150 words) on the "
+                    "basics of this specific topic, then ask one question "
+                    "to check understanding. Do not reference any other "
+                    "subject or previous lesson."
+                )
+                return ai_brain.chat(prompt, history=[])
+            except Exception as error:
+                log(f"Universal teacher error: {error}", "error")
+                return "I couldn't teach that topic right now."
+
     if command.startswith("physics "):
 
         topic = command[len("physics "):].strip()

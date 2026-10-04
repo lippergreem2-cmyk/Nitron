@@ -35,6 +35,7 @@ import com.nitron.bubble.chat.ChatManager
 import com.nitron.bubble.chat.Message
 import com.nitron.bubble.chat.MessageAdapter
 import java.io.ByteArrayOutputStream
+import java.io.File
 import java.util.Locale
 import android.util.Base64
 
@@ -779,13 +780,25 @@ class MainActivity : AppCompatActivity() {
                         }
                         ?: "picture.jpg"
 
+                val localImageFile =
+                    File(
+                        filesDir,
+                        "img_" + System.currentTimeMillis() + "_" + filename
+                    )
+
+                localImageFile.writeBytes(bytes)
+
+                val localUri =
+                    Uri.fromFile(localImageFile)
+
                 welcomeText.visibility =
                     View.GONE
 
                 addMessage(
                     Message(
-                        "📷 Learning image: $filename",
-                        true
+                        "📷 Sent image: $filename",
+                        true,
+                        imageUri = localUri.toString()
                     )
                 )
 
@@ -793,9 +806,12 @@ class MainActivity : AppCompatActivity() {
                     messageAdapter.itemCount - 1
                 )
 
+                val imageQuestion = messageInput.text.toString().trim()
+
                 TermuxBridge.sendImage(
                     base64Image,
-                    filename
+                    filename,
+                    imageQuestion
                 ) { reply ->
 
                     runOnUiThread {
@@ -1055,12 +1071,70 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
+        Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
+            try {
+                val trace =
+                    "Thread: " + thread.name + "\n\n" +
+                    android.util.Log.getStackTraceString(throwable)
+
+                val crashIntent =
+                    android.content.Intent(
+                        applicationContext,
+                        FullTextActivity::class.java
+                    )
+
+                crashIntent.putExtra("full_text", trace)
+                crashIntent.putExtra("is_code", true)
+                crashIntent.flags =
+                    android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+
+                applicationContext.startActivity(crashIntent)
+            } catch (e: Exception) {
+            }
+
+            Thread.sleep(500)
+            android.os.Process.killProcess(android.os.Process.myPid())
+        }
+
+        Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
+            try {
+                val trace =
+                    "Thread: " + thread.name + "\n\n" +
+                    android.util.Log.getStackTraceString(throwable)
+
+                val crashIntent =
+                    android.content.Intent(
+                        applicationContext,
+                        FullTextActivity::class.java
+                    )
+
+                crashIntent.putExtra("full_text", trace)
+                crashIntent.putExtra("is_code", true)
+                crashIntent.flags =
+                    android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+
+                applicationContext.startActivity(crashIntent)
+            } catch (e: Exception) {
+            }
+
+            Thread.sleep(500)
+            android.os.Process.killProcess(android.os.Process.myPid())
+        }
+
+        TermuxBridge.initialize(this)
+
         applySavedTheme()
 
         setContentView(
             R.layout.activity_main
 
         )
+
+        // =====================================================
+        // NITRON LEGAL AGREEMENT
+        // =====================================================
+
+        showLegalAgreementIfNeeded()
 
         // // =====================================================
         // NITRON TEXT-TO-SPEECH
@@ -1832,4 +1906,53 @@ class MainActivity : AppCompatActivity() {
 
         super.onDestroy()
     }
+
+    private var imageHandGestureController: HandGestureController? = null
+
+    private fun startImageHandTracking() {
+        if (imageHandGestureController != null) return
+
+        imageHandGestureController = HandGestureController(this, this) { spread ->
+            // Hand gesture data is now active while an image is being inspected.
+            // Zoom/pan/selection will be connected here next.
+        }
+
+        imageHandGestureController?.start()
+    }
+
+    private fun stopImageHandTracking() {
+        imageHandGestureController?.stop()
+        imageHandGestureController = null
+    }
+
+
+    // =====================================================
+    // TERMS & CONDITIONS
+    // =====================================================
+
+    private fun showLegalAgreementIfNeeded() {
+
+        val accepted =
+            getSharedPreferences(
+                "nitron_legal",
+                MODE_PRIVATE
+            ).getBoolean(
+                "terms_accepted",
+                false
+            )
+
+        if (!accepted) {
+
+            startActivity(
+                Intent(
+                    this,
+                    LegalActivity::class.java
+                ).apply {
+                    putExtra("required", true)
+                }
+            )
+        }
+    }
+
+
 }

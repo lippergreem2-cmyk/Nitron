@@ -5,11 +5,11 @@
         android:centerX="50%"
         android:centerY="50%"
         android:gradientRadius="210dp"
-        android:startColor="#550015"
-        android:centerColor="#28000D"
-        android:endColor="#080006"/>
+        android:startColor="#3A6BFF"
+        android:centerColor="#16213E"
+        android:endColor="#050912"/>
     <stroke
-        android:width="4dp"
-        android:color="#FF2D78"/>
+        android:width="3dp"
+        android:color="#4C8DFF"/>
     <corners android:radius="150dp"/>
 </shape>

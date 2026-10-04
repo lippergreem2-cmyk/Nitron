@@ -1,0 +1,131 @@
+{
+  "nmap": {
+    "category": "network_security",
+    "purpose": "Network discovery and port/service auditing",
+    "safe_use": "localhost or systems you are authorized to test"
+  },
+  "wireshark": {
+    "category": "network_analysis",
+    "purpose": "Capture and analyze network traffic",
+    "safe_use": "your own device or authorized lab"
+  },
+  "burp_suite": {
+    "category": "web_security",
+    "purpose": "Inspect and test web applications",
+    "safe_use": "your own applications and authorized labs"
+  },
+  "kali_linux": {
+    "category": "security_platform",
+    "purpose": "Linux environment containing many security tools",
+    "safe_use": "authorized security testing"
+  },
+  "splunk": {
+    "category": "siem",
+    "purpose": "Search, analyze and visualize security logs"
+  },
+  "elk": {
+    "category": "siem",
+    "purpose": "Elasticsearch, Logstash and Kibana security analytics"
+  },
+  "sqlmap": {
+    "category": "web_security",
+    "purpose": "SQL injection testing",
+    "safe_use": "local/authorized vulnerable applications only"
+  },
+  "virustotal": {
+    "category": "threat_intelligence",
+    "purpose": "Analyze suspicious files, URLs and indicators"
+  },
+  "cyberchef": {
+    "category": "analysis",
+    "purpose": "Decode, transform and analyze data"
+  },
+  "shodan": {
+    "category": "osint",
+    "purpose": "Search internet-connected assets"
+  },
+  "censys": {
+    "category": "osint",
+    "purpose": "Discover internet-facing assets"
+  },
+  "haveibeenpwned": {
+    "category": "threat_intelligence",
+    "purpose": "Check whether accounts appear in known breaches"
+  },
+  "urlscan": {
+    "category": "threat_intelligence",
+    "purpose": "Analyze website behavior and resources"
+  },
+  "abuseipdb": {
+    "category": "threat_intelligence",
+    "purpose": "Investigate reported IP abuse"
+  },
+  "alienvault_otx": {
+    "category": "threat_intelligence",
+    "purpose": "Threat-intelligence research"
+  },
+  "greynoise": {
+    "category": "threat_intelligence",
+    "purpose": "Analyze internet scanning and background noise"
+  },
+  "mitre_attack": {
+    "category": "knowledge",
+    "purpose": "Learn attacker techniques and defensive mappings"
+  },
+  "owasp_webgoat": {
+    "category": "training",
+    "purpose": "Practice web security in an intentionally vulnerable lab"
+  },
+  "owasp_juice_shop": {
+    "category": "training",
+    "purpose": "Practice web application security legally"
+  },
+  "tryhackme": {
+    "category": "training",
+    "purpose": "Hands-on cybersecurity learning labs"
+  },
+  "hack_the_box": {
+    "category": "training",
+    "purpose": "Authorized cybersecurity practice labs"
+  },
+  "port_swigger": {
+    "category": "training",
+    "purpose": "Web security learning and labs"
+  },
+  "securitytrails": {
+    "category": "osint",
+    "purpose": "Domain and DNS intelligence"
+  },
+  "intelx": {
+    "category": "osint",
+    "purpose": "Search and investigate public intelligence"
+  },
+  "spiderfoot": {
+    "category": "osint",
+    "purpose": "Automate OSINT investigations"
+  },
+  "maltego": {
+    "category": "osint",
+    "purpose": "Visualize relationships between digital assets"
+  },
+  "theharvester": {
+    "category": "osint",
+    "purpose": "Collect public domain, email and subdomain information"
+  },
+  "amass": {
+    "category": "osint",
+    "purpose": "Asset and subdomain discovery"
+  },
+  "subfinder": {
+    "category": "osint",
+    "purpose": "Passive subdomain discovery"
+  },
+  "rustscan": {
+    "category": "network_security",
+    "purpose": "Fast port discovery"
+  },
+  "wireshark": {
+    "category": "network_analysis",
+    "purpose": "Network packet analysis"
+  }
+}

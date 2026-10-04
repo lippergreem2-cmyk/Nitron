@@ -1,48 +1,28 @@
-import speech_recognition as sr
+import subprocess
 
 
 class CommandListener:
 
-    def __init__(self):
-
-        self.recognizer = sr.Recognizer()
-
     def listen(self):
-
-        with sr.Microphone() as source:
-
-            print("Waiting for your command...")
-
-            self.recognizer.adjust_for_ambient_noise(source)
-
-            audio = self.recognizer.listen(source)
-
+        print("Waiting for your command...")
         try:
-
-            command = self.recognizer.recognize_google(audio)
-
-            print("Command:", command)
-
+            result = subprocess.check_output(
+                ["termux-speech-to-text"],
+                text=True,
+                timeout=15
+            )
+            command = result.strip()
+            if command:
+                print("Command:", command)
             return command
-
-        except sr.UnknownValueError:
-
+        except subprocess.TimeoutExpired:
             return ""
-
-        except sr.RequestError:
-
-            return ""
-
-        except Exception:
-
+        except Exception as error:
+            print("Listen error:", error)
             return ""
 
     def get_command(self):
-
         while True:
-
             command = self.listen()
-
             if command != "":
-
                 return command

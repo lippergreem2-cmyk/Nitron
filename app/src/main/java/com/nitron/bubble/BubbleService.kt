@@ -1,6 +1,7 @@
 package com.nitron.bubble
 
 import android.app.Service
+import androidx.lifecycle.LifecycleService
 import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Build
@@ -10,13 +11,14 @@ import android.view.GestureDetector
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.TextView
 
-class BubbleService : Service() {
+class BubbleService : LifecycleService() {
 
     companion object {
         @JvmStatic
@@ -29,6 +31,15 @@ class BubbleService : Service() {
         fun restoreBubbleAtBottom() {
             instance?.restoreBubbleAtBottomInternal()
         }
+
+        @JvmStatic
+        fun setSpeaking(speaking: Boolean) {
+            if (speaking) {
+                instance?.startGlowPulse()
+            } else {
+                instance?.stopGlowPulse()
+            }
+        }
     }
 
     private lateinit var windowManager: WindowManager
@@ -36,6 +47,7 @@ class BubbleService : Service() {
     private lateinit var params: WindowManager.LayoutParams
     private lateinit var bubbleMenu: BubbleMenu
     private lateinit var glowView: View
+    private var handGestureController: HandGestureController? = null
 
     private var startX = 0
     private var startY = 0
@@ -43,6 +55,8 @@ class BubbleService : Service() {
     private var touchY = 0f
 
     private var moved = false
+    private var bubbleScale = 1.0f
+    private lateinit var scaleGestureDetector: ScaleGestureDetector
 
     override fun onCreate() {
         super.onCreate()
@@ -126,8 +140,33 @@ class BubbleService : Service() {
             }
         )
 
+        scaleGestureDetector = ScaleGestureDetector(
+            this,
+            object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+
+                override fun onScale(
+                    detector: ScaleGestureDetector
+                ): Boolean {
+
+                    bubbleScale *= detector.scaleFactor
+                    bubbleScale = bubbleScale.coerceIn(0.5f, 2.5f)
+
+                    bubbleView.scaleX = bubbleScale
+                    bubbleView.scaleY = bubbleScale
+
+                    return true
+                }
+            }
+        )
+
         // Drag + tap only on the center circle now
         nitronBubble.setOnTouchListener { _, event ->
+
+            scaleGestureDetector.onTouchEvent(event)
+
+            if (event.pointerCount > 1 || scaleGestureDetector.isInProgress) {
+                return@setOnTouchListener true
+            }
 
             gestureDetector.onTouchEvent(event)
 
@@ -402,6 +441,8 @@ class BubbleService : Service() {
 
     override fun onDestroy() {
 
+        handGestureController?.stop()
+
         instance = null
         isRunning = false
 
@@ -418,9 +459,4 @@ class BubbleService : Service() {
         super.onDestroy()
     }
 
-    override fun onBind(
-        intent: Intent?
-    ): IBinder? {
-        return null
-    }
 }

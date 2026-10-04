@@ -13,8 +13,12 @@ import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.animation.LinearInterpolator
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -28,6 +32,47 @@ import java.util.Locale
 
 class VoiceModeActivity : AppCompatActivity() {
 
+    private var handGestureController: HandGestureController? = null
+
+    private fun sendTypedMessage() {
+
+        val typedText = voiceInputField.text.toString().trim()
+
+        if (typedText.isNotBlank()) {
+
+            ChatHistoryStore.add(
+                Message(
+                    typedText,
+                    true
+                )
+            )
+
+            chatManager.sendMessage(
+                typedText
+            )
+
+            voiceInputField.text.clear()
+
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(voiceInputField.windowToken, 0)
+        }
+    }
+
+    private fun getVoiceLocale(): Locale {
+
+        val savedTag = getSharedPreferences(
+            "nitron_settings",
+            MODE_PRIVATE
+        ).getString("voice_language", null)
+
+        return if (savedTag != null) {
+            Locale.forLanguageTag(savedTag)
+        } else {
+            Locale.getDefault()
+        }
+    }
+
+
     private lateinit var chatManager: ChatManager
     private lateinit var speechRecognizer: SpeechRecognizer
     private lateinit var tts: TextToSpeech
@@ -35,6 +80,7 @@ class VoiceModeActivity : AppCompatActivity() {
     private lateinit var replyFrame: FrameLayout
     private lateinit var replyText: TextView
     private lateinit var micIcon: TextView
+    private lateinit var voiceInputField: EditText
 
     private val handler = Handler(Looper.getMainLooper())
 
@@ -47,6 +93,10 @@ class VoiceModeActivity : AppCompatActivity() {
 
     private var recognizerStarting = false
     private var lastRecognizedText = ""
+    private var silenceRestartCount = 0
+    private var pendingChunks: MutableList<String> = mutableListOf()
+    private var chunkIndex = 0
+    private var bargeInWindowActive = false
 
     private val micPermissionRequestCode = 501
 
@@ -71,6 +121,33 @@ class VoiceModeActivity : AppCompatActivity() {
         replyFrame = findViewById(R.id.voiceReplyFrame)
         replyText = findViewById(R.id.voiceReplyText)
         micIcon = findViewById(R.id.voiceMicIcon)
+        voiceInputField = findViewById(R.id.voiceInputField)
+
+        voiceInputField.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
+                sendTypedMessage()
+                true
+            } else {
+                false
+            }
+        }
+
+        findViewById<TextView>(R.id.voiceSendIcon).setOnClickListener {
+            sendTypedMessage()
+        }
+
+        findViewById<TextView>(R.id.voicePlusIcon).setOnClickListener {
+
+            val panel =
+                findViewById<View>(R.id.voiceActionPanel)
+
+            panel.visibility =
+                if (panel.visibility == View.VISIBLE) {
+                    View.GONE
+                } else {
+                    View.VISIBLE
+                }
+        }
 
         chatManager = ChatManager()
 
@@ -78,9 +155,6 @@ class VoiceModeActivity : AppCompatActivity() {
 
             override fun onReply(reply: String) {
                 runOnUiThread {
-
-                    replyFrame.visibility = View.VISIBLE
-                    replyText.text = reply
 
                     ChatHistoryStore.add(
                         Message(reply, false)
@@ -95,7 +169,10 @@ class VoiceModeActivity : AppCompatActivity() {
 
             if (status == TextToSpeech.SUCCESS) {
 
-                val result = tts.setLanguage(Locale.getDefault())
+                val result = tts.setLanguage(getVoiceLocale())
+
+                tts.setPitch(1.0f)
+                tts.setSpeechRate(1.0f)
 
                 ttsReady =
                     result != TextToSpeech.LANG_MISSING_DATA &&
@@ -112,14 +189,8 @@ class VoiceModeActivity : AppCompatActivity() {
 
                         override fun onDone(utteranceId: String?) {
                             runOnUiThread {
-
-                                isNitronSpeaking = false
-
-                                /*
-                                 * Do not immediately reopen the microphone.
-                                 * Give Android audio routing a moment to settle.
-                                 */
-                                scheduleListening(700)
+                                chunkIndex++
+                                attemptBriefListen()
                             }
                         }
 
@@ -127,6 +198,8 @@ class VoiceModeActivity : AppCompatActivity() {
                             runOnUiThread {
 
                                 isNitronSpeaking = false
+                                BubbleService.setSpeaking(false)
+                                pendingChunks.clear()
 
                                 scheduleListening(700)
                             }
@@ -140,6 +213,9 @@ class VoiceModeActivity : AppCompatActivity() {
         startOrbitAnimations()
         setupOrbDragRotation()
         makeOrbTextHollow()
+
+        // Disabled: camera+hand-tracking overloads this device.
+        // startHandGestureControl()
 
         /*
          * The bubble itself starts voice mode.
@@ -183,6 +259,24 @@ class VoiceModeActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.voiceCloseIcon).setOnClickListener {
             finish()
+        }
+
+        findViewById<View>(R.id.voiceOrbContainer).setOnClickListener {
+            if (isNitronSpeaking) {
+                interruptNitron()
+                if (!isListening && !recognizerStarting) {
+                    requestMicAndListen()
+                }
+            }
+        }
+
+        findViewById<View>(R.id.voiceOrbContainer).setOnClickListener {
+            if (isNitronSpeaking) {
+                interruptNitron()
+                if (!isListening && !recognizerStarting) {
+                    requestMicAndListen()
+                }
+            }
         }
 
         findViewById<TextView>(R.id.voiceSettingsIcon).setOnClickListener {
@@ -297,16 +391,42 @@ class VoiceModeActivity : AppCompatActivity() {
         orbText.invalidate()
     }
 
+    private var orbTouchScale = 1.0f
+    private lateinit var orbScaleGestureDetector: ScaleGestureDetector
+
     private fun setupOrbDragRotation() {
         val orb = findViewById<View>(R.id.voiceOrbContainer)
 
         orb.cameraDistance =
             12000 * resources.displayMetrics.density
 
+        orbScaleGestureDetector = ScaleGestureDetector(
+            this,
+            object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+
+                override fun onScale(detector: ScaleGestureDetector): Boolean {
+
+                    orbTouchScale *= detector.scaleFactor
+                    orbTouchScale = orbTouchScale.coerceIn(0.5f, 2.5f)
+
+                    orb.scaleX = orbTouchScale
+                    orb.scaleY = orbTouchScale
+
+                    return true
+                }
+            }
+        )
+
         var lastX = 0f
         var lastY = 0f
 
         orb.setOnTouchListener { view, event ->
+
+            orbScaleGestureDetector.onTouchEvent(event)
+
+            if (event.pointerCount > 1 || orbScaleGestureDetector.isInProgress) {
+                return@setOnTouchListener true
+            }
 
             when (event.actionMasked) {
 
@@ -444,6 +564,14 @@ class VoiceModeActivity : AppCompatActivity() {
 
     private fun setupSpeechRecognizer() {
 
+        if (!SpeechRecognizer.isRecognitionAvailable(this)) {
+            Toast.makeText(
+                this,
+                "NITRON DEBUG: Speech recognition is not available on this device",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
         speechRecognizer =
             SpeechRecognizer.createSpeechRecognizer(this)
 
@@ -463,11 +591,10 @@ class VoiceModeActivity : AppCompatActivity() {
 
                 override fun onBeginningOfSpeech() {
 
-                    /*
-                     * BARGE-IN:
-                     * If the user starts talking while
-                     * Nitron is speaking, immediately stop TTS.
-                     */
+                    bargeInWindowActive = false
+                    pendingChunks.clear()
+                    chunkIndex = 0
+
                     if (isNitronSpeaking) {
                         interruptNitron()
                     }
@@ -497,6 +624,12 @@ class VoiceModeActivity : AppCompatActivity() {
 
                     runOnUiThread {
                         micIcon.alpha = 1.0f
+
+                        Toast.makeText(
+                            this@VoiceModeActivity,
+                            "NITRON DEBUG: mic error code $error",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
 
                     /*
@@ -544,6 +677,8 @@ class VoiceModeActivity : AppCompatActivity() {
                             lastRecognizedText =
                                 spokenText
 
+                            silenceRestartCount = 0
+
                             ChatHistoryStore.add(
                                 Message(
                                     spokenText,
@@ -553,11 +688,15 @@ class VoiceModeActivity : AppCompatActivity() {
 
                             /*
                              * This is the actual path that
-                             * sends the user's words to Nitron.
+                             * sends the user's words to Nitron,
+                             * unless it was a device command like
+                             * "open X" or "close", handled locally.
                              */
-                            chatManager.sendMessage(
-                                spokenText
-                            )
+                            if (!tryHandleAppCommand(spokenText)) {
+                                chatManager.sendMessage(
+                                    spokenText
+                                )
+                            }
 
                             /*
                              * Don't reopen the microphone
@@ -567,7 +706,19 @@ class VoiceModeActivity : AppCompatActivity() {
                         }
                     } else {
 
-                        scheduleListening(700)
+                        silenceRestartCount++
+
+                        if (silenceRestartCount <= 2) {
+                            scheduleListening(700)
+                        } else {
+                            silenceRestartCount = 0
+                            /*
+                             * Stop auto-restarting after repeated
+                             * silence. This is what was causing the
+                             * rapid mic "beep beep" loop. The user
+                             * can re-engage with the mic button.
+                             */
+                        }
                     }
                 }
 
@@ -584,18 +735,6 @@ class VoiceModeActivity : AppCompatActivity() {
                         matches?.firstOrNull()?.trim()
 
                     if (!partial.isNullOrBlank()) {
-
-                        /*
-                         * Show what the user is saying.
-                         */
-                        runOnUiThread {
-
-                            replyFrame.visibility =
-                                View.VISIBLE
-
-                            replyText.text =
-                                partial
-                        }
 
                         /*
                          * If Nitron is talking and the
@@ -646,8 +785,7 @@ class VoiceModeActivity : AppCompatActivity() {
             userStopped ||
             !voiceModeActive ||
             isListening ||
-            recognizerStarting ||
-            isNitronSpeaking
+            recognizerStarting
         ) {
             return
         }
@@ -666,7 +804,7 @@ class VoiceModeActivity : AppCompatActivity() {
 
         intent.putExtra(
             RecognizerIntent.EXTRA_LANGUAGE,
-            Locale.getDefault()
+            getVoiceLocale()
         )
 
         intent.putExtra(
@@ -675,24 +813,21 @@ class VoiceModeActivity : AppCompatActivity() {
         )
 
         /*
-         * Give the user more time to speak naturally.
-         * This also greatly reduces rapid recognizer
-         * open/close cycles.
+         * Some Samsung / OEM devices bind the recognition
+         * intent to a broken or unrelated service by default,
+         * causing an immediate ERROR_NO_MATCH regardless of
+         * what's said. Forcing Google's app explicitly is the
+         * standard workaround.
          */
-        intent.putExtra(
-            RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS,
-            2200
-        )
+        intent.setPackage("com.google.android.googlequicksearchbox")
 
-        intent.putExtra(
-            RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS,
-            1500
-        )
-
-        intent.putExtra(
-            RecognizerIntent.EXTRA_SPEECH_INPUT_MINIMUM_LENGTH_MILLIS,
-            800
-        )
+        /*
+         * These custom silence/length timing extras were
+         * removed: on some OEM speech services (e.g. Samsung)
+         * they cause the recognizer to give up almost
+         * immediately with ERROR_NO_MATCH. Using the
+         * recognizer's own default timing instead.
+         */
 
         try {
 
@@ -727,6 +862,65 @@ class VoiceModeActivity : AppCompatActivity() {
         )
     }
 
+    private fun tryHandleAppCommand(text: String): Boolean {
+
+        val lower = text.trim().lowercase(Locale.getDefault())
+
+        val closeWords = setOf(
+            "close", "close this", "close app",
+            "go home", "go to home screen", "exit"
+        )
+
+        if (lower in closeWords) {
+            val homeIntent = Intent(Intent.ACTION_MAIN).apply {
+                addCategory(Intent.CATEGORY_HOME)
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+            startActivity(homeIntent)
+            speak("Closing.")
+            return true
+        }
+
+        if (lower.startsWith("open ")) {
+
+            val appName = lower.removePrefix("open ").trim()
+
+            if (appName.isBlank()) {
+                return false
+            }
+
+            val pm = packageManager
+            val installedApps = pm.getInstalledApplications(
+                PackageManager.GET_META_DATA
+            ).filter {
+                pm.getLaunchIntentForPackage(it.packageName) != null
+            }
+
+            val match = installedApps
+                .map { it to it.loadLabel(pm).toString() }
+                .filter {
+                    it.second.lowercase(Locale.getDefault()).contains(appName)
+                }
+                .minByOrNull { it.second.length }
+
+            if (match != null) {
+                val launchIntent = pm.getLaunchIntentForPackage(
+                    match.first.packageName
+                )
+                if (launchIntent != null) {
+                    startActivity(launchIntent)
+                    speak("Opening " + match.second + ".")
+                    return true
+                }
+            }
+
+            speak("I couldn't find an app called " + appName + ".")
+            return true
+        }
+
+        return false
+    }
+
     private fun speak(text: String) {
 
         if (text.isBlank()) {
@@ -736,10 +930,6 @@ class VoiceModeActivity : AppCompatActivity() {
 
         if (!ttsReady) {
 
-            /*
-             * TTS may still be initializing.
-             * Try again shortly instead of losing the reply.
-             */
             handler.postDelayed(
                 {
                     if (!isFinishing) {
@@ -752,50 +942,85 @@ class VoiceModeActivity : AppCompatActivity() {
             return
         }
 
+        pendingChunks = splitIntoSentences(text).toMutableList()
+        chunkIndex = 0
+
+        speakNextChunk()
+    }
+
+    private fun splitIntoSentences(text: String): List<String> {
+        val parts = text.split(Regex("(?<=[.!?])\\s+"))
+        return parts.map { it.trim() }.filter { it.isNotBlank() }
+    }
+
+    private fun speakNextChunk() {
+
+        if (chunkIndex >= pendingChunks.size) {
+            isNitronSpeaking = false
+            BubbleService.setSpeaking(false)
+            scheduleListening(700)
+            return
+        }
+
         isNitronSpeaking = true
+        BubbleService.setSpeaking(true)
 
-        /*
-         * Make sure the recognizer isn't still holding
-         * the microphone while TTS starts.
-         */
         if (isListening) {
-
             try {
                 speechRecognizer.stopListening()
             } catch (_: Exception) {
             }
-
             isListening = false
             recognizerStarting = false
         }
 
+        val chunk = pendingChunks[chunkIndex]
+
         val result = tts.speak(
-            text,
+            chunk,
             TextToSpeech.QUEUE_FLUSH,
             null,
-            "nitron_reply"
+            "nitron_chunk"
         )
 
         if (result == TextToSpeech.ERROR) {
             isNitronSpeaking = false
-            android.util.Log.e(
-                "NITRON_TTS",
-                "TTS speak() returned ERROR"
-            )
+            BubbleService.setSpeaking(false)
+            pendingChunks.clear()
             scheduleListening(1200)
-        } else {
-            android.util.Log.d(
-                "NITRON_TTS",
-                "TTS speak() accepted reply"
-            )
         }
     }
 
-    private fun interruptNitron() {
+    private fun attemptBriefListen() {
 
-        if (!isNitronSpeaking) {
+        isNitronSpeaking = false
+        BubbleService.setSpeaking(false)
+
+        if (isFinishing || userStopped || !voiceModeActive) {
             return
         }
+
+        bargeInWindowActive = true
+
+        startListening()
+
+        handler.postDelayed(
+            {
+                if (bargeInWindowActive) {
+                    bargeInWindowActive = false
+                    try {
+                        speechRecognizer.stopListening()
+                    } catch (_: Exception) {
+                    }
+                    isListening = false
+                    recognizerStarting = false
+                    speakNextChunk()
+                }
+            },
+            900
+        )
+    }
+    private fun interruptNitron() {
 
         try {
             tts.stop()
@@ -803,12 +1028,9 @@ class VoiceModeActivity : AppCompatActivity() {
         }
 
         isNitronSpeaking = false
-
-        /*
-         * The recognizer should already be receiving the
-         * user's speech. Do NOT start another recognizer
-         * session here.
-         */
+        BubbleService.setSpeaking(false)
+        pendingChunks.clear()
+        chunkIndex = 0
     }
 
     override fun onRequestPermissionsResult(
@@ -837,7 +1059,31 @@ class VoiceModeActivity : AppCompatActivity() {
         }
     }
 
+    private fun startHandGestureControl() {
+
+        val orb = findViewById<View>(R.id.voiceOrbContainer)
+
+        handGestureController = HandGestureController(this, this) { spread ->
+
+            runOnUiThread {
+
+                try {
+                    val scale = (spread * 6f).coerceIn(0.6f, 2.2f)
+
+                    orb.scaleX = scale
+                    orb.scaleY = scale
+                } catch (e: Throwable) {
+                    Toast.makeText(this, "NITRON DEBUG: orb scale error: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
+        handGestureController?.start()
+    }
+
     override fun onDestroy() {
+
+        handGestureController?.stop()
 
         voiceModeActive = false
         userStopped = true

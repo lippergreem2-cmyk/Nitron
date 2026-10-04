@@ -4,7 +4,9 @@
 # ==========================================================
 
 
-from strategy import analyze_trade
+from strategy import analyze_trade as _analyze_trade
+from paper_hook import make_logged
+analyze_trade = make_logged(_analyze_trade)
 from confidence import confidence_level
 from news_filter import can_trade
 from mt5_data import get_candles

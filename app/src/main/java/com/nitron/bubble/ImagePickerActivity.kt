@@ -12,6 +12,7 @@ class ImagePickerActivity : Activity() {
 
     companion object {
         private const val PICK_IMAGE = 5001
+        const val EXTRA_IMAGE_URI = "nitron_image_uri"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,73 +33,102 @@ class ImagePickerActivity : Activity() {
     ) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode != PICK_IMAGE) {
+        if (requestCode != PICK_IMAGE ||
+            resultCode != RESULT_OK ||
+            data?.data == null
+        ) {
             finish()
             return
         }
 
-        if (resultCode != RESULT_OK || data?.data == null) {
-            finish()
-            return
-        }
+        val uri = data.data!!
 
-        val uri: Uri = data.data!!
-
-        try {
-            val resolver = contentResolver
-
-            val bytes = resolver.openInputStream(uri).use { input ->
-                if (input == null) {
-                    throw Exception("Could not open image.")
-                }
-
-                val output = ByteArrayOutputStream()
-                val buffer = ByteArray(8192)
-
-                while (true) {
-                    val count = input.read(buffer)
-
-                    if (count == -1) break
-
-                    output.write(buffer, 0, count)
-                }
-
-                output.toByteArray()
+        // Return the selected picture to MainActivity immediately.
+        setResult(
+            RESULT_OK,
+            Intent().apply {
+                putExtra(EXTRA_IMAGE_URI, uri.toString())
             }
+        )
 
-            val base64 = Base64.encodeToString(bytes, Base64.NO_WRAP)
+        // Keep access to the selected image.
+        try {
+            contentResolver.takePersistableUriPermission(
+                uri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+        } catch (_: Exception) {
+        }
 
-            val filename = uri.lastPathSegment
-                ?.substringAfterLast("/")
-                ?.substringAfterLast(":")
-                ?.takeIf { it.isNotBlank() }
-                ?: "picture.jpg"
+        // Also send the picture to Nitron's backend.
+        Thread {
 
-            TermuxBridge.sendImage(
-                base64,
-                filename
-            ) { reply ->
+            try {
+
+                val bytes =
+                    contentResolver.openInputStream(uri).use { input ->
+
+                        if (input == null) {
+                            throw Exception("Could not open image.")
+                        }
+
+                        val output = ByteArrayOutputStream()
+                        val buffer = ByteArray(8192)
+
+                        while (true) {
+
+                            val count = input.read(buffer)
+
+                            if (count == -1) break
+
+                            output.write(buffer, 0, count)
+                        }
+
+                        output.toByteArray()
+                    }
+
+                val base64 =
+                    Base64.encodeToString(
+                        bytes,
+                        Base64.NO_WRAP
+                    )
+
+                val filename =
+                    uri.lastPathSegment
+                        ?.substringAfterLast("/")
+                        ?.substringAfterLast(":")
+                        ?.takeIf { it.isNotBlank() }
+                        ?: "picture.jpg"
+
+                TermuxBridge.sendImage(
+                    base64,
+                    filename
+                ) { reply ->
+
+                    runOnUiThread {
+
+                        Toast.makeText(
+                            this,
+                            reply,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+
+            } catch (e: Exception) {
 
                 runOnUiThread {
+
                     Toast.makeText(
                         this,
-                        reply,
+                        "Could not send picture: ${e.message}",
                         Toast.LENGTH_LONG
                     ).show()
-
-                    finish()
                 }
             }
 
-        } catch (e: Exception) {
+        }.start()
 
-            Toast.makeText(
-                this,
-                "Could not read picture: ${e.message}",
-                Toast.LENGTH_LONG
-            ).show()
-
-            finish()
-        }
+        finish()
     }
 }

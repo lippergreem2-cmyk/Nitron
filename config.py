@@ -6,7 +6,10 @@ import os
 
 # API keys are loaded from environment variables.
 # NEVER put real API keys directly in this file.
-TWELVEDATA_API_KEY = os.getenv("TWELVEDATA_API_KEY")
+TWELVEDATA_API_KEY = (
+    os.getenv("TWELVE_DATA_API_KEY")
+    or os.getenv("TWELVEDATA_API_KEY")
+)
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 ASSETS = {

@@ -12,6 +12,11 @@ except ImportError:
     AIProviderManager = None
 
 try:
+    from brain.teaching.teacher import teacher
+except Exception:
+    teacher = None
+
+try:
     from developer.ai_provider import AIProviderManager
 except ImportError:
     AIProviderManager = None
@@ -300,10 +305,16 @@ class ReasoningEngine:
             # TITLE MATCHING
             # --------------------------------------------------
 
+            # Match complete title words, not arbitrary substrings.
+            # This prevents weak matches such as "know" -> "knowledge".
+            title_words = set(
+                re.findall(r"[a-zA-Z0-9_]+", title)
+            )
+
             title_matches = sum(
                 1
                 for word in words
-                if word in title
+                if word in title_words
             )
 
             score += title_matches * 60
@@ -370,7 +381,10 @@ class ReasoningEngine:
             if title and summary_text.strip():
                 score += 10
 
-            if score > 0:
+            # Reject weak learned-knowledge matches.
+            # Learned knowledge should only take control when the
+            # question has a meaningful relationship to the topic.
+            if score >= 300:
                 results[topic] = {
                     "score": score,
                     "data": data
@@ -1537,11 +1551,14 @@ complete file contents, written exactly as-is, no escaping needed
 
         manager = AIProviderManager()
 
-        response = manager.generate(prompt)
+        # AI providers are optional accelerators. If Ollama or another
+        # provider is unavailable, return control to generate_project(),
+        # which already has Nitron's built-in local fallback.
+        response = manager.safe_generate(prompt)
 
         if not isinstance(response, str) or not response.strip():
             raise RuntimeError(
-                "AI provider returned empty code."
+                "No optional AI provider returned usable code."
             )
 
         text = response.strip()
@@ -1630,6 +1647,71 @@ complete file contents, written exactly as-is, no escaping needed
         """Generate a project using the real AI source-generation engine."""
 
         question = str(question).strip()
+
+        # ==================================================
+        # NATURAL CONVERSATION — BEFORE KNOWLEDGE LEARNING
+        # ==================================================
+        normalized_question = re.sub(r"\s+", " ", question.lower()).strip()
+        normalized_question = re.sub(r"[!?.,]+$", "", normalized_question).strip()
+
+        greeting_patterns = [
+            r"^(?:yoo\s*[,.]?\s*)?(?:hello|hi|hey)(?:\s+nitron)?$",
+            r"^(?:yoo\s*[,.]?\s*)?good\s+morning(?:\s+nitron)?$",
+            r"^(?:yoo\s*[,.]?\s*)?good\s+afternoon(?:\s+nitron)?$",
+            r"^(?:yoo\s*[,.]?\s*)?good\s+evening(?:\s+nitron)?$",
+            r"^(?:yoo\s*[,.]?\s*)?good\s+night(?:\s+nitron)?$",
+            r"^yoo(?:\s+nitron)?$",
+        ]
+
+        if any(
+            re.match(pattern, normalized_question, re.IGNORECASE)
+            for pattern in greeting_patterns
+        ):
+            if "good evening" in normalized_question:
+                return {"message": "Yoo! Good evening 😎 How can I help you?"}
+            if "good morning" in normalized_question:
+                return {"message": "Yoo! Good morning 😎 How can I help you?"}
+            if "good afternoon" in normalized_question:
+                return {"message": "Yoo! Good afternoon 😎 How can I help you?"}
+            if "good night" in normalized_question:
+                return {"message": "Yoo! Good night 😎 Take care!"}
+            return {"message": "Yoo! I'm Nitron. How can I help you?"}
+
+
+        # ==================================================
+        # NATURAL CONVERSATION — ALWAYS BEFORE WEB LEARNING
+        # ==================================================
+        normalized_question = re.sub(r"\s+", " ", question.lower()).strip()
+        normalized_question = re.sub(r"[!?.,]+$", "", normalized_question).strip()
+
+        # Greetings can contain extra words such as:
+        # "Yoo Nitron, good evening"
+        # "Good evening Nitron"
+        # "Yoo, good evening"
+        greeting_patterns = [
+            r"^(?:yoo\s*[,.]?\s*)?(?:hello|hi|hey)(?:\s+nitron)?$",
+            r"^(?:yoo\s*[,.]?\s*)?(?:good\s+morning)(?:\s+nitron)?$",
+            r"^(?:yoo\s*[,.]?\s*)?(?:good\s+afternoon)(?:\s+nitron)?$",
+            r"^(?:yoo\s*[,.]?\s*)?(?:good\s+evening)(?:\s+nitron)?$",
+            r"^(?:yoo\s*[,.]?\s*)?(?:good\s+night)(?:\s+nitron)?$",
+            r"^(?:yoo\s*[,.]?\s*)?(?:thanks|thank\s+you)(?:\s+nitron)?$",
+            r"^yoo(?:\s+nitron)?$",
+        ]
+
+        if any(re.match(pattern, normalized_question, re.IGNORECASE)
+               for pattern in greeting_patterns):
+            if "good evening" in normalized_question:
+                return {"message": "Yoo! Good evening 😎 How can I help you?"}
+            if "good morning" in normalized_question:
+                return {"message": "Yoo! Good morning 😎 How can I help you?"}
+            if "good afternoon" in normalized_question:
+                return {"message": "Yoo! Good afternoon 😎 How can I help you?"}
+            if "good night" in normalized_question:
+                return {"message": "Yoo! Good night 😎 Take care!"}
+            if "thank" in normalized_question:
+                return {"message": "You're welcome 😎"}
+            return {"message": "Yoo! I'm Nitron. How can I help you?"}
+
         plan = self._build_project_plan(question)
 
         # ------------------------------------------------------------
@@ -1915,10 +1997,324 @@ calculator()
             return skill
 
 
+    def _solve_math_question(self, question):
+        """
+        Solve common arithmetic/algebra questions locally.
+        Returns None when the question is not recognized as math.
+        """
+
+        import re
+
+        q = str(question).strip().lower()
+
+        # Simple multiplication
+        m = re.search(
+            r"(?:what is )?(-?\\d+(?:\\.\\d+)?)\\s*(?:x|×|\\*|multiplied by)\\s*(-?\\d+(?:\\.\\d+)?)",
+            q
+        )
+        if m:
+            a = float(m.group(1))
+            b = float(m.group(2))
+            result = a * b
+            return f"{a:g} × {b:g} = {result:g}"
+
+        # Simple division
+        m = re.search(
+            r"(?:what is )?(-?\\d+(?:\\.\\d+)?)\\s*(?:÷|/|divided by)\\s*(-?\\d+(?:\\.\\d+)?)",
+            q
+        )
+        if m:
+            a = float(m.group(1))
+            b = float(m.group(2))
+            if b == 0:
+                return "Division by zero is undefined."
+            result = a / b
+            return f"{a:g} ÷ {b:g} = {result:g}"
+
+        # Linear inequality: ax + b > c
+        m = re.search(
+            r"(-?\\d+(?:\\.\\d+)?)\\s*x\\s*([+-])\\s*(\\d+(?:\\.\\d+)?)\\s*(>=|<=|>|<)\\s*(-?\\d+(?:\\.\\d+)?)",
+            q
+        )
+        if m and ("solve" in q or "inequality" in q):
+            a = float(m.group(1))
+            sign = m.group(2)
+            b = float(m.group(3))
+            op = m.group(4)
+            c = float(m.group(5))
+
+            if sign == "-":
+                b = -b
+
+            if a == 0:
+                return "This inequality has no x term."
+
+            value = (c - b) / a
+
+            if a < 0:
+                flip = {">": "<", "<": ">", ">=": "<=", "<=": ">="}
+                op = flip[op]
+
+            return f"x {op} {value:g}"
+
+        # 2x2 matrix multiplication
+        matrices = re.findall(r"\[\s*\[[-\d.,\s]+\]\s*,\s*\[[-\d.,\s]+\]\s*\]", q)
+
+        if len(matrices) >= 2 and "matrix" in q:
+            nums = []
+            for text in matrices[:2]:
+                rows = re.findall(r"\\[([^\\]]+)\\]", text)
+                parsed = []
+                for row in rows:
+                    values = [float(x.strip()) for x in row.split(",")]
+                    parsed.append(values)
+                nums.append(parsed)
+
+            a, b = nums
+
+            if (
+                len(a) == 2 and len(b) == 2 and
+                all(len(row) == 2 for row in a + b)
+            ):
+                result = [
+                    [
+                        a[0][0] * b[0][0] + a[0][1] * b[1][0],
+                        a[0][0] * b[0][1] + a[0][1] * b[1][1]
+                    ],
+                    [
+                        a[1][0] * b[0][0] + a[1][1] * b[1][0],
+                        a[1][0] * b[0][1] + a[1][1] * b[1][1]
+                    ]
+                ]
+
+                def fmt(x):
+                    return f"{x:g}"
+
+                return (
+                    f"[[{fmt(result[0][0])}, {fmt(result[0][1])}], "
+                    f"[{fmt(result[1][0])}, {fmt(result[1][1])}]]"
+                )
+
+        return None
+
     def answer(self, question):
+        question = str(question).strip()
+
+        # ==================================================
+        # UNIVERSAL TEACHER
+        # ==================================================
+        if teacher is not None and teacher.is_teaching_request(question):
+            try:
+                return teacher.teach(question)
+            except Exception as error:
+                print(f"[TEACHER] Error: {error}")
+
+
         """\n        Answer a question using this priority:\n\n        1. Relevant learned knowledge\n        2. Built-in knowledge\n        3. Automatic web learning\n        4. Internal search fallback\n        """
 
         question = str(question).strip()
+
+        # ==================================================
+        # HARD NATURAL-CONVERSATION GATE
+        # MUST RUN BEFORE ANY LEARNING / WEB / KNOWLEDGE ROUTING
+        # ==================================================
+        _chat_text = re.sub(r"\s+", " ", question.lower()).strip()
+        _chat_text = re.sub(r"[!?.,]+$", "", _chat_text).strip()
+
+        _chat_greetings = {
+            "hello",
+            "hi",
+            "hey",
+            "hello nitron",
+            "hi nitron",
+            "hey nitron",
+            "good morning",
+            "good afternoon",
+            "good evening",
+            "good night",
+            "good morning nitron",
+            "good afternoon nitron",
+            "good evening nitron",
+            "good night nitron",
+            "yoo",
+            "yoo nitron",
+            "yoo good morning",
+            "yoo good afternoon",
+            "yoo good evening",
+            "yoo good night",
+            "yoo good morning nitron",
+            "yoo good afternoon nitron",
+            "yoo good evening nitron",
+            "yoo good night nitron",
+            "yoo nitron good morning",
+            "yoo nitron good afternoon",
+            "yoo nitron good evening",
+            "yoo nitron good night",
+        }
+
+        # Remove punctuation between greeting words too.
+        _chat_compact = re.sub(r"\s*,\s*", " ", _chat_text)
+        _chat_compact = re.sub(r"\s+", " ", _chat_compact).strip()
+
+        # Also handle commas after the assistant's name:
+        # "Yoo Nitron, good evening" -> "yoo nitron good evening"
+        _chat_compact = _chat_compact.replace("nitron,", "nitron ")
+        _chat_compact = re.sub(r"\s+", " ", _chat_compact).strip()
+
+        if _chat_text in _chat_greetings or _chat_compact in _chat_greetings:
+            if "good evening" in _chat_text or "good evening" in _chat_compact:
+                return {"message": "Good evening! How can I help?"}
+
+            if "good morning" in _chat_text or "good morning" in _chat_compact:
+                return {"message": "Good morning! How can I help?"}
+
+            if "good afternoon" in _chat_text or "good afternoon" in _chat_compact:
+                return {"message": "Good afternoon! How can I help?"}
+
+            if "good night" in _chat_text or "good night" in _chat_compact:
+                return {"message": "Good night! Take care!"}
+
+            return {"message": "Yoo! I'm Nitron. How can I help you?"}
+
+
+        # ==================================================
+        # 0. NATURAL CONVERSATION + SIMPLE MATH
+        # ==================================================
+        # IMPORTANT: Handle greetings BEFORE learned knowledge,
+        # Wikipedia, or any automatic learning.
+        normalized = re.sub(r"\\s+", " ", question.lower()).strip()
+        normalized = re.sub(r"[!?.,]+$", "", normalized).strip()
+
+        greeting_responses = {
+            "hello": "Hello! I'm Nitron. How can I help you?",
+            "hi": "Hi! I'm Nitron. What can I help you with?",
+            "hey": "Hey! I'm Nitron. What would you like me to do?",
+            "hello nitron": "Hello! I'm here. What can I help you with?",
+            "hi nitron": "Hi! I'm ready.",
+            "hey nitron": "Hey! I'm ready.",
+            "yoo": "Yoo! I'm Nitron. How can I help you?",
+            "yoo nitron": "Yoo! I'm Nitron. How can I help you?",
+            "good morning": "Good morning! How can I help?",
+            "good afternoon": "Good afternoon! How can I help?",
+            "good evening": "Good evening! How can I help?",
+            "good night": "Good night! Take care!",
+        }
+
+        # Exact/simple greetings.
+        if normalized in greeting_responses:
+            return {"message": greeting_responses[normalized]}
+
+        # Compound greetings such as:
+        # "Yoo Nitron, good evening"
+        # "Good evening Nitron"
+        # "Yoo, good evening"
+        compound_greeting_patterns = [
+            (r"^(?:yoo\\s*(?:nitron)?\\s*[,.!]?\\s*)?good\\s+morning(?:\\s+nitron)?$",
+             "Good morning! How can I help?"),
+            (r"^(?:yoo\\s*(?:nitron)?\\s*[,.!]?\\s*)?good\\s+afternoon(?:\\s+nitron)?$",
+             "Good afternoon! How can I help?"),
+            (r"^(?:yoo\\s*(?:nitron)?\\s*[,.!]?\\s*)?good\\s+evening(?:\\s+nitron)?$",
+             "Good evening! How can I help?"),
+            (r"^(?:yoo\\s*(?:nitron)?\\s*[,.!]?\\s*)?good\\s+night(?:\\s+nitron)?$",
+             "Good night! Take care!"),
+        ]
+
+        for pattern, response in compound_greeting_patterns:
+            if re.match(pattern, normalized, re.IGNORECASE):
+                return {"message": response}
+
+        # These must run BEFORE learned knowledge and automatic
+        # Wikipedia learning. Ordinary conversation should never
+        # be interpreted as a request to learn a Wikipedia topic.
+        # ==================================================
+
+        normalized = question.lower().strip(" ?.!")
+
+        # Basic greetings / conversational messages.
+        conversation_responses = {
+            "hello": "Hello! I'm Nitron. How can I help you?",
+            "hi": "Hi! I'm Nitron. What can I help you with?",
+            "hey": "Hey! I'm Nitron. What would you like me to do?",
+            "hello nitron": "Hello! I'm here. What can I help you with?",
+            "hi nitron": "Hi! I'm ready.",
+            "hey nitron": "Hey! I'm ready.",
+            "good morning": "Good morning! How can I help?",
+            "good afternoon": "Good afternoon! How can I help?",
+            "good evening": "Good evening! How can I help?",
+            "thanks": "You're welcome!",
+            "thank you": "You're welcome!",
+            "bye": "Goodbye! I'll be here when you need me.",
+        }
+
+        if normalized in conversation_responses:
+            return {
+                "message": conversation_responses[normalized]
+            }
+
+        # Identity / capability questions are conversation, not
+        # Wikipedia-learning requests.
+        identity_questions = {
+            "who are you",
+            "what are you",
+            "what can you do",
+            "what do you do",
+            "what is nitron",
+            "who is nitron",
+        }
+
+        if normalized in identity_questions:
+            return {
+                "message": (
+                    "I'm Nitron, your AI assistant. I can "
+                    "understand natural language, answer questions, "
+                    "learn information, work with code and projects, "
+                    "and use my built-in tools and capabilities."
+                )
+            }
+
+        # --------------------------------------------------
+        # SIMPLE LOCAL MATH
+        # --------------------------------------------------
+        # Handle straightforward arithmetic locally so questions
+        # such as "what is 2 + 2?" never reach Wikipedia.
+        # This is intentionally limited to arithmetic expressions.
+        # --------------------------------------------------
+
+        math_match = re.match(
+            r"^(?:what\s+is\s+|calculate\s+|solve\s+)?"
+            r"([0-9\s+\-*/().%]+)\??$",
+            question,
+            re.IGNORECASE
+        )
+
+        if math_match:
+            expression = math_match.group(1).strip()
+
+            # Require at least one arithmetic operator so a plain
+            # number is not unnecessarily treated as a calculation.
+            if re.search(r"[+\-*/%]", expression):
+                try:
+                    # Only arithmetic characters are permitted by
+                    # the regex above; no names/functions can enter.
+                    result = eval(
+                        expression,
+                        {"__builtins__": {}},
+                        {}
+                    )
+
+                    if isinstance(result, (int, float)):
+                        return {
+                            "message": f"The answer is {result}.",
+                            "calculation": expression,
+                            "result": result
+                        }
+
+                except Exception:
+                    pass
+
+        # ==================================================
+        # 0A. INTELLIGENT CAPABILITY ROUTING
+        # ==================================================
 
         # ==================================================
         # 0. INTELLIGENT CAPABILITY ROUTING
@@ -2634,8 +3030,72 @@ calculator()
                 pass
 
         # ==================================================
+        # LOCAL MATH ROUTING
+        # ==================================================
+        # Math answers must not depend on Ollama or online AI.
+
+        try:
+            math_result = self._solve_math_question(question)
+
+            if math_result is not None:
+                return {
+                    "message": str(math_result),
+                    "provider": "local_math"
+                }
+
+        except Exception as error:
+            print(f"[MATH] Local math error: {error}")
+
+        # ==================================================
+        # 2.5. ONLINE AI
+        # ==================================================
+        # Online AI is an optional intelligence accelerator.
+        # Nitron's local brain still works if every provider
+        # is unavailable.
+
+        try:
+
+            if AIProviderManager is not None:
+
+                manager = AIProviderManager()
+
+                online_prompt = f"""
+You are Nitron, a general-purpose AI assistant.
+
+Answer the user's message naturally, clearly, and directly.
+Do not pretend to have performed actions you cannot perform.
+Do not mention internal providers, Ollama, APIs, routing,
+or implementation details unless the user asks.
+
+User:
+{question}
+
+Nitron:
+"""
+
+                online_response = manager.safe_generate(
+                    online_prompt
+                )
+
+                if (
+                    isinstance(online_response, str)
+                    and online_response.strip()
+                ):
+                    return {
+                        "message": online_response.strip(),
+                        "provider": "online_ai"
+                    }
+
+        except Exception as error:
+
+            print(
+                f"[AI] Online AI unavailable: {error}"
+            )
+
+        # ==================================================
         # 3. AUTOMATIC WEB LEARNING
         # ==================================================
+
 
         try:
 

@@ -1,6 +1,9 @@
 package com.nitron.bubble
 
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
+import android.widget.LinearLayout
+import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -26,6 +29,7 @@ class SettingsActivity : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private var pickerTts: TextToSpeech? = null
 
     private val locationPermission =
         registerForActivityResult(
@@ -194,6 +198,10 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
+        findViewById<TextView>(R.id.voiceLanguageSetting).setOnClickListener {
+            showVoiceLanguagePicker()
+        }
+
         findViewById<TextView>(R.id.signOutSetting).setOnClickListener {
 
             firebaseAuth.signOut()
@@ -204,6 +212,65 @@ class SettingsActivity : AppCompatActivity() {
                 .setMessage("You have been signed out of Nitron.")
                 .setPositiveButton("OK") { _, _ -> finish() }
                 .show()
+        }
+    }
+
+    private fun showVoiceLanguagePicker() {
+
+        pickerTts = TextToSpeech(this) { status ->
+
+            if (status == TextToSpeech.SUCCESS) {
+
+                val locales = pickerTts?.availableLanguages
+                    ?.distinctBy { it.toLanguageTag() }
+                    ?.sortedBy { it.displayName }
+                    ?: emptyList()
+
+                runOnUiThread {
+
+                    if (locales.isEmpty()) {
+                        AlertDialog.Builder(this)
+                            .setTitle("Voice language")
+                            .setMessage("No languages are currently available on this device's speech engine.")
+                            .setPositiveButton("OK", null)
+                            .show()
+                        return@runOnUiThread
+                    }
+
+                    val savedTag = getSharedPreferences(
+                        "nitron_settings",
+                        MODE_PRIVATE
+                    ).getString("voice_language", null)
+
+                    val names = locales.map { it.displayName }.toTypedArray()
+                    val checkedIndex = locales.indexOfFirst { it.toLanguageTag() == savedTag }
+
+                    AlertDialog.Builder(this)
+                        .setTitle("Voice language")
+                        .setSingleChoiceItems(names, checkedIndex) { dialog, which ->
+
+                            val chosen = locales[which]
+
+                            getSharedPreferences(
+                                "nitron_settings",
+                                MODE_PRIVATE
+                            )
+                                .edit()
+                                .putString("voice_language", chosen.toLanguageTag())
+                                .apply()
+
+                            dialog.dismiss()
+                            pickerTts?.shutdown()
+                            pickerTts = null
+                        }
+                        .setNegativeButton("Cancel") { dialog, _ ->
+                            dialog.dismiss()
+                            pickerTts?.shutdown()
+                            pickerTts = null
+                        }
+                        .show()
+                }
+            }
         }
     }
 

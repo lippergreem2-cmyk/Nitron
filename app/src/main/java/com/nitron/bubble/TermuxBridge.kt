@@ -1,6 +1,10 @@
 package com.nitron.bubble
 
+import android.content.Context
+
 import org.json.JSONObject
+import com.google.firebase.auth.FirebaseAuth
+import com.google.android.gms.tasks.Tasks
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
@@ -9,6 +13,13 @@ import java.net.URL
 import kotlin.concurrent.thread
 
 object TermuxBridge {
+
+    private lateinit var appContext: Context
+
+    fun initialize(context: Context) {
+        appContext = context.applicationContext
+    }
+
 
     /*
      * ============================================================
@@ -37,11 +48,50 @@ object TermuxBridge {
     }
 
 
-    private const val SERVER_URL =
-        "http://127.0.0.1:8000/command"
+    /*
+     * ============================================================
+     * NITRON SERVER
+     * ============================================================
+     *
+     * Change this one address when Nitron is deployed online.
+     *
+     * Local development:
+     * http://127.0.0.1:8000
+     *
+     * Production example:
+     * https://api.your-nitron-domain.com
+     */
+    private const val DEFAULT_SERVER_BASE_URL =
+        "https://bowl-kate-engaged-armor.trycloudflare.com"
 
-    private const val IMAGE_SERVER_URL =
-        "http://127.0.0.1:8000/learn-image"
+    private fun serverBaseUrl(): String {
+        return appContext
+            .getSharedPreferences(
+                "nitron_server",
+                Context.MODE_PRIVATE
+            )
+            .getString(
+                "server_url",
+                DEFAULT_SERVER_BASE_URL
+            )
+            ?.trim()
+            ?.trimEnd('/')
+            ?.ifEmpty { DEFAULT_SERVER_BASE_URL }
+            ?: DEFAULT_SERVER_BASE_URL
+    }
+
+    private fun serverUrl(path: String): String {
+        return serverBaseUrl() + "/" + path.trimStart('/')
+    }
+
+    private fun commandUrl() =
+        serverUrl("command")
+
+    private fun learnImageUrl() =
+        serverUrl("learn-image")
+
+    private fun analyzeImageUrl() =
+        serverUrl("analyze-image")
 
     /*
      * ============================================================
@@ -440,7 +490,7 @@ object TermuxBridge {
             try {
 
                 val url =
-                    URL(SERVER_URL)
+                    URL(commandUrl())
 
                 val connection =
                     url.openConnection()
@@ -463,12 +513,53 @@ object TermuxBridge {
                     "application/json; charset=UTF-8"
                 )
 
+                // Use the signed-in Firebase account when available.
+                // The backend can verify this token instead of trusting
+                // the locally stored user_id.
+                try {
+                    val firebaseUser =
+                        FirebaseAuth.getInstance().currentUser
+
+                    if (firebaseUser != null) {
+                        val tokenResult =
+                            Tasks.await(
+                                firebaseUser.getIdToken(false)
+                            )
+
+                        val token = tokenResult.token
+
+                        if (!token.isNullOrBlank()) {
+                            connection.setRequestProperty(
+                                "Authorization",
+                                "Bearer $token"
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    println(
+                        "[AUTH] Firebase token unavailable: ${e.message}"
+                    )
+                }
+
+                val prefs =
+                    appContext.getSharedPreferences(
+                        "nitron_user",
+                        Context.MODE_PRIVATE
+                    )
+
+                val savedUserId =
+                    prefs.getString("user_id", null)
+
                 val json =
                     JSONObject()
                         .put(
                             "message",
                             message
                         )
+
+                if (!savedUserId.isNullOrBlank()) {
+                    json.put("user_id", savedUserId)
+                }
 
                 OutputStreamWriter(
                     connection.outputStream,
@@ -510,12 +601,42 @@ object TermuxBridge {
                     val responseJson =
                         JSONObject(reply)
 
+                    if (responseJson.has("user_id")) {
+
+                        val userId =
+                            responseJson.optString(
+                                "user_id",
+                                ""
+                            )
+
+                        if (userId.isNotBlank()) {
+
+                            prefs.edit()
+                                .putString(
+                                    "user_id",
+                                    userId
+                                )
+                                .apply()
+
+                            println(
+                                "[USER] Saved user ID: $userId"
+                            )
+                        }
+                    }
+
                     if (responseJson.has("response")) {
-                        cleanReply = responseJson.getString("response")
+                        cleanReply =
+                            responseJson.getString("response")
                     }
 
                     if (responseJson.has("image_url")) {
-                        val u = responseJson.optString("image_url", "")
+
+                        val u =
+                            responseJson.optString(
+                                "image_url",
+                                ""
+                            )
+
                         if (u.isNotBlank()) {
                             imageUrl = u
                         }
@@ -528,8 +649,12 @@ object TermuxBridge {
 
                 val finalReply =
                     if (imageUrl != null) {
-                        "[NITRON_IMG]$imageUrl[/NITRON_IMG]" + formatReply(cleanReply)
+
+                        "[NITRON_IMG]$imageUrl[/NITRON_IMG]" +
+                                formatReply(cleanReply)
+
                     } else {
+
                         formatReply(cleanReply)
                     }
 
@@ -554,6 +679,7 @@ object TermuxBridge {
     fun sendImage(
         base64Image: String,
         filename: String,
+        question: String = "",
         callback: (String) -> Unit
     ) {
 
@@ -562,7 +688,7 @@ object TermuxBridge {
             try {
 
                 val url =
-                    URL(IMAGE_SERVER_URL)
+                    URL(analyzeImageUrl())
 
                 val connection =
                     url.openConnection()
@@ -596,8 +722,8 @@ object TermuxBridge {
                             filename
                         )
                         .put(
-                            "note",
-                            "Image selected from Nitron Android app"
+                            "question",
+                            question
                         )
 
                 OutputStreamWriter(

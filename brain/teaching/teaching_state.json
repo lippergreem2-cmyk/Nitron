@@ -1,0 +1,179 @@
+{
+  "active": true,
+  "goal": "Teach me mathematics",
+  "project": "Teach Me Mathematics",
+  "workspace": "GeneratedProjects/Teach_Me_Mathematics",
+  "technology": [],
+  "steps": [],
+  "current_step": 0,
+  "status": "planning",
+  "history": [],
+  "created": "2026-09-17T03:27:47.133497",
+  "course_queue": [
+    {
+      "course": "astronomy",
+      "lessons": 15,
+      "completed": false
+    },
+    {
+      "course": "Python Programming",
+      "lessons": 15,
+      "completed": false
+    },
+    {
+      "course": "C++ Programming",
+      "lessons": 15,
+      "completed": false
+    },
+    {
+      "course": "biology",
+      "lessons": 15,
+      "completed": false
+    },
+    {
+      "course": "robotics",
+      "lessons": 15,
+      "completed": false
+    },
+    {
+      "course": "Japanese",
+      "lessons": 15,
+      "completed": false
+    },
+    {
+      "course": "economics",
+      "lessons": 15,
+      "completed": false
+    },
+    {
+      "course": "physics",
+      "lessons": 15,
+      "completed": false
+    }
+  ],
+  "course_queue_index": 0,
+  "course_queue_active": true,
+  "learning_requested_lessons": 15,
+  "learning_topic": "Astronomy",
+  "learning_step": 1,
+  "learning_history": [
+    {
+      "step": 1,
+      "user": "Teach me astronomy",
+      "assistant": "**Lesson 1 – Our Night Sky: Observing the Stars**  \n\n---\n\n### 1️⃣ What “up” means in the sky  \nWhen you look upward, the sky can be described with the same four cardinal directions we use on the ground:\n\n| Direction | Where it appears in the sky |\n|-----------|----------------------------|\n| **North** | Towards the North Celestial Pole (the star Polaris is very close to it). |\n| **South** | Directly opposite North; in the Northern Hemisphere it’s low on the horizon in winter, higher in summer. |\n| **East**  | Where the Sun rises (roughly the left side of the sky if you face South). |\n| **West**  | Where the Sun sets (right side when facing South). |\n\n**Why this helps:**  If you know a star’s direction, you can point a telescope, plan a walk, or simply tell a friend where to look.\n\n---\n\n### 2️⃣ Finding **North** with Polaris  \n1. Locate the **Big Dipper** (the “seven‑star dipper” of Ursa Major).  \n2. Follow the line made by the two outer stars of the Dipper’s “bowl” (Dubhe → Merak) outward about five times the distance between those stars.  \n3. The bright star you reach is **Polaris**, the North Star.  \n4. Draw an imaginary line from Polaris straight down to the horizon—that point is **North**.\n\n*(If you’re in the Southern Hemisphere, you’ll use the Southern Cross to point roughly toward South instead.)*\n\n---\n\n### 3️⃣ Spotting a familiar pattern – **Orion’s Belt**  \n\n**What you’ll see:** Three bright stars in a straight line, spaced almost equally. On a clear winter night (December–February) in the Northern Hemisphere they appear **south‑south‑west** after sunset.\n\n**How to locate it:**\n1. Look for a bright, “hour‑glass” shape: a short line of stars (Orion’s shoulders) above, a short line (Orion’s feet) below, with a vertical line of three stars in the middle – that’s the Belt.  \n2. Once you have the Belt, you can use it as a “pointer*:  \n   * Extending the line **upward** (to the left if you’re facing the Belt) points to **Betelgeuse** (red star, Orion’s shoulder) and eventually to **Aldebaran** in Taurus.  \n   * Extending the line **downward** (to the right) points to **Sirius**, the brightest star in the sky, in Canis Major.\n\n**Reasoning behind the trick:**  The Belt’s stars lie almost exactly on the celestial equator, so the line they form points roughly east‑west. By extending it you can jump quickly from one well‑known object to another.\n\n---\n\n### 4️⃣ Other “easy‑to‑find” constellations  \n\n| Constellation | How to spot it | Typical direction (winter night) |\n|---------------|----------------|----------------------------------|\n| **Cassiopeia** | A “W” or “M” shape of five stars high in the sky. | North (high) |\n| **Cygnus** (the Swan) | A bright cross‑shaped pattern, also called the Northern Cross. | North‑northeast |\n| **Gemini** (the Twins) | Two bright stars (Castor & Pollux) close together, with a loose rectangle of fainter stars. | East‑south‑east |\n\nThese are all visible without any equipment and give you reference points for the cardinal directions.\n\n---\n\n### 5️⃣ Quick tip: Using your hand as a measuring tool  \n\n- **Fist** at arm’s length ≈ 10° of sky (about the width of the Moon).  \n- **Four fingers** together ≈ 5°.  \n- **One finger** ≈ 1°.  \n\nUse this to estimate how far apart stars or constellations are, which helps you map the sky mentally.\n\n---\n\n## 🎯 Practice Task  \n\n1. Tonight (or whenever you have clear sky), look up and **find three different constellations** (e.g., Orion, Cassiopeia, Gemini).  \n2. **Sketch** a simple diagram on a piece of paper: draw the main stars you see for each constellation and label them.  \n3. Beside each sketch, write the **direction** (North, South, East, West, or a combination such as “south‑west”) where the constellation appears at that moment.  \n\nWhen you’ve finished, type **“next”** to let me know you’re ready to continue."
+    },
+    {
+      "step": 2,
+      "user": "Teach me the next lesson.",
+      "assistant": "**Lesson 2 – The Celestial Sphere and Coordinates**  \n\n---\n\n### 1. The imaginary “celestial sphere”\n\n- Imagine the night sky as a huge hollow ball surrounding the Earth.  \n- Every star, planet, or galaxy can be thought of as being stuck on the inner surface of that ball.  \n- Because the sphere is so far away, the distances of the objects don’t matter for positioning; we only need *directions*.\n\n---\n\n### 2. Two ways to give a direction  \n\n| System | What it measures | How it’s defined | Who uses it |\n|--------|------------------|------------------|-------------|\n| **Altitude‑Azimuth (Alt‑Az)** | Height above the local horizon and compass direction | • **Altitude** = angle above the horizon (0° – +90°) <br>• **Azimuth** = angle measured eastward from true north (0° = N, 90° = E, 180° = S, 270° = W) | Anyone looking up from a specific place (e.g., a backyard, a telescope mount) |\n| **Right‑Ascension / Declination (RA/Dec)** | Fixed “latitude‑longitude” on the celestial sphere | • **Declination** = celestial latitude, measured north (+) or south (‑) of the celestial equator (‑90° – +90°) <br>• **Right‑Ascension** = celestial longitude, measured eastward from the vernal‑equinox point, expressed in **hours, minutes, seconds** (0 h – 24 h) | Astronomers who need a coordinate that doesn’t change with the observer’s location |\n\n---\n\n### 3. From RA/Dec to Alt‑Az – the basic steps  \n\n1. **Know your observing site**  \n   - Latitude φ (positive north)  \n   - Longitude λ (positive east)  \n\n2. **Know the date and time** (expressed in **Universal Time (UT)**).  \n\n3. **Compute the Local Sidereal Time (LST)** – the “celestial clock” that tells what RA is on your local meridian.  \n   \\[\n   \\text{LST} = \\text{GST} + \\lambda_{\\text{(in hours)}}\n   \\]  \n   (GST = Greenwich Sidereal Time; you can get it from online calculators or use a short table; for this lesson we’ll give the value.)\n\n4. **Find the Hour Angle (H)** of the object:  \n   \\[\n   H = \\text{LST} - \\text{RA}\n   \\]  \n   (If H is negative, add 24 h; if > 24 h, subtract 24 h.)  \n\n5. **Convert H, φ, and the object’s declination δ to altitude (a) and azimuth (A)**  \n   \\[\n   \\sin a = \\sin\\delta\\,\\sin\\phi + \\cos\\delta\\,\\cos\\phi\\,\\cos H\n   \\]\n   \\[\n   \\cos A = \\frac{\\sin\\delta - \\sin a\\,\\sin\\phi}{\\cos a\\,\\cos\\phi}\n   \\]\n   - Compute **a** with the arcsine.  \n   - Compute **A** with arccos; if sin H < 0, use **A = 360° – A** to get the correct quadrant.\n\nThese formulas look a bit heavy, but you only need a calculator (or a spreadsheet) and the three numbers (φ, δ, H).\n\n---\n\n### 4. Worked example – Orion’s Belt (star **Alnitak**)  \n\n| Item | Value |\n|------|-------|\n| **Location** | New York City, USA (φ = +40.7°, λ = ‑74.0°) |\n| **Date & time** | 2024‑08‑01 22:00 local (EDT = UT‑4 h) → **UT = 02:00 on 2024‑08‑02** |\n| **Alnitak RA / Dec** | RA = 05 h 40 m 45 s → 5.679 h  <br> Dec = ‑01° 56′ 33″ → –1.942° |\n| **Greenwich Sidereal Time (GST)** at that UT ≈ 12 h 30 m (you can look up a sidereal‑time table; we’ll use this rounded value) |\n| **Local Sidereal Time (LST)** | LST = GST + λ (in hours). λ = –74° = –4.933 h. <br> LST = 12.5 h – 4.933 h ≈ **7.57 h** |\n| **Hour Angle (H)** | H = LST – RA = 7.57 h – 5.679 h = **1.89 h** <br> Convert to degrees: 1.89 h × 15°/h ≈ **28.4°** |\n| **Altitude** | \\(\\sin a = \\sin(-1.942°)\\sin(40.7°) + \\cos(-1.942°)\\cos(40.7°)\\cos(28.4°)\\) <br> → a ≈ **45°** above the horizon |\n| **Azimuth** | \\(\\cos A = \\frac{\\sin(-1.942°) - \\sin(45°)\\sin(40.7°)}{\\cos(45°)\\cos(40.7°)}\\) <br> → A ≈ **215°** (south‑south‑west) |\n\nSo, at that moment in New York, Alnitak would appear **45° high**, **215° azimuth** (a little west of due south).\n\n---\n\n### 5. Why this matters  \n\n- **Alt‑Az** tells you where to point a telescope right now.  \n- **RA/Dec** stays the same night after night, so catalogs and sky‑maps use it.  \n- Converting between them lets you take a star’s catalog entry (RA/Dec) and know exactly where to look from your backyard.\n\n---\n\n### 6. Your turn – practice task  \n\n**Convert the coordinates of Sirius** (the brightest star) to altitude‑azimuth for the same location and time used above (New York, 2024‑08‑02 02:00 UT).\n\n- **Sirius data**: RA = 06 h 45 m 09 s → 6.7525 h,  Dec = ‑16° 42′ 58″ → –16.716°\n- Follow the five steps listed in section 3.\n- Write down the **altitude** (in degrees) and **azimuth** (in degrees, measured from true north eastward).\n\nWhen you have your answer, type **“next”** to continue. Good luck!"
+    },
+    {
+      "step": 2,
+      "user": "teach me about mechanism",
+      "assistant": "**Lesson 2 – The Celestial Sphere and Coordinates**  \n\n---\n\n### 1. The “imaginary” sphere around Earth  \n\n* Imagine a giant sphere of infinite radius centred on you.  \n* All the stars you see are projected onto the inner surface of that sphere.  \n* Because the sphere is only a mental tool, we can give any point on it a pair of numbers – a **coordinate system** – just as we locate places on a map.\n\n---\n\n### 2. Two ways to label a point on the sky  \n\n| System | When it’s useful | How the coordinates are written |\n|--------|------------------|---------------------------------|\n| **Horizontal (alt‑az)** | For “what I see right now” from a specific spot on Earth. | **Altitude** (how high above the horizon, 0° – 90°) and **Azimuth** (direction along the horizon, measured from North through East: 0° = North, 90° = East, 180° = South, 270° = West). |\n| **Equatorial (RA/Dec)** | For cataloguing objects, planning observations, sharing data. | **Right‑Ascension (RA)** – like longitude on the sky, measured eastward along the celestial equator in **hours, minutes, seconds** (0 h to 24 h).  **Declination (Dec)** – like latitude, measured north (+) or south (−) of the celestial equator in **degrees** (‑90° – +90°). |\n\n*The equatorial grid is fixed to the stars; the horizontal grid rotates with Earth.*\n\n---\n\n### 3. Key reference points  \n\n| Name | What it is | Why it matters |\n|------|------------|----------------|\n| **Celestial equator** | Projection of Earth’s equator onto the sphere. | Declination = 0°. |\n| **North (and South) Celestial Pole** | Points where Earth’s axis meets the sphere. | Declination = +90° (N) or –90° (S). |\n| **Local horizon** | The great circle that separates “above” from “below” for you. | Altitude = 0°. |\n| **Meridian** | The great circle that passes through the NCP, SCP and your zenith. | When an object crosses it, it is at its highest altitude that day. |\n\n---\n\n### 4. From RA/Dec to Alt‑Az – the basic steps  \n\n1. **Know your site’s latitude (φ)** – e.g. New York ≈ +40.7°.  \n2. **Know the local sidereal time (LST)** at the moment you want the conversion.  \n   *LST* tells you which RA is on your local meridian right now.  \n   Rough way to get it (good to ± 15 min):  \n\n   ```\n   LST ≈ 100.46 + 0.985647·d + longitude + 15·UT\n   ```\n   *d = days since 2000‑01‑01 12:00 UT, longitude in degrees (east positive), UT = universal time in hours.  \n   Then reduce the result to the range 0 – 24 h (or 0 – 360°).  \n   (For a beginner you can also look up LST on a web calculator.)  \n\n3. **Compute the Hour Angle (H)** of the object:  \n\n   ```\n   H = LST – RA            (in hours; convert to degrees by ×15)\n   ```\n   Positive H means the object is west of the meridian; negative means east.\n\n4. **Use the spherical‑trigonometry formulas** (angles in degrees).  \n\n   ```\n   altitude (a) = arcsin[ sinδ·sinφ + cosδ·cosφ·cosH ]\n   azimuth (A)  = arccos[ (sinδ – sin a·sinφ) / (cos a·cosφ) ]\n   ```\n   *If sin H < 0, the azimuth is A (measured from North toward East).  \n   If sin H ≥ 0, use 360° – A.*  \n\n   (You can do the arithmetic with a scientific calculator or a free online “RA/Dec → Alt‑Az” tool.)\n\n---\n\n### 5. Worked example – Orion’s Belt  \n\n| Star | RA (h m s) | Dec (°) |\n|------|-----------|----------|\n| Alnitak | 05 h 40 m 45 s | –01° 56′ |\n| Alnilam | 05 h 36 m 12 s | –01° 12′ |\n| Mintaka | 05 h 32 m 00 s | –00° 18′ |\n\nAssume you are in **Madrid, Spain** (latitude ≈ +40.4°, longitude ≈ –3.7°) on **2025‑08‑01 at 22:00 local time** (which is 20:00 UT).\n\n1. **Find LST** (using a web calculator, LST ≈ 10 h 30 m).  \n2. **Hour Angle of Alnitak**:  \n\n   ```\n   H = LST – RA = 10.50 h – 5.68 h = 4.82 h\n   → H ≈ 4.82 h ×15 = 72.3° (west of the meridian)\n   ```\n\n3. **Plug into the altitude formula** (φ = 40.4°, δ = –1.93°):  \n\n   ```\n   sin a = sin(–1.93°)·sin(40.4°) + cos(–1.93°)·cos(40.4°)·cos(72.3°)\n   a ≈ 23°\n   ```\n\n4. **Azimuth** (using the formula above) gives **A ≈ 238°**, i.e. roughly **south‑west**.\n\nSo at that moment Alnitak sits about **23° above the horizon**, looking toward the **south‑west**. The other two belt stars have almost the same altitude and azimuth because they are close together in the sky.\n\n---\n\n### 6. Why this matters  \n\n* When you want to point a telescope, you need altitude‑azimuth.  \n* When you read a star catalogue, you use RA/Dec.  \n* Converting between them lets you take a star’s “address” (RA/Dec) and find where it actually appears from your backyard at a chosen time.\n\n---\n\n### 7. Your turn – a tiny practice task  \n\n1. Pick a bright star you like (e.g., **Sirius**). Its catalog coordinates are:  \n\n   **RA = 06 h 45 m 09 s** **Dec = –16° 43′**  \n\n2. Choose **your city** and a **specific date & time** (local time).  \n\n3. Using a calculator or a free online “RA/Dec → Alt‑Az” converter, find the **altitude and azimuth** of Sirius for that moment.  \n\n4. Write down the result (e.g., “Altitude ≈ 30°, Azimuth ≈ 210° (south‑west)”).  \n\nWhen you’ve done that, reply **“next”** and we’ll move on. Happy star‑hunting!"
+    },
+    {
+      "step": 2,
+      "user": "teach me verbs",
+      "assistant": "**Lesson 2 – The Celestial Sphere and Coordinates**  \n\n---\n\n### 1. The imaginary “celestial sphere”\n\n* Imagine the sky as a huge sphere surrounding Earth, with the Earth at its centre.  \n* All stars, planets and the Moon can be thought of as **projected onto the inner surface** of that sphere.  \n* Because the sphere is only a mental tool, we can give any point on it a pair of numbers – its **coordinates** – just as we do for points on a map.\n\n---\n\n### 2. Two coordinate systems\n\n| System | What it is measured from | Axes (reference lines) | When it is most useful |\n|--------|--------------------------|------------------------|------------------------|\n| **Altitude‑Azimuth (Alt‑Az)** | The observer’s local horizon | • **Altitude** = angle above (positive) or below (negative) the horizon, 0° – 90°<br>• **Azimuth** = angle measured clockwise from true North (0°) through East (90°), South (180°), West (270°) | Everyday observing, pointing a telescope, planetarium software |\n| **Right‑Ascension / Declination (RA/Dec)** | The Earth’s equatorial plane projected onto the sky (the **celestial equator**) | • **Declination (δ)** = angular distance north (+) or south (‑) of the celestial equator, like latitude, –90° – +90°<br>• **Right‑Ascension (α)** = angular distance eastward along the celestial equator from the **vernal equinox** point, measured in **hours, minutes, seconds** (0 h – 24 h) | Cataloguing objects, planning observations months in advance, sharing data with other astronomers |\n\n---\n\n### 3. From RA/Dec to Alt‑Az – the conversion steps  \n\nTo turn a star’s catalog coordinates (α, δ) into the position you see in the sky (altitude, azimuth) you need three pieces of information:\n\n1. **Your geographic latitude (φ) and longitude (λ).**  \n   *Positive latitude = north, positive longitude = east of Greenwich.*\n\n2. **The date and time of observation** (in **UT** – Universal Time).  \n\n3. **The star’s RA (α) and Dec (δ).**  \n\n#### Step‑by‑step procedure\n\n1. **Find the Greenwich Sidereal Time (GST)** for the given UT.  \n   (Sidereal time runs at the rate of the Earth’s rotation relative to the stars, not the Sun.)  \n   A quick‑look table or an online calculator can give you GST; for this lesson we’ll use an approximate value.\n\n2. **Compute the Local Sidereal Time (LST):**  \n\n\\[\n\\text{LST} = \\text{GST} + \\lambda\n\\]\n\n   (λ in **hours**; 1 h = 15° of longitude. East longitudes are added, west longitudes are subtracted.)\n\n3. **Find the Hour Angle (H) of the object:**  \n\n\\[\nH = \\text{LST} - \\alpha\n\\]\n\n   (If H is negative, add 24 h; if H > 24 h, subtract 24 h.)  \n   The hour angle tells you how far west the object is from the local meridian: H = 0 h when the object is on the meridian, positive H means it has already crossed the meridian and is moving toward the west.\n\n4. **Convert H, δ, and φ to altitude (a) and azimuth (A).**  \n   Use the spherical‑trigonometry formulas (angles in **degrees**; H must be converted to degrees: 1 h = 15°).\n\n\\[\n\\sin a = \\sin\\delta \\,\\sin\\phi + \\cos\\delta \\,\\cos\\phi \\,\\cos H\n\\]\n\n\\[\n\\cos A = \\frac{\\sin\\delta - \\sin a \\,\\sin\\phi}{\\cos a \\,\\cos\\phi}\n\\]\n\n   *Compute a = arcsin(sin a).  \n   *Compute A = arccos(cos A).  \n   *If sin H > 0 then Azimuth = 360° – A (object is west of the meridian); otherwise Azimuth = A.*\n\n---\n\n### 4. Worked example – Orion’s Belt  \n\nTake the middle star of Orion’s belt, **Alnilam**:  \n\n* RA = 05 h 36 m 12 s → 5.6033 h  \n* Dec = ‑01° 12′ 06″ → –1.2017°  \n\nAssume you are in **Madrid, Spain** (φ = 40.4° N, λ = ‑3.7° ≈ ‑0.247 h) and you look at the sky on **2023‑12‑01 22:00 local time** (which is 21:00 UT).\n\n1. **GST** for 2023‑12‑01 21:00 UT ≈ 06 h 30 m (≈ 6.5 h).  \n2. **LST** = GST + λ = 6.5 h – 0.247 h ≈ 6.25 h.  \n3. **Hour Angle** H = LST – RA = 6.25 h – 5.6033 h ≈ 0.6467 h → 0.6467 × 15 ≈ 9.7°.  \n4. Plug into the altitude formula  \n\n\\[\n\\sin a = \\sin(-1.2017°)\\sin 40.4° + \\cos(-1.2017°)\\cos 40.4°\\cos 9.7°\n\\]\n\n   → a ≈ 41° (the star is about 41° above the horizon).  \n\n5. Azimuth: compute cos A, then decide the side using sin H (positive, so the star is **west** of the meridian). The result is roughly **Az ≈ 260°** (west‑southwest).\n\nSo, at that moment in Madrid, Alnilam sits about **41° high**, a little **west of due south‑southwest**.\n\n---\n\n### 5. Practice conversion – Sirius  \n\nNow we’ll convert the coordinates of the brightest star in the night sky, **Sirius**.\n\n| Parameter | Value |\n|-----------|-------|\n| **RA (α)** | 06 h 45 m 09 s → **6.7525 h** |\n| **Dec (δ)**| ‑16° 42′ 58″ → **‑16.716°** |\n| **Observer** | **New York City, USA** (φ = 40.7° N, λ = ‑74.0° → ‑4.933 h) |\n| **Date & Time** | 2023‑12‑01 22:00 local (EST) → **03:00 UT** on 2024‑01‑01 (because EST = UT‑5) |\n\n**Step‑by‑step (numbers rounded for clarity):**\n\n1. **GST** for 2024‑01‑01 03:00 UT ≈ 07 h 15 m → **7.25 h**.  \n2. **LST** = GST + λ = 7.25 h – 4.933 h ≈ **2.32 h**.  \n3. **Hour Angle** H = LST – RA = 2.32 h – 6.7525 h = **‑4.4325 h**.  \n   Add 24 h → H = 19.5675 h → convert to degrees: 19.5675 × 15 ≈ 293.5°. (You can also keep H as a negative angle; the formulas work the same.)  \n4. **Altitude**  \n\n\\[\n\\sin a = \\sin(-16.716°)\\sin 40.7° + \\cos(-16.716°)\\cos 40.7°\\cos 293.5°\n\\]\n\n   → a ≈ ‑13° (negative! Sirius is **below the horizon** at that moment in New York).  \n\n5. **Azimuth** (if the star were up) would be computed, but because a < 0 the star is not visible.\n\n*Take‑away:* The same star can be high in the sky for one city and below the horizon for another, simply because of Earth’s rotation and your latitude.\n\n---\n\n### 6. Your turn – small practice task  \n\n**Task:** Using the same method, find the altitude and azimuth of **Betelgeuse** (RA = 05 h 55 m 10 s, Dec = +07° 24′ 25″) for an observer located in **Sydney, Australia** (φ = ‑33.9°, λ = 151.2° E → +10.08 h) on **2024‑04‑15 at 22:00 local time** (AEST, which is UT + 10 h).\n\n1. Convert the local time to UT.  \n2. Look up (or approximate) the GST for that UT.  \n3. Compute LST, hour angle, then altitude and azimuth.  \n\nWrite down the final altitude (in degrees) and azimuth (degrees measured from true North clockwise).  \n\nWhen you have finished, **type “next”** to receive feedback and continue."
+    },
+    {
+      "step": 2,
+      "user": "teach me classification",
+      "assistant": "**Lesson 2 – The Celestial Sphere and Coordinates**  \n\n---\n\n### 1. The imaginary “celestial sphere”\n\n- Imagine a huge sphere surrounding the Earth. All stars, planets and the Sun are projected onto its inner surface.\n- Because the sphere is so far away, the relative positions of the objects don’t change noticeably as you move a few kilometres on Earth.  \n- The sphere gives us a convenient way to give every object a pair of coordinates, just like latitude / longitude on Earth.\n\n---\n\n### 2. Two ways to label a point on the sphere  \n\n| System | What it measures | Typical units |\n|--------|------------------|---------------|\n| **Horizon (Alt‑Az) system** | • **Altitude (Alt)** – angle above the horizon (‑0° to +90°)  <br>• **Azimuth (Az)** – direction along the horizon, measured from true north eastward (0° → 360°) | degrees |\n| **Equatorial system** | • **Declination (Dec)** – like terrestrial latitude, measured north (+) or south (‑) of the celestial equator (‑90° → +90°)  <br>• **Right‑ascension (RA)** – like longitude, measured eastward along the celestial equator, but in **hours, minutes, seconds** (0 h → 24 h) | degrees for Dec, hours for RA |\n\nAstronomers almost always use RA/Dec because the grid is fixed to the stars; the Alt‑Az grid rotates with the Earth and is useful for “what do I see right now?”\n\n---\n\n### 3. How to go from RA/Dec to Alt‑Az  \n\nYou need three pieces of information:\n\n1. **Your geographic latitude (φ)** – e.g. 40.7° N for New York City.  \n2. **The local sidereal time (LST)** – the “star‑clock” that tells you which RA is on your local meridian right now.  \n3. **The object’s RA (α) and Dec (δ).**\n\n**Step 1 – Compute the hour angle (HA).**  \n\\[\n\\text{HA} = \\text{LST} - \\alpha\n\\]\n(Hour angle is positive west of the meridian; if HA < 0, add 24 h.)\n\n**Step 2 – Convert HA and Dec to altitude (Alt).**  \n\\[\n\\sin\\!\\text{Alt} = \\sin\\delta\\;\\sin\\phi + \\cos\\delta\\;\\cos\\phi\\;\\cos\\text{HA}\n\\]\n\n**Step 3 – Compute azimuth (Az).**  \nFirst find the cosine of Az:\n\\[\n\\cos\\!\\text{Az} = \\frac{\\sin\\delta - \\sin\\text{Alt}\\;\\sin\\phi}{\\cos\\text{Alt}\\;\\cos\\phi}\n\\]\n\nThen determine the quadrant:  \n\n- If \\(\\sin\\text{HA} > 0\\) → Azimuth = 360° − arccos(...).  \n- If \\(\\sin\\text{HA} ≤ 0\\) → Azimuth = arccos(...).\n\nAll trigonometric functions use **degrees** for φ, δ, HA (or you can work in radians – just be consistent).\n\n---\n\n### 4. Example – Orion’s Belt (Alnitak)\n\n| Quantity | Value |\n|----------|-------|\n| RA (α) | 5 h 40 m 45 s  → 5.679 h → 85.18° |\n| Dec (δ) | –1° 56′  → –1.93° |\n| Observer latitude (φ) | 40.7° N |\n| Date & time | 2024‑09‑15 22:00 local (New York, EDT) |\n\n**1️⃣ Find LST** (quick online calculators or planetarium software give LST ≈ 08 h 45 m → 131.25°).  \n\n**2️⃣ Hour angle**  \nHA = LST – RA = 08 h 45 m – 05 h 40 m ≈ 3 h 05 m = 46.25° (west of meridian).\n\n**3️⃣ Altitude**  \n\\[\n\\sin\\!\\text{Alt}= \\sin(-1.93°)\\sin(40.7°)+\\cos(-1.93°)\\cos(40.7°)\\cos(46.25°)\\\\\n\\text{Alt}\\approx 30.4°\n\\]\n\n**4️⃣ Azimuth**  \n\\[\n\\cos\\!\\text{Az}= \\frac{\\sin(-1.93°)-\\sin(30.4°)\\sin(40.7°)}{\\cos(30.4°)\\cos(40.7°)}\\approx 0.55\n\\]\n\\[\n\\arccos(0.55)=56.3°\n\\]\nSince \\(\\sin\\text{HA}>0\\) (HA > 0 h), Az = 360° − 56.3° ≈ 303.7° (i.e., roughly NW).\n\n*Result:* At that moment Alnitak sits **30° above the horizon, azimuth ≈ 304°** (north‑west).\n\n---\n\n### 5. Your turn – Practice task  \n\n**Goal:** Convert the equatorial coordinates of **Sirius** to altitude‑azimuth for a specific location and time.\n\n| Item | Value |\n|------|-------|\n| **RA (α)** | 6 h 45 m 09 s → 6.7525 h → **101.29°** |\n| **Dec (δ)** | –16° 42′ 58″ → **–16.716°** |\n| **Observer** | Los Angeles, CA (latitude φ = 34.05° N, longitude λ = 118.25° W) |\n| **Date & local time** | 2024‑10‑01, **22:30 PST** (UTC‑8) |\n\n**Steps you should follow**\n\n1. Find the **local sidereal time (LST)** for Los Angeles at the given moment (you may use an online LST calculator or the approximate formula).  \n2. Compute the **hour angle (HA = LST – RA)** (keep HA in degrees; add 360° if it becomes negative).  \n3. Use the Alt‑Az formulas above to get **Alt** and **Az**.  \n4. Write your final answer as:  \n   *Altitude ≈ ___°, Azimuth ≈ ___° (measured from true north eastward).*\n\nWhen you have finished, type **“next”** to move on. Good luck!"
+    }
+  ],
+  "learning_level": "beginner",
+  "learning_lessons": [
+    {
+      "title": "Our Night Sky: Observing the Stars",
+      "objective": "Identify basic celestial objects and understand sky orientation.",
+      "description": "Learn how to locate prominent constellations (e.g., Orion) and planets with the naked eye. Example: Spotting the three‑star belt of Orion on a clear winter night. Practice: Sketch the positions of three constellations you see tonight and note their direction (north, south, east, west). This prepares you to use a coordinate system in the next lesson.",
+      "completed": false
+    },
+    {
+      "title": "The Celestial Sphere and Coordinates",
+      "objective": "Understand the celestial coordinate system (altitude‑azimuth and right‑ascension/declination).",
+      "description": "Introduce the imaginary celestial sphere, the horizon system, and the equatorial system used by astronomers. Example: Converting Orion’s belt coordinates from RA/Dec to altitude‑azimuth for your location. Practice: Convert the coordinates of a bright star (e.g., Sirius) from RA/Dec to altitude‑azimuth for your city at a given time. This groundwork lets you track motion in the next lesson.",
+      "completed": false
+    },
+    {
+      "title": "Apparent Motion of Stars and the Seasons",
+      "objective": "Explain daily (diurnal) motion and yearly (seasonal) changes in the night sky.",
+      "description": "Describe why stars rise in the east and set in the west and why constellations shift with the seasons. Example: Orion is a winter constellation for the Northern Hemisphere but a summer one for the Southern Hemisphere. Practice: Over three consecutive nights, record the time Orion appears and note the shift. Understanding these motions prepares you for Earth’s tilt and orbit in the next lesson.",
+      "completed": false
+    },
+    {
+      "title": "Earth’s Rotation, Revolution, and Axis Tilt",
+      "objective": "Grasp how Earth’s spin, orbit, and tilt produce day/night cycles and seasons.",
+      "description": "Detail the 24‑hour rotation, 365‑day revolution, and 23.5° axial tilt, linking them to equinoxes and solstices. Example: Why the Sun is overhead at the Tropic of Cancer on June 21. Practice: Draw a simple diagram showing Earth’s position at the March equinox, June solstice, September equinox, and December solstice. This knowledge sets the stage for gravity and orbital mechanics.",
+      "completed": false
+    },
+    {
+      "title": "Fundamentals of Gravity and Orbits",
+      "objective": "Explain Newton’s law of universal gravitation and why objects orbit.",
+      "description": "Introduce the inverse‑square law and how gravity balances centrifugal force to create stable orbits. Example: The Moon’s orbit around Earth. Practice: Using the simplified formula F = G·(m₁·m₂)/r², calculate the gravitational force between Earth (6 × 10²⁴ kg) and the Moon (7.35 × 10²² kg) at an average distance of 3.84 × 10⁸ m. With gravity understood, you can explore the Solar System’s layout next.",
+      "completed": false
+    },
+    {
+      "title": "Structure of the Solar System",
+      "objective": "Identify the Sun, planets, dwarf planets, moons, asteroids, and comets.",
+      "description": "Review each major component, noting differences in size, composition, and orbital distance. Example: Comparing Earth’s rocky surface with Jupiter’s gas‑giant nature. Practice: Sort a mixed list of Solar System objects (e.g., Ceres, Europa, Saturn, Pluto) into categories: planet, dwarf planet, moon, asteroid, comet. This categorization leads naturally to planetary motion laws.",
+      "completed": false
+    },
+    {
+      "title": "Kepler’s Laws of Planetary Motion",
+      "objective": "State and apply the three laws governing orbital shapes, areas, and periods.",
+      "description": "Explain (1) elliptical orbits with the Sun at one focus, (2) equal areas swept in equal times, (3) the square‑of‑period proportional to the cube‑of‑semi‑major axis. Example: Mars follows an ellipse that brings it closer to the Sun at perihelion. Practice: Using the simplified form P² = a³ (where P is in Earth years and a in AU), estimate the orbital period of a planet at 4 AU. Mastery of orbital dynamics prepares you for understanding light and telescopes.",
+      "completed": false
+    },
+    {
+      "title": "Light, Telescopes, and Observational Tools",
+      "objective": "Understand visible light, basic optics, and the function of different telescopes.",
+      "description": "Cover wavelengths, how lenses and mirrors form images, and differences between refractors, reflectors, and radio dishes. Example: Comparing a 60 mm refractor (good for planets) with a 200 mm Dobsonian reflector (good for deep‑sky objects). Practice: Label the parts of a simple diagram of a reflecting telescope (primary mirror, secondary mirror, focuser, eyepiece). Knowing how we gather light sets up the study of stars next.",
+      "completed": false
+    },
+    {
+      "title": "Stars: Classification and Lifecycle",
+      "objective": "Learn the spectral classification system and basic stellar evolution.",
+      "description": "Introduce the O‑B‑A‑F‑G‑K‑M sequence, temperature, and luminosity, and trace a star’s path on the Hertzsprung‑Russell diagram. Example: The Sun (G2V) versus the red supergiant Betelgeuse (M2I). Practice: Place five listed stars (e.g., Sirius, Rigel, Proxima Centauri) on a simplified HR diagram based on their temperature and luminosity. This foundation leads to how stars are born in nebulae.",
+      "completed": false
+    },
+    {
+      "title": "Nebulae and Star‑Forming Regions",
+      "objective": "Describe how molecular clouds collapse to form new stars.",
+      "description": "Explain the role of gravity, turbulence, and radiation in creating protostars, and differentiate emission, reflection, and dark nebulae. Example: The Orion Nebula as a nearby stellar nursery. Practice: Identify three nebula types from provided images and note a key observational feature for each. Understanding star birth prepares you for the final stages of stellar life.",
+      "completed": false
+    },
+    {
+      "title": "Stellar Remnants: White Dwarfs, Neutron Stars, Black Holes",
+      "objective": "Differentiate the end states of stars based on initial mass.",
+      "description": "Cover the fate of low‑mass stars (white dwarfs), intermediate‑mass stars (neutron stars), and high‑mass stars (black holes). Example: Sirius B as a white dwarf; the Crab Pulsar as a neutron star. Practice: Match five progenitor mass ranges to their expected remnants using a table. With remnants understood, you can explore larger structures—galaxies.",
+      "completed": false
+    },
+    {
+      "title": "Galaxies: Classification and Our Milky Way",
+      "objective": "Identify major galaxy types and locate our Solar System within the Milky Way.",
+      "description": "Discuss spiral, elliptical, and irregular galaxies, and components such as bulge, disk, halo, and dark matter halo. Example: Comparing the spiral Andromeda (M31) with the elliptical galaxy M87. Practice: Classify five given galaxy images and state whether each is spiral, elliptical, or irregular. This galactic perspective prepares you for cosmology.",
+      "completed": false
+    },
+    {
+      "title": "Cosmology Basics: Big Bang, Expansion, Dark Matter & Dark Energy",
+      "objective": "Grasp the origin, large‑scale expansion, and mysterious components of the universe.",
+      "description": "Introduce the Big Bang model, Hubble’s law, redshift, and evidence for dark matter and dark energy. Example: Using the redshift of a distant galaxy (z = 0.05) to estimate its recession speed. Practice: Calculate the recessional velocity for a galaxy with z = 0.03 using v ≈ z·c (c = 300,000 km/s). Understanding the universe’s expansion sets the stage for how astronomers measure it.",
+      "completed": false
+    },
+    {
+      "title": "Astronomical Measurement: Spectroscopy, Photometry, and Data",
+      "objective": "Learn how spectra and brightness measurements reveal composition, distance, and motion.",
+      "description": "Explain absorption/emission lines, Doppler shift, magnitude scales, and basic data reduction. Example: Identifying hydrogen’s Balmer series in a star’s spectrum. Practice: Given a simple spectral chart, identify the element responsible for the strongest absorption line. Mastery of measurement techniques prepares you for exploring modern frontiers.",
+      "completed": false
+    },
+    {
+      "title": "Current Frontiers and How to Continue Learning",
+      "objective": "Identify contemporary topics and resources for ongoing astronomical study.",
+      "description": "Cover exoplanet detection (transit method), gravitational‑wave astronomy, and upcoming missions (James Webb Space Telescope). Example: The discovery of Kepler‑186f, an Earth‑size planet in the habitable zone. Practice: Design a one‑night backyard observing project (e.g., record the light curve of a variable star) using a smartphone app. This final step equips you to apply what you’ve learned and pursue deeper study.",
+      "completed": false
+    }
+  ]
+}

@@ -759,3 +759,42 @@ Start Ollama or configure OPENAI_API_KEY.
 2026-08-23 15:02:36,161 [WARNING] brain.reasoning: unexpected character after line continuation character (reasoning.py, line 1)
 2026-08-23 15:05:33,269 [WARNING] brain.brain: unexpected character after line continuation character (reasoning.py, line 1)
 2026-08-23 15:05:33,273 [WARNING] brain.reasoning: unexpected character after line continuation character (reasoning.py, line 1)
+2026-10-04 11:19:16,027 [WARNING] trade_advisor: cannot import name 'open_trades' from 'tradelog' (/data/data/com.termux/files/home/Nitron/tradelog.py)
+2026-10-04 11:22:35,205 [WARNING] trade_advisor: cannot import name 'open_trades' from 'tradelog' (/data/data/com.termux/files/home/Nitron/tradelog.py)
+2026-10-04 11:25:32,571 [WARNING] trade_advisor: cannot import name 'open_trades' from 'tradelog' (/data/data/com.termux/files/home/Nitron/tradelog.py)
+2026-10-04 18:02:29,163 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.207.228:5000
+2026-10-04 18:02:29,164 [INFO] [33mPress CTRL+C to quit[0m
+2026-10-04 18:02:38,907 [INFO] 127.0.0.1 - - [04/Oct/2026 18:02:38] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:17:18,476 [INFO] 127.0.0.1 - - [04/Oct/2026 18:17:18] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:17:36,743 [INFO] 127.0.0.1 - - [04/Oct/2026 18:17:36] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:17:56,473 [INFO] 127.0.0.1 - - [04/Oct/2026 18:17:56] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:18:05,806 [INFO] 127.0.0.1 - - [04/Oct/2026 18:18:05] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:18:23,026 [INFO] 127.0.0.1 - - [04/Oct/2026 18:18:23] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:18:32,757 [INFO] 127.0.0.1 - - [04/Oct/2026 18:18:32] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:18:45,441 [INFO] 127.0.0.1 - - [04/Oct/2026 18:18:45] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:18:52,856 [INFO] 127.0.0.1 - - [04/Oct/2026 18:18:52] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:18:59,835 [INFO] 127.0.0.1 - - [04/Oct/2026 18:18:59] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:19:04,542 [INFO] 127.0.0.1 - - [04/Oct/2026 18:19:04] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:19:54,499 [INFO] 127.0.0.1 - - [04/Oct/2026 18:19:54] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:20:10,602 [INFO] 127.0.0.1 - - [04/Oct/2026 18:20:10] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:23:31,601 [INFO] 127.0.0.1 - - [04/Oct/2026 18:23:31] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:24:09,915 [INFO] 127.0.0.1 - - [04/Oct/2026 18:24:09] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:26:12,233 [INFO] 127.0.0.1 - - [04/Oct/2026 18:26:12] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:26:48,748 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.207.228:5000
+2026-10-04 18:26:48,750 [INFO] [33mPress CTRL+C to quit[0m
+2026-10-04 18:26:52,752 [INFO] 127.0.0.1 - - [04/Oct/2026 18:26:52] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:26:53,923 [INFO] 127.0.0.1 - - [04/Oct/2026 18:26:53] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:28:01,889 [INFO] 127.0.0.1 - - [04/Oct/2026 18:28:01] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:35:34,959 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.207.228:5000
+2026-10-04 18:35:34,962 [INFO] [33mPress CTRL+C to quit[0m
+2026-10-04 18:35:38,583 [INFO] 127.0.0.1 - - [04/Oct/2026 18:35:38] "POST /command HTTP/1.1" 200 -
+2026-10-04 18:36:08,004 [INFO] 127.0.0.1 - - [04/Oct/2026 18:36:08] "POST /command HTTP/1.1" 200 -
